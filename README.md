@@ -20,9 +20,11 @@ NicaCompare reúne los precios de distintas marcas y comercios en una sola inter
 * Ayudar a los usuarios a optimizar su presupuesto encontrando la opción más económica.
 
 **Logo**
+
 <img width="3543" height="805" alt="LOGO 22" src="https://github.com/user-attachments/assets/00f506a5-90b2-4b56-bf0a-3c64fed76279" />
 
 **Icono**
+
 <img width="512" height="512" alt="Sin título-2" src="https://github.com/user-attachments/assets/854e90b5-a2d6-48cb-9d2e-1fb1ad229b49" />
 
 **Pantallas**
