@@ -14,6 +14,7 @@ namespace NicaCompare
         private void btningresar_Paint(object sender, PaintEventArgs e) { }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) { }
         private void inicio_nombre_TextChanged(object sender, EventArgs e) { }
+        private void inicioPassword_TextChanged(object sender, EventArgs e) { }
 
         public Login() { InitializeComponent(); }
 
@@ -33,35 +34,37 @@ namespace NicaCompare
 
         private void IniciarSecion(object sender, EventArgs e)
         {
-            string correo = (inicio_nombre.Text ?? "").Trim().ToLower(); //input del form
-            string password = inicioPassword.Text ?? ""; //input del form
+            string correo = (inicio_nombre.Text ?? "").Trim().ToLower(); //input en el diseno
+            string password = inicioPassword.Text ?? ""; //input en el diseno
 
             if (string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Por favor, ingrese el correo y la contraseña.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            { MessageBox.Show("Por favor, ingrese el correo y la contraseña.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-            if (Usuarios_Guardados.Usuarios.ContainsKey(correo) && Usuarios_Guardados.Usuarios[correo].Password == password) // buscar en los Usuarios
+            if (usuarios_db.Usuarios.ContainsKey(correo) && usuarios_db.Usuarios[correo].Password == password)
             {
+                sesion_actual.Correo = correo;
+                sesion_actual.Nombre = usuarios_db.Usuarios[correo].Nombre;
+                sesion_actual.TipoUsuario = usuarios_db.Usuarios[correo].TipoUsuario;
+                sesion_actual.Saldo = usuarios_db.Usuarios[correo].Saldo;
+
                 Inicio ventana3 = new Inicio();
                 ventana3.FormClosed += (s, args) => this.Close();
                 ventana3.Show();
                 this.Hide();
             }
             else { MessageBox.Show("Correo o contraseña incorrectos.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void btn_iniciar_sincuenta_Click(object sender, EventArgs e)
+        {
+
+            Inicio ventana3 = new Inicio();
+            ventana3.FormClosed += (s, args) => this.Close();
+            ventana3.Show();
+            this.Hide();
 
         }
     }
 
-    public static class Usuarios_Guardados
-    {
-        public static Dictionary<string, (string Nombre, string Password)> Usuarios = new Dictionary<string, (string Nombre, string Password)>
-        {
-            { "skl@unan.ni", ("Skl", "17") },
-            { "oto@.unan.ni", ("Oto", "123") },
-            { "jahary@.unan.ni", ("Jahary", "123") },
-            { "moises@.unan.ni", ("Moises", "123") }
-        };
-    }
+
 }

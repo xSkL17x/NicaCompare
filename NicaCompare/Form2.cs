@@ -32,7 +32,7 @@ namespace NicaCompare
             string passwordConf = campoPassword2.Text ?? "";
 
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordConf))
-            { MessageBox.Show("Por favor, llene todos los campos.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;}
+            { MessageBox.Show("Por favor, llene todos los campos.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
             if (!correo.Contains("@") || (!correo.EndsWith(".com") && !correo.EndsWith(".ni") && !correo.EndsWith(".es")))
             { MessageBox.Show("Porfavor Ingrese Un Correo Válido", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
@@ -41,12 +41,12 @@ namespace NicaCompare
             { MessageBox.Show("La contraseña debe tener al menos 5 caracteres.", "Contraseña muy corta", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
             if (password != passwordConf)
-            { MessageBox.Show("Las contraseñas no coinciden.", "Error en contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error);  return; }
+            { MessageBox.Show("Las contraseñas no coinciden.", "Error en contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            if (Usuarios_Guardados.Usuarios.ContainsKey(correo))
+            if (usuarios_db.Usuarios.ContainsKey(correo))
             { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            Usuarios_Guardados.Usuarios.Add(correo, (nombre, password));
+            usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 300));
 
             MessageBox.Show($"{nombre} su Cuenta fue Creada con exito\n\nCorreo: {correo}", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

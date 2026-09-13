@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             panel1 = new Panel();
-            botonMenu6 = new BotonMenu();
+            boton_usuario = new BotonMenu();
             botonMenu5 = new BotonMenu();
             botonMenu1 = new BotonMenu();
             botonMenu4 = new BotonMenu();
@@ -38,7 +38,6 @@
             Menu = new BotonMenu();
             label11 = new Label();
             pictureBox2 = new PictureBox();
-            botonMenu2 = new BotonMenu();
             panel2 = new Panel();
             label2 = new Label();
             barraBusqueda1 = new BarraBusqueda();
@@ -57,7 +56,7 @@
             // 
             panel1.BackColor = SystemColors.ButtonFace;
             panel1.BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_04_at_1_50_14_PM_upscayl_5x_digital_art_4x;
-            panel1.Controls.Add(botonMenu6);
+            panel1.Controls.Add(boton_usuario);
             panel1.Controls.Add(botonMenu5);
             panel1.Controls.Add(botonMenu1);
             panel1.Controls.Add(botonMenu4);
@@ -71,32 +70,33 @@
             panel1.Size = new Size(254, 550);
             panel1.TabIndex = 0;
             // 
-            // botonMenu6
+            // boton_usuario
             // 
-            botonMenu6.AutoColorearIconoBlanco = true;
-            botonMenu6.AutoEscalarImagen = true;
-            botonMenu6.BackColor = Color.Transparent;
-            botonMenu6.BorderRadius = 18;
-            botonMenu6.ColorHover = Color.FromArgb(13, 110, 253);
-            botonMenu6.ColorTextoNormal = Color.FromArgb(70, 70, 70);
-            botonMenu6.EsSeleccionado = false;
-            botonMenu6.FlatAppearance.BorderSize = 0;
-            botonMenu6.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            botonMenu6.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            botonMenu6.FlatStyle = FlatStyle.Flat;
-            botonMenu6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            botonMenu6.ForeColor = Color.FromArgb(70, 70, 70);
-            botonMenu6.Image = Properties.Resources._12120220;
-            botonMenu6.Location = new Point(16, 117);
-            botonMenu6.MargenImagenIzquierda = 15;
-            botonMenu6.Margin = new Padding(3, 2, 3, 2);
-            botonMenu6.Name = "botonMenu6";
-            botonMenu6.PorcentajeEscalaImagen = 50;
-            botonMenu6.Size = new Size(221, 40);
-            botonMenu6.TabIndex = 16;
-            botonMenu6.Text = "Usuario";
-            botonMenu6.TextAlign = ContentAlignment.MiddleLeft;
-            botonMenu6.UseVisualStyleBackColor = false;
+            boton_usuario.AutoColorearIconoBlanco = true;
+            boton_usuario.AutoEscalarImagen = true;
+            boton_usuario.BackColor = Color.Transparent;
+            boton_usuario.BorderRadius = 18;
+            boton_usuario.ColorHover = Color.FromArgb(13, 110, 253);
+            boton_usuario.ColorTextoNormal = Color.FromArgb(70, 70, 70);
+            boton_usuario.EsSeleccionado = false;
+            boton_usuario.FlatAppearance.BorderSize = 0;
+            boton_usuario.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            boton_usuario.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            boton_usuario.FlatStyle = FlatStyle.Flat;
+            boton_usuario.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            boton_usuario.ForeColor = Color.FromArgb(70, 70, 70);
+            boton_usuario.Image = Properties.Resources._12120220;
+            boton_usuario.Location = new Point(16, 117);
+            boton_usuario.MargenImagenIzquierda = 15;
+            boton_usuario.Margin = new Padding(3, 2, 3, 2);
+            boton_usuario.Name = "boton_usuario";
+            boton_usuario.PorcentajeEscalaImagen = 50;
+            boton_usuario.Size = new Size(221, 40);
+            boton_usuario.TabIndex = 16;
+            boton_usuario.Text = "Usuario";
+            boton_usuario.TextAlign = ContentAlignment.MiddleLeft;
+            boton_usuario.UseVisualStyleBackColor = false;
+            boton_usuario.Click += boton_usuario_Click;
             // 
             // botonMenu5
             // 
@@ -258,34 +258,6 @@
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
             // 
-            // botonMenu2
-            // 
-            botonMenu2.AutoColorearIconoBlanco = true;
-            botonMenu2.AutoEscalarImagen = true;
-            botonMenu2.BackColor = Color.Transparent;
-            botonMenu2.BorderRadius = 18;
-            botonMenu2.ColorHover = Color.FromArgb(13, 110, 253);
-            botonMenu2.ColorTextoNormal = Color.FromArgb(70, 70, 70);
-            botonMenu2.EsSeleccionado = false;
-            botonMenu2.FlatAppearance.BorderSize = 0;
-            botonMenu2.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            botonMenu2.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            botonMenu2.FlatStyle = FlatStyle.Flat;
-            botonMenu2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            botonMenu2.ForeColor = Color.FromArgb(70, 70, 70);
-            botonMenu2.Image = Properties.Resources._12120220;
-            botonMenu2.Location = new Point(746, 4);
-            botonMenu2.MargenImagenIzquierda = 15;
-            botonMenu2.Margin = new Padding(3, 2, 3, 2);
-            botonMenu2.Name = "botonMenu2";
-            botonMenu2.PorcentajeEscalaImagen = 50;
-            botonMenu2.Size = new Size(165, 27);
-            botonMenu2.TabIndex = 11;
-            botonMenu2.Text = "Inicio de sesion";
-            botonMenu2.TextAlign = ContentAlignment.MiddleLeft;
-            botonMenu2.UseVisualStyleBackColor = false;
-            botonMenu2.Click += botonMenu2_Click;
-            // 
             // panel2
             // 
             panel2.BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_07_at_3_21_22_PM;
@@ -390,6 +362,7 @@
             tarjetaTienda2.TabIndex = 19;
             tarjetaTienda2.TamañoImagen = new Size(0, 0);
             tarjetaTienda2.Text = "tarjetaTienda2";
+            tarjetaTienda2.CheckedChanged += tarjetaTienda2_CheckedChanged;
             // 
             // tarjetaTienda3
             // 
@@ -447,7 +420,6 @@
             Controls.Add(tarjetaTienda1);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(botonMenu2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Inicio";
@@ -467,12 +439,11 @@
         private PictureBox pictureBox2;
         private Label label11;
         private BotonMenu Menu;
-        private BotonMenu botonMenu2;
         private BotonMenu botonMenu3;
         private BotonMenu botonMenu4;
         private BotonMenu botonMenu1;
         private BotonMenu botonMenu5;
-        private BotonMenu botonMenu6;
+        private BotonMenu boton_usuario;
         private Panel panel2;
         private Label label1;
         private Label LABEL;

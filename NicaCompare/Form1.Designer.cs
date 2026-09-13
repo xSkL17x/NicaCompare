@@ -43,6 +43,7 @@
             label1 = new Label();
             pictureBox2 = new PictureBox();
             colorDialog1 = new ColorDialog();
+            btn_iniciar_sincuenta = new BotonAccion();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -52,6 +53,7 @@
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.AutoSize = true;
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(btn_iniciar_sincuenta);
             panel1.Controls.Add(inicio_nombre);
             panel1.Controls.Add(Inicio_INGRESAR);
             panel1.Controls.Add(inicioPassword);
@@ -64,10 +66,10 @@
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
-            panel1.Location = new Point(220, 2);
+            panel1.Location = new Point(377, 4);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(792, 666);
+            panel1.Size = new Size(509, 666);
             panel1.TabIndex = 0;
             // 
             // inicio_nombre
@@ -77,7 +79,7 @@
             inicio_nombre.BorderColor = Color.FromArgb(228, 231, 236);
             inicio_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
             inicio_nombre.BorderRadius = 12;
-            inicio_nombre.Location = new Point(255, 321);
+            inicio_nombre.Location = new Point(113, 321);
             inicio_nombre.Margin = new Padding(3, 2, 3, 2);
             inicio_nombre.Name = "inicio_nombre";
             inicio_nombre.PlaceholderText = "Ingresa tu texto aquí";
@@ -98,7 +100,7 @@
             Inicio_INGRESAR.FlatStyle = FlatStyle.Flat;
             Inicio_INGRESAR.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             Inicio_INGRESAR.ForeColor = Color.White;
-            Inicio_INGRESAR.Location = new Point(255, 428);
+            Inicio_INGRESAR.Location = new Point(113, 428);
             Inicio_INGRESAR.Margin = new Padding(3, 2, 3, 2);
             Inicio_INGRESAR.MostrarFlecha = true;
             Inicio_INGRESAR.Name = "Inicio_INGRESAR";
@@ -115,20 +117,21 @@
             inicioPassword.BorderColor = Color.FromArgb(228, 231, 236);
             inicioPassword.BorderFocusColor = Color.FromArgb(13, 110, 253);
             inicioPassword.BorderRadius = 12;
-            inicioPassword.Location = new Point(255, 380);
+            inicioPassword.Location = new Point(113, 380);
             inicioPassword.Margin = new Padding(3, 2, 3, 2);
             inicioPassword.Name = "inicioPassword";
             inicioPassword.Padding = new Padding(9, 8, 9, 8);
             inicioPassword.PlaceholderText = "Confirma tu contraseña";
             inicioPassword.Size = new Size(288, 34);
             inicioPassword.TabIndex = 1;
+            inicioPassword.TextChanged += inicioPassword_TextChanged;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift Light", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(269, 245);
+            label2.Location = new Point(127, 245);
             label2.Name = "label2";
             label2.Size = new Size(224, 24);
             label2.TabIndex = 2;
@@ -142,7 +145,7 @@
             linkLabel2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             linkLabel2.ForeColor = Color.FromArgb(0, 0, 192);
             linkLabel2.LinkColor = Color.FromArgb(0, 0, 192);
-            linkLabel2.Location = new Point(424, 477);
+            linkLabel2.Location = new Point(282, 503);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(88, 15);
             linkLabel2.TabIndex = 9;
@@ -154,7 +157,7 @@
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(300, 477);
+            label6.Location = new Point(158, 503);
             label6.Name = "label6";
             label6.Size = new Size(106, 15);
             label6.TabIndex = 11;
@@ -166,7 +169,7 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(255, 304);
+            label3.Location = new Point(113, 304);
             label3.Name = "label3";
             label3.Size = new Size(107, 15);
             label3.TabIndex = 3;
@@ -177,7 +180,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(255, 362);
+            label4.Location = new Point(113, 362);
             label4.Name = "label4";
             label4.Size = new Size(66, 15);
             label4.TabIndex = 6;
@@ -187,7 +190,7 @@
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(308, 524);
+            label5.Location = new Point(166, 524);
             label5.Name = "label5";
             label5.Size = new Size(152, 15);
             label5.TabIndex = 10;
@@ -209,7 +212,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(300, 190);
+            label1.Location = new Point(158, 190);
             label1.Name = "label1";
             label1.Size = new Size(176, 13);
             label1.TabIndex = 1;
@@ -220,13 +223,35 @@
             // 
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = Properties.Resources.LOGO_222;
-            pictureBox2.Location = new Point(255, 81);
+            pictureBox2.Location = new Point(113, 81);
             pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(279, 149);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
+            // 
+            // btn_iniciar_sincuenta
+            // 
+            btn_iniciar_sincuenta.Anchor = AnchorStyles.None;
+            btn_iniciar_sincuenta.BackColor = Color.Transparent;
+            btn_iniciar_sincuenta.BorderRadius = 12;
+            btn_iniciar_sincuenta.ColorNormal = Color.Silver;
+            btn_iniciar_sincuenta.FlatAppearance.BorderSize = 0;
+            btn_iniciar_sincuenta.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn_iniciar_sincuenta.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btn_iniciar_sincuenta.FlatStyle = FlatStyle.Flat;
+            btn_iniciar_sincuenta.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_iniciar_sincuenta.ForeColor = Color.White;
+            btn_iniciar_sincuenta.Location = new Point(158, 470);
+            btn_iniciar_sincuenta.Margin = new Padding(3, 2, 3, 2);
+            btn_iniciar_sincuenta.MostrarFlecha = true;
+            btn_iniciar_sincuenta.Name = "btn_iniciar_sincuenta";
+            btn_iniciar_sincuenta.Size = new Size(203, 22);
+            btn_iniciar_sincuenta.TabIndex = 14;
+            btn_iniciar_sincuenta.Text = "Iniciar sin cuenta";
+            btn_iniciar_sincuenta.UseVisualStyleBackColor = false;
+            btn_iniciar_sincuenta.Click += btn_iniciar_sincuenta_Click;
             // 
             // Login
             // 
@@ -264,5 +289,6 @@
         private BotonAccion Inicio_INGRESAR;
         private CampoTexto inicio_nombre;
         private LinkLabel linkLabel2;
+        private BotonAccion btn_iniciar_sincuenta;
     }
 }
