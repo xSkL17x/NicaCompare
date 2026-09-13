@@ -1,72 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace NicaCompare
 {
-    public partial class Form2 : Form
+    public partial class Registro : Form
     {
-        public Form2()
+        private void pictureBox2_Click(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void pictureBox1_Click(object sender, EventArgs e) { }
+        private void label3_Click(object sender, EventArgs e) { }
+        private void campoTexto1_TextChanged(object sender, EventArgs e) { }
+
+        public Registro() { InitializeComponent(); }
+
+        //╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈➤ㄅқŁ ⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
+
+        private void ir_al_login(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            InitializeComponent();
+            Login ventana1 = new Login();
+            ventana1.FormClosed += (s, args) => this.Close();
+            ventana1.Show();
+            this.Hide();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void Crear_Cuenta(object sender, EventArgs e)
         {
+            string nombre = (registro_nombre.Text ?? "").Trim();
+            string correo = (registro_correo.Text ?? "").Trim().ToLower();
+            string password = campoPassword1.Text ?? "";
+            string passwordConf = campoPassword2.Text ?? "";
 
-        }
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordConf))
+            { MessageBox.Show("Por favor, llene todos los campos.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;}
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+            if (!correo.Contains("@") || (!correo.EndsWith(".com") && !correo.EndsWith(".ni") && !correo.EndsWith(".es")))
+            { MessageBox.Show("Porfavor Ingrese Un Correo Válido", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-        }
+            if (password.Length < 5)
+            { MessageBox.Show("La contraseña debe tener al menos 5 caracteres.", "Contraseña muy corta", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+            if (password != passwordConf)
+            { MessageBox.Show("Las contraseñas no coinciden.", "Error en contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error);  return; }
 
-        }
+            if (Usuarios_Guardados.Usuarios.ContainsKey(correo))
+            { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
+            Usuarios_Guardados.Usuarios.Add(correo, (nombre, password));
 
-        }
+            MessageBox.Show($"{nombre} su Cuenta fue Creada con exito\n\nCorreo: {correo}", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonRedondeado1_Click(object sender, EventArgs e)
-        {
-            {
-                Form1 ventana1 = new Form1();
-                ventana1.FormClosed += (s, args) => this.Close();
-                ventana1.Show();
-                this.Hide();
-            }
-        }
-
-        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            {
-                Form1 ventana1 = new Form1();
-                ventana1.FormClosed += (s, args) => this.Close();
-                ventana1.Show();
-                this.Hide();
-            }
-        }
-
-        private void INGRESAR1_Click(object sender, EventArgs e)
-        {
-            Form3 ventana3 = new Form3();
-            ventana3.FormClosed += (s, args) => this.Close();
-            ventana3.Show();
+            Login ventanaLogin = new Login();
+            ventanaLogin.FormClosed += (s, args) => this.Close();
+            ventanaLogin.Show();
             this.Hide();
         }
     }

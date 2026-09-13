@@ -1,6 +1,6 @@
 ﻿namespace NicaCompare
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             panel1 = new Panel();
-            campoTexto1 = new CampoTexto();
-            INGRESAR1 = new BotonAccion();
-            campoPassword1 = new CampoPassword();
+            inicio_nombre = new CampoTexto();
+            Inicio_INGRESAR = new BotonAccion();
+            inicioPassword = new CampoPassword();
             label2 = new Label();
             linkLabel2 = new LinkLabel();
             label6 = new Label();
@@ -48,10 +49,12 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.AutoSize = true;
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(campoTexto1);
-            panel1.Controls.Add(INGRESAR1);
-            panel1.Controls.Add(campoPassword1);
+            panel1.Controls.Add(inicio_nombre);
+            panel1.Controls.Add(Inicio_INGRESAR);
+            panel1.Controls.Add(inicioPassword);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(linkLabel2);
             panel1.Controls.Add(label6);
@@ -61,118 +64,132 @@
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
-            panel1.Location = new Point(252, 3);
+            panel1.Location = new Point(220, 2);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(472, 616);
+            panel1.Size = new Size(792, 666);
             panel1.TabIndex = 0;
             // 
-            // campoTexto1
+            // inicio_nombre
             // 
-            campoTexto1.BackColor = Color.Transparent;
-            campoTexto1.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto1.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto1.BorderRadius = 12;
-            campoTexto1.Location = new Point(74, 292);
-            campoTexto1.Name = "campoTexto1";
-            campoTexto1.PlaceholderText = "Ingresa tu texto aquí";
-            campoTexto1.Size = new Size(327, 46);
-            campoTexto1.TabIndex = 13;
-            campoTexto1.TipoIcono = TipoIconoCampo.Correo;
+            inicio_nombre.Anchor = AnchorStyles.None;
+            inicio_nombre.BackColor = Color.Transparent;
+            inicio_nombre.BorderColor = Color.FromArgb(228, 231, 236);
+            inicio_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            inicio_nombre.BorderRadius = 12;
+            inicio_nombre.Location = new Point(255, 321);
+            inicio_nombre.Margin = new Padding(3, 2, 3, 2);
+            inicio_nombre.Name = "inicio_nombre";
+            inicio_nombre.PlaceholderText = "Ingresa tu texto aquí";
+            inicio_nombre.Size = new Size(286, 34);
+            inicio_nombre.TabIndex = 13;
+            inicio_nombre.TipoIcono = TipoIconoCampo.Correo;
+            inicio_nombre.TextChanged += inicio_nombre_TextChanged;
             // 
-            // INGRESAR1
+            // Inicio_INGRESAR
             // 
-            INGRESAR1.BackColor = Color.Transparent;
-            INGRESAR1.BorderRadius = 12;
-            INGRESAR1.ColorNormal = Color.FromArgb(255, 122, 0);
-            INGRESAR1.FlatAppearance.BorderSize = 0;
-            INGRESAR1.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            INGRESAR1.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            INGRESAR1.FlatStyle = FlatStyle.Flat;
-            INGRESAR1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            INGRESAR1.ForeColor = Color.White;
-            INGRESAR1.Location = new Point(74, 434);
-            INGRESAR1.MostrarFlecha = true;
-            INGRESAR1.Name = "INGRESAR1";
-            INGRESAR1.Size = new Size(327, 46);
-            INGRESAR1.TabIndex = 12;
-            INGRESAR1.Text = "INGRESAR";
-            INGRESAR1.UseVisualStyleBackColor = false;
-            INGRESAR1.Click += INGRESAR1_Click;
+            Inicio_INGRESAR.Anchor = AnchorStyles.None;
+            Inicio_INGRESAR.BackColor = Color.Transparent;
+            Inicio_INGRESAR.BorderRadius = 12;
+            Inicio_INGRESAR.ColorNormal = Color.FromArgb(255, 122, 0);
+            Inicio_INGRESAR.FlatAppearance.BorderSize = 0;
+            Inicio_INGRESAR.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            Inicio_INGRESAR.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            Inicio_INGRESAR.FlatStyle = FlatStyle.Flat;
+            Inicio_INGRESAR.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            Inicio_INGRESAR.ForeColor = Color.White;
+            Inicio_INGRESAR.Location = new Point(255, 428);
+            Inicio_INGRESAR.Margin = new Padding(3, 2, 3, 2);
+            Inicio_INGRESAR.MostrarFlecha = true;
+            Inicio_INGRESAR.Name = "Inicio_INGRESAR";
+            Inicio_INGRESAR.Size = new Size(286, 34);
+            Inicio_INGRESAR.TabIndex = 12;
+            Inicio_INGRESAR.Text = "INGRESAR";
+            Inicio_INGRESAR.UseVisualStyleBackColor = false;
+            Inicio_INGRESAR.Click += IniciarSecion;
             // 
-            // campoPassword1
+            // inicioPassword
             // 
-            campoPassword1.BackColor = Color.Transparent;
-            campoPassword1.BorderColor = Color.FromArgb(228, 231, 236);
-            campoPassword1.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoPassword1.BorderRadius = 12;
-            campoPassword1.Location = new Point(74, 370);
-            campoPassword1.Name = "campoPassword1";
-            campoPassword1.Padding = new Padding(10);
-            campoPassword1.PlaceholderText = "Confirma tu contraseña";
-            campoPassword1.Size = new Size(329, 46);
-            campoPassword1.TabIndex = 1;
+            inicioPassword.Anchor = AnchorStyles.None;
+            inicioPassword.BackColor = Color.Transparent;
+            inicioPassword.BorderColor = Color.FromArgb(228, 231, 236);
+            inicioPassword.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            inicioPassword.BorderRadius = 12;
+            inicioPassword.Location = new Point(255, 380);
+            inicioPassword.Margin = new Padding(3, 2, 3, 2);
+            inicioPassword.Name = "inicioPassword";
+            inicioPassword.Padding = new Padding(9, 8, 9, 8);
+            inicioPassword.PlaceholderText = "Confirma tu contraseña";
+            inicioPassword.Size = new Size(288, 34);
+            inicioPassword.TabIndex = 1;
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift Light", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(90, 191);
+            label2.Location = new Point(269, 245);
             label2.Name = "label2";
-            label2.Size = new Size(281, 30);
+            label2.Size = new Size(224, 24);
             label2.TabIndex = 2;
             label2.Text = "BIENVENIDO DE NUEVO";
             label2.Click += label2_Click;
             // 
             // linkLabel2
             // 
+            linkLabel2.Anchor = AnchorStyles.None;
             linkLabel2.AutoSize = true;
             linkLabel2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             linkLabel2.ForeColor = Color.FromArgb(0, 0, 192);
             linkLabel2.LinkColor = Color.FromArgb(0, 0, 192);
-            linkLabel2.Location = new Point(267, 500);
+            linkLabel2.Location = new Point(424, 477);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(75, 20);
+            linkLabel2.Size = new Size(88, 15);
             linkLabel2.TabIndex = 9;
             linkLabel2.TabStop = true;
-            linkLabel2.Text = "Crea una";
+            linkLabel2.Text = "Crear Cuenta";
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(126, 500);
+            label6.Location = new Point(300, 477);
             label6.Name = "label6";
-            label6.Size = new Size(134, 20);
+            label6.Size = new Size(106, 15);
             label6.TabIndex = 11;
             label6.Text = "¿No tienes cuenta?";
             label6.Click += label6_Click;
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(74, 269);
+            label3.Location = new Point(255, 304);
             label3.Name = "label3";
-            label3.Size = new Size(140, 20);
+            label3.Size = new Size(107, 15);
             label3.TabIndex = 3;
             label3.Text = "Correo  Electronico";
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(74, 347);
+            label4.Location = new Point(255, 362);
             label4.Name = "label4";
-            label4.Size = new Size(86, 20);
+            label4.Size = new Size(66, 15);
             label4.TabIndex = 6;
             label4.Text = "Contraseña";
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(135, 563);
+            label5.Location = new Point(308, 524);
             label5.Name = "label5";
-            label5.Size = new Size(193, 20);
+            label5.Size = new Size(152, 15);
             label5.TabIndex = 10;
             label5.Text = "UNAN Matagalpa Grupo #1";
             label5.Click += label5_Click;
@@ -180,48 +197,55 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(67, 299);
+            linkLabel1.Location = new Point(59, 224);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(0, 20);
+            linkLabel1.Size = new Size(0, 15);
             linkLabel1.TabIndex = 4;
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(126, 117);
+            label1.Location = new Point(300, 190);
             label1.Name = "label1";
-            label1.Size = new Size(216, 16);
+            label1.Size = new Size(176, 13);
             label1.TabIndex = 1;
             label1.Text = "---- COMPARA. ELIGE. AHORRA ---";
             label1.Click += label1_Click;
             // 
             // pictureBox2
             // 
+            pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = Properties.Resources.LOGO_222;
-            pictureBox2.Location = new Point(74, -28);
+            pictureBox2.Location = new Point(255, 81);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(319, 199);
+            pictureBox2.Size = new Size(279, 149);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
-            // Form1
+            // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_04_at_1_50_14_PM_upscayl_5x_digital_art_4x;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1011, 636);
+            ClientSize = new Size(1264, 681);
             Controls.Add(panel1);
-            Name = "Form1";
-            Text = "Form1";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "NicaCompare | Login 👤";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -235,10 +259,10 @@
         private ColorDialog colorDialog1;
         private Label label5;
         private Label label6;
-        private LinkLabel linkLabel2;
         private Label label2;
-        private CampoPassword campoPassword1;
-        private BotonAccion INGRESAR1;
-        private CampoTexto campoTexto1;
+        private CampoPassword inicioPassword;
+        private BotonAccion Inicio_INGRESAR;
+        private CampoTexto inicio_nombre;
+        private LinkLabel linkLabel2;
     }
 }

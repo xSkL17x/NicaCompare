@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NicaCompare
 {
-    public partial class Form3 : Form
+    public partial class Inicio : Form
     {
-        public Form3()
+        public Inicio()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace NicaCompare
 
         private void botonMenu2_Click(object sender, EventArgs e)
         {
-            Form1 ventana1 = new Form1();
+            Login ventana1 = new Login();
             ventana1.FormClosed += (s, args) => this.Close();
             ventana1.Show();
             this.Hide();
