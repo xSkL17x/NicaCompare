@@ -46,5 +46,34 @@ namespace NicaCompare
                 MessageBox.Show("Aquí te llevará a la pantalla de usuario.", "Perfil de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void barraBusqueda1_BuscarClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonMenu2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonMenu2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonMenu2_Click_2(object sender, EventArgs e)
+        {
+          
+            Form5 ventana5 = new Form5();
+            ventana5.FormClosed += (s, args) => this.Close();
+            ventana5.Show();
+            this.Hide();
+        }
     }
 }

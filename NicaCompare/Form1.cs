@@ -64,6 +64,15 @@ namespace NicaCompare
             this.Hide();
 
         }
+
+        private void botonAccion1_Click(object sender, EventArgs e)
+        {
+            Inicio ventana3 = new Inicio();
+            ventana3.FormClosed += (s, args) => this.Close();
+            ventana3.Show();
+            this.Hide();
+
+        }
     }
 
 
