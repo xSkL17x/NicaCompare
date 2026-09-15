@@ -146,6 +146,7 @@
             botonRedondeado1.TabIndex = 6;
             botonRedondeado1.Text = "Crear Perfil";
             botonRedondeado1.UseVisualStyleBackColor = false;
+            botonRedondeado1.Click += botonRedondeado1_Click;
             // 
             // Form5
             // 

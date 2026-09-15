@@ -55,5 +55,15 @@ namespace NicaCompare
             ventanaLogin.Show();
             this.Hide();
         }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void campoPassword1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

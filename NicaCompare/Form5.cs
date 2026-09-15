@@ -21,5 +21,13 @@ namespace NicaCompare
         {
 
         }
+
+        private void botonRedondeado1_Click(object sender, EventArgs e)
+        {
+            Registro ventana2 = new Registro();
+            ventana2.FormClosed += (s, args) => this.Close();
+            ventana2.Show();
+            this.Hide();
+        }
     }
 }
