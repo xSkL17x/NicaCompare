@@ -49,6 +49,7 @@
             panel1 = new Panel();
             botonMenu1 = new BotonMenu();
             botonRedondeado1 = new BotonRedondeado();
+            label11 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,9 +87,9 @@
             campoTexto1.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto1.EsPassword = false;
             campoTexto1.IconoPersonalizado = null;
-            campoTexto1.Location = new Point(20, 140);
+            campoTexto1.Location = new Point(18, 76);
             campoTexto1.Name = "campoTexto1";
-            campoTexto1.PlaceholderText = "Ingresa tu texto aquí";
+            campoTexto1.PlaceholderText = "1234 5678 9101 1121";
             campoTexto1.Size = new Size(724, 47);
             campoTexto1.TabIndex = 15;
             campoTexto1.TipoIcono = TipoIconoCampo.Tarjeta;
@@ -104,12 +105,13 @@
             campoTexto2.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto2.EsPassword = false;
             campoTexto2.IconoPersonalizado = null;
-            campoTexto2.Location = new Point(20, 226);
+            campoTexto2.Location = new Point(12, 177);
             campoTexto2.Name = "campoTexto2";
             campoTexto2.PlaceholderText = "Como aparece en la tarjeta";
             campoTexto2.Size = new Size(350, 47);
             campoTexto2.TabIndex = 16;
             campoTexto2.TipoIcono = TipoIconoCampo.Usuario;
+            campoTexto2.TextChanged += campoTexto2_TextChanged;
             // 
             // campoTexto3
             // 
@@ -121,7 +123,7 @@
             campoTexto3.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto3.EsPassword = false;
             campoTexto3.IconoPersonalizado = null;
-            campoTexto3.Location = new Point(386, 142);
+            campoTexto3.Location = new Point(386, 177);
             campoTexto3.Name = "campoTexto3";
             campoTexto3.PlaceholderText = "MM / AA";
             campoTexto3.Size = new Size(350, 47);
@@ -138,7 +140,7 @@
             campoTexto4.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto4.EsPassword = false;
             campoTexto4.IconoPersonalizado = null;
-            campoTexto4.Location = new Point(20, 314);
+            campoTexto4.Location = new Point(12, 262);
             campoTexto4.Name = "campoTexto4";
             campoTexto4.PlaceholderText = "123";
             campoTexto4.Size = new Size(350, 47);
@@ -155,7 +157,7 @@
             campoTexto5.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto5.EsPassword = false;
             campoTexto5.IconoPersonalizado = null;
-            campoTexto5.Location = new Point(20, 447);
+            campoTexto5.Location = new Point(18, 399);
             campoTexto5.Name = "campoTexto5";
             campoTexto5.PlaceholderText = "Tu nombre completo";
             campoTexto5.Size = new Size(350, 47);
@@ -173,7 +175,7 @@
             campoTexto6.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto6.EsPassword = false;
             campoTexto6.IconoPersonalizado = null;
-            campoTexto6.Location = new Point(386, 363);
+            campoTexto6.Location = new Point(386, 399);
             campoTexto6.Name = "campoTexto6";
             campoTexto6.PlaceholderText = "correo@ejemplo.com";
             campoTexto6.Size = new Size(350, 47);
@@ -191,7 +193,7 @@
             campoTexto7.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto7.EsPassword = false;
             campoTexto7.IconoPersonalizado = null;
-            campoTexto7.Location = new Point(20, 534);
+            campoTexto7.Location = new Point(12, 488);
             campoTexto7.Name = "campoTexto7";
             campoTexto7.PlaceholderText = "+505 8*** ****";
             campoTexto7.Size = new Size(350, 47);
@@ -208,7 +210,7 @@
             campoTexto8.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto8.EsPassword = false;
             campoTexto8.IconoPersonalizado = null;
-            campoTexto8.Location = new Point(386, 452);
+            campoTexto8.Location = new Point(386, 488);
             campoTexto8.Name = "campoTexto8";
             campoTexto8.PlaceholderText = "Dirección, ciudad, departamento";
             campoTexto8.Size = new Size(350, 47);
@@ -221,7 +223,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Navy;
-            label4.Location = new Point(20, 114);
+            label4.Location = new Point(290, 10);
             label4.Name = "label4";
             label4.Size = new Size(139, 23);
             label4.TabIndex = 22;
@@ -233,11 +235,12 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Navy;
-            label1.Location = new Point(20, 201);
+            label1.Location = new Point(12, 151);
             label1.Name = "label1";
             label1.Size = new Size(161, 23);
             label1.TabIndex = 23;
             label1.Text = "Nombre del titular";
+            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -245,7 +248,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Navy;
-            label2.Location = new Point(386, 117);
+            label2.Location = new Point(388, 151);
             label2.Name = "label2";
             label2.Size = new Size(168, 23);
             label2.TabIndex = 24;
@@ -258,7 +261,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Navy;
-            label3.Location = new Point(20, 289);
+            label3.Location = new Point(18, 236);
             label3.Name = "label3";
             label3.Size = new Size(231, 23);
             label3.TabIndex = 25;
@@ -270,7 +273,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Navy;
-            label5.Location = new Point(20, 421);
+            label5.Location = new Point(18, 373);
             label5.Name = "label5";
             label5.Size = new Size(157, 23);
             label5.TabIndex = 26;
@@ -282,7 +285,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Navy;
-            label6.Location = new Point(388, 337);
+            label6.Location = new Point(388, 373);
             label6.Name = "label6";
             label6.Size = new Size(157, 23);
             label6.TabIndex = 27;
@@ -294,7 +297,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Navy;
-            label7.Location = new Point(20, 510);
+            label7.Location = new Point(12, 462);
             label7.Name = "label7";
             label7.Size = new Size(78, 23);
             label7.TabIndex = 28;
@@ -306,7 +309,7 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Navy;
-            label8.Location = new Point(386, 426);
+            label8.Location = new Point(386, 462);
             label8.Name = "label8";
             label8.Size = new Size(205, 23);
             label8.TabIndex = 29;
@@ -315,16 +318,27 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(label11);
             panel1.Controls.Add(botonRedondeado1);
+            panel1.Controls.Add(campoTexto1);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(campoTexto2);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(campoTexto4);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label8);
+            panel1.Controls.Add(campoTexto5);
             panel1.Controls.Add(campoTexto3);
             panel1.Controls.Add(label6);
+            panel1.Controls.Add(campoTexto7);
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(campoTexto6);
             panel1.Controls.Add(campoTexto8);
-            panel1.Location = new Point(8, 84);
+            panel1.Location = new Point(2, 87);
             panel1.Name = "panel1";
-            panel1.Size = new Size(749, 582);
+            panel1.Size = new Size(749, 618);
             panel1.TabIndex = 30;
             // 
             // botonMenu1
@@ -359,30 +373,32 @@
             botonRedondeado1.FlatStyle = FlatStyle.Flat;
             botonRedondeado1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             botonRedondeado1.ForeColor = Color.White;
-            botonRedondeado1.Location = new Point(499, 517);
+            botonRedondeado1.Location = new Point(502, 549);
             botonRedondeado1.Name = "botonRedondeado1";
             botonRedondeado1.Size = new Size(200, 50);
             botonRedondeado1.TabIndex = 30;
             botonRedondeado1.Text = "Confirmar   →";
             botonRedondeado1.UseVisualStyleBackColor = false;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.Navy;
+            label11.Location = new Point(18, 50);
+            label11.Name = "label11";
+            label11.Size = new Size(158, 23);
+            label11.TabIndex = 31;
+            label11.Text = "Numero de tarjeta";
+            // 
             // Form7
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
-            ClientSize = new Size(763, 688);
+            ClientSize = new Size(763, 717);
             Controls.Add(botonMenu1);
-            Controls.Add(label7);
-            Controls.Add(label5);
-            Controls.Add(label3);
-            Controls.Add(label1);
-            Controls.Add(label4);
-            Controls.Add(campoTexto7);
-            Controls.Add(campoTexto5);
-            Controls.Add(campoTexto4);
-            Controls.Add(campoTexto2);
-            Controls.Add(campoTexto1);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(panel1);
@@ -418,5 +434,6 @@
         private Panel panel1;
         private BotonMenu botonMenu1;
         private BotonRedondeado botonRedondeado1;
+        private Label label11;
     }
 }
