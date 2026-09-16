@@ -48,11 +48,11 @@
             label10 = new Label();
             panel3 = new Panel();
             panel4 = new Panel();
-            button1 = new Button();
-            botonRedondeado1 = new BotonRedondeado();
-            botonRedondeado2 = new BotonRedondeado();
-            label11 = new Label();
             label12 = new Label();
+            label11 = new Label();
+            botonRedondeado2 = new BotonRedondeado();
+            botonRedondeado1 = new BotonRedondeado();
+            button1 = new Button();
             botonRedondeado3 = new BotonRedondeado();
             botonRedondeado4 = new BotonRedondeado();
             panel5 = new Panel();
@@ -139,12 +139,13 @@
             campoTexto1.BorderColor = Color.FromArgb(228, 231, 236);
             campoTexto1.BorderFocusColor = Color.FromArgb(13, 110, 253);
             campoTexto1.BorderRadius = 12;
+            campoTexto1.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             campoTexto1.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto1.EsPassword = false;
             campoTexto1.IconoPersonalizado = null;
             campoTexto1.Location = new Point(35, 327);
             campoTexto1.Name = "campoTexto1";
-            campoTexto1.PlaceholderText = "Ingresa tu texto aquí";
+            campoTexto1.PlaceholderText = "Tu nombre completo";
             campoTexto1.Size = new Size(400, 60);
             campoTexto1.TabIndex = 2;
             campoTexto1.TipoIcono = TipoIconoCampo.Usuario;
@@ -155,12 +156,13 @@
             campoTexto2.BorderColor = Color.FromArgb(228, 231, 236);
             campoTexto2.BorderFocusColor = Color.FromArgb(13, 110, 253);
             campoTexto2.BorderRadius = 12;
+            campoTexto2.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             campoTexto2.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto2.EsPassword = false;
             campoTexto2.IconoPersonalizado = null;
             campoTexto2.Location = new Point(35, 484);
             campoTexto2.Name = "campoTexto2";
-            campoTexto2.PlaceholderText = "Ingresa tu texto aquí";
+            campoTexto2.PlaceholderText = "+505 8*** ****";
             campoTexto2.Size = new Size(400, 60);
             campoTexto2.TabIndex = 3;
             campoTexto2.TipoIcono = TipoIconoCampo.Telefono;
@@ -171,12 +173,13 @@
             campoTexto3.BorderColor = Color.FromArgb(228, 231, 236);
             campoTexto3.BorderFocusColor = Color.FromArgb(13, 110, 253);
             campoTexto3.BorderRadius = 12;
+            campoTexto3.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             campoTexto3.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto3.EsPassword = false;
             campoTexto3.IconoPersonalizado = null;
             campoTexto3.Location = new Point(35, 645);
             campoTexto3.Name = "campoTexto3";
-            campoTexto3.PlaceholderText = "";
+            campoTexto3.PlaceholderText = "Ej. Managua";
             campoTexto3.Size = new Size(400, 60);
             campoTexto3.TabIndex = 4;
             campoTexto3.TipoIcono = TipoIconoCampo.Ubicacion;
@@ -187,12 +190,13 @@
             campoTexto4.BorderColor = Color.FromArgb(228, 231, 236);
             campoTexto4.BorderFocusColor = Color.FromArgb(13, 110, 253);
             campoTexto4.BorderRadius = 12;
+            campoTexto4.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             campoTexto4.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto4.EsPassword = false;
             campoTexto4.IconoPersonalizado = null;
             campoTexto4.Location = new Point(518, 292);
             campoTexto4.Name = "campoTexto4";
-            campoTexto4.PlaceholderText = "Ingresa tu texto aquí";
+            campoTexto4.PlaceholderText = "DD / MM / AAAA";
             campoTexto4.Size = new Size(400, 60);
             campoTexto4.TabIndex = 6;
             campoTexto4.TipoIcono = TipoIconoCampo.Calendario;
@@ -204,12 +208,13 @@
             campoTexto5.BorderColor = Color.FromArgb(228, 231, 236);
             campoTexto5.BorderFocusColor = Color.FromArgb(13, 110, 253);
             campoTexto5.BorderRadius = 12;
+            campoTexto5.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             campoTexto5.ColorIcono = Color.FromArgb(130, 138, 150);
             campoTexto5.EsPassword = false;
             campoTexto5.IconoPersonalizado = null;
             campoTexto5.Location = new Point(518, 135);
             campoTexto5.Name = "campoTexto5";
-            campoTexto5.PlaceholderText = "Ingresa tu texto aquí";
+            campoTexto5.PlaceholderText = "correo@ejemplo.com";
             campoTexto5.Size = new Size(400, 60);
             campoTexto5.TabIndex = 5;
             campoTexto5.TipoIcono = TipoIconoCampo.Correo;
@@ -322,19 +327,45 @@
             panel4.Size = new Size(444, 416);
             panel4.TabIndex = 14;
             // 
-            // button1
+            // label12
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = Properties.Resources.no_hay_usuario;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.Transparent;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(104, 105);
-            button1.Name = "button1";
-            button1.Size = new Size(247, 200);
-            button1.TabIndex = 0;
-            button1.UseVisualStyleBackColor = false;
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(18, 51);
+            label12.Name = "label12";
+            label12.Size = new Size(255, 23);
+            label12.TabIndex = 4;
+            label12.Text = "Puedes cambiar tu foto de perfil";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.Navy;
+            label11.Location = new Point(18, 23);
+            label11.Name = "label11";
+            label11.Size = new Size(147, 28);
+            label11.TabIndex = 4;
+            label11.Text = "Foto de perfil";
+            // 
+            // botonRedondeado2
+            // 
+            botonRedondeado2.BackColor = Color.FromArgb(255, 128, 0);
+            botonRedondeado2.BorderRadius = 20;
+            botonRedondeado2.FlatAppearance.BorderSize = 0;
+            botonRedondeado2.FlatStyle = FlatStyle.Flat;
+            botonRedondeado2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            botonRedondeado2.ForeColor = Color.White;
+            botonRedondeado2.ImageAlign = ContentAlignment.TopLeft;
+            botonRedondeado2.Location = new Point(231, 316);
+            botonRedondeado2.Name = "botonRedondeado2";
+            botonRedondeado2.Size = new Size(195, 50);
+            botonRedondeado2.TabIndex = 2;
+            botonRedondeado2.Text = "Eliminar foto";
+            botonRedondeado2.UseVisualStyleBackColor = false;
+            botonRedondeado2.Click += botonRedondeado2_Click;
             // 
             // botonRedondeado1
             // 
@@ -352,50 +383,26 @@
             botonRedondeado1.UseVisualStyleBackColor = false;
             botonRedondeado1.Click += botonRedondeado1_Click;
             // 
-            // botonRedondeado2
+            // button1
             // 
-            botonRedondeado2.BackColor = Color.FromArgb(255, 128, 0);
-            botonRedondeado2.BorderRadius = 20;
-            botonRedondeado2.FlatAppearance.BorderSize = 0;
-            botonRedondeado2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            botonRedondeado2.ForeColor = Color.White;
-            botonRedondeado2.ImageAlign = ContentAlignment.TopLeft;
-            botonRedondeado2.Location = new Point(231, 316);
-            botonRedondeado2.Name = "botonRedondeado2";
-            botonRedondeado2.Size = new Size(195, 50);
-            botonRedondeado2.TabIndex = 2;
-            botonRedondeado2.Text = "Eliminar foto";
-            botonRedondeado2.UseVisualStyleBackColor = false;
-            botonRedondeado2.Click += botonRedondeado2_Click;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.Navy;
-            label11.Location = new Point(18, 23);
-            label11.Name = "label11";
-            label11.Size = new Size(147, 28);
-            label11.TabIndex = 4;
-            label11.Text = "Foto de perfil";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(18, 51);
-            label12.Name = "label12";
-            label12.Size = new Size(255, 23);
-            label12.TabIndex = 4;
-            label12.Text = "Puedes cambiar tu foto de perfil";
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = Properties.Resources.no_hay_usuario;
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.Transparent;
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(104, 105);
+            button1.Name = "button1";
+            button1.Size = new Size(247, 200);
+            button1.TabIndex = 0;
+            button1.UseVisualStyleBackColor = false;
             // 
             // botonRedondeado3
             // 
             botonRedondeado3.BackColor = Color.FromArgb(255, 128, 0);
             botonRedondeado3.BorderRadius = 20;
             botonRedondeado3.FlatAppearance.BorderSize = 0;
+            botonRedondeado3.FlatStyle = FlatStyle.Flat;
             botonRedondeado3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             botonRedondeado3.ForeColor = Color.White;
             botonRedondeado3.ImageAlign = ContentAlignment.TopLeft;

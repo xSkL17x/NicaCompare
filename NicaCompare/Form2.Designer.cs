@@ -26,6 +26,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registro));
             panel1 = new ReaLTaiizor.Controls.Panel();
+            campoPassword2 = new CampoPassword();
+            campoPassword1 = new CampoPassword();
             Crearcuenta = new BotonAccion();
             registro_correo = new CampoTexto();
             registro_nombre = new CampoTexto();
@@ -46,8 +48,6 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
-            campoPassword1 = new CampoPassword();
-            campoPassword2 = new CampoPassword();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -82,12 +82,40 @@
             panel1.EdgeColor = Color.FromArgb(32, 41, 50);
             panel1.Location = new Point(483, 95);
             panel1.Name = "panel1";
-            panel1.Padding = new Padding(5, 5, 5, 5);
+            panel1.Padding = new Padding(5);
             panel1.Size = new Size(440, 707);
             panel1.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             panel1.TabIndex = 0;
             panel1.Text = "panel1";
             panel1.Click += panel1_Click;
+            // 
+            // campoPassword2
+            // 
+            campoPassword2.Anchor = AnchorStyles.None;
+            campoPassword2.BackColor = Color.Transparent;
+            campoPassword2.BorderColor = Color.FromArgb(228, 231, 236);
+            campoPassword2.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            campoPassword2.BorderRadius = 12;
+            campoPassword2.Location = new Point(56, 510);
+            campoPassword2.Name = "campoPassword2";
+            campoPassword2.Padding = new Padding(10, 11, 10, 11);
+            campoPassword2.PlaceholderText = "Confirma tu contraseña";
+            campoPassword2.Size = new Size(329, 45);
+            campoPassword2.TabIndex = 24;
+            // 
+            // campoPassword1
+            // 
+            campoPassword1.Anchor = AnchorStyles.None;
+            campoPassword1.BackColor = Color.Transparent;
+            campoPassword1.BorderColor = Color.FromArgb(228, 231, 236);
+            campoPassword1.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            campoPassword1.BorderRadius = 12;
+            campoPassword1.Location = new Point(56, 439);
+            campoPassword1.Name = "campoPassword1";
+            campoPassword1.Padding = new Padding(10, 11, 10, 11);
+            campoPassword1.PlaceholderText = "Confirma tu contraseña";
+            campoPassword1.Size = new Size(329, 45);
+            campoPassword1.TabIndex = 23;
             // 
             // Crearcuenta
             // 
@@ -117,12 +145,13 @@
             registro_correo.BorderColor = Color.FromArgb(228, 231, 236);
             registro_correo.BorderFocusColor = Color.FromArgb(13, 110, 253);
             registro_correo.BorderRadius = 12;
+            registro_correo.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             registro_correo.ColorIcono = Color.FromArgb(130, 138, 150);
             registro_correo.EsPassword = false;
             registro_correo.IconoPersonalizado = null;
             registro_correo.Location = new Point(56, 367);
             registro_correo.Name = "registro_correo";
-            registro_correo.PlaceholderText = "Ingresa tu texto aquí";
+            registro_correo.PlaceholderText = "correo@ejemplo.com";
             registro_correo.Size = new Size(327, 45);
             registro_correo.TabIndex = 21;
             registro_correo.TipoIcono = TipoIconoCampo.Correo;
@@ -134,12 +163,13 @@
             registro_nombre.BorderColor = Color.FromArgb(228, 231, 236);
             registro_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
             registro_nombre.BorderRadius = 12;
+            registro_nombre.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             registro_nombre.ColorIcono = Color.FromArgb(130, 138, 150);
             registro_nombre.EsPassword = false;
             registro_nombre.IconoPersonalizado = null;
             registro_nombre.Location = new Point(56, 297);
             registro_nombre.Name = "registro_nombre";
-            registro_nombre.PlaceholderText = "Ingresa tu texto aquí";
+            registro_nombre.PlaceholderText = "Tu nombre completo";
             registro_nombre.Size = new Size(327, 45);
             registro_nombre.TabIndex = 20;
             registro_nombre.TipoIcono = TipoIconoCampo.Usuario;
@@ -329,34 +359,6 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
-            // 
-            // campoPassword1
-            // 
-            campoPassword1.Anchor = AnchorStyles.None;
-            campoPassword1.BackColor = Color.Transparent;
-            campoPassword1.BorderColor = Color.FromArgb(228, 231, 236);
-            campoPassword1.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoPassword1.BorderRadius = 12;
-            campoPassword1.Location = new Point(56, 439);
-            campoPassword1.Name = "campoPassword1";
-            campoPassword1.Padding = new Padding(10, 11, 10, 11);
-            campoPassword1.PlaceholderText = "Confirma tu contraseña";
-            campoPassword1.Size = new Size(329, 45);
-            campoPassword1.TabIndex = 23;
-            // 
-            // campoPassword2
-            // 
-            campoPassword2.Anchor = AnchorStyles.None;
-            campoPassword2.BackColor = Color.Transparent;
-            campoPassword2.BorderColor = Color.FromArgb(228, 231, 236);
-            campoPassword2.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoPassword2.BorderRadius = 12;
-            campoPassword2.Location = new Point(56, 510);
-            campoPassword2.Name = "campoPassword2";
-            campoPassword2.Padding = new Padding(10, 11, 10, 11);
-            campoPassword2.PlaceholderText = "Confirma tu contraseña";
-            campoPassword2.Size = new Size(329, 45);
-            campoPassword2.TabIndex = 24;
             // 
             // Registro
             // 

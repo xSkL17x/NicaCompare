@@ -99,9 +99,13 @@
             inicio_nombre.BorderColor = Color.FromArgb(228, 231, 236);
             inicio_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
             inicio_nombre.BorderRadius = 12;
+            inicio_nombre.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            inicio_nombre.ColorIcono = Color.FromArgb(100, 116, 139);
+            inicio_nombre.EsPassword = false;
+            inicio_nombre.IconoPersonalizado = null;
             inicio_nombre.Location = new Point(129, 428);
             inicio_nombre.Name = "inicio_nombre";
-            inicio_nombre.PlaceholderText = "Ingresa tu texto aquí";
+            inicio_nombre.PlaceholderText = "correo@ejemplo.com";
             inicio_nombre.Size = new Size(327, 45);
             inicio_nombre.TabIndex = 13;
             inicio_nombre.TipoIcono = TipoIconoCampo.Correo;
