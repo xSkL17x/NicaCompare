@@ -30,18 +30,17 @@
         {
             panel1 = new Panel();
             panel2 = new Panel();
-            label1 = new Label();
+            label_fecha = new Label();
             pictureBox2 = new PictureBox();
-            label2 = new Label();
-            label3 = new Label();
-            campoTexto1 = new CampoTexto();
-            campoTexto2 = new CampoTexto();
-            campoTexto3 = new CampoTexto();
-            campoTexto4 = new CampoTexto();
-            campoTexto5 = new CampoTexto();
+            label_nombre = new Label();
+            label_correo = new Label();
+            imput_nombre = new CampoTexto();
+            imput_telefono = new CampoTexto();
+            imput_fecha = new CampoTexto();
+            imput_correo = new CampoTexto();
             label4 = new Label();
             label5 = new Label();
-            label6 = new Label();
+            label_tipo_cuenta = new Label();
             label7 = new Label();
             label8 = new Label();
             label9 = new Label();
@@ -68,10 +67,10 @@
             panel1.BackgroundImage = Properties.Resources.fondo_perfil;
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(label_fecha);
             panel1.Controls.Add(pictureBox2);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label_nombre);
+            panel1.Controls.Add(label_correo);
             panel1.Location = new Point(0, 1);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
@@ -86,17 +85,17 @@
             panel2.Size = new Size(1261, 434);
             panel2.TabIndex = 2;
             // 
-            // label1
+            // label_fecha
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Navy;
-            label1.Location = new Point(171, 81);
-            label1.Name = "label1";
-            label1.Size = new Size(140, 19);
-            label1.TabIndex = 3;
-            label1.Text = "Usuario desde 2026";
+            label_fecha.AutoSize = true;
+            label_fecha.BackColor = Color.Transparent;
+            label_fecha.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_fecha.ForeColor = Color.Navy;
+            label_fecha.Location = new Point(171, 81);
+            label_fecha.Name = "label_fecha";
+            label_fecha.Size = new Size(140, 19);
+            label_fecha.TabIndex = 3;
+            label_fecha.Text = "Usuario desde 2026";
             // 
             // pictureBox2
             // 
@@ -111,121 +110,103 @@
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
             // 
-            // label2
+            // label_nombre
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Navy;
-            label2.Location = new Point(170, 22);
-            label2.Name = "label2";
-            label2.Size = new Size(124, 25);
-            label2.TabIndex = 1;
-            label2.Text = "OTONIEL JR";
-            label2.Click += label2_Click;
+            label_nombre.AutoSize = true;
+            label_nombre.BackColor = Color.Transparent;
+            label_nombre.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_nombre.ForeColor = Color.Navy;
+            label_nombre.Location = new Point(170, 22);
+            label_nombre.Name = "label_nombre";
+            label_nombre.Size = new Size(124, 25);
+            label_nombre.TabIndex = 1;
+            label_nombre.Text = "OTONIEL JR";
+            label_nombre.Click += label2_Click;
             // 
-            // label3
+            // label_correo
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(170, 52);
-            label3.Name = "label3";
-            label3.Size = new Size(135, 19);
-            label3.TabIndex = 2;
-            label3.Text = "JomuUb@gmail.com";
-            label3.Click += label3_Click;
+            label_correo.AutoSize = true;
+            label_correo.BackColor = Color.Transparent;
+            label_correo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_correo.Location = new Point(170, 52);
+            label_correo.Name = "label_correo";
+            label_correo.Size = new Size(135, 19);
+            label_correo.TabIndex = 2;
+            label_correo.Text = "JomuUb@gmail.com";
+            label_correo.Click += label3_Click;
             // 
-            // campoTexto1
+            // imput_nombre
             // 
-            campoTexto1.BackColor = Color.Transparent;
-            campoTexto1.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto1.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto1.BorderRadius = 12;
-            campoTexto1.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto1.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto1.EsPassword = false;
-            campoTexto1.IconoPersonalizado = null;
-            campoTexto1.Location = new Point(31, 245);
-            campoTexto1.Margin = new Padding(3, 2, 3, 2);
-            campoTexto1.Name = "campoTexto1";
-            campoTexto1.PlaceholderText = "Tu nombre completo";
-            campoTexto1.Size = new Size(350, 45);
-            campoTexto1.TabIndex = 2;
-            campoTexto1.TipoIcono = TipoIconoCampo.Usuario;
+            imput_nombre.BackColor = Color.Transparent;
+            imput_nombre.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_nombre.BorderRadius = 12;
+            imput_nombre.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_nombre.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_nombre.EsPassword = false;
+            imput_nombre.IconoPersonalizado = null;
+            imput_nombre.Location = new Point(31, 245);
+            imput_nombre.Margin = new Padding(3, 2, 3, 2);
+            imput_nombre.Name = "imput_nombre";
+            imput_nombre.PlaceholderText = "Tu nombre completo";
+            imput_nombre.Size = new Size(350, 45);
+            imput_nombre.TabIndex = 2;
+            imput_nombre.TipoIcono = TipoIconoCampo.Usuario;
             // 
-            // campoTexto2
+            // imput_telefono
             // 
-            campoTexto2.BackColor = Color.Transparent;
-            campoTexto2.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto2.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto2.BorderRadius = 12;
-            campoTexto2.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto2.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto2.EsPassword = false;
-            campoTexto2.IconoPersonalizado = null;
-            campoTexto2.Location = new Point(31, 363);
-            campoTexto2.Margin = new Padding(3, 2, 3, 2);
-            campoTexto2.Name = "campoTexto2";
-            campoTexto2.PlaceholderText = "+505 8*** ****";
-            campoTexto2.Size = new Size(350, 45);
-            campoTexto2.TabIndex = 3;
-            campoTexto2.TipoIcono = TipoIconoCampo.Telefono;
+            imput_telefono.BackColor = Color.Transparent;
+            imput_telefono.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_telefono.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_telefono.BorderRadius = 12;
+            imput_telefono.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_telefono.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_telefono.EsPassword = false;
+            imput_telefono.IconoPersonalizado = null;
+            imput_telefono.Location = new Point(31, 363);
+            imput_telefono.Margin = new Padding(3, 2, 3, 2);
+            imput_telefono.Name = "imput_telefono";
+            imput_telefono.PlaceholderText = "+505 8*** ****";
+            imput_telefono.Size = new Size(350, 45);
+            imput_telefono.TabIndex = 3;
+            imput_telefono.TipoIcono = TipoIconoCampo.Telefono;
             // 
-            // campoTexto3
+            // imput_fecha
             // 
-            campoTexto3.BackColor = Color.Transparent;
-            campoTexto3.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto3.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto3.BorderRadius = 12;
-            campoTexto3.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto3.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto3.EsPassword = false;
-            campoTexto3.IconoPersonalizado = null;
-            campoTexto3.Location = new Point(31, 484);
-            campoTexto3.Margin = new Padding(3, 2, 3, 2);
-            campoTexto3.Name = "campoTexto3";
-            campoTexto3.PlaceholderText = "Ej. Managua";
-            campoTexto3.Size = new Size(350, 45);
-            campoTexto3.TabIndex = 4;
-            campoTexto3.TipoIcono = TipoIconoCampo.Ubicacion;
+            imput_fecha.BackColor = Color.Transparent;
+            imput_fecha.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_fecha.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_fecha.BorderRadius = 12;
+            imput_fecha.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_fecha.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_fecha.EsPassword = false;
+            imput_fecha.IconoPersonalizado = null;
+            imput_fecha.Location = new Point(453, 219);
+            imput_fecha.Margin = new Padding(3, 2, 3, 2);
+            imput_fecha.Name = "imput_fecha";
+            imput_fecha.PlaceholderText = "DD / MM / AAAA";
+            imput_fecha.Size = new Size(350, 45);
+            imput_fecha.TabIndex = 6;
+            imput_fecha.TipoIcono = TipoIconoCampo.Calendario;
+            imput_fecha.TextChanged += campoTexto4_TextChanged;
             // 
-            // campoTexto4
+            // imput_correo
             // 
-            campoTexto4.BackColor = Color.Transparent;
-            campoTexto4.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto4.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto4.BorderRadius = 12;
-            campoTexto4.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto4.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto4.EsPassword = false;
-            campoTexto4.IconoPersonalizado = null;
-            campoTexto4.Location = new Point(453, 219);
-            campoTexto4.Margin = new Padding(3, 2, 3, 2);
-            campoTexto4.Name = "campoTexto4";
-            campoTexto4.PlaceholderText = "DD / MM / AAAA";
-            campoTexto4.Size = new Size(350, 45);
-            campoTexto4.TabIndex = 6;
-            campoTexto4.TipoIcono = TipoIconoCampo.Calendario;
-            campoTexto4.TextChanged += campoTexto4_TextChanged;
-            // 
-            // campoTexto5
-            // 
-            campoTexto5.BackColor = Color.Transparent;
-            campoTexto5.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto5.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto5.BorderRadius = 12;
-            campoTexto5.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto5.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto5.EsPassword = false;
-            campoTexto5.IconoPersonalizado = null;
-            campoTexto5.Location = new Point(453, 101);
-            campoTexto5.Margin = new Padding(3, 2, 3, 2);
-            campoTexto5.Name = "campoTexto5";
-            campoTexto5.PlaceholderText = "correo@ejemplo.com";
-            campoTexto5.Size = new Size(350, 45);
-            campoTexto5.TabIndex = 5;
-            campoTexto5.TipoIcono = TipoIconoCampo.Correo;
+            imput_correo.BackColor = Color.Transparent;
+            imput_correo.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_correo.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_correo.BorderRadius = 12;
+            imput_correo.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_correo.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_correo.EsPassword = false;
+            imput_correo.IconoPersonalizado = null;
+            imput_correo.Location = new Point(453, 101);
+            imput_correo.Margin = new Padding(3, 2, 3, 2);
+            imput_correo.Name = "imput_correo";
+            imput_correo.PlaceholderText = "correo@ejemplo.com";
+            imput_correo.Size = new Size(350, 45);
+            imput_correo.TabIndex = 5;
+            imput_correo.TipoIcono = TipoIconoCampo.Correo;
             // 
             // label4
             // 
@@ -251,17 +232,17 @@
             label5.TabIndex = 8;
             label5.Text = "Teléfono";
             // 
-            // label6
+            // label_tipo_cuenta
             // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.Navy;
-            label6.Location = new Point(34, 454);
-            label6.Name = "label6";
-            label6.Size = new Size(75, 19);
-            label6.TabIndex = 9;
-            label6.Text = "Ubicacion";
+            label_tipo_cuenta.AutoSize = true;
+            label_tipo_cuenta.BackColor = Color.Transparent;
+            label_tipo_cuenta.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_tipo_cuenta.ForeColor = Color.Navy;
+            label_tipo_cuenta.Location = new Point(310, 319);
+            label_tipo_cuenta.Name = "label_tipo_cuenta";
+            label_tipo_cuenta.Size = new Size(240, 37);
+            label_tipo_cuenta.TabIndex = 9;
+            label_tipo_cuenta.Text = "Cuenta Premium";
             // 
             // label7
             // 
@@ -314,8 +295,9 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(campoTexto5);
-            panel3.Controls.Add(campoTexto4);
+            panel3.Controls.Add(label_tipo_cuenta);
+            panel3.Controls.Add(imput_correo);
+            panel3.Controls.Add(imput_fecha);
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label8);
             panel3.Location = new Point(10, 144);
@@ -462,24 +444,20 @@
             BackColor = Color.MintCream;
             BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_07_at_12_37_13_PM;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1264, 681);
-            Controls.Add(label6);
+            ClientSize = new Size(1256, 575);
             Controls.Add(label5);
             Controls.Add(panel4);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label4);
-            Controls.Add(campoTexto3);
-            Controls.Add(campoTexto2);
-            Controls.Add(campoTexto1);
+            Controls.Add(imput_telefono);
+            Controls.Add(imput_nombre);
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panel5);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form6";
-            StartPosition = FormStartPosition.CenterParent;
             Text = "Form6";
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -495,19 +473,19 @@
         #endregion
 
         private Panel panel1;
-        private Label label3;
-        private Label label2;
+        private Label label_correo;
+        private Label label_nombre;
         private PictureBox pictureBox2;
-        private Label label1;
+        private Label label_fecha;
         private Panel panel2;
-        private CampoTexto campoTexto1;
-        private CampoTexto campoTexto2;
+        private CampoTexto imput_nombre;
+        private CampoTexto imput_telefono;
         private CampoTexto campoTexto3;
-        private CampoTexto campoTexto4;
-        private CampoTexto campoTexto5;
+        private CampoTexto imput_fecha;
+        private CampoTexto imput_correo;
         private Label label4;
         private Label label5;
-        private Label label6;
+        private Label label_tipo_cuenta;
         private Label label7;
         private Label label8;
         private Label label9;
