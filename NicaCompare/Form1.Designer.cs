@@ -66,9 +66,10 @@
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox2);
-            panel1.Location = new Point(431, 5);
+            panel1.Location = new Point(377, 4);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(582, 888);
+            panel1.Size = new Size(509, 666);
             panel1.TabIndex = 0;
             // 
             // botonAccion1
@@ -83,10 +84,11 @@
             botonAccion1.FlatStyle = FlatStyle.Flat;
             botonAccion1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             botonAccion1.ForeColor = Color.White;
-            botonAccion1.Location = new Point(129, 632);
+            botonAccion1.Location = new Point(113, 474);
+            botonAccion1.Margin = new Padding(3, 2, 3, 2);
             botonAccion1.MostrarFlecha = true;
             botonAccion1.Name = "botonAccion1";
-            botonAccion1.Size = new Size(327, 45);
+            botonAccion1.Size = new Size(286, 34);
             botonAccion1.TabIndex = 14;
             botonAccion1.Text = "INICIAR SIN CUENTA";
             botonAccion1.UseVisualStyleBackColor = false;
@@ -103,10 +105,11 @@
             inicio_nombre.ColorIcono = Color.FromArgb(100, 116, 139);
             inicio_nombre.EsPassword = false;
             inicio_nombre.IconoPersonalizado = null;
-            inicio_nombre.Location = new Point(129, 428);
+            inicio_nombre.Location = new Point(113, 321);
+            inicio_nombre.Margin = new Padding(3, 2, 3, 2);
             inicio_nombre.Name = "inicio_nombre";
             inicio_nombre.PlaceholderText = "correo@ejemplo.com";
-            inicio_nombre.Size = new Size(327, 45);
+            inicio_nombre.Size = new Size(286, 34);
             inicio_nombre.TabIndex = 13;
             inicio_nombre.TipoIcono = TipoIconoCampo.Correo;
             inicio_nombre.TextChanged += inicio_nombre_TextChanged;
@@ -123,10 +126,11 @@
             Inicio_INGRESAR.FlatStyle = FlatStyle.Flat;
             Inicio_INGRESAR.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             Inicio_INGRESAR.ForeColor = Color.White;
-            Inicio_INGRESAR.Location = new Point(129, 571);
+            Inicio_INGRESAR.Location = new Point(113, 428);
+            Inicio_INGRESAR.Margin = new Padding(3, 2, 3, 2);
             Inicio_INGRESAR.MostrarFlecha = true;
             Inicio_INGRESAR.Name = "Inicio_INGRESAR";
-            Inicio_INGRESAR.Size = new Size(327, 45);
+            Inicio_INGRESAR.Size = new Size(286, 34);
             Inicio_INGRESAR.TabIndex = 12;
             Inicio_INGRESAR.Text = "INGRESAR";
             Inicio_INGRESAR.UseVisualStyleBackColor = false;
@@ -139,11 +143,12 @@
             inicioPassword.BorderColor = Color.FromArgb(228, 231, 236);
             inicioPassword.BorderFocusColor = Color.FromArgb(13, 110, 253);
             inicioPassword.BorderRadius = 12;
-            inicioPassword.Location = new Point(129, 507);
+            inicioPassword.Location = new Point(113, 380);
+            inicioPassword.Margin = new Padding(3, 2, 3, 2);
             inicioPassword.Name = "inicioPassword";
-            inicioPassword.Padding = new Padding(10, 11, 10, 11);
+            inicioPassword.Padding = new Padding(9, 8, 9, 8);
             inicioPassword.PlaceholderText = "Confirma tu contraseña";
-            inicioPassword.Size = new Size(329, 45);
+            inicioPassword.Size = new Size(288, 34);
             inicioPassword.TabIndex = 1;
             inicioPassword.TextChanged += inicioPassword_TextChanged;
             // 
@@ -152,9 +157,9 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift Light", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(145, 327);
+            label2.Location = new Point(127, 245);
             label2.Name = "label2";
-            label2.Size = new Size(281, 30);
+            label2.Size = new Size(224, 24);
             label2.TabIndex = 2;
             label2.Text = "BIENVENIDO DE NUEVO";
             label2.Click += label2_Click;
@@ -166,9 +171,9 @@
             linkLabel2.Font = new Font("Segoe UI Historic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             linkLabel2.ForeColor = Color.FromArgb(0, 0, 192);
             linkLabel2.LinkColor = Color.FromArgb(0, 0, 192);
-            linkLabel2.Location = new Point(320, 698);
+            linkLabel2.Location = new Point(280, 524);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(106, 20);
+            linkLabel2.Size = new Size(88, 15);
             linkLabel2.TabIndex = 9;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Crear Cuenta";
@@ -178,9 +183,9 @@
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(179, 698);
+            label6.Location = new Point(157, 524);
             label6.Name = "label6";
-            label6.Size = new Size(134, 20);
+            label6.Size = new Size(106, 15);
             label6.TabIndex = 11;
             label6.Text = "¿No tienes cuenta?";
             label6.Click += label6_Click;
@@ -190,9 +195,9 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(129, 405);
+            label3.Location = new Point(113, 304);
             label3.Name = "label3";
-            label3.Size = new Size(140, 20);
+            label3.Size = new Size(107, 15);
             label3.TabIndex = 3;
             label3.Text = "Correo  Electronico";
             // 
@@ -201,9 +206,9 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(129, 483);
+            label4.Location = new Point(113, 362);
             label4.Name = "label4";
-            label4.Size = new Size(86, 20);
+            label4.Size = new Size(66, 15);
             label4.TabIndex = 6;
             label4.Text = "Contraseña";
             // 
@@ -211,9 +216,9 @@
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(204, 834);
+            label5.Location = new Point(178, 626);
             label5.Name = "label5";
-            label5.Size = new Size(193, 20);
+            label5.Size = new Size(152, 15);
             label5.TabIndex = 10;
             label5.Text = "UNAN Matagalpa Grupo #1";
             label5.Click += label5_Click;
@@ -221,9 +226,9 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(67, 299);
+            linkLabel1.Location = new Point(59, 224);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(0, 20);
+            linkLabel1.Size = new Size(0, 15);
             linkLabel1.TabIndex = 4;
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
@@ -233,9 +238,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(181, 253);
+            label1.Location = new Point(158, 190);
             label1.Name = "label1";
-            label1.Size = new Size(216, 16);
+            label1.Size = new Size(176, 13);
             label1.TabIndex = 1;
             label1.Text = "---- COMPARA. ELIGE. AHORRA ---";
             label1.Click += label1_Click;
@@ -244,25 +249,28 @@
             // 
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.Image = Properties.Resources.LOGO_222;
-            pictureBox2.Location = new Point(129, 108);
+            pictureBox2.Location = new Point(113, 81);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(319, 199);
+            pictureBox2.Size = new Size(279, 149);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_04_at_1_50_14_PM_upscayl_5x_digital_art_4x;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1445, 908);
+            ClientSize = new Size(1264, 681);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "NicaCompare | Login 👤";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

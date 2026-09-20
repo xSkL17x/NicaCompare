@@ -56,5 +56,10 @@ namespace NicaCompare
         {
 
         }
+
+        private void botonMenu1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

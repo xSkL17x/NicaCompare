@@ -19,7 +19,11 @@ namespace NicaCompare
         private void INGRESAR1_Click(object sender, EventArgs e) { }
         private void tarjetaTienda3_CheckedChanged(object sender, EventArgs e) { }
         private void tarjetaTienda2_CheckedChanged(object sender, EventArgs e) { }
-
+        private void barraBusqueda1_BuscarClicked(object sender, EventArgs e) { }
+        private void Inicio_Load(object sender, EventArgs e) { }
+        private void botonMenu2_Click(object sender, EventArgs e) { }
+        private void botonMenu2_Click_1(object sender, EventArgs e) { }
+        private void barraBusqueda1_BuscarClicked_1(object sender, EventArgs e) { }
         public Inicio()
         {
             InitializeComponent();
@@ -27,53 +31,22 @@ namespace NicaCompare
         }
 
         //____________๑.・🍨︴Boton Usuario ✰  ๑_______________
-        private void CargarUsuarioActivo()
-        {
-            if (!string.IsNullOrEmpty(sesion_actual.Nombre)) { boton_usuario.Text = sesion_actual.Nombre; }
-        }
+        private void CargarUsuarioActivo() { if (!string.IsNullOrEmpty(sesion_actual.Nombre)) { boton_usuario.Text = sesion_actual.Nombre; btn_Usuario_2.Text = sesion_actual.Nombre; } }
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(sesion_actual.Nombre))
             {
-                Login ventana1 = new Login();
-                ventana1.FormClosed += (s, args) => this.Close();
-                ventana1.Show();
-                this.Hide();
+                Form5 Registro2 = new Form5(); Registro2.FormClosed += (s, args) => this.Close();
+                Registro2.Show(); this.Hide();
             }
             else
             {
-                MessageBox.Show("Aquí te llevará a la pantalla de usuario.", "Perfil de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Form6 Perfil = new Form6(); Perfil.FormClosed += (s, args) => this.Close();
+                Perfil.Show(); this.Hide();
             }
         }
 
-        private void barraBusqueda1_BuscarClicked(object sender, EventArgs e)
-        {
 
-        }
-
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonMenu2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonMenu2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonMenu2_Click_2(object sender, EventArgs e)
-        {
-          
-            Form5 ventana5 = new Form5();
-            ventana5.FormClosed += (s, args) => this.Close();
-            ventana5.Show();
-            this.Hide();
-        }
     }
 }
