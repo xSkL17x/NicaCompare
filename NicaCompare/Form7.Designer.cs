@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form7));
             label9 = new Label();
             label10 = new Label();
-            campoTexto1 = new CampoTexto();
-            campoTexto2 = new CampoTexto();
-            campoTexto3 = new CampoTexto();
-            campoTexto4 = new CampoTexto();
-            campoTexto5 = new CampoTexto();
-            campoTexto6 = new CampoTexto();
-            campoTexto7 = new CampoTexto();
-            campoTexto8 = new CampoTexto();
+            imput_tarjeta = new CampoTexto();
+            imput_tarjeta_nombre = new CampoTexto();
+            imput_fecha_expiracion = new CampoTexto();
+            imput_cvv = new CampoTexto();
+            imput_nombre = new CampoTexto();
+            imput_correo = new CampoTexto();
+            imput_telefono = new CampoTexto();
+            imput_direccion = new CampoTexto();
             label4 = new Label();
             label1 = new Label();
             label2 = new Label();
@@ -80,153 +80,153 @@
             label10.TabIndex = 14;
             label10.Text = "Ingresa los datos de tu metodo de pago para completar tu compra";
             // 
-            // campoTexto1
+            // imput_tarjeta
             // 
-            campoTexto1.BackColor = Color.Transparent;
-            campoTexto1.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto1.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto1.BorderRadius = 12;
-            campoTexto1.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto1.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto1.EsPassword = false;
-            campoTexto1.IconoPersonalizado = null;
-            campoTexto1.Location = new Point(16, 57);
-            campoTexto1.Margin = new Padding(3, 2, 3, 2);
-            campoTexto1.Name = "campoTexto1";
-            campoTexto1.PlaceholderText = "1234 5678 9101 1121";
-            campoTexto1.Size = new Size(634, 35);
-            campoTexto1.TabIndex = 15;
-            campoTexto1.TipoIcono = TipoIconoCampo.Tarjeta;
-            campoTexto1.TextChanged += campoTexto1_TextChanged;
+            imput_tarjeta.BackColor = Color.Transparent;
+            imput_tarjeta.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_tarjeta.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_tarjeta.BorderRadius = 12;
+            imput_tarjeta.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_tarjeta.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_tarjeta.EsPassword = false;
+            imput_tarjeta.IconoPersonalizado = null;
+            imput_tarjeta.Location = new Point(16, 57);
+            imput_tarjeta.Margin = new Padding(3, 2, 3, 2);
+            imput_tarjeta.Name = "imput_tarjeta";
+            imput_tarjeta.PlaceholderText = "1234 5678 9101 1121";
+            imput_tarjeta.Size = new Size(634, 35);
+            imput_tarjeta.TabIndex = 15;
+            imput_tarjeta.TipoIcono = TipoIconoCampo.Tarjeta;
+            imput_tarjeta.TextChanged += campoTexto1_TextChanged;
             // 
-            // campoTexto2
+            // imput_tarjeta_nombre
             // 
-            campoTexto2.BackColor = Color.Transparent;
-            campoTexto2.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto2.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto2.BorderRadius = 12;
-            campoTexto2.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto2.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto2.EsPassword = false;
-            campoTexto2.IconoPersonalizado = null;
-            campoTexto2.Location = new Point(10, 133);
-            campoTexto2.Margin = new Padding(3, 2, 3, 2);
-            campoTexto2.Name = "campoTexto2";
-            campoTexto2.PlaceholderText = "Como aparece en la tarjeta";
-            campoTexto2.Size = new Size(306, 35);
-            campoTexto2.TabIndex = 16;
-            campoTexto2.TipoIcono = TipoIconoCampo.Usuario;
-            campoTexto2.TextChanged += campoTexto2_TextChanged;
+            imput_tarjeta_nombre.BackColor = Color.Transparent;
+            imput_tarjeta_nombre.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_tarjeta_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_tarjeta_nombre.BorderRadius = 12;
+            imput_tarjeta_nombre.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_tarjeta_nombre.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_tarjeta_nombre.EsPassword = false;
+            imput_tarjeta_nombre.IconoPersonalizado = null;
+            imput_tarjeta_nombre.Location = new Point(10, 133);
+            imput_tarjeta_nombre.Margin = new Padding(3, 2, 3, 2);
+            imput_tarjeta_nombre.Name = "imput_tarjeta_nombre";
+            imput_tarjeta_nombre.PlaceholderText = "Como aparece en la tarjeta";
+            imput_tarjeta_nombre.Size = new Size(306, 35);
+            imput_tarjeta_nombre.TabIndex = 16;
+            imput_tarjeta_nombre.TipoIcono = TipoIconoCampo.Usuario;
+            imput_tarjeta_nombre.TextChanged += campoTexto2_TextChanged;
             // 
-            // campoTexto3
+            // imput_fecha_expiracion
             // 
-            campoTexto3.BackColor = Color.Transparent;
-            campoTexto3.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto3.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto3.BorderRadius = 12;
-            campoTexto3.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto3.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto3.EsPassword = false;
-            campoTexto3.IconoPersonalizado = null;
-            campoTexto3.Location = new Point(338, 133);
-            campoTexto3.Margin = new Padding(3, 2, 3, 2);
-            campoTexto3.Name = "campoTexto3";
-            campoTexto3.PlaceholderText = "MM / AA";
-            campoTexto3.Size = new Size(306, 35);
-            campoTexto3.TabIndex = 17;
-            campoTexto3.TipoIcono = TipoIconoCampo.Calendario;
+            imput_fecha_expiracion.BackColor = Color.Transparent;
+            imput_fecha_expiracion.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_fecha_expiracion.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_fecha_expiracion.BorderRadius = 12;
+            imput_fecha_expiracion.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_fecha_expiracion.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_fecha_expiracion.EsPassword = false;
+            imput_fecha_expiracion.IconoPersonalizado = null;
+            imput_fecha_expiracion.Location = new Point(338, 133);
+            imput_fecha_expiracion.Margin = new Padding(3, 2, 3, 2);
+            imput_fecha_expiracion.Name = "imput_fecha_expiracion";
+            imput_fecha_expiracion.PlaceholderText = "MM / AA";
+            imput_fecha_expiracion.Size = new Size(306, 35);
+            imput_fecha_expiracion.TabIndex = 17;
+            imput_fecha_expiracion.TipoIcono = TipoIconoCampo.Calendario;
             // 
-            // campoTexto4
+            // imput_cvv
             // 
-            campoTexto4.BackColor = Color.Transparent;
-            campoTexto4.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto4.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto4.BorderRadius = 12;
-            campoTexto4.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto4.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto4.EsPassword = false;
-            campoTexto4.IconoPersonalizado = null;
-            campoTexto4.Location = new Point(10, 196);
-            campoTexto4.Margin = new Padding(3, 2, 3, 2);
-            campoTexto4.Name = "campoTexto4";
-            campoTexto4.PlaceholderText = "123";
-            campoTexto4.Size = new Size(306, 35);
-            campoTexto4.TabIndex = 18;
-            campoTexto4.TipoIcono = TipoIconoCampo.Tarjeta;
+            imput_cvv.BackColor = Color.Transparent;
+            imput_cvv.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_cvv.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_cvv.BorderRadius = 12;
+            imput_cvv.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_cvv.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_cvv.EsPassword = false;
+            imput_cvv.IconoPersonalizado = null;
+            imput_cvv.Location = new Point(10, 196);
+            imput_cvv.Margin = new Padding(3, 2, 3, 2);
+            imput_cvv.Name = "imput_cvv";
+            imput_cvv.PlaceholderText = "123";
+            imput_cvv.Size = new Size(306, 35);
+            imput_cvv.TabIndex = 18;
+            imput_cvv.TipoIcono = TipoIconoCampo.Tarjeta;
             // 
-            // campoTexto5
+            // imput_nombre
             // 
-            campoTexto5.BackColor = Color.Transparent;
-            campoTexto5.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto5.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto5.BorderRadius = 12;
-            campoTexto5.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto5.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto5.EsPassword = false;
-            campoTexto5.IconoPersonalizado = null;
-            campoTexto5.Location = new Point(16, 299);
-            campoTexto5.Margin = new Padding(3, 2, 3, 2);
-            campoTexto5.Name = "campoTexto5";
-            campoTexto5.PlaceholderText = "Tu nombre completo";
-            campoTexto5.Size = new Size(306, 35);
-            campoTexto5.TabIndex = 19;
-            campoTexto5.TipoIcono = TipoIconoCampo.Usuario;
-            campoTexto5.TextChanged += campoTexto5_TextChanged;
+            imput_nombre.BackColor = Color.Transparent;
+            imput_nombre.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_nombre.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_nombre.BorderRadius = 12;
+            imput_nombre.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_nombre.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_nombre.EsPassword = false;
+            imput_nombre.IconoPersonalizado = null;
+            imput_nombre.Location = new Point(16, 299);
+            imput_nombre.Margin = new Padding(3, 2, 3, 2);
+            imput_nombre.Name = "imput_nombre";
+            imput_nombre.PlaceholderText = "Tu nombre completo";
+            imput_nombre.Size = new Size(306, 35);
+            imput_nombre.TabIndex = 19;
+            imput_nombre.TipoIcono = TipoIconoCampo.Usuario;
+            imput_nombre.TextChanged += campoTexto5_TextChanged;
             // 
-            // campoTexto6
+            // imput_correo
             // 
-            campoTexto6.BackColor = Color.Transparent;
-            campoTexto6.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto6.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto6.BorderRadius = 12;
-            campoTexto6.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto6.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto6.EsPassword = false;
-            campoTexto6.IconoPersonalizado = null;
-            campoTexto6.Location = new Point(338, 299);
-            campoTexto6.Margin = new Padding(3, 2, 3, 2);
-            campoTexto6.Name = "campoTexto6";
-            campoTexto6.PlaceholderText = "correo@ejemplo.com";
-            campoTexto6.Size = new Size(306, 35);
-            campoTexto6.TabIndex = 19;
-            campoTexto6.TipoIcono = TipoIconoCampo.Correo;
-            campoTexto6.TextChanged += campoTexto6_TextChanged;
+            imput_correo.BackColor = Color.Transparent;
+            imput_correo.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_correo.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_correo.BorderRadius = 12;
+            imput_correo.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_correo.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_correo.EsPassword = false;
+            imput_correo.IconoPersonalizado = null;
+            imput_correo.Location = new Point(338, 299);
+            imput_correo.Margin = new Padding(3, 2, 3, 2);
+            imput_correo.Name = "imput_correo";
+            imput_correo.PlaceholderText = "correo@ejemplo.com";
+            imput_correo.Size = new Size(306, 35);
+            imput_correo.TabIndex = 19;
+            imput_correo.TipoIcono = TipoIconoCampo.Correo;
+            imput_correo.TextChanged += campoTexto6_TextChanged;
             // 
-            // campoTexto7
+            // imput_telefono
             // 
-            campoTexto7.BackColor = Color.Transparent;
-            campoTexto7.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto7.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto7.BorderRadius = 12;
-            campoTexto7.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto7.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto7.EsPassword = false;
-            campoTexto7.IconoPersonalizado = null;
-            campoTexto7.Location = new Point(10, 366);
-            campoTexto7.Margin = new Padding(3, 2, 3, 2);
-            campoTexto7.Name = "campoTexto7";
-            campoTexto7.PlaceholderText = "+505 8*** ****";
-            campoTexto7.Size = new Size(306, 35);
-            campoTexto7.TabIndex = 20;
-            campoTexto7.TipoIcono = TipoIconoCampo.Telefono;
+            imput_telefono.BackColor = Color.Transparent;
+            imput_telefono.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_telefono.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_telefono.BorderRadius = 12;
+            imput_telefono.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_telefono.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_telefono.EsPassword = false;
+            imput_telefono.IconoPersonalizado = null;
+            imput_telefono.Location = new Point(10, 366);
+            imput_telefono.Margin = new Padding(3, 2, 3, 2);
+            imput_telefono.Name = "imput_telefono";
+            imput_telefono.PlaceholderText = "+505 8*** ****";
+            imput_telefono.Size = new Size(306, 35);
+            imput_telefono.TabIndex = 20;
+            imput_telefono.TipoIcono = TipoIconoCampo.Telefono;
             // 
-            // campoTexto8
+            // imput_direccion
             // 
-            campoTexto8.BackColor = Color.Transparent;
-            campoTexto8.BorderColor = Color.FromArgb(228, 231, 236);
-            campoTexto8.BorderFocusColor = Color.FromArgb(13, 110, 253);
-            campoTexto8.BorderRadius = 12;
-            campoTexto8.ColorFondoIcono = Color.FromArgb(241, 245, 249);
-            campoTexto8.ColorIcono = Color.FromArgb(130, 138, 150);
-            campoTexto8.EsPassword = false;
-            campoTexto8.IconoPersonalizado = null;
-            campoTexto8.Location = new Point(338, 366);
-            campoTexto8.Margin = new Padding(3, 2, 3, 2);
-            campoTexto8.Name = "campoTexto8";
-            campoTexto8.PlaceholderText = "Dirección, ciudad, departamento";
-            campoTexto8.Size = new Size(306, 35);
-            campoTexto8.TabIndex = 21;
-            campoTexto8.TipoIcono = TipoIconoCampo.Ubicacion;
+            imput_direccion.BackColor = Color.Transparent;
+            imput_direccion.BorderColor = Color.FromArgb(228, 231, 236);
+            imput_direccion.BorderFocusColor = Color.FromArgb(13, 110, 253);
+            imput_direccion.BorderRadius = 12;
+            imput_direccion.ColorFondoIcono = Color.FromArgb(241, 245, 249);
+            imput_direccion.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_direccion.EsPassword = false;
+            imput_direccion.IconoPersonalizado = null;
+            imput_direccion.Location = new Point(338, 366);
+            imput_direccion.Margin = new Padding(3, 2, 3, 2);
+            imput_direccion.Name = "imput_direccion";
+            imput_direccion.PlaceholderText = "Dirección, ciudad, departamento";
+            imput_direccion.Size = new Size(306, 35);
+            imput_direccion.TabIndex = 21;
+            imput_direccion.TipoIcono = TipoIconoCampo.Ubicacion;
             // 
             // label4
             // 
@@ -332,22 +332,22 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(label11);
             panel1.Controls.Add(botonRedondeado1);
-            panel1.Controls.Add(campoTexto1);
+            panel1.Controls.Add(imput_tarjeta);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(campoTexto2);
+            panel1.Controls.Add(imput_tarjeta_nombre);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(campoTexto4);
+            panel1.Controls.Add(imput_cvv);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label8);
-            panel1.Controls.Add(campoTexto5);
-            panel1.Controls.Add(campoTexto3);
+            panel1.Controls.Add(imput_nombre);
+            panel1.Controls.Add(imput_fecha_expiracion);
             panel1.Controls.Add(label6);
-            panel1.Controls.Add(campoTexto7);
+            panel1.Controls.Add(imput_telefono);
             panel1.Controls.Add(label4);
-            panel1.Controls.Add(campoTexto6);
-            panel1.Controls.Add(campoTexto8);
+            panel1.Controls.Add(imput_correo);
+            panel1.Controls.Add(imput_direccion);
             panel1.Location = new Point(282, 109);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
@@ -437,14 +437,14 @@
 
         private Label label9;
         private Label label10;
-        private CampoTexto campoTexto1;
-        private CampoTexto campoTexto2;
-        private CampoTexto campoTexto3;
-        private CampoTexto campoTexto4;
-        private CampoTexto campoTexto5;
-        private CampoTexto campoTexto6;
-        private CampoTexto campoTexto7;
-        private CampoTexto campoTexto8;
+        private CampoTexto imput_tarjeta;
+        private CampoTexto imput_tarjeta_nombre;
+        private CampoTexto imput_fecha_expiracion;
+        private CampoTexto imput_cvv;
+        private CampoTexto imput_nombre;
+        private CampoTexto imput_correo;
+        private CampoTexto imput_telefono;
+        private CampoTexto imput_direccion;
         private Label label4;
         private Label label1;
         private Label label2;
