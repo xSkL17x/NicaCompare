@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form6));
             panel1 = new Panel();
             panel2 = new Panel();
             label_fecha = new Label();
-            pictureBox2 = new PictureBox();
+            avatar1 = new PictureBox();
             label_nombre = new Label();
             label_correo = new Label();
             imput_nombre = new CampoTexto();
@@ -46,29 +47,33 @@
             label9 = new Label();
             label10 = new Label();
             panel3 = new Panel();
+            btn_recargar = new BotonRedondeado();
+            label_saldo = new Label();
             panel4 = new Panel();
+            avatar2 = new PictureBox();
             label12 = new Label();
             label11 = new Label();
             botonRedondeado2 = new BotonRedondeado();
             botonRedondeado1 = new BotonRedondeado();
-            button1 = new Button();
+            panel5 = new Panel();
             botonRedondeado3 = new BotonRedondeado();
             botonRedondeado4 = new BotonRedondeado();
-            panel5 = new Panel();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)avatar1).BeginInit();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)avatar2).BeginInit();
             panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackgroundImage = Properties.Resources.fondo_perfil;
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label_fecha);
-            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(avatar1);
             panel1.Controls.Add(label_nombre);
             panel1.Controls.Add(label_correo);
             panel1.Location = new Point(0, 1);
@@ -97,18 +102,18 @@
             label_fecha.TabIndex = 3;
             label_fecha.Text = "Usuario desde 2026";
             // 
-            // pictureBox2
+            // avatar1
             // 
-            pictureBox2.Anchor = AnchorStyles.None;
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = Properties.Resources.no_hay_usuario;
-            pictureBox2.Location = new Point(31, 8);
-            pictureBox2.Margin = new Padding(3, 2, 3, 2);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(134, 109);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
+            avatar1.Anchor = AnchorStyles.None;
+            avatar1.BackColor = Color.Transparent;
+            avatar1.Image = Properties.Resources.no_hay_usuario;
+            avatar1.Location = new Point(12, 10);
+            avatar1.Margin = new Padding(3, 2, 3, 2);
+            avatar1.Name = "avatar1";
+            avatar1.Size = new Size(134, 109);
+            avatar1.SizeMode = PictureBoxSizeMode.Zoom;
+            avatar1.TabIndex = 2;
+            avatar1.TabStop = false;
             // 
             // label_nombre
             // 
@@ -179,8 +184,10 @@
             imput_fecha.BorderRadius = 12;
             imput_fecha.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             imput_fecha.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_fecha.Enabled = false;
             imput_fecha.EsPassword = false;
             imput_fecha.IconoPersonalizado = null;
+            imput_fecha.ImeMode = ImeMode.NoControl;
             imput_fecha.Location = new Point(453, 219);
             imput_fecha.Margin = new Padding(3, 2, 3, 2);
             imput_fecha.Name = "imput_fecha";
@@ -198,8 +205,10 @@
             imput_correo.BorderRadius = 12;
             imput_correo.ColorFondoIcono = Color.FromArgb(241, 245, 249);
             imput_correo.ColorIcono = Color.FromArgb(130, 138, 150);
+            imput_correo.Enabled = false;
             imput_correo.EsPassword = false;
             imput_correo.IconoPersonalizado = null;
+            imput_correo.ImeMode = ImeMode.NoControl;
             imput_correo.Location = new Point(453, 101);
             imput_correo.Margin = new Padding(3, 2, 3, 2);
             imput_correo.Name = "imput_correo";
@@ -238,7 +247,7 @@
             label_tipo_cuenta.BackColor = Color.Transparent;
             label_tipo_cuenta.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label_tipo_cuenta.ForeColor = Color.Navy;
-            label_tipo_cuenta.Location = new Point(310, 319);
+            label_tipo_cuenta.Location = new Point(61, 282);
             label_tipo_cuenta.Name = "label_tipo_cuenta";
             label_tipo_cuenta.Size = new Size(240, 37);
             label_tipo_cuenta.TabIndex = 9;
@@ -265,9 +274,9 @@
             label8.ForeColor = Color.Navy;
             label8.Location = new Point(453, 199);
             label8.Name = "label8";
-            label8.Size = new Size(146, 19);
+            label8.Size = new Size(125, 19);
             label8.TabIndex = 11;
-            label8.Text = "Fecha de nacimiento";
+            label8.Text = "Fecha de registro";
             label8.Click += label8_Click;
             // 
             // label9
@@ -295,29 +304,81 @@
             // 
             // panel3
             // 
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.AutoSize = true;
+            panel3.Controls.Add(btn_recargar);
+            panel3.Controls.Add(label_saldo);
             panel3.Controls.Add(label_tipo_cuenta);
+            panel3.Controls.Add(panel4);
             panel3.Controls.Add(imput_correo);
             panel3.Controls.Add(imput_fecha);
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label8);
+            panel3.Controls.Add(panel5);
+            panel3.ImeMode = ImeMode.Close;
             panel3.Location = new Point(10, 144);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(829, 404);
+            panel3.Size = new Size(1242, 446);
             panel3.TabIndex = 13;
+            // 
+            // btn_recargar
+            // 
+            btn_recargar.BackColor = Color.FromArgb(255, 255, 128);
+            btn_recargar.BorderRadius = 20;
+            btn_recargar.Cursor = Cursors.Hand;
+            btn_recargar.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 64);
+            btn_recargar.FlatAppearance.BorderSize = 2;
+            btn_recargar.FlatStyle = FlatStyle.Flat;
+            btn_recargar.Font = new Font("Segoe Fluent Icons", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_recargar.ForeColor = Color.Black;
+            btn_recargar.Location = new Point(492, 340);
+            btn_recargar.Margin = new Padding(3, 2, 3, 2);
+            btn_recargar.Name = "btn_recargar";
+            btn_recargar.Size = new Size(195, 38);
+            btn_recargar.TabIndex = 6;
+            btn_recargar.Text = "Recargar";
+            btn_recargar.UseVisualStyleBackColor = false;
+            btn_recargar.Click += btn_recargar_Click;
+            // 
+            // label_saldo
+            // 
+            label_saldo.AutoSize = true;
+            label_saldo.BackColor = Color.Transparent;
+            label_saldo.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_saldo.ForeColor = Color.Navy;
+            label_saldo.Location = new Point(475, 282);
+            label_saldo.Name = "label_saldo";
+            label_saldo.Size = new Size(240, 37);
+            label_saldo.TabIndex = 17;
+            label_saldo.Text = "Cuenta Premium";
             // 
             // panel4
             // 
+            panel4.Anchor = AnchorStyles.None;
+            panel4.Controls.Add(avatar2);
             panel4.Controls.Add(label12);
             panel4.Controls.Add(label11);
             panel4.Controls.Add(botonRedondeado2);
             panel4.Controls.Add(botonRedondeado1);
-            panel4.Controls.Add(button1);
-            panel4.Location = new Point(857, 144);
+            panel4.Location = new Point(847, 7);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
             panel4.Size = new Size(388, 312);
             panel4.TabIndex = 14;
+            // 
+            // avatar2
+            // 
+            avatar2.Anchor = AnchorStyles.None;
+            avatar2.BackColor = Color.Transparent;
+            avatar2.Image = Properties.Resources.no_hay_usuario;
+            avatar2.Location = new Point(86, 74);
+            avatar2.Margin = new Padding(3, 2, 3, 2);
+            avatar2.Name = "avatar2";
+            avatar2.Size = new Size(198, 150);
+            avatar2.SizeMode = PictureBoxSizeMode.Zoom;
+            avatar2.TabIndex = 4;
+            avatar2.TabStop = false;
             // 
             // label12
             // 
@@ -377,20 +438,16 @@
             botonRedondeado1.UseVisualStyleBackColor = false;
             botonRedondeado1.Click += botonRedondeado1_Click;
             // 
-            // button1
+            // panel5
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = Properties.Resources.no_hay_usuario;
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.Transparent;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(91, 79);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(216, 150);
-            button1.TabIndex = 0;
-            button1.UseVisualStyleBackColor = false;
+            panel5.Anchor = AnchorStyles.None;
+            panel5.Controls.Add(botonRedondeado3);
+            panel5.Controls.Add(botonRedondeado4);
+            panel5.Location = new Point(847, 340);
+            panel5.Margin = new Padding(3, 2, 3, 2);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(388, 85);
+            panel5.TabIndex = 16;
             // 
             // botonRedondeado3
             // 
@@ -427,16 +484,6 @@
             botonRedondeado4.UseVisualStyleBackColor = false;
             botonRedondeado4.Click += botonRedondeado4_Click;
             // 
-            // panel5
-            // 
-            panel5.Controls.Add(botonRedondeado3);
-            panel5.Controls.Add(botonRedondeado4);
-            panel5.Location = new Point(857, 463);
-            panel5.Margin = new Padding(3, 2, 3, 2);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(388, 85);
-            panel5.TabIndex = 16;
-            // 
             // Form6
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -444,9 +491,8 @@
             BackColor = Color.MintCream;
             BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_07_at_12_37_13_PM;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1256, 575);
+            ClientSize = new Size(1264, 681);
             Controls.Add(label5);
-            Controls.Add(panel4);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label4);
@@ -454,17 +500,20 @@
             Controls.Add(imput_nombre);
             Controls.Add(panel1);
             Controls.Add(panel3);
-            Controls.Add(panel5);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form6";
-            Text = "Form6";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Mi Perfil 👤";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)avatar1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)avatar2).EndInit();
             panel5.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -475,7 +524,7 @@
         private Panel panel1;
         private Label label_correo;
         private Label label_nombre;
-        private PictureBox pictureBox2;
+        private PictureBox avatar1;
         private Label label_fecha;
         private Panel panel2;
         private CampoTexto imput_nombre;
@@ -492,7 +541,6 @@
         private Label label10;
         private Panel panel3;
         private Panel panel4;
-        private Button button1;
         private BotonRedondeado botonRedondeado2;
         private BotonRedondeado botonRedondeado1;
         private Label label12;
@@ -500,5 +548,8 @@
         private BotonRedondeado botonRedondeado3;
         private BotonRedondeado botonRedondeado4;
         private Panel panel5;
+        private PictureBox avatar2;
+        private Label label_saldo;
+        private BotonRedondeado btn_recargar;
     }
 }

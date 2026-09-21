@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form7));
             label9 = new Label();
             label10 = new Label();
             campoTexto1 = new CampoTexto();
@@ -49,12 +50,13 @@
             panel1 = new Panel();
             label11 = new Label();
             botonRedondeado1 = new BotonRedondeado();
-            botonMenu1 = new BotonMenu();
+            btn_volver = new BotonMenu();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.None;
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -68,6 +70,7 @@
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.None;
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -325,7 +328,7 @@
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = Color.White;
             panel1.Controls.Add(label11);
             panel1.Controls.Add(botonRedondeado1);
@@ -379,32 +382,33 @@
             botonRedondeado1.Text = "Confirmar   →";
             botonRedondeado1.UseVisualStyleBackColor = false;
             // 
-            // botonMenu1
+            // btn_volver
             // 
-            botonMenu1.AutoColorearIconoBlanco = true;
-            botonMenu1.AutoEscalarImagen = true;
-            botonMenu1.BackColor = Color.Transparent;
-            botonMenu1.BorderRadius = 18;
-            botonMenu1.ColorHover = Color.FromArgb(13, 110, 253);
-            botonMenu1.ColorTextoNormal = Color.FromArgb(0, 0, 192);
-            botonMenu1.EsSeleccionado = false;
-            botonMenu1.FlatAppearance.BorderSize = 0;
-            botonMenu1.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            botonMenu1.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            botonMenu1.FlatStyle = FlatStyle.Flat;
-            botonMenu1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            botonMenu1.ForeColor = Color.FromArgb(0, 0, 192);
-            botonMenu1.Location = new Point(1129, 12);
-            botonMenu1.MargenImagenIzquierda = 15;
-            botonMenu1.Margin = new Padding(3, 2, 3, 2);
-            botonMenu1.Name = "botonMenu1";
-            botonMenu1.PorcentajeEscalaImagen = 50;
-            botonMenu1.Size = new Size(136, 31);
-            botonMenu1.TabIndex = 31;
-            botonMenu1.Text = "←      Volver";
-            botonMenu1.TextAlign = ContentAlignment.MiddleLeft;
-            botonMenu1.UseVisualStyleBackColor = true;
-            botonMenu1.Click += botonMenu1_Click;
+            btn_volver.Anchor = AnchorStyles.None;
+            btn_volver.AutoColorearIconoBlanco = true;
+            btn_volver.AutoEscalarImagen = true;
+            btn_volver.BackColor = Color.Transparent;
+            btn_volver.BorderRadius = 18;
+            btn_volver.ColorHover = Color.FromArgb(13, 110, 253);
+            btn_volver.ColorTextoNormal = Color.FromArgb(0, 0, 192);
+            btn_volver.EsSeleccionado = false;
+            btn_volver.FlatAppearance.BorderSize = 0;
+            btn_volver.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn_volver.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btn_volver.FlatStyle = FlatStyle.Flat;
+            btn_volver.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btn_volver.ForeColor = Color.FromArgb(0, 0, 192);
+            btn_volver.Location = new Point(1129, 12);
+            btn_volver.MargenImagenIzquierda = 15;
+            btn_volver.Margin = new Padding(3, 2, 3, 2);
+            btn_volver.Name = "btn_volver";
+            btn_volver.PorcentajeEscalaImagen = 50;
+            btn_volver.Size = new Size(136, 31);
+            btn_volver.TabIndex = 31;
+            btn_volver.Text = "←      Volver";
+            btn_volver.TextAlign = ContentAlignment.MiddleLeft;
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += botonMenu1_Click;
             // 
             // Form7
             // 
@@ -412,14 +416,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientInactiveCaption;
             ClientSize = new Size(1264, 681);
-            Controls.Add(botonMenu1);
+            Controls.Add(btn_volver);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(panel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form7";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Form7";
+            Text = "Recargar 💳";
             WindowState = FormWindowState.Maximized;
             Load += Form7_Load;
             panel1.ResumeLayout(false);
@@ -449,7 +454,7 @@
         private Label label7;
         private Label label8;
         private Panel panel1;
-        private BotonMenu botonMenu1;
+        private BotonMenu btn_volver;
         private BotonRedondeado botonRedondeado1;
         private Label label11;
     }

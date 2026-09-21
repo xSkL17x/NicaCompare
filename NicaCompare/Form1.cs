@@ -46,6 +46,8 @@ namespace NicaCompare
                 sesion_actual.Nombre = usuarios_db.Usuarios[correo].Nombre;
                 sesion_actual.TipoUsuario = usuarios_db.Usuarios[correo].TipoUsuario;
                 sesion_actual.Saldo = usuarios_db.Usuarios[correo].Saldo;
+                sesion_actual.Telefono = usuarios_db.Usuarios[correo].Telefono;
+                sesion_actual.fecha_registro = usuarios_db.Usuarios[correo].fecha_registro;
 
                 Inicio ventana3 = new Inicio();
                 ventana3.FormClosed += (s, args) => this.Close();

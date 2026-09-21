@@ -25,6 +25,8 @@ namespace NicaCompare
         private void botonRedondeado3_Click(object sender, EventArgs e) { }
         private void botonRedondeado4_Click(object sender, EventArgs e) { }
 
+        private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide();}
+
         public Form6()
         {
             if (string.IsNullOrEmpty(sesion_actual.Nombre))
@@ -43,8 +45,17 @@ namespace NicaCompare
         private void cargar_datos_usuario()
         {
             label_nombre.Text = sesion_actual.Nombre;
+            label_correo.Text = sesion_actual.Correo;
+            label_fecha.Text = "Usuario desde el " + sesion_actual.fecha_registro.ToString("dd/MM/yyyy");
+
+            imput_correo.Text = sesion_actual.Correo;
+            imput_nombre.Text = sesion_actual.Nombre;
+            imput_telefono.Text = sesion_actual.Telefono.ToString();
+            imput_fecha.Text = sesion_actual.fecha_registro.ToString("dd/MM/yyyy");
+            label_tipo_cuenta.Text = "Cuenta " + sesion_actual.TipoUsuario;
+            label_saldo.Text = "Saldo: C$" + sesion_actual.Saldo.ToString("0");
+
         }
 
-
-    }
-    }
+     }
+}

@@ -59,7 +59,10 @@ namespace NicaCompare
 
         private void botonMenu1_Click(object sender, EventArgs e)
         {
-
+            Form6 home = new Form6();
+            home.FormClosed += (s, args) => this.Close();
+            home.Show();
+            this.Hide();
         }
     }
 }
