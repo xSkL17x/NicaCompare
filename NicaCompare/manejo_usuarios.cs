@@ -21,7 +21,7 @@ namespace NicaCompare
         public static Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro)> Usuarios =
             new Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro)>
         {
-        { "skl@unan.ni", ("Skl ◕⩊◕", "17", "Gratis", 250, 81234567, new DateTime(2026, 9, 14)) },
+        { "skl@unan.ni", ("Skl ◕⩊◕", "17", "PREMIUM", 280, 81234567, new DateTime(2026, 9, 14)) },
         { "oto@.unan.ni", ("Oto (๑﹏๑)", "123", "Gratis", 300, 81234567, new DateTime(2026, 9, 14)) },
         { "jahary@.unan.ni", ("Jahary (✿ᴗ͈ˬᴗ͈)⁾", "123", "Gratis", 300, 81234567, new DateTime(2026, 9, 14)) },
         { "moises@.unan.ni", ("Moises (•̀ ᗜ •́ )", "123", "Gratis", 300, 81234567, new DateTime(2026, 9, 14)) }
