@@ -25,7 +25,7 @@ namespace NicaCompare
         private void botonRedondeado3_Click(object sender, EventArgs e) { }
         private void botonRedondeado4_Click(object sender, EventArgs e) { }
 
-        private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide();}
+        private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
 
         public Form6()
         {
@@ -57,5 +57,6 @@ namespace NicaCompare
 
         }
 
-     }
+        private void btn_ir_planes_Click(object sender, EventArgs e) { Form8 recargar = new Form8(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
+    }
 }

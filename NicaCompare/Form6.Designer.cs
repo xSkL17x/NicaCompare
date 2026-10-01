@@ -58,6 +58,7 @@
             panel5 = new Panel();
             botonRedondeado3 = new BotonRedondeado();
             botonRedondeado4 = new BotonRedondeado();
+            btn_ir_planes = new BotonRedondeado();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)avatar1).BeginInit();
             panel3.SuspendLayout();
@@ -249,9 +250,9 @@
             label_tipo_cuenta.ForeColor = Color.Navy;
             label_tipo_cuenta.Location = new Point(61, 282);
             label_tipo_cuenta.Name = "label_tipo_cuenta";
-            label_tipo_cuenta.Size = new Size(240, 37);
+            label_tipo_cuenta.Size = new Size(198, 37);
             label_tipo_cuenta.TabIndex = 9;
-            label_tipo_cuenta.Text = "Cuenta Premium";
+            label_tipo_cuenta.Text = "Cuenta NONE";
             // 
             // label7
             // 
@@ -306,6 +307,7 @@
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel3.AutoSize = true;
+            panel3.Controls.Add(btn_ir_planes);
             panel3.Controls.Add(btn_recargar);
             panel3.Controls.Add(label_saldo);
             panel3.Controls.Add(label_tipo_cuenta);
@@ -347,11 +349,11 @@
             label_saldo.BackColor = Color.Transparent;
             label_saldo.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label_saldo.ForeColor = Color.Navy;
-            label_saldo.Location = new Point(475, 282);
+            label_saldo.Location = new Point(505, 282);
             label_saldo.Name = "label_saldo";
-            label_saldo.Size = new Size(240, 37);
+            label_saldo.Size = new Size(154, 37);
             label_saldo.TabIndex = 17;
-            label_saldo.Text = "Cuenta Premium";
+            label_saldo.Text = "Saldo C$ 0";
             // 
             // panel4
             // 
@@ -484,6 +486,25 @@
             botonRedondeado4.UseVisualStyleBackColor = false;
             botonRedondeado4.Click += botonRedondeado4_Click;
             // 
+            // btn_ir_planes
+            // 
+            btn_ir_planes.BackColor = Color.Blue;
+            btn_ir_planes.BorderRadius = 20;
+            btn_ir_planes.Cursor = Cursors.Hand;
+            btn_ir_planes.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 64);
+            btn_ir_planes.FlatAppearance.BorderSize = 2;
+            btn_ir_planes.FlatStyle = FlatStyle.Flat;
+            btn_ir_planes.Font = new Font("Segoe Fluent Icons", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_ir_planes.ForeColor = Color.WhiteSmoke;
+            btn_ir_planes.Location = new Point(77, 340);
+            btn_ir_planes.Margin = new Padding(3, 2, 3, 2);
+            btn_ir_planes.Name = "btn_ir_planes";
+            btn_ir_planes.Size = new Size(195, 38);
+            btn_ir_planes.TabIndex = 18;
+            btn_ir_planes.Text = "Ver Planos";
+            btn_ir_planes.UseVisualStyleBackColor = false;
+            btn_ir_planes.Click += btn_ir_planes_Click;
+            // 
             // Form6
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -551,5 +572,6 @@
         private PictureBox avatar2;
         private Label label_saldo;
         private BotonRedondeado btn_recargar;
+        private BotonRedondeado btn_ir_planes;
     }
 }

@@ -37,14 +37,11 @@ namespace NicaCompare
             if (!correo.Contains("@") || (!correo.EndsWith(".com") && !correo.EndsWith(".ni") && !correo.EndsWith(".es")))
             { MessageBox.Show("Porfavor Ingrese Un Correo Válido", "Correo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-            if (password.Length < 5)
-            { MessageBox.Show("La contraseña debe tener al menos 5 caracteres.", "Contraseña muy corta", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+            if (password.Length < 5) { MessageBox.Show("La contraseña debe tener al menos 5 caracteres.", "Contraseña muy corta", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-            if (password != passwordConf)
-            { MessageBox.Show("Las contraseñas no coinciden.", "Error en contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+            if (password != passwordConf) { MessageBox.Show("Las contraseñas no coinciden.", "Error en contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            if (usuarios_db.Usuarios.ContainsKey(correo))
-            { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+            if (usuarios_db.Usuarios.ContainsKey(correo)) { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
             usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 300, 505, DateTime.Now));
 

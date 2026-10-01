@@ -37,7 +37,7 @@ namespace NicaCompare
         {
             if (string.IsNullOrEmpty(sesion_actual.Nombre))
             {
-                Form5 Registro2 = new Form5(); Registro2.FormClosed += (s, args) => this.Close();
+                Login Registro2 = new Login(); Registro2.FormClosed += (s, args) => this.Close();
                 Registro2.Show(); this.Hide();
             }
             else

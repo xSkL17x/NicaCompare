@@ -263,6 +263,7 @@
             // boton_usuario
             // 
             boton_usuario.AutoColorearIconoBlanco = true;
+            boton_usuario.AutoEllipsis = true;
             boton_usuario.AutoEscalarImagen = true;
             boton_usuario.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             boton_usuario.BackColor = Color.Transparent;
