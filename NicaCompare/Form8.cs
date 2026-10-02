@@ -34,20 +34,49 @@ namespace NicaCompare
         }
         private void procesar_plan(string plan, int costo)
         {
-            if (sesion_actual.Saldo < costo)
+            int Saldo = sesion_actual.Saldo;
+            int restante = Saldo - costo;
+
+            if (Saldo < costo)
             {
-                if (MessageBox.Show("Saldo insuficiente, ¿desea recargar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    recargar_saldo(this, EventArgs.Empty);
+                if (MessageBox.Show("Saldo insuficiente, ¿desea recargar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { recargar_saldo(this, EventArgs.Empty); }
             }
             else
             {
-                sesion_actual.Saldo -= costo;
-                cargar_datos_usuario();
+                if (MessageBox.Show(
+                    $"¿Deseas cambiar al plan **{plan}**?\n\n" +
+                    $"Precio: C$ {costo}/mes\n" +
+                    $"Saldo actual: C$ {Saldo}\n" +
+                    $"Saldo restante: C$ {restante}",
+                    "Completar Suscripción",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {               
+                    sesion_actual.Saldo -= costo;
+                    sesion_actual.TipoUsuario = plan;
+                    MessageBox.Show($"¡El Plan {plan} ha sido adquirido con éxito!\n\nNuevo Saldo: C$ {sesion_actual.Saldo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Ir a la pantalla del perfil
+                    Form6 Perfil = new Form6(); Perfil.FormClosed += (s, args) => this.Close();
+                    Perfil.Show(); this.Hide();
+
+                    //o solo actulizar y quedar en esta pantalla
+                    //cargar_datos_usuario();
+                    ;
+                }
             }
         }
-        private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Básico", 49); }
-        private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Intermedio", 99); }
-        private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Premium", 149); }
+        private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Básico 🔹", 49); }
+        private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Premium 💎", 99); }
+        private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Elite 👑", 149); }
         private void recargar_saldo(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
-    }
+
+        private void btn_volver_Click(object sender, EventArgs e)
+        {
+            Form6 home = new Form6();
+            home.FormClosed += (s, args) => this.Close();
+            home.Show();
+            this.Hide();
+        }
+}
 }
