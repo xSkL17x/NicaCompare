@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.13.0" />
     <PackageReference Include="ReaLTaiizor" Version="3.8.2.1" />
   </ItemGroup>
 
