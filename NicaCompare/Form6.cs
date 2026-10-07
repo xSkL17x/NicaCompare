@@ -58,5 +58,15 @@ namespace NicaCompare
         }
 
         private void btn_ir_planes_Click(object sender, EventArgs e) { Form8 recargar = new Form8(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
+
+        private void label_saldo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonRedondeado5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

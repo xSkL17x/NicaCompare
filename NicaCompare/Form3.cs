@@ -47,6 +47,14 @@ namespace NicaCompare
             }
         }
 
+        private void botonCategoriaCheck1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void botonCategoriaCheck3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
