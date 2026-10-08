@@ -46,6 +46,7 @@
             barraBusqueda1 = new BarraBusqueda();
             label2 = new Label();
             panel_Busqueda = new Panel();
+            panel6 = new Panel();
             botonMenu6 = new BotonMenu();
             contenedor_categorias_tabla = new Panel();
             panel4 = new Panel();
@@ -60,6 +61,7 @@
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel_Busqueda.SuspendLayout();
+            panel6.SuspendLayout();
             contenedor_categorias_tabla.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
@@ -251,12 +253,12 @@
             boton_usuario.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             boton_usuario.ForeColor = Color.FromArgb(70, 70, 70);
             boton_usuario.Image = Properties.Resources.usuario;
-            boton_usuario.Location = new Point(703, 8);
+            boton_usuario.Location = new Point(3, 35);
             boton_usuario.MargenImagenIzquierda = 15;
             boton_usuario.Margin = new Padding(3, 2, 3, 2);
             boton_usuario.Name = "boton_usuario";
             boton_usuario.PorcentajeEscalaImagen = 50;
-            boton_usuario.Size = new Size(169, 36);
+            boton_usuario.Size = new Size(166, 36);
             boton_usuario.TabIndex = 16;
             boton_usuario.Text = "Inicio de Sesión";
             boton_usuario.TextAlign = ContentAlignment.MiddleLeft;
@@ -270,6 +272,7 @@
             tarjetaTienda1.BackgroundImageLayout = ImageLayout.Center;
             tarjetaTienda1.ColorBorde = Color.FromArgb(220, 224, 230);
             tarjetaTienda1.ColorCheck = Color.FromArgb(13, 110, 253);
+            tarjetaTienda1.Enabled = false;
             tarjetaTienda1.Imagen = null;
             tarjetaTienda1.Location = new Point(187, 4);
             tarjetaTienda1.MargenImagen = 8;
@@ -283,6 +286,7 @@
             tarjetaTienda1.TabIndex = 18;
             tarjetaTienda1.TamañoImagen = new Size(0, 0);
             tarjetaTienda1.Text = "tarjetaTienda1";
+            tarjetaTienda1.CheckedChanged += tarjetaTienda1_CheckedChanged;
             // 
             // tarjetaTienda2
             // 
@@ -360,7 +364,7 @@
             barraBusqueda1.Cursor = Cursors.IBeam;
             barraBusqueda1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             barraBusqueda1.ImeMode = ImeMode.Off;
-            barraBusqueda1.Location = new Point(185, 164);
+            barraBusqueda1.Location = new Point(168, 163);
             barraBusqueda1.Margin = new Padding(3, 2, 3, 2);
             barraBusqueda1.MinimumSize = new Size(175, 30);
             barraBusqueda1.Name = "barraBusqueda1";
@@ -386,8 +390,7 @@
             panel_Busqueda.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel_Busqueda.BackgroundImage = Properties.Resources.WhatsApp_Image_2026_09_07_at_3_21_22_PM;
             panel_Busqueda.BackgroundImageLayout = ImageLayout.Stretch;
-            panel_Busqueda.Controls.Add(boton_usuario);
-            panel_Busqueda.Controls.Add(botonMenu6);
+            panel_Busqueda.Controls.Add(panel6);
             panel_Busqueda.Controls.Add(label2);
             panel_Busqueda.Controls.Add(barraBusqueda1);
             panel_Busqueda.Controls.Add(label1);
@@ -397,6 +400,17 @@
             panel_Busqueda.Name = "panel_Busqueda";
             panel_Busqueda.Size = new Size(1015, 208);
             panel_Busqueda.TabIndex = 17;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.Transparent;
+            panel6.Controls.Add(boton_usuario);
+            panel6.Controls.Add(botonMenu6);
+            panel6.Dock = DockStyle.Right;
+            panel6.Location = new Point(842, 0);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(173, 208);
+            panel6.TabIndex = 24;
             // 
             // botonMenu6
             // 
@@ -416,12 +430,12 @@
             botonMenu6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             botonMenu6.ForeColor = Color.FromArgb(70, 70, 70);
             botonMenu6.Image = Properties.Resources.vip;
-            botonMenu6.Location = new Point(884, 8);
+            botonMenu6.Location = new Point(1, 83);
             botonMenu6.MargenImagenIzquierda = 15;
             botonMenu6.Margin = new Padding(3, 2, 3, 2);
             botonMenu6.Name = "botonMenu6";
             botonMenu6.PorcentajeEscalaImagen = 50;
-            botonMenu6.Size = new Size(123, 36);
+            botonMenu6.Size = new Size(169, 36);
             botonMenu6.TabIndex = 23;
             botonMenu6.Text = "Premium";
             botonMenu6.TextAlign = ContentAlignment.MiddleLeft;
@@ -442,7 +456,7 @@
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel4.Anchor = AnchorStyles.None;
             panel4.AutoScroll = true;
             panel4.Controls.Add(label_producto_busqueda);
             panel4.Controls.Add(panel2);
@@ -467,21 +481,22 @@
             // panel2
             // 
             panel2.Controls.Add(TABLAPRODUCTOS);
-            panel2.Location = new Point(3, 35);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, 38);
             panel2.Name = "panel2";
-            panel2.Size = new Size(963, 291);
+            panel2.Size = new Size(982, 291);
             panel2.TabIndex = 0;
             // 
             // TABLAPRODUCTOS
             // 
-            TABLAPRODUCTOS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TABLAPRODUCTOS.BackgroundColor = SystemColors.ButtonFace;
             TABLAPRODUCTOS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TABLAPRODUCTOS.Columns.AddRange(new DataGridViewColumn[] { Nombre, Precio, Tienda });
+            TABLAPRODUCTOS.Dock = DockStyle.Fill;
             TABLAPRODUCTOS.Location = new Point(0, 0);
             TABLAPRODUCTOS.Name = "TABLAPRODUCTOS";
             TABLAPRODUCTOS.RightToLeft = RightToLeft.No;
-            TABLAPRODUCTOS.Size = new Size(963, 291);
+            TABLAPRODUCTOS.Size = new Size(982, 291);
             TABLAPRODUCTOS.TabIndex = 0;
             TABLAPRODUCTOS.CellContentClick += dataGridView1_CellContentClick_1;
             // 
@@ -505,7 +520,7 @@
             // 
             // panel3
             // 
-            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.Anchor = AnchorStyles.None;
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel3.Controls.Add(tarjetaTienda1);
             panel3.Controls.Add(tarjetaTienda2);
@@ -540,6 +555,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel_Busqueda.ResumeLayout(false);
             panel_Busqueda.PerformLayout();
+            panel6.ResumeLayout(false);
             contenedor_categorias_tabla.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
@@ -578,5 +594,6 @@
         private Panel panel2;
         private BotonMenu botonMenu6;
         private Panel panel5;
+        private Panel panel6;
     }
 }

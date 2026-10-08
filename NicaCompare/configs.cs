@@ -9,8 +9,9 @@ namespace NicaCompare
                 {
                     "La Curacao", new Dictionary<string, string>
                     {
-                        { "Url", "https://www.lacuracaonline.com/nicaragua/search/" },
-                        { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
+                        { "Url", "https://www.lacuracaonline.com/nicaragua/search/" },                        
+                        { "Activo", "SI" },
+                        { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" }
                     }
                 },
                 {
@@ -18,6 +19,7 @@ namespace NicaCompare
                     {
                         { "Url", "https://gcm.com.ni/?s=" },
                         { "UrlParametros", "&post_type=product" }, // Se remueve &type_aws=true para evitar conflictos de maquetación
+                        { "Activo", "SI" },
                         { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
                         { "ExcluirNombres", "GCM|Search Results for|Somos Guardianes del Ahorro|Pago seguro con:" }
                     }
@@ -27,8 +29,9 @@ namespace NicaCompare
                     {
                         { "Url", "https://sicsa.com.ni/?s=" },
                         { "UrlParametros", "&post_type=product" },
+                        { "Activo", "SI" },
                         { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
-                        { "ExcluirNombres", "SICSA|Resultados|Categorías|Recommended Products|últimos productos|Filtro" }
+                        { "ExcluirNombres", "SICSA|Resultados|Categorías|Recommended Products|últimos productos|Filtro|Producto Prueba" }
                     }
                 }
             };
