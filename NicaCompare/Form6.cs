@@ -17,15 +17,14 @@ namespace NicaCompare
         private void label3_Click(object sender, EventArgs e) { }
         private void label7_Click(object sender, EventArgs e) { }
         private void label8_Click(object sender, EventArgs e) { }
-
+        private void imput_telefono_TextChanged(object sender, EventArgs e) { }
         private void campoTexto4_TextChanged(object sender, EventArgs e) { }
         private void label_saldo_Click(object sender, EventArgs e) { }
         private void botonRedondeado5_Click(object sender, EventArgs e) { }
         private void botonRedondeado1_Click(object sender, EventArgs e) { }
         private void botonRedondeado2_Click(object sender, EventArgs e) { }
-        private void botonRedondeado3_Click(object sender, EventArgs e) { }
-        private void botonRedondeado4_Click(object sender, EventArgs e) { }
 
+        private void label1_Click(object sender, EventArgs e) { }
         private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
 
         private void btn_volver_Click(object sender, EventArgs e) { Pantallas.cambiar<Inicio>(this); }
@@ -49,9 +48,62 @@ namespace NicaCompare
         private void btn_ir_planes_Click(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
         private void botonRecargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }
 
-        private void imput_telefono_TextChanged(object sender, EventArgs e)
-        {
 
+
+        private void btn_cancelar_cambios_Click(object sender, EventArgs e) {cargar_datos_usuario();imput_contra_actual.Text = "";imput_nuevacontra.Text = "";}
+
+        private void btn_guardar_cambios_Click(object sender, EventArgs e)
+        {
+            string correo = sesion_actual.Correo;
+            if (!usuarios_db.Usuarios.ContainsKey(correo)) return;
+
+            var usuarioDB = usuarios_db.Usuarios[correo];
+            string contraguardada = usuarioDB.Password;
+
+            // 1. Lógica para cambiar contraseña
+            if (!string.IsNullOrWhiteSpace(imput_contra_actual.Text))
+            {
+                if (imput_contra_actual.Text != contraguardada)
+                {
+                    MessageBox.Show("La contraseña actual es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(imput_nuevacontra.Text))
+                {
+                    contraguardada = imput_nuevacontra.Text;
+                }
+            }
+
+            // 2. Lógica para validar el teléfono
+            if (!int.TryParse(imput_telefono.Text, out int nuevoTelefono))
+            {
+                MessageBox.Show("El número de teléfono no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Guardar en la Sesión Actual
+            sesion_actual.Nombre = imput_nombre.Text;
+            sesion_actual.Telefono = nuevoTelefono;
+
+            // 4. Guardar en el Diccionario (Simulación de DB)
+            usuarios_db.Usuarios[correo] = (
+                sesion_actual.Nombre,
+                contraguardada,
+                usuarioDB.TipoUsuario,
+                usuarioDB.Saldo,
+                nuevoTelefono,
+                usuarioDB.fecha_registro
+            );
+
+            // 5. Refrescar interfaz
+            imput_contra_actual.Text = "";
+            imput_nuevacontra.Text = "";
+            cargar_datos_usuario();
+
+            MessageBox.Show("Datos actualizados correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
     }
 }

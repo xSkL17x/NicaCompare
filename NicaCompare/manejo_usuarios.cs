@@ -10,7 +10,7 @@ namespace NicaCompare
         public static string Nombre = "";
         public static string TipoUsuario = "";
         public static int Saldo = 0;
-        public static int Telefono = 81234567;
+        public static int Telefono = 0;
         public static DateTime fecha_registro = DateTime.Today;
 
 

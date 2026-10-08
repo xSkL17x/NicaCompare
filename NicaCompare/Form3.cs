@@ -33,29 +33,30 @@ namespace NicaCompare
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
 
-        public Inicio()
-        {
-            InitializeComponent();
-            CargarUsuarioActivo();
-        }
+        public Inicio() { InitializeComponent(); CargarUsuarioActivo(); }
 
 
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
         //____________๑.・🍨︴Boton Usuario ✰  ๑_______________
-        private void CargarUsuarioActivo() { if (!string.IsNullOrEmpty(sesion_actual.Nombre)) { boton_usuario.Text = sesion_actual.Nombre; btn_Usuario_2.Text = sesion_actual.Nombre; } }
+        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; btn_Usuario_2.Text = sesion_actual.Nombre; } }
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(sesion_actual.Nombre))
-            {
-                Login Registro2 = new Login(); Registro2.FormClosed += (s, args) => this.Close();
-                Registro2.Show(); this.Hide();
-            }
-            else
-            {
-                Form6 Perfil = new Form6(); Perfil.FormClosed += (s, args) => this.Close();
-                Perfil.Show(); this.Hide();
-            }
+            if (!GestorSesion.ValidarSesion()) {Pantallas.cambiar<Login>(this);}
+            else { Pantallas.cambiar<Form6>(this); }
+        }
+
+
+        private void btn_cerar_sesion_Click(object sender, EventArgs e)
+        {
+            sesion_actual.Correo = "";
+            sesion_actual.Nombre = "";
+            sesion_actual.TipoUsuario = "";
+            sesion_actual.Saldo = 0;
+            sesion_actual.Telefono = 0;
+            sesion_actual.fecha_registro = DateTime.Today;
+
+            Pantallas.cambiar<Login>(this);
         }
 
         private async void barraBusqueda1_BuscarClicked_1(object sender, EventArgs e)
@@ -68,22 +69,20 @@ namespace NicaCompare
             barraBusqueda1.Text = "";
 
             await EjecutarScrapingAsync(textoBuscado);
-            await TestearHtmlSicsaAsync(textoBuscado);
         }
 
         private void AgregarProductoATabla(string nombre, string precio, string tienda) { TABLAPRODUCTOS.Rows.Add(nombre, precio, tienda); }
 
 
         private async Task EjecutarScrapingAsync(string textoBuscado)
-        {
-            // Cache temporal para evitar productos duplicados por tienda durante la búsqueda
+        {           
             HashSet<string> productosAgregados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
             using (HttpClient client = new HttpClient())
             {
                 foreach (var tienda in ConfigScraper.Tiendas)
                 {
-                    if (tienda.Key == "La Curacao") continue;
+                    if (tienda.Key == "La Curacao") continue; // no funka aun la curacao
+
                     string urlBusqueda = tienda.Value["Url"] + textoBuscado + (tienda.Value.ContainsKey("UrlParametros") ? tienda.Value["UrlParametros"] : "");
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("User-Agent", tienda.Value["UserAgent"]);
@@ -118,47 +117,18 @@ namespace NicaCompare
                                 foreach (var palabra in palabrasExcluidas) { if (nombre.Contains(palabra)) { esValido = false; break; } }
                                 string claveCache = $"{tienda.Key}_{nombre}";
 
-                                if (esValido && productosAgregados.Add(claveCache))
-                                {
-                                    AgregarProductoATabla(nombre, precio, tienda.Key);
-                                    count++;
-                                }
+                                if (esValido && productosAgregados.Add(claveCache)) { AgregarProductoATabla(nombre, precio, tienda.Key); count++; } //pa ebitar duplicados XD
                             }
                         }
                         else { label_producto_busqueda.Text = $"Sin resultados en {tienda.Key}"; }
                     }
-                    catch { };// label_producto_busqueda.Text = $"Error de :{tienda.Key}"; }
+                    catch { }
+                    ;// label_producto_busqueda.Text = $"Error de :{tienda.Key}"; }
                 }
             }
         }
 
 
 
-
-        // Método temporal para extraer el HTML crudo de SICSA
-        private async Task TestearHtmlSicsaAsync(string textoBuscado)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                string urlBusqueda = "https://www.lacuracaonline.com/nicaragua/search/s" + textoBuscado;
-                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
-
-                try
-                {
-                    string html = await client.GetStringAsync(urlBusqueda);
-
-                    string rutaArchivo = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "sicsa_html.txt");
-                    System.IO.File.WriteAllText(rutaArchivo, html);
-
-                    MessageBox.Show("HTML guardado en el Escritorio como sicsa_html.txt", "Test SICSA");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
-        }
-
-        
     }
 }
