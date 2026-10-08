@@ -19,7 +19,8 @@ namespace NicaCompare
         private void label8_Click(object sender, EventArgs e) { }
 
         private void campoTexto4_TextChanged(object sender, EventArgs e) { }
-
+        private void label_saldo_Click(object sender, EventArgs e) { }
+        private void botonRedondeado5_Click(object sender, EventArgs e) { }
         private void botonRedondeado1_Click(object sender, EventArgs e) { }
         private void botonRedondeado2_Click(object sender, EventArgs e) { }
         private void botonRedondeado3_Click(object sender, EventArgs e) { }
@@ -27,20 +28,8 @@ namespace NicaCompare
 
         private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
 
-        public Form6()
-        {
-            if (string.IsNullOrEmpty(sesion_actual.Nombre))
-            {
-                Inicio home = new Inicio();
-                home.FormClosed += (s, args) => this.Close();
-                home.Show();
-                this.Hide();
-                return;
-            }
-
-            InitializeComponent();
-            cargar_datos_usuario();
-        }
+        private void btn_volver_Click(object sender, EventArgs e) { Pantallas.cambiar<Inicio>(this); }
+        public Form6() { InitializeComponent(); cargar_datos_usuario(); }
 
         private void cargar_datos_usuario()
         {
@@ -57,14 +46,10 @@ namespace NicaCompare
 
         }
 
-        private void btn_ir_planes_Click(object sender, EventArgs e) { Form8 recargar = new Form8(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
+        private void btn_ir_planes_Click(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
+        private void botonRecargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }
 
-        private void label_saldo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonRedondeado5_Click(object sender, EventArgs e)
+        private void imput_telefono_TextChanged(object sender, EventArgs e)
         {
 
         }

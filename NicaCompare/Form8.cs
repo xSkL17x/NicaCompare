@@ -13,27 +13,29 @@ namespace NicaCompare
     {
         private void Form8_Load(object sender, EventArgs e) { }
         public Form8()
-        {
-            if (string.IsNullOrEmpty(sesion_actual.Nombre))
-            {
-                Inicio home = new Inicio();
-                home.FormClosed += (s, args) => this.Close();
-                home.Show();
-                this.Hide();
-                return;
-            }
-            InitializeComponent();
-            cargar_datos_usuario();
-        }
+        {InitializeComponent(); cargar_datos_usuario();}
         private void cargar_datos_usuario()
         {
-            label_nombre.Text = sesion_actual.Nombre;
-            label_plan.Text = "Plan Actual :" + sesion_actual.TipoUsuario;
-            label_correo.Text = sesion_actual.Correo;
-            label_saldo.Text = "Saldo: C$" + sesion_actual.Saldo.ToString("0");
+            if (GestorSesion.ValidarSesion()) {
+                label_nombre.Text = sesion_actual.Nombre;
+                label_plan.Text = "Plan Actual :" + sesion_actual.TipoUsuario;
+                label_correo.Text = sesion_actual.Correo;
+                label_saldo.Text = "Saldo: C$" + sesion_actual.Saldo.ToString("0");
+            }
+            else {
+                label_nombre.Visible = false;
+                label_plan.Visible = false;
+                label_correo.Visible = false;
+                label_saldo.Visible = false;
+                avatar_planes.Visible = false;
+            }
         }
         private void procesar_plan(string plan, int costo)
         {
+
+
+            if (!GestorSesion.ValidarSesion()){ if (MessageBox.Show("Inicia Sesion👤 , Para activar Plan 😀", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { Pantallas.cambiar<Login>(this); } return;  };
+
             int Saldo = sesion_actual.Saldo;
             int restante = Saldo - costo;
 
@@ -51,15 +53,13 @@ namespace NicaCompare
                     "Completar Suscripción",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
-                {               
+                {
                     sesion_actual.Saldo -= costo;
                     sesion_actual.TipoUsuario = plan;
                     MessageBox.Show($"¡El Plan {plan} ha sido adquirido con éxito!\n\nNuevo Saldo: C$ {sesion_actual.Saldo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Ir a la pantalla del perfil
-                    Form6 Perfil = new Form6(); Perfil.FormClosed += (s, args) => this.Close();
-                    Perfil.Show(); this.Hide();
-
+                    Pantallas.cambiar<Form6>(this);
                     //o solo actulizar y quedar en esta pantalla
                     //cargar_datos_usuario();
                     ;
@@ -73,10 +73,9 @@ namespace NicaCompare
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
-            Form6 home = new Form6();
-            home.FormClosed += (s, args) => this.Close();
-            home.Show();
-            this.Hide();
+
+            if (GestorSesion.ValidarSesion()) {Pantallas.cambiar<Form6>(this);}
+            else{Pantallas.cambiar<Inicio>(this);}
         }
-}
+    }
 }

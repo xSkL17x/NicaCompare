@@ -39,6 +39,8 @@ namespace NicaCompare
             CargarUsuarioActivo();
         }
 
+
+        private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
         //____________๑.・🍨︴Boton Usuario ✰  ๑_______________
         private void CargarUsuarioActivo() { if (!string.IsNullOrEmpty(sesion_actual.Nombre)) { boton_usuario.Text = sesion_actual.Nombre; btn_Usuario_2.Text = sesion_actual.Nombre; } }
 
@@ -66,19 +68,22 @@ namespace NicaCompare
             barraBusqueda1.Text = "";
 
             await EjecutarScrapingAsync(textoBuscado);
+            await TestearHtmlSicsaAsync(textoBuscado);
         }
 
-        private void AgregarProductoATabla(string nombre, string precio, string tienda) { TABLAPRODUCTOS.Rows.Add(nombre, precio, tienda);}
+        private void AgregarProductoATabla(string nombre, string precio, string tienda) { TABLAPRODUCTOS.Rows.Add(nombre, precio, tienda); }
 
 
         private async Task EjecutarScrapingAsync(string textoBuscado)
         {
+            // Cache temporal para evitar productos duplicados por tienda durante la búsqueda
+            HashSet<string> productosAgregados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
             using (HttpClient client = new HttpClient())
             {
                 foreach (var tienda in ConfigScraper.Tiendas)
                 {
                     if (tienda.Key == "La Curacao") continue;
-
                     string urlBusqueda = tienda.Value["Url"] + textoBuscado + (tienda.Value.ContainsKey("UrlParametros") ? tienda.Value["UrlParametros"] : "");
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Add("User-Agent", tienda.Value["UserAgent"]);
@@ -86,7 +91,7 @@ namespace NicaCompare
                     try
                     {
                         string html = await client.GetStringAsync(urlBusqueda);
-                        HtmlAgilityPack.HtmlDocum4ent doc = new HtmlAgilityPack.HtmlDocument(); doc.LoadHtml(html);
+                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument(); doc.LoadHtml(html);
 
                         var nodosProductos = doc.DocumentNode.SelectNodes("//*[contains(@class, 'product') and not(contains(@class, 'category'))]");
 
@@ -98,7 +103,7 @@ namespace NicaCompare
 
                             foreach (var nodo in nodosProductos)
                             {
-                                if (count >= 5) break;
+                                if (count >= 100) break;
 
                                 var nodoTitulo = nodo.SelectSingleNode(".//*[contains(@class, 'title') or contains(@class, 'name') or name()='h2' or name()='h3']");
                                 var nodoPrecio = nodo.SelectSingleNode(".//ins//bdi | .//bdi | .//*[contains(@class, 'electro-price')] | .//*[contains(@class, 'price')]");
@@ -111,13 +116,18 @@ namespace NicaCompare
 
                                 bool esValido = !string.IsNullOrEmpty(nombre);
                                 foreach (var palabra in palabrasExcluidas) { if (nombre.Contains(palabra)) { esValido = false; break; } }
+                                string claveCache = $"{tienda.Key}_{nombre}";
 
-                                if (esValido) { AgregarProductoATabla(nombre, precio, tienda.Key); count++; }
+                                if (esValido && productosAgregados.Add(claveCache))
+                                {
+                                    AgregarProductoATabla(nombre, precio, tienda.Key);
+                                    count++;
+                                }
                             }
                         }
                         else { label_producto_busqueda.Text = $"Sin resultados en {tienda.Key}"; }
                     }
-                    catch { label_producto_busqueda.Text = $"Error de conexión con {tienda.Key}"; }
+                    catch { };// label_producto_busqueda.Text = $"Error de :{tienda.Key}"; }
                 }
             }
         }
@@ -125,5 +135,30 @@ namespace NicaCompare
 
 
 
+        // Método temporal para extraer el HTML crudo de SICSA
+        private async Task TestearHtmlSicsaAsync(string textoBuscado)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string urlBusqueda = "https://www.lacuracaonline.com/nicaragua/search/s" + textoBuscado;
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
+
+                try
+                {
+                    string html = await client.GetStringAsync(urlBusqueda);
+
+                    string rutaArchivo = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "sicsa_html.txt");
+                    System.IO.File.WriteAllText(rutaArchivo, html);
+
+                    MessageBox.Show("HTML guardado en el Escritorio como sicsa_html.txt", "Test SICSA");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        
     }
 }

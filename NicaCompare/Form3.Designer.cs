@@ -406,10 +406,12 @@
             botonMenu6.Text = "Premium";
             botonMenu6.TextAlign = ContentAlignment.MiddleLeft;
             botonMenu6.UseVisualStyleBackColor = false;
+            botonMenu6.Click += botonMenu6_Click_1;
             // 
             // contenedor_categorias_tabla
             // 
-            contenedor_categorias_tabla.Anchor = AnchorStyles.None;
+            contenedor_categorias_tabla.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            contenedor_categorias_tabla.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             contenedor_categorias_tabla.BorderStyle = BorderStyle.Fixed3D;
             contenedor_categorias_tabla.Controls.Add(panel4);
             contenedor_categorias_tabla.Controls.Add(panel3);
@@ -420,12 +422,13 @@
             // 
             // panel4
             // 
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel4.AutoScroll = true;
             panel4.Controls.Add(label_producto_busqueda);
             panel4.Controls.Add(panel2);
             panel4.Location = new Point(14, 127);
             panel4.Name = "panel4";
-            panel4.Size = new Size(968, 329);
+            panel4.Size = new Size(982, 329);
             panel4.TabIndex = 22;
             // 
             // label_producto_busqueda
@@ -451,10 +454,10 @@
             // 
             // TABLAPRODUCTOS
             // 
+            TABLAPRODUCTOS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TABLAPRODUCTOS.BackgroundColor = SystemColors.ButtonFace;
             TABLAPRODUCTOS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TABLAPRODUCTOS.Columns.AddRange(new DataGridViewColumn[] { Nombre, Precio, Tienda });
-            TABLAPRODUCTOS.Dock = DockStyle.Fill;
             TABLAPRODUCTOS.Location = new Point(0, 0);
             TABLAPRODUCTOS.Name = "TABLAPRODUCTOS";
             TABLAPRODUCTOS.RightToLeft = RightToLeft.No;
@@ -466,29 +469,30 @@
             // 
             Nombre.HeaderText = "Nombre Producto";
             Nombre.Name = "Nombre";
-            Nombre.Width = 400;
+            Nombre.Width = 307;
             // 
             // Precio
             // 
             Precio.HeaderText = "Precio";
             Precio.Name = "Precio";
-            Precio.Width = 150;
+            Precio.Width = 306;
             // 
             // Tienda
             // 
             Tienda.HeaderText = "Tienda";
             Tienda.Name = "Tienda";
-            Tienda.Width = 200;
+            Tienda.Width = 307;
             // 
             // panel3
             // 
-            panel3.Anchor = AnchorStyles.None;
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel3.Controls.Add(tarjetaTienda1);
             panel3.Controls.Add(tarjetaTienda2);
             panel3.Controls.Add(tarjetaTienda3);
             panel3.Location = new Point(12, 1);
             panel3.Name = "panel3";
-            panel3.Size = new Size(968, 120);
+            panel3.Size = new Size(984, 120);
             panel3.TabIndex = 21;
             // 
             // Inicio

@@ -27,4 +27,15 @@ namespace NicaCompare
         { "moises@.unan.ni", ("Moises (•̀ ᗜ •́ )", "123", "Gratis", 50, 81234567, new DateTime(2026, 9, 14)) }
         };
     }
+
+
+
+    public static class GestorSesion
+    {
+        public static bool ValidarSesion()
+        {
+            if (string.IsNullOrEmpty(sesion_actual.Nombre)){return false;}
+            return true; 
+        }
+    }
 }
