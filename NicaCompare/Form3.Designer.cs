@@ -44,8 +44,12 @@
             panel6 = new Panel();
             botonMenu6 = new BotonMenu();
             contenedor_categorias_tabla = new Panel();
-            panel2 = new Panel();
+            label_txt_compare = new Label();
             panel4 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            pictureBox1 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
             TABLAPRODUCTOS = new DataGridView();
             Nombre = new DataGridViewTextBoxColumn();
             Precio = new DataGridViewTextBoxColumn();
@@ -53,12 +57,20 @@
             label_producto_busqueda = new Label();
             panel3 = new Panel();
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            lbl_Compare_gallo = new Label();
+            lbl_Compare_gcm = new Label();
+            lbl_Compare_sicsa = new Label();
+            lbl_busquedas_restantes = new Label();
             panel_Busqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             panel6.SuspendLayout();
             contenedor_categorias_tabla.SuspendLayout();
             panel4.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TABLAPRODUCTOS).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
@@ -97,7 +109,7 @@
             // tarjetaTienda1
             // 
             tarjetaTienda1.BackColor = Color.Transparent;
-            tarjetaTienda1.BackgroundImage = Properties.Resources._2dd8d181507843_Y3JvcCw4MTAsNjMzLDAsMA;
+            tarjetaTienda1.BackgroundImage = (Image)resources.GetObject("tarjetaTienda1.BackgroundImage");
             tarjetaTienda1.BackgroundImageLayout = ImageLayout.Center;
             tarjetaTienda1.ColorBorde = Color.FromArgb(220, 224, 230);
             tarjetaTienda1.ColorCheck = Color.FromArgb(13, 110, 253);
@@ -270,6 +282,7 @@
             // panel6
             // 
             panel6.BackColor = Color.Transparent;
+            panel6.Controls.Add(lbl_busquedas_restantes);
             panel6.Controls.Add(boton_usuario);
             panel6.Controls.Add(botonMenu6);
             panel6.Dock = DockStyle.Right;
@@ -314,7 +327,7 @@
             contenedor_categorias_tabla.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             contenedor_categorias_tabla.BackColor = Color.Transparent;
             contenedor_categorias_tabla.BorderStyle = BorderStyle.Fixed3D;
-            contenedor_categorias_tabla.Controls.Add(panel2);
+            contenedor_categorias_tabla.Controls.Add(label_txt_compare);
             contenedor_categorias_tabla.Controls.Add(panel4);
             contenedor_categorias_tabla.Controls.Add(label_producto_busqueda);
             contenedor_categorias_tabla.Controls.Add(panel3);
@@ -324,33 +337,100 @@
             contenedor_categorias_tabla.Size = new Size(1268, 527);
             contenedor_categorias_tabla.TabIndex = 27;
             // 
-            // panel2
+            // label_txt_compare
             // 
-            panel2.Location = new Point(14, 196);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(443, 292);
-            panel2.TabIndex = 25;
+            label_txt_compare.AutoSize = true;
+            label_txt_compare.BackColor = Color.Transparent;
+            label_txt_compare.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_txt_compare.ForeColor = Color.Indigo;
+            label_txt_compare.Location = new Point(103, 163);
+            label_txt_compare.Name = "label_txt_compare";
+            label_txt_compare.Size = new Size(306, 30);
+            label_txt_compare.TabIndex = 25;
+            label_txt_compare.Text = "Compare: Los Mejores Precios";
+            label_txt_compare.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel4
             // 
             panel4.Anchor = AnchorStyles.None;
             panel4.AutoScroll = true;
+            panel4.Controls.Add(tableLayoutPanel1);
             panel4.Controls.Add(TABLAPRODUCTOS);
-            panel4.Location = new Point(481, 196);
+            panel4.Location = new Point(3, 196);
             panel4.Name = "panel4";
-            panel4.Size = new Size(781, 292);
+            panel4.Size = new Size(1258, 324);
             panel4.TabIndex = 22;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.43021F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.56979F));
+            tableLayoutPanel1.Controls.Add(lbl_Compare_sicsa, 0, 2);
+            tableLayoutPanel1.Controls.Add(lbl_Compare_gcm, 0, 1);
+            tableLayoutPanel1.Controls.Add(pictureBox1, 1, 0);
+            tableLayoutPanel1.Controls.Add(pictureBox3, 1, 1);
+            tableLayoutPanel1.Controls.Add(pictureBox4, 1, 2);
+            tableLayoutPanel1.Controls.Add(lbl_Compare_gallo, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Left;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Size = new Size(464, 324);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.el_gallo_mas_gallo_nuevo;
+            pictureBox1.Location = new Point(4, 2);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(103, 98);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 26;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(4, 110);
+            pictureBox3.Margin = new Padding(3, 2, 3, 2);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(103, 93);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 27;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.Image = Properties.Resources.LOGO_222;
+            pictureBox4.Location = new Point(4, 218);
+            pictureBox4.Margin = new Padding(3, 2, 3, 2);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(103, 93);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 28;
+            pictureBox4.TabStop = false;
             // 
             // TABLAPRODUCTOS
             // 
             TABLAPRODUCTOS.BackgroundColor = SystemColors.ButtonFace;
             TABLAPRODUCTOS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TABLAPRODUCTOS.Columns.AddRange(new DataGridViewColumn[] { Nombre, Precio, Tienda });
-            TABLAPRODUCTOS.Location = new Point(7, 48);
+            TABLAPRODUCTOS.Dock = DockStyle.Right;
+            TABLAPRODUCTOS.Location = new Point(470, 0);
             TABLAPRODUCTOS.Name = "TABLAPRODUCTOS";
             TABLAPRODUCTOS.RightToLeft = RightToLeft.No;
             TABLAPRODUCTOS.RowHeadersWidth = 51;
-            TABLAPRODUCTOS.Size = new Size(788, 224);
+            TABLAPRODUCTOS.ScrollBars = ScrollBars.Vertical;
+            TABLAPRODUCTOS.Size = new Size(788, 324);
             TABLAPRODUCTOS.TabIndex = 0;
             TABLAPRODUCTOS.CellContentClick += dataGridView1_CellContentClick_1;
             // 
@@ -387,6 +467,7 @@
             label_producto_busqueda.TabIndex = 24;
             label_producto_busqueda.Text = "Mas Buscado";
             label_producto_busqueda.TextAlign = ContentAlignment.MiddleCenter;
+            label_producto_busqueda.Click += label_producto_busqueda_Click;
             // 
             // panel3
             // 
@@ -414,6 +495,61 @@
             webView21.TabIndex = 21;
             webView21.ZoomFactor = 1D;
             // 
+            // lbl_Compare_gallo
+            // 
+            lbl_Compare_gallo.AutoSize = true;
+            lbl_Compare_gallo.BackColor = Color.Transparent;
+            lbl_Compare_gallo.Dock = DockStyle.Fill;
+            lbl_Compare_gallo.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Compare_gallo.ForeColor = Color.FromArgb(0, 0, 64);
+            lbl_Compare_gallo.Location = new Point(113, 0);
+            lbl_Compare_gallo.Name = "lbl_Compare_gallo";
+            lbl_Compare_gallo.Size = new Size(348, 108);
+            lbl_Compare_gallo.TabIndex = 10;
+            lbl_Compare_gallo.Text = "Test Producto C$ 550";
+            lbl_Compare_gallo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Compare_gcm
+            // 
+            lbl_Compare_gcm.AutoSize = true;
+            lbl_Compare_gcm.BackColor = Color.Transparent;
+            lbl_Compare_gcm.Dock = DockStyle.Fill;
+            lbl_Compare_gcm.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Compare_gcm.ForeColor = Color.FromArgb(0, 0, 64);
+            lbl_Compare_gcm.Location = new Point(113, 108);
+            lbl_Compare_gcm.Name = "lbl_Compare_gcm";
+            lbl_Compare_gcm.Size = new Size(348, 108);
+            lbl_Compare_gcm.TabIndex = 29;
+            lbl_Compare_gcm.Text = "Test Producto C$ 850";
+            lbl_Compare_gcm.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Compare_sicsa
+            // 
+            lbl_Compare_sicsa.AutoSize = true;
+            lbl_Compare_sicsa.BackColor = Color.Transparent;
+            lbl_Compare_sicsa.Dock = DockStyle.Fill;
+            lbl_Compare_sicsa.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Compare_sicsa.ForeColor = Color.FromArgb(0, 0, 64);
+            lbl_Compare_sicsa.Location = new Point(113, 216);
+            lbl_Compare_sicsa.Name = "lbl_Compare_sicsa";
+            lbl_Compare_sicsa.Size = new Size(348, 108);
+            lbl_Compare_sicsa.TabIndex = 30;
+            lbl_Compare_sicsa.Text = "Test Producto C$ 1120";
+            lbl_Compare_sicsa.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lbl_busquedas_restantes
+            // 
+            lbl_busquedas_restantes.AutoSize = true;
+            lbl_busquedas_restantes.BackColor = Color.WhiteSmoke;
+            lbl_busquedas_restantes.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_busquedas_restantes.ForeColor = Color.BlueViolet;
+            lbl_busquedas_restantes.Location = new Point(6, 15);
+            lbl_busquedas_restantes.Name = "lbl_busquedas_restantes";
+            lbl_busquedas_restantes.Size = new Size(89, 60);
+            lbl_busquedas_restantes.TabIndex = 10;
+            lbl_busquedas_restantes.Text = "Busquedas \r\nRestantes\r\n (7)";
+            lbl_busquedas_restantes.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -438,9 +574,15 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             contenedor_categorias_tabla.ResumeLayout(false);
             contenedor_categorias_tabla.PerformLayout();
             panel4.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)TABLAPRODUCTOS).EndInit();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
@@ -472,6 +614,14 @@
         private TarjetaResultadoComparacion tarjetaResultadoComparacion1;
         private PictureBox pictureBox2;
         internal Panel panel1;
-        private Panel panel2;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label label_txt_compare;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private Label lbl_busquedas_restantes;
+        private Label lbl_Compare_sicsa;
+        private Label lbl_Compare_gcm;
+        private Label lbl_Compare_gallo;
     }
 }

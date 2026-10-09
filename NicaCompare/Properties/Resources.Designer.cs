@@ -93,6 +93,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap el_gallo_mas_gallo_nuevo {
+            get {
+                object obj = ResourceManager.GetObject("el_gallo_mas_gallo_nuevo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap electrodomesticos {
             get {
                 object obj = ResourceManager.GetObject("electrodomesticos", resourceCulture);

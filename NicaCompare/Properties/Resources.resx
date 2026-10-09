@@ -133,17 +133,20 @@
   <data name="GCM1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GCM1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="WhatsApp Image 2026-09-07 at 12.37.09 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WhatsApp Image 2026-09-07 at 12.37.09 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LOGO 22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LOGO 22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="fondo perfil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fondo perfil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WhatsApp Image 2026-09-07 at 12.37.09 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WhatsApp Image 2026-09-07 at 12.37.09 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot 2026-09-07 201337" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Screenshot 2026-09-07 201337.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="tecnologia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tecnologia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="electrodomesticos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\electrodomesticos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,9 +172,6 @@
   <data name="WhatsApp Image 2026-09-07 at 3.21.22 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-07 at 3.21.22 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tecnologia" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tecnologia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LOGO 222" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LOGO 222.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,8 +184,11 @@
   <data name="R (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\R (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FOTO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FOTO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Screenshot 2026-09-07 201337" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot 2026-09-07 201337.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Screenshot 2026-09-07 201238" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Screenshot 2026-09-07 201238.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,7 +202,7 @@
   <data name="WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FOTO" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FOTO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="el_gallo_mas_gallo_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\el_gallo_mas_gallo_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
