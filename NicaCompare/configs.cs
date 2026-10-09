@@ -7,9 +7,9 @@ namespace NicaCompare
         public static readonly Dictionary<string, Dictionary<string, string>> Tiendas = new Dictionary<string, Dictionary<string, string>>
             {
                 {
-                    "La Curacao", new Dictionary<string, string>
+                    "el GallomasGallo", new Dictionary<string, string>
                     {
-                        { "Url", "https://www.lacuracaonline.com/nicaragua/search/" },                        
+                        { "Url", "https://www.elgallomasgallo.com.ni/catalogsearch/result/?q=" },                        
                         { "Activo", "SI" },
                         { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" }
                     }
@@ -35,6 +35,7 @@ namespace NicaCompare
                     }
                 }
             };
+
     }
 
 
