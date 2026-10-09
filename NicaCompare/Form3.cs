@@ -110,7 +110,7 @@ namespace NicaCompare
 
                             foreach (var nodo in nodosProductos)
                             {
-                                if (count >= 100) break;                                
+                                if (count >= 1000) break;                                
 
                                 var nodoTitulo = nodo.SelectSingleNode(".//*[contains(@class, 'title') or contains(@class, 'name') or name()='h2' or name()='h3']");
                                 var nodoPrecio = nodo.SelectSingleNode(".//ins//bdi | .//bdi | .//*[contains(@class, 'electro-price')] | .//*[contains(@class, 'price')]");
