@@ -32,7 +32,6 @@ namespace NicaCompare
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            // 1. Dibujar el fondo del panel/formulario en las esquinas para eliminar el borde pixelado
             if (this.Parent != null)
             {
                 using (SolidBrush parentBrush = new SolidBrush(this.Parent.BackColor))
@@ -45,13 +44,12 @@ namespace NicaCompare
 
             using (GraphicsPath path = GetRoundedPath(rect, borderRadius))
             {
-                // 2. Dibujar el fondo del botón redondeado
+         
                 using (SolidBrush brush = new SolidBrush(this.BackColor))
                 {
                     g.FillPath(brush, path);
                 }
 
-                // 3. Dibujar línea suave de contorno
                 using (Pen pen = new Pen(this.BackColor, 1.5f))
                 {
                     g.DrawPath(pen, path);
@@ -60,17 +58,16 @@ namespace NicaCompare
                 this.Region = new Region(path);
             }
 
-            // 4. Dibujar el texto perfectamente centrado encima del fondo
             Rectangle textRect = this.ClientRectangle;
 
-            // Si le asignas un icono/imagen al botón
+       
             if (this.Image != null)
             {
                 int imgX = 15;
                 int imgY = (this.Height - this.Image.Height) / 2;
                 g.DrawImage(this.Image, imgX, imgY, this.Image.Width, this.Image.Height);
 
-                // Mover el área de texto a la derecha de la imagen
+        
                 textRect = new Rectangle(imgX + this.Image.Width + 5, 0, this.Width - (imgX + this.Image.Width + 10), this.Height);
             }
 

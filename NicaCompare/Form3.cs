@@ -68,14 +68,14 @@ namespace NicaCompare
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
 
-            TABLAPRODUCTOS.Rows.Clear();
+            tablaResultados1.Rows.Clear();
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} porfavor espere";
             barraBusqueda1.Text = "";
 
             await EjecutarScrapingAsync(textoBuscado);
         }
 
-        private void AgregarProductoATabla(string nombre, string precio, string tienda) { TABLAPRODUCTOS.Rows.Add(nombre, precio, tienda); }
+        private void AgregarProductoATabla(string nombre, string precio, string tienda) { tablaResultados1.Rows.Add(nombre, precio, tienda); }
 
 
         private async Task EjecutarScrapingAsync(string textoBuscado)
@@ -144,6 +144,16 @@ namespace NicaCompare
         private void label_producto_busqueda_Click(object sender, EventArgs e) { }
 
         private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tablaResultados1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tablaResultados2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
