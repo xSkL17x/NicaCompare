@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             boton_usuario = new BotonMenu();
@@ -54,11 +54,11 @@
             label_txt_compare = new Label();
             panel4 = new Panel();
             tablaResultados1 = new TablaResultados();
-            dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewImageColumn2 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
@@ -275,7 +275,7 @@
             botonMenu6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             botonMenu6.ForeColor = Color.FromArgb(70, 70, 70);
             botonMenu6.Image = Properties.Resources.vip;
-            botonMenu6.Location = new Point(111, 30);
+            botonMenu6.Location = new Point(99, 12);
             botonMenu6.MargenImagenIzquierda = 15;
             botonMenu6.Name = "botonMenu6";
             botonMenu6.PorcentajeEscalaImagen = 50;
@@ -398,15 +398,15 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             tablaResultados1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             tablaResultados1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tablaResultados1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewImageColumn1, dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewImageColumn2, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20 });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(15, 23, 42);
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle4;
+            tablaResultados1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(15, 23, 42);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle2;
             tablaResultados1.EnableHeadersVisualStyles = false;
             tablaResultados1.GridColor = Color.FromArgb(226, 232, 240);
             tablaResultados1.Location = new Point(11, 11);
@@ -415,48 +415,40 @@
             tablaResultados1.MultiSelect = false;
             tablaResultados1.Name = "tablaResultados1";
             tablaResultados1.ReadOnly = true;
+            tablaResultados1.RightToLeft = RightToLeft.No;
             tablaResultados1.RowHeadersVisible = false;
             tablaResultados1.RowHeadersWidth = 51;
             tablaResultados1.RowTemplate.Height = 72;
+            tablaResultados1.ScrollBars = ScrollBars.Vertical;
             tablaResultados1.Size = new Size(1415, 418);
             tablaResultados1.TabIndex = 3;
             tablaResultados1.TabStop = false;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewImageColumn1.HeaderText = "Foto";
-            dataGridViewImageColumn1.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            dataGridViewImageColumn1.MinimumWidth = 6;
-            dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            dataGridViewImageColumn1.ReadOnly = true;
-            dataGridViewImageColumn1.Width = 90;
             // 
             // dataGridViewTextBoxColumn1
             // 
             dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewTextBoxColumn1.HeaderText = "Nombre";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.MinimumWidth = 160;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewTextBoxColumn2.HeaderText = "Tienda";
+            dataGridViewTextBoxColumn2.HeaderText = "Precio";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             dataGridViewTextBoxColumn2.ReadOnly = true;
-            dataGridViewTextBoxColumn2.Width = 220;
+            dataGridViewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridViewTextBoxColumn2.Width = 170;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewTextBoxColumn3.HeaderText = "Precio";
+            dataGridViewTextBoxColumn3.HeaderText = "Tienda";
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
-            dataGridViewTextBoxColumn3.Width = 170;
+            dataGridViewTextBoxColumn3.SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridViewTextBoxColumn3.Width = 210;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -464,13 +456,26 @@
             dataGridViewTextBoxColumn4.MinimumWidth = 6;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.ReadOnly = true;
+            dataGridViewTextBoxColumn4.SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridViewTextBoxColumn4.Width = 170;
             // 
-            // dataGridViewImageColumn2
+            // dataGridViewImageColumn1
             // 
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.NullValue = null;
-            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewImageColumn1.HeaderText = "Foto";
+            dataGridViewImageColumn1.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            dataGridViewImageColumn1.MinimumWidth = 6;
+            dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            dataGridViewImageColumn1.ReadOnly = true;
+            dataGridViewImageColumn1.Width = 90;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewImageColumn2.HeaderText = "Foto";
             dataGridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridViewImageColumn2.MinimumWidth = 6;
