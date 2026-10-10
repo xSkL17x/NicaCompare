@@ -51,6 +51,7 @@
             label11 = new Label();
             lbl_busquedas_restantes = new Label();
             contenedor_categorias_tabla = new Panel();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             label_txt_compare = new Label();
             panel4 = new Panel();
             tablaResultados1 = new TablaResultados();
@@ -58,15 +59,14 @@
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            label_producto_busqueda = new Label();
+            panel3 = new Panel();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewImageColumn2 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
-            label_producto_busqueda = new Label();
-            panel3 = new Panel();
-            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
@@ -80,10 +80,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel1.SuspendLayout();
             contenedor_categorias_tabla.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tablaResultados1).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // boton_usuario
@@ -238,6 +238,7 @@
             panel_Busqueda.BackgroundImage = (Image)resources.GetObject("panel_Busqueda.BackgroundImage");
             panel_Busqueda.BackgroundImageLayout = ImageLayout.Stretch;
             panel_Busqueda.Controls.Add(panel6);
+            panel_Busqueda.Controls.Add(botonMenu6);
             panel_Busqueda.Controls.Add(pictureBox2);
             panel_Busqueda.Controls.Add(panel1);
             panel_Busqueda.Location = new Point(-3, 0);
@@ -249,7 +250,6 @@
             // 
             panel6.BackColor = Color.Transparent;
             panel6.Controls.Add(boton_usuario);
-            panel6.Controls.Add(botonMenu6);
             panel6.Dock = DockStyle.Right;
             panel6.Location = new Point(1119, 0);
             panel6.Margin = new Padding(3, 4, 3, 4);
@@ -275,7 +275,7 @@
             botonMenu6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             botonMenu6.ForeColor = Color.FromArgb(70, 70, 70);
             botonMenu6.Image = Properties.Resources.vip;
-            botonMenu6.Location = new Point(99, 12);
+            botonMenu6.Location = new Point(1006, 12);
             botonMenu6.MargenImagenIzquierda = 15;
             botonMenu6.Name = "botonMenu6";
             botonMenu6.PorcentajeEscalaImagen = 50;
@@ -330,7 +330,7 @@
             lbl_busquedas_restantes.BackColor = Color.WhiteSmoke;
             lbl_busquedas_restantes.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_busquedas_restantes.ForeColor = Color.BlueViolet;
-            lbl_busquedas_restantes.Location = new Point(1305, 0);
+            lbl_busquedas_restantes.Location = new Point(1317, 106);
             lbl_busquedas_restantes.Name = "lbl_busquedas_restantes";
             lbl_busquedas_restantes.Size = new Size(109, 75);
             lbl_busquedas_restantes.TabIndex = 10;
@@ -344,6 +344,7 @@
             contenedor_categorias_tabla.BackColor = Color.Transparent;
             contenedor_categorias_tabla.BorderStyle = BorderStyle.Fixed3D;
             contenedor_categorias_tabla.Controls.Add(barraBusqueda1);
+            contenedor_categorias_tabla.Controls.Add(webView21);
             contenedor_categorias_tabla.Controls.Add(label_txt_compare);
             contenedor_categorias_tabla.Controls.Add(panel4);
             contenedor_categorias_tabla.Controls.Add(label_producto_busqueda);
@@ -353,6 +354,17 @@
             contenedor_categorias_tabla.Name = "contenedor_categorias_tabla";
             contenedor_categorias_tabla.Size = new Size(1616, 755);
             contenedor_categorias_tabla.TabIndex = 27;
+            // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(1431, 255);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(94, 29);
+            webView21.TabIndex = 21;
+            webView21.ZoomFactor = 1D;
             // 
             // label_txt_compare
             // 
@@ -409,7 +421,7 @@
             tablaResultados1.DefaultCellStyle = dataGridViewCellStyle2;
             tablaResultados1.EnableHeadersVisualStyles = false;
             tablaResultados1.GridColor = Color.FromArgb(226, 232, 240);
-            tablaResultados1.Location = new Point(11, 11);
+            tablaResultados1.Location = new Point(39, 3);
             tablaResultados1.Moneda = "$";
             tablaResultados1.MostrarEncabezados = true;
             tablaResultados1.MultiSelect = false;
@@ -420,7 +432,7 @@
             tablaResultados1.RowHeadersWidth = 51;
             tablaResultados1.RowTemplate.Height = 72;
             tablaResultados1.ScrollBars = ScrollBars.Vertical;
-            tablaResultados1.Size = new Size(1415, 418);
+            tablaResultados1.Size = new Size(1408, 418);
             tablaResultados1.TabIndex = 3;
             tablaResultados1.TabStop = false;
             // 
@@ -458,6 +470,35 @@
             dataGridViewTextBoxColumn4.ReadOnly = true;
             dataGridViewTextBoxColumn4.SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridViewTextBoxColumn4.Width = 170;
+            // 
+            // label_producto_busqueda
+            // 
+            label_producto_busqueda.AutoSize = true;
+            label_producto_busqueda.BackColor = Color.Transparent;
+            label_producto_busqueda.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_producto_busqueda.ForeColor = Color.Indigo;
+            label_producto_busqueda.Location = new Point(942, 235);
+            label_producto_busqueda.Name = "label_producto_busqueda";
+            label_producto_busqueda.Size = new Size(184, 37);
+            label_producto_busqueda.TabIndex = 24;
+            label_producto_busqueda.Text = "Mas Buscado";
+            label_producto_busqueda.TextAlign = ContentAlignment.MiddleCenter;
+            label_producto_busqueda.Click += label_producto_busqueda_Click;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.None;
+            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(lbl_busquedas_restantes);
+            panel3.Controls.Add(tarjetaTienda1);
+            panel3.Controls.Add(tarjetaTienda2);
+            panel3.Controls.Add(tarjetaTienda3);
+            panel3.Location = new Point(99, 71);
+            panel3.Margin = new Padding(3, 4, 3, 4);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1417, 160);
+            panel3.TabIndex = 21;
             // 
             // dataGridViewImageColumn1
             // 
@@ -514,47 +555,6 @@
             dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
             dataGridViewTextBoxColumn20.ReadOnly = true;
             dataGridViewTextBoxColumn20.Width = 170;
-            // 
-            // label_producto_busqueda
-            // 
-            label_producto_busqueda.AutoSize = true;
-            label_producto_busqueda.BackColor = Color.Transparent;
-            label_producto_busqueda.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_producto_busqueda.ForeColor = Color.Indigo;
-            label_producto_busqueda.Location = new Point(942, 235);
-            label_producto_busqueda.Name = "label_producto_busqueda";
-            label_producto_busqueda.Size = new Size(184, 37);
-            label_producto_busqueda.TabIndex = 24;
-            label_producto_busqueda.Text = "Mas Buscado";
-            label_producto_busqueda.TextAlign = ContentAlignment.MiddleCenter;
-            label_producto_busqueda.Click += label_producto_busqueda_Click;
-            // 
-            // panel3
-            // 
-            panel3.Anchor = AnchorStyles.None;
-            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.BackColor = Color.Transparent;
-            panel3.Controls.Add(lbl_busquedas_restantes);
-            panel3.Controls.Add(webView21);
-            panel3.Controls.Add(tarjetaTienda1);
-            panel3.Controls.Add(tarjetaTienda2);
-            panel3.Controls.Add(tarjetaTienda3);
-            panel3.Location = new Point(99, 71);
-            panel3.Margin = new Padding(3, 4, 3, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1417, 160);
-            panel3.TabIndex = 21;
-            // 
-            // webView21
-            // 
-            webView21.AllowExternalDrop = true;
-            webView21.CreationProperties = null;
-            webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(1293, 94);
-            webView21.Name = "webView21";
-            webView21.Size = new Size(94, 29);
-            webView21.TabIndex = 21;
-            webView21.ZoomFactor = 1D;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -645,11 +645,11 @@
             panel1.PerformLayout();
             contenedor_categorias_tabla.ResumeLayout(false);
             contenedor_categorias_tabla.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)tablaResultados1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
         }
 

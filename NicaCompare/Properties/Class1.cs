@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
@@ -24,39 +25,8 @@ namespace NicaCompare
         }
     }
 
-    // ================= Panel con bordes redondeados =================
-    public class PanelRedondeado : Panel
-    {
-        public int Radio { get; set; } = 14;
-        public Color ColorBorde { get; set; } = Color.FromArgb(203, 213, 225);
-
-        public PanelRedondeado()
-        {
-            DoubleBuffered = true;
-            ResizeRedraw = true;
-            BackColor = Color.White;
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            if (Width < 4 || Height < 4) return;
-            using (var p = Formas.Redondeado(new Rectangle(0, 0, Width, Height), Radio))
-                Region = new Region(p);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            using (var p = Formas.Redondeado(new Rectangle(0, 0, Width - 2, Height - 2), Radio))
-            using (var pen = new Pen(ColorBorde, 1.5f))
-                e.Graphics.DrawPath(pen, p);
-        }
-    }
-
-    // ================= Marco donde va la foto del producto =================
-    public class MarcoFoto : Control
+    // ================= Marco redondeado de la foto =================
+    internal class MarcoFoto : Control
     {
         private Image _imagen;
         public Image Imagen { get { return _imagen; } set { _imagen = value; Invalidate(); } }
@@ -65,7 +35,7 @@ namespace NicaCompare
         {
             DoubleBuffered = true;
             ResizeRedraw = true;
-            BackColor = Color.FromArgb(249, 251, 255);
+            BackColor = Color.White;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -74,7 +44,6 @@ namespace NicaCompare
             g.Clear(BackColor);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            // Tarjeta blanca con borde
             var externo = new Rectangle(0, 0, Width - 1, Height - 1);
             using (var p = Formas.Redondeado(externo, 16))
             {
@@ -82,8 +51,7 @@ namespace NicaCompare
                 using (var pen = new Pen(Color.FromArgb(203, 213, 225), 1.5f)) g.DrawPath(pen, p);
             }
 
-            // Zona interior gris claro
-            var interior = Rectangle.Inflate(externo, -12, -12);
+            var interior = Rectangle.Inflate(externo, -10, -10);
             using (var p = Formas.Redondeado(interior, 12))
             {
                 using (var b = new SolidBrush(Color.FromArgb(241, 245, 249))) g.FillPath(b, p);
@@ -102,7 +70,7 @@ namespace NicaCompare
                 }
                 else
                 {
-                    // Ícono de "foto" para que se vea el espacio reservado
+                    // Ícono de foto para que se vea el espacio reservado
                     int w = 64, h = 48;
                     int x = interior.X + (interior.Width - w) / 2;
                     int y = interior.Y + (interior.Height - h) / 2;
@@ -124,30 +92,54 @@ namespace NicaCompare
         }
     }
 
-    // ================= Tabla: Nombre | Precio | Tienda | Disponibilidad =================
+    // ================= TABLA: [Foto + nombre arriba] | Nombre | Precio | Tienda | Disponibilidad =================
     public class TablaResultados : DataGridView
     {
-        // Logos de tienda: Logos["SICSA"] = imagen (la clave puede ser parte del nombre)
+        private const int AnchoFoto = 270;      // zona izquierda
+        private const int RadioMarco = 14;
+
+        private readonly MarcoFoto marco = new MarcoFoto();
+        private readonly Label lblProducto = new Label();
+
+        private readonly Color _borde = Color.FromArgb(203, 213, 225);
+        private readonly Color _colorMejor = Color.FromArgb(240, 247, 255);
+        private decimal? _min;
+        private bool _sucio = true;
+
         public Dictionary<string, Image> Logos { get; } =
             new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
 
-        // Solo por compatibilidad con el diseñador
+        // ----- Lo que tú vas a usar -----
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string NombreProducto
+        {
+            get { return lblProducto.Text; }
+            set { lblProducto.Text = value; }
+        }
+
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Image Foto
+        {
+            get { return marco.Imagen; }
+            set { marco.Imagen = value; }
+        }
+
+        // Compatibilidad con el diseñador
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Moneda { get; set; } = "$";
 
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool MostrarEncabezados
         {
             get { return ColumnHeadersVisible; }
             set { ColumnHeadersVisible = value; }
         }
 
-        private readonly Color _colorMejor = Color.FromArgb(240, 247, 255);
-        private decimal? _min;
-        private bool _sucio = true;
-
         public TablaResultados()
         {
             RightToLeft = RightToLeft.No;
             DoubleBuffered = true;
+            ResizeRedraw = true;
             BorderStyle = BorderStyle.None;
             CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             GridColor = Color.FromArgb(226, 232, 240);
@@ -163,11 +155,10 @@ namespace NicaCompare
             ScrollBars = ScrollBars.Vertical;
             TabStop = false;
 
-            // Encabezados
             EnableHeadersVisualStyles = false;
             ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            ColumnHeadersHeight = 38;
+            ColumnHeadersHeight = 44;
             ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 252);
             ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(71, 85, 105);
             ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(248, 250, 252);
@@ -176,7 +167,6 @@ namespace NicaCompare
             ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             ColumnHeadersDefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
 
-            // Filas
             RowTemplate.Height = 58;
             DefaultCellStyle.Font = new Font("Segoe UI", 10F);
             DefaultCellStyle.ForeColor = Color.FromArgb(15, 23, 42);
@@ -185,16 +175,17 @@ namespace NicaCompare
             DefaultCellStyle.SelectionForeColor = Color.FromArgb(15, 23, 42);
             DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            // Orden: Nombre, Precio, Tienda, Disponibilidad
-            Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "Nombre", HeaderText = "Nombre", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 100, MinimumWidth = 160 });
-            Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "Precio", HeaderText = "Precio", Width = 170, SortMode = DataGridViewColumnSortMode.NotSortable });
-            Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "Tienda", HeaderText = "Tienda", Width = 210, SortMode = DataGridViewColumnSortMode.NotSortable });
-            Columns.Add(new DataGridViewTextBoxColumn
-            { Name = "Estado", HeaderText = "Disponibilidad", Width = 170, SortMode = DataGridViewColumnSortMode.NotSortable });
+            // Nombre del producto (arriba de la foto)
+            lblProducto.Text = "Producto";
+            lblProducto.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            lblProducto.ForeColor = Color.FromArgb(15, 23, 60);
+            lblProducto.BackColor = Color.White;
+            lblProducto.AutoEllipsis = true;
+            lblProducto.TextAlign = ContentAlignment.MiddleLeft;
+            Controls.Add(lblProducto);
+            Controls.Add(marco);
 
+            // OJO: las columnas NO se crean aquí (así el diseñador no las guarda y no salen dobles)
             DataError += (s, e) => { e.ThrowException = false; };
             CellPainting += Tabla_CellPainting;
             RowsAdded += (s, e) => _sucio = true;
@@ -202,10 +193,91 @@ namespace NicaCompare
             CellValueChanged += (s, e) => _sucio = true;
         }
 
-        // Orden de los datos: nombre, precio, tienda (la disponibilidad se calcula sola)
+        // ---------- Columnas (se crean al ejecutar y se limpian duplicados) ----------
+        private static readonly string[] _cols = { "Nombre", "Precio", "Tienda", "Estado", "Foto" };
+
+        private bool ColumnasOk()
+        {
+            if (Columns.Count != _cols.Length) return false;
+            for (int i = 0; i < _cols.Length; i++)
+                if (Columns[i].Name != _cols[i]) return false;
+            return true;
+        }
+
+        private void AsegurarColumnas()
+        {
+            if (DesignMode || ColumnasOk()) return;
+
+            Rows.Clear();
+            Columns.Clear();
+
+            Columns.Add(new DataGridViewTextBoxColumn
+            { Name = "Nombre", HeaderText = "Nombre", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 100, MinimumWidth = 150, SortMode = DataGridViewColumnSortMode.NotSortable });
+            Columns.Add(new DataGridViewTextBoxColumn
+            { Name = "Precio", HeaderText = "Precio", Width = 170, SortMode = DataGridViewColumnSortMode.NotSortable });
+            Columns.Add(new DataGridViewTextBoxColumn
+            { Name = "Tienda", HeaderText = "Tienda", Width = 200, SortMode = DataGridViewColumnSortMode.NotSortable });
+            Columns.Add(new DataGridViewTextBoxColumn
+            { Name = "Estado", HeaderText = "Disponibilidad", Width = 170, SortMode = DataGridViewColumnSortMode.NotSortable });
+            Columns.Add(new DataGridViewTextBoxColumn
+            { Name = "Foto", HeaderText = "", Width = AnchoFoto, Resizable = DataGridViewTriState.False, SortMode = DataGridViewColumnSortMode.NotSortable });
+
+            // La zona de la foto va a la izquierda, pero los datos siguen entrando en el mismo orden:
+            // Rows.Add(nombre, precio, tienda)
+            Columns["Foto"].DisplayIndex = 0;
+            PosicionarMarco();
+        }
+
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+            AsegurarColumnas();
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            AsegurarColumnas();
+        }
+
+        // Puedes usar Rows.Add(nombre, precio, tienda) o este método
         public int AgregarFila(string nombre, string precio, string tienda)
         {
+            AsegurarColumnas();
             return Rows.Add(nombre, precio, tienda, null);
+        }
+
+        public void Limpiar()
+        {
+            Rows.Clear();
+        }
+
+        // ---------- Posición del marco de la foto ----------
+        private void PosicionarMarco()
+        {
+            int header = ColumnHeadersHeight;
+            int lado = Math.Max(100, Math.Min(AnchoFoto - 30, ClientSize.Height - header - 22));
+            lblProducto.SetBounds(14, 6, AnchoFoto - 28, header - 10);
+            marco.SetBounds(14, header + 10, lado, lado);
+        }
+
+        // ---------- Marco redondeado de toda la tabla ----------
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            PosicionarMarco();
+            if (Width < 4 || Height < 4) return;
+            using (var p = Formas.Redondeado(new Rectangle(0, 0, Width, Height), RadioMarco))
+                Region = new Region(p);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            using (var p = Formas.Redondeado(new Rectangle(0, 0, Width - 2, Height - 2), RadioMarco))
+            using (var pen = new Pen(_borde, 1.5f))
+                e.Graphics.DrawPath(pen, p);
         }
 
         // ---------- Precio y estado ----------
@@ -246,12 +318,22 @@ namespace NicaCompare
 
         private void Tabla_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.ColumnIndex < 0) return;
+            string col = Columns[e.ColumnIndex].Name;
+
+            // Zona de la foto: fondo blanco liso, sin líneas
+            if (col == "Foto")
+            {
+                using (var b = new SolidBrush(Color.White))
+                    e.Graphics.FillRectangle(b, e.CellBounds);
+                e.Handled = true;
+                return;
+            }
+
+            if (e.RowIndex < 0) return;
             if (_sucio) Recalcular();
 
-            string col = Columns[e.ColumnIndex].Name;
             string estado = EstadoDe(e.RowIndex);
-
             if (estado == "Mejor oferta")
             {
                 e.CellStyle.BackColor = _colorMejor;
@@ -260,7 +342,6 @@ namespace NicaCompare
 
             const DataGridViewPaintParts SinTexto =
                 DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentForeground;
-
             string val = (e.Value ?? "").ToString().Trim();
 
             switch (col)
@@ -380,95 +461,6 @@ namespace NicaCompare
                 TextRenderer.DrawText(g, icono, fIco, new Rectangle(r.X + 14, r.Y, wIco + 2, h), fg, flags);
                 TextRenderer.DrawText(g, estado, fTxt, new Rectangle(r.X + 14 + wIco + 6, r.Y, wTxt + 4, h), fg, flags);
             }
-        }
-    }
-
-    // ================= Tarjeta completa: marco de foto + nombre + tabla =================
-    public class TarjetaResultados : PanelRedondeado
-    {
-        private readonly Label lblProducto = new Label();
-        private readonly MarcoFoto marcoFoto = new MarcoFoto();
-        private readonly PanelRedondeado marcoTabla = new PanelRedondeado();
-        public readonly TablaResultados Tabla = new TablaResultados();
-        private bool _ajustando;
-
-        // Nombre del producto buscado (arriba de la foto)
-        public string NombreProducto
-        {
-            get { return lblProducto.Text; }
-            set { lblProducto.Text = value; }
-        }
-
-        // Foto del producto: asígnale tu PNG cuando lo tengas
-        public Image Foto
-        {
-            get { return marcoFoto.Imagen; }
-            set { marcoFoto.Imagen = value; }
-        }
-
-        public TarjetaResultados()
-        {
-            RightToLeft = RightToLeft.No;
-            Radio = 18;
-            BackColor = Color.FromArgb(249, 251, 255);
-            Size = new Size(1000, 420);
-
-            lblProducto.Text = "Producto";
-            lblProducto.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            lblProducto.ForeColor = Color.FromArgb(15, 23, 60);
-            lblProducto.BackColor = Color.Transparent;
-            lblProducto.AutoEllipsis = true;
-            lblProducto.TextAlign = ContentAlignment.MiddleLeft;
-
-            marcoTabla.Radio = 12;
-            marcoTabla.Padding = new Padding(2);
-            Tabla.Dock = DockStyle.Fill;
-            marcoTabla.Controls.Add(Tabla);
-
-            Controls.Add(lblProducto);
-            Controls.Add(marcoFoto);
-            Controls.Add(marcoTabla);
-            Acomodar();
-        }
-
-        public void SetLogo(string claveTienda, Image logo)
-        {
-            Tabla.Logos[claveTienda] = logo;
-            Tabla.Invalidate();
-        }
-
-        public int AgregarFila(string nombre, string precio, string tienda)
-        {
-            return Tabla.AgregarFila(nombre, precio, tienda);
-        }
-
-        public void Limpiar()
-        {
-            Tabla.Rows.Clear();
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            Acomodar();
-        }
-
-        private void Acomodar()
-        {
-            if (_ajustando || lblProducto == null) return;
-            _ajustando = true;
-            try
-            {
-                const int m = 22, altoTitulo = 34;
-                int lado = Math.Max(140, Math.Min(250, Height - 2 * m - altoTitulo - 8));
-
-                lblProducto.SetBounds(m, m, lado, altoTitulo);
-                marcoFoto.SetBounds(m, m + altoTitulo + 8, lado, lado);
-
-                int tx = m + lado + 24;
-                marcoTabla.SetBounds(tx, m, Math.Max(300, Width - tx - m), Math.Max(100, Height - 2 * m));
-            }
-            finally { _ajustando = false; }
         }
     }
 }
