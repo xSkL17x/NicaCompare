@@ -263,6 +263,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap skl {
+            get {
+                object obj = ResourceManager.GetObject("skl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tecnologia {
             get {
                 object obj = ResourceManager.GetObject("tecnologia", resourceCulture);

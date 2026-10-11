@@ -130,6 +130,9 @@
   <data name="no hay usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\no hay usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="el_gallo_mas_gallo_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\el_gallo_mas_gallo_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="GCM1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GCM1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -202,7 +205,7 @@
   <data name="WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="el_gallo_mas_gallo_nuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\el_gallo_mas_gallo_nuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="skl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

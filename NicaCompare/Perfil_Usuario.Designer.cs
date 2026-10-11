@@ -149,6 +149,7 @@
             // 
             // label_correo
             // 
+            label_correo.AutoSize = true;
             label_correo.BackColor = Color.Transparent;
             label_correo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_correo.Location = new Point(164, 55);
@@ -156,10 +157,12 @@
             label_correo.Size = new Size(135, 19);
             label_correo.TabIndex = 2;
             label_correo.Text = "JomuUb@gmail.com";
+            label_correo.TextAlign = ContentAlignment.MiddleCenter;
             label_correo.Click += label3_Click;
             // 
             // label_nombre
             // 
+            label_nombre.AutoSize = true;
             label_nombre.BackColor = Color.Transparent;
             label_nombre.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label_nombre.ForeColor = Color.Navy;
@@ -168,6 +171,7 @@
             label_nombre.Size = new Size(124, 25);
             label_nombre.TabIndex = 1;
             label_nombre.Text = "OTONIEL JR";
+            label_nombre.TextAlign = ContentAlignment.MiddleCenter;
             label_nombre.Click += label2_Click;
             // 
             // avatar1
@@ -185,6 +189,7 @@
             // 
             // label_fecha
             // 
+            label_fecha.AutoSize = true;
             label_fecha.BackColor = Color.Transparent;
             label_fecha.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label_fecha.ForeColor = Color.Navy;
@@ -193,6 +198,7 @@
             label_fecha.Size = new Size(140, 19);
             label_fecha.TabIndex = 3;
             label_fecha.Text = "Usuario desde 2026";
+            label_fecha.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel2
             // 
@@ -311,6 +317,7 @@
             // label_tipo_cuenta
             // 
             label_tipo_cuenta.Anchor = AnchorStyles.None;
+            label_tipo_cuenta.AutoSize = true;
             label_tipo_cuenta.BackColor = Color.Transparent;
             label_tipo_cuenta.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_tipo_cuenta.ForeColor = Color.Navy;
@@ -319,6 +326,7 @@
             label_tipo_cuenta.Size = new Size(188, 31);
             label_tipo_cuenta.TabIndex = 9;
             label_tipo_cuenta.Text = "Cuenta NONE";
+            label_tipo_cuenta.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -410,7 +418,7 @@
             // 
             avatar2.Anchor = AnchorStyles.None;
             avatar2.BackColor = Color.Transparent;
-            avatar2.Image = Properties.Resources.no_hay_usuario;
+            avatar2.Image = Properties.Resources.usuario;
             avatar2.Location = new Point(102, 60);
             avatar2.Margin = new Padding(3, 2, 3, 2);
             avatar2.Name = "avatar2";
@@ -512,6 +520,7 @@
             // label_saldo
             // 
             label_saldo.Anchor = AnchorStyles.None;
+            label_saldo.AutoSize = true;
             label_saldo.BackColor = Color.Transparent;
             label_saldo.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_saldo.ForeColor = Color.Navy;
@@ -520,6 +529,7 @@
             label_saldo.Size = new Size(147, 31);
             label_saldo.TabIndex = 17;
             label_saldo.Text = "Saldo C$ 0";
+            label_saldo.TextAlign = ContentAlignment.MiddleCenter;
             label_saldo.Click += label_saldo_Click;
             // 
             // btn_elegir_plan
@@ -681,6 +691,7 @@
             panel1.ResumeLayout(false);
             panel10.ResumeLayout(false);
             panel7.ResumeLayout(false);
+            panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)avatar1).EndInit();
             panel3.ResumeLayout(false);
             panel9.ResumeLayout(false);
@@ -688,6 +699,7 @@
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)avatar2).EndInit();
             panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
             panel5.ResumeLayout(false);

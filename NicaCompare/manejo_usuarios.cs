@@ -14,6 +14,9 @@ namespace NicaCompare
         public static int Busquedas_restantes = 10;
         public static DateTime fecha_registro = DateTime.Today;
         public static string Img = "no hay usuario";
+
+
+
     }
 
     public static class usuarios_db

@@ -39,14 +39,7 @@ namespace NicaCompare
     }
 
 
-        public static class Pantallas
-        {
-            public static void cambiar<Formulario>(Form formularioActual) where Formulario : Form, new()
-            {
-                Formulario nuevaPantalla = new Formulario();
-                nuevaPantalla.FormClosed += (s, args) => formularioActual.Close();
-                nuevaPantalla.Show();
-                formularioActual.Hide();
-            }
-    }
+
+
+
 }

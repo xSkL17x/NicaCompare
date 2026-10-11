@@ -37,7 +37,7 @@ namespace NicaCompare
 
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
         //____________๑.・🍨︴Boton Usuario ✰  ๑_______________
-        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; } }// btn_Usuario_2.Text = sesion_actual.Nombre; } }
+        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; boton_usuario.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario"); } }
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
