@@ -16,13 +16,7 @@ namespace NicaCompare
 
         //╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈➤ㄅқŁ ⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 
-        private void ir_al_login(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Login ventana1 = new Login();
-            ventana1.FormClosed += (s, args) => this.Close();
-            ventana1.Show();
-            this.Hide();
-        }
+        private void ir_al_login(object sender, LinkLabelLinkClickedEventArgs e) { Pantallas.cambiar<Login>(this);}
 
         private void Crear_Cuenta(object sender, EventArgs e)
         {
@@ -47,10 +41,7 @@ namespace NicaCompare
 
             MessageBox.Show($"{nombre} su Cuenta fue Creada con exito\n\nCorreo: {correo}", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            Login ventanaLogin = new Login();
-            ventanaLogin.FormClosed += (s, args) => this.Close();
-            ventanaLogin.Show();
-            this.Hide();
+            Pantallas.cambiar<Login>(this);
         }
 
         private void panel1_Click(object sender, EventArgs e) { }

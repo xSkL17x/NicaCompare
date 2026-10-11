@@ -65,7 +65,7 @@ namespace NicaCompare
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
 
-            //TABLAPRODUCTOS.Rows.Clear();
+            tablaResultados1.Rows.Clear();
             //if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} por favor espere";
             barraBusqueda1.Text = "";
@@ -78,7 +78,7 @@ namespace NicaCompare
             string nomImg = ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"].Replace("Properties.Resources.", "") : "";
             var imgObjeto = !string.IsNullOrEmpty(nomImg) ? Properties.Resources.ResourceManager.GetObject(nomImg) : null;
             Image logo = imgObjeto != null ? (Image)imgObjeto : Properties.Resources.LOGO_22;
-            //TABLAPRODUCTOS.Rows.Add(nombre, precio, logo, tiendaKey);
+            tablaResultados1.Rows.Add(nombre, precio, logo, tiendaKey);
         }
 
         private void AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
@@ -125,6 +125,7 @@ namespace NicaCompare
 
                 var resultadosPorTienda = await Task.WhenAll(tareasScraping);
                 int totalEncontrados = 0;
+
                 List<ProductoResult> losMasBaratos = new List<ProductoResult>();
                 HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -140,7 +141,9 @@ namespace NicaCompare
                         var masBarato = res.Item2.Where(p => p.PrecioMonto < decimal.MaxValue).OrderBy(p => p.PrecioMonto).FirstOrDefault();
                         if (masBarato != null) { losMasBaratos.Add(masBarato); }
                     }
+
                     else { losMasBaratos.Add(new ProductoResult { Nombre = "No disponible en esta tienda", PrecioTexto = "", PrecioMonto = decimal.MaxValue, TiendaKey = res.Item1 }); }
+
                 }
 
                 losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
