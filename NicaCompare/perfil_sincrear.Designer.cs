@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form5));
             panel1 = new Panel();
+            btn_volver = new BotonMenu();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -39,7 +40,6 @@
             label6 = new Label();
             botonRedondeado1 = new BotonRedondeado();
             panel2 = new Panel();
-            btn_volver = new BotonMenu();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -59,6 +59,35 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1264, 139);
             panel1.TabIndex = 0;
+            // 
+            // btn_volver
+            // 
+            btn_volver.Anchor = AnchorStyles.Right;
+            btn_volver.AutoColorearIconoBlanco = true;
+            btn_volver.AutoEscalarImagen = true;
+            btn_volver.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_volver.BackColor = Color.Transparent;
+            btn_volver.BorderRadius = 18;
+            btn_volver.ColorHover = Color.FromArgb(13, 110, 253);
+            btn_volver.ColorTextoNormal = Color.FromArgb(0, 0, 192);
+            btn_volver.EsSeleccionado = false;
+            btn_volver.FlatAppearance.BorderSize = 0;
+            btn_volver.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn_volver.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btn_volver.FlatStyle = FlatStyle.Flat;
+            btn_volver.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btn_volver.ForeColor = Color.FromArgb(0, 0, 192);
+            btn_volver.Location = new Point(1125, 31);
+            btn_volver.MargenImagenIzquierda = 15;
+            btn_volver.Margin = new Padding(3, 2, 3, 2);
+            btn_volver.Name = "btn_volver";
+            btn_volver.PorcentajeEscalaImagen = 50;
+            btn_volver.Size = new Size(136, 31);
+            btn_volver.TabIndex = 34;
+            btn_volver.Text = "←      Volver";
+            btn_volver.TextAlign = ContentAlignment.MiddleLeft;
+            btn_volver.UseVisualStyleBackColor = true;
+            btn_volver.Click += btn_volver_Click;
             // 
             // label3
             // 
@@ -159,6 +188,7 @@
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.None;
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(botonRedondeado1);
             panel2.Controls.Add(label6);
@@ -168,35 +198,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(477, 478);
             panel2.TabIndex = 7;
-            // 
-            // btn_volver
-            // 
-            btn_volver.Anchor = AnchorStyles.Right;
-            btn_volver.AutoColorearIconoBlanco = true;
-            btn_volver.AutoEscalarImagen = true;
-            btn_volver.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_volver.BackColor = Color.Transparent;
-            btn_volver.BorderRadius = 18;
-            btn_volver.ColorHover = Color.FromArgb(13, 110, 253);
-            btn_volver.ColorTextoNormal = Color.FromArgb(0, 0, 192);
-            btn_volver.EsSeleccionado = false;
-            btn_volver.FlatAppearance.BorderSize = 0;
-            btn_volver.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btn_volver.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btn_volver.FlatStyle = FlatStyle.Flat;
-            btn_volver.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btn_volver.ForeColor = Color.FromArgb(0, 0, 192);
-            btn_volver.Location = new Point(1125, 31);
-            btn_volver.MargenImagenIzquierda = 15;
-            btn_volver.Margin = new Padding(3, 2, 3, 2);
-            btn_volver.Name = "btn_volver";
-            btn_volver.PorcentajeEscalaImagen = 50;
-            btn_volver.Size = new Size(136, 31);
-            btn_volver.TabIndex = 34;
-            btn_volver.Text = "←      Volver";
-            btn_volver.TextAlign = ContentAlignment.MiddleLeft;
-            btn_volver.UseVisualStyleBackColor = true;
-            btn_volver.Click += btn_volver_Click;
             // 
             // Form5
             // 

@@ -5,16 +5,7 @@ namespace NicaCompare
 {
     public partial class Login : Form
     {
-        private void panel2_Paint(object sender, PaintEventArgs e) { }
-        private void label5_Click(object sender, EventArgs e) { }
-        private void label6_Click(object sender, EventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
-        private void button1_Click(object sender, EventArgs e) { }
-        private void btningresar_Paint(object sender, PaintEventArgs e) { }
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) { }
-        private void inicio_nombre_TextChanged(object sender, EventArgs e) { }
-        private void inicioPassword_TextChanged(object sender, EventArgs e) { }
+
 
         public Login() { InitializeComponent(); }
 
@@ -24,13 +15,8 @@ namespace NicaCompare
         //  █   █     █   █ █   █      █   
         //  █   █████ █   █ █   █     ███  
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Registro ventana2 = new Registro();
-            ventana2.FormClosed += (s, args) => this.Close();
-            ventana2.Show();
-            this.Hide();
-        }
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) { Pantallas.cambiar<Registro>(this); }
+        private void btn_iniciar_sincuenta_Click(object sender, EventArgs e) { Pantallas.cambiar<Inicio>(this); }
 
         private void IniciarSecion(object sender, EventArgs e)
         {
@@ -49,32 +35,14 @@ namespace NicaCompare
                 sesion_actual.Telefono = usuarios_db.Usuarios[correo].Telefono;
                 sesion_actual.fecha_registro = usuarios_db.Usuarios[correo].fecha_registro;
 
-                Inicio ventana3 = new Inicio();
-                ventana3.FormClosed += (s, args) => this.Close();
-                ventana3.Show();
-                this.Hide();
+                Pantallas.cambiar<Inicio>(this);
             }
             else { MessageBox.Show("Correo o contraseña incorrectos.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void btn_iniciar_sincuenta_Click(object sender, EventArgs e)
-        {
+        
 
-            Inicio ventana3 = new Inicio();
-            ventana3.FormClosed += (s, args) => this.Close();
-            ventana3.Show();
-            this.Hide();
 
-        }
-
-        private void botonAccion1_Click(object sender, EventArgs e)
-        {
-            Inicio ventana3 = new Inicio();
-            ventana3.FormClosed += (s, args) => this.Close();
-            ventana3.Show();
-            this.Hide();
-
-        }
     }
 
 

@@ -92,7 +92,7 @@
             botonAccion1.TabIndex = 14;
             botonAccion1.Text = "INICIAR SIN CUENTA";
             botonAccion1.UseVisualStyleBackColor = false;
-            botonAccion1.Click += botonAccion1_Click;
+            botonAccion1.Click += btn_iniciar_sincuenta_Click;
             // 
             // inicio_nombre
             // 
@@ -112,7 +112,7 @@
             inicio_nombre.Size = new Size(286, 34);
             inicio_nombre.TabIndex = 13;
             inicio_nombre.TipoIcono = TipoIconoCampo.Correo;
-            inicio_nombre.TextChanged += inicio_nombre_TextChanged;
+            
             // 
             // Inicio_INGRESAR
             // 
@@ -150,7 +150,7 @@
             inicioPassword.PlaceholderText = "Confirma tu contraseña";
             inicioPassword.Size = new Size(288, 34);
             inicioPassword.TabIndex = 1;
-            inicioPassword.TextChanged += inicioPassword_TextChanged;
+            
             // 
             // label2
             // 
@@ -162,7 +162,7 @@
             label2.Size = new Size(224, 24);
             label2.TabIndex = 2;
             label2.Text = "BIENVENIDO DE NUEVO";
-            label2.Click += label2_Click;
+            
             // 
             // linkLabel2
             // 
@@ -188,7 +188,7 @@
             label6.Size = new Size(106, 15);
             label6.TabIndex = 11;
             label6.Text = "¿No tienes cuenta?";
-            label6.Click += label6_Click;
+            
             // 
             // label3
             // 
@@ -221,7 +221,7 @@
             label5.Size = new Size(152, 15);
             label5.TabIndex = 10;
             label5.Text = "UNAN Matagalpa Grupo #1";
-            label5.Click += label5_Click;
+            
             // 
             // linkLabel1
             // 
@@ -230,7 +230,7 @@
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(0, 15);
             linkLabel1.TabIndex = 4;
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            
             // 
             // label1
             // 
@@ -243,7 +243,7 @@
             label1.Size = new Size(176, 13);
             label1.TabIndex = 1;
             label1.Text = "---- COMPARA. ELIGE. AHORRA ---";
-            label1.Click += label1_Click;
+            
             // 
             // pictureBox2
             // 

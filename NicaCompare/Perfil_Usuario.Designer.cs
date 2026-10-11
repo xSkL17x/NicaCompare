@@ -213,7 +213,7 @@
             imput_nombre.ColorIcono = Color.FromArgb(130, 138, 150);
             imput_nombre.EsPassword = false;
             imput_nombre.IconoPersonalizado = null;
-            imput_nombre.Location = new Point(21, 140);
+            imput_nombre.Location = new Point(22, 118);
             imput_nombre.Margin = new Padding(3, 2, 3, 2);
             imput_nombre.Name = "imput_nombre";
             imput_nombre.PlaceholderText = "Tu nombre completo";
@@ -232,7 +232,7 @@
             imput_telefono.ColorIcono = Color.FromArgb(130, 138, 150);
             imput_telefono.EsPassword = false;
             imput_telefono.IconoPersonalizado = null;
-            imput_telefono.Location = new Point(21, 244);
+            imput_telefono.Location = new Point(22, 222);
             imput_telefono.Margin = new Padding(3, 2, 3, 2);
             imput_telefono.Name = "imput_telefono";
             imput_telefono.PlaceholderText = "+505 8*** ****";
@@ -254,7 +254,7 @@
             imput_fecha.EsPassword = false;
             imput_fecha.IconoPersonalizado = null;
             imput_fecha.ImeMode = ImeMode.NoControl;
-            imput_fecha.Location = new Point(452, 133);
+            imput_fecha.Location = new Point(453, 111);
             imput_fecha.Margin = new Padding(3, 2, 3, 2);
             imput_fecha.Name = "imput_fecha";
             imput_fecha.PlaceholderText = "DD / MM / AAAA";
@@ -276,7 +276,7 @@
             imput_correo.EsPassword = false;
             imput_correo.IconoPersonalizado = null;
             imput_correo.ImeMode = ImeMode.NoControl;
-            imput_correo.Location = new Point(20, 345);
+            imput_correo.Location = new Point(21, 323);
             imput_correo.Margin = new Padding(3, 2, 3, 2);
             imput_correo.Name = "imput_correo";
             imput_correo.PlaceholderText = "correo@ejemplo.com";
@@ -290,7 +290,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Navy;
-            label4.Location = new Point(32, 100);
+            label4.Location = new Point(33, 78);
             label4.Name = "label4";
             label4.Size = new Size(135, 19);
             label4.TabIndex = 7;
@@ -302,7 +302,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Navy;
-            label5.Location = new Point(32, 213);
+            label5.Location = new Point(33, 191);
             label5.Name = "label5";
             label5.Size = new Size(67, 19);
             label5.TabIndex = 8;
@@ -314,7 +314,7 @@
             label_tipo_cuenta.BackColor = Color.Transparent;
             label_tipo_cuenta.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_tipo_cuenta.ForeColor = Color.Navy;
-            label_tipo_cuenta.Location = new Point(25, 44);
+            label_tipo_cuenta.Location = new Point(22, 44);
             label_tipo_cuenta.Name = "label_tipo_cuenta";
             label_tipo_cuenta.Size = new Size(188, 31);
             label_tipo_cuenta.TabIndex = 9;
@@ -326,7 +326,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Navy;
-            label7.Location = new Point(32, 310);
+            label7.Location = new Point(33, 288);
             label7.Name = "label7";
             label7.Size = new Size(134, 19);
             label7.TabIndex = 10;
@@ -339,7 +339,7 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Navy;
-            label8.Location = new Point(452, 93);
+            label8.Location = new Point(453, 71);
             label8.Name = "label8";
             label8.Size = new Size(125, 19);
             label8.TabIndex = 11;
@@ -352,7 +352,7 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.Navy;
-            label9.Location = new Point(21, 19);
+            label9.Location = new Point(22, 1);
             label9.Name = "label9";
             label9.Size = new Size(203, 25);
             label9.TabIndex = 12;
@@ -363,7 +363,7 @@
             label10.Anchor = AnchorStyles.None;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(21, 42);
+            label10.Location = new Point(22, 24);
             label10.Name = "label10";
             label10.Size = new Size(432, 19);
             label10.TabIndex = 4;
@@ -371,26 +371,25 @@
             // 
             // panel3
             // 
-            panel3.AutoSize = true;
+            panel3.Anchor = AnchorStyles.None;
             panel3.BackColor = Color.Transparent;
             panel3.Controls.Add(panel9);
             panel3.Controls.Add(panel8);
-            panel3.Dock = DockStyle.Fill;
             panel3.ImeMode = ImeMode.Close;
-            panel3.Location = new Point(0, 0);
+            panel3.Location = new Point(0, 130);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1264, 681);
+            panel3.Size = new Size(1264, 551);
             panel3.TabIndex = 13;
             // 
             // panel9
             // 
-            panel9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel9.Controls.Add(panel4);
             panel9.Controls.Add(panel6);
-            panel9.Location = new Point(780, 139);
+            panel9.Dock = DockStyle.Right;
+            panel9.Location = new Point(786, 0);
             panel9.Name = "panel9";
-            panel9.Size = new Size(478, 530);
+            panel9.Size = new Size(478, 551);
             panel9.TabIndex = 25;
             // 
             // panel4
@@ -401,10 +400,10 @@
             panel4.Controls.Add(label11);
             panel4.Controls.Add(botonRedondeado2);
             panel4.Controls.Add(botonRedondeado1);
-            panel4.Location = new Point(33, 15);
+            panel4.Location = new Point(33, 33);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(420, 293);
+            panel4.Size = new Size(420, 284);
             panel4.TabIndex = 14;
             // 
             // avatar2
@@ -412,7 +411,7 @@
             avatar2.Anchor = AnchorStyles.None;
             avatar2.BackColor = Color.Transparent;
             avatar2.Image = Properties.Resources.no_hay_usuario;
-            avatar2.Location = new Point(102, 64);
+            avatar2.Location = new Point(102, 60);
             avatar2.Margin = new Padding(3, 2, 3, 2);
             avatar2.Name = "avatar2";
             avatar2.Size = new Size(198, 150);
@@ -485,9 +484,9 @@
             panel6.Controls.Add(label_saldo);
             panel6.Controls.Add(label_tipo_cuenta);
             panel6.Controls.Add(btn_elegir_plan);
-            panel6.Location = new Point(8, 313);
+            panel6.Location = new Point(8, 322);
             panel6.Name = "panel6";
-            panel6.Size = new Size(467, 214);
+            panel6.Size = new Size(460, 214);
             panel6.TabIndex = 25;
             // 
             // btn_recargar
@@ -500,12 +499,13 @@
             btn_recargar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_recargar.ForeColor = Color.White;
             btn_recargar.ImageAlign = ContentAlignment.TopLeft;
-            btn_recargar.Location = new Point(268, 122);
+            btn_recargar.Location = new Point(265, 122);
             btn_recargar.Margin = new Padding(3, 2, 3, 2);
             btn_recargar.Name = "btn_recargar";
             btn_recargar.Size = new Size(194, 38);
             btn_recargar.TabIndex = 18;
-            btn_recargar.Text = "recargar saldo";
+            btn_recargar.Text = "Recargar Saldo";
+            btn_recargar.TextAlign = ContentAlignment.BottomCenter;
             btn_recargar.UseVisualStyleBackColor = false;
             btn_recargar.Click += botonRecargar_Click;
             // 
@@ -515,7 +515,7 @@
             label_saldo.BackColor = Color.Transparent;
             label_saldo.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_saldo.ForeColor = Color.Navy;
-            label_saldo.Location = new Point(292, 44);
+            label_saldo.Location = new Point(289, 44);
             label_saldo.Name = "label_saldo";
             label_saldo.Size = new Size(147, 31);
             label_saldo.TabIndex = 17;
@@ -532,7 +532,7 @@
             btn_elegir_plan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_elegir_plan.ForeColor = Color.White;
             btn_elegir_plan.ImageAlign = ContentAlignment.TopLeft;
-            btn_elegir_plan.Location = new Point(13, 122);
+            btn_elegir_plan.Location = new Point(10, 122);
             btn_elegir_plan.Margin = new Padding(3, 2, 3, 2);
             btn_elegir_plan.Name = "btn_elegir_plan";
             btn_elegir_plan.Size = new Size(223, 38);
@@ -543,7 +543,6 @@
             // 
             // panel8
             // 
-            panel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel8.BackColor = Color.Transparent;
             panel8.Controls.Add(label5);
             panel8.Controls.Add(label10);
@@ -560,9 +559,9 @@
             panel8.Controls.Add(imput_telefono);
             panel8.Controls.Add(imput_fecha);
             panel8.Controls.Add(label8);
-            panel8.Location = new Point(12, 139);
+            panel8.Location = new Point(16, 31);
             panel8.Name = "panel8";
-            panel8.Size = new Size(762, 530);
+            panel8.Size = new Size(764, 486);
             panel8.TabIndex = 14;
             // 
             // imput_nuevacontra
@@ -572,7 +571,7 @@
             imput_nuevacontra.BorderColor = Color.FromArgb(228, 231, 236);
             imput_nuevacontra.BorderFocusColor = Color.FromArgb(13, 110, 253);
             imput_nuevacontra.BorderRadius = 12;
-            imput_nuevacontra.Location = new Point(453, 342);
+            imput_nuevacontra.Location = new Point(454, 320);
             imput_nuevacontra.Margin = new Padding(3, 2, 3, 2);
             imput_nuevacontra.Name = "imput_nuevacontra";
             imput_nuevacontra.Padding = new Padding(9, 8, 9, 8);
@@ -585,7 +584,7 @@
             panel5.Anchor = AnchorStyles.None;
             panel5.Controls.Add(btn_cancelar);
             panel5.Controls.Add(btn_guardar_cambios);
-            panel5.Location = new Point(214, 413);
+            panel5.Location = new Point(215, 391);
             panel5.Margin = new Padding(3, 2, 3, 2);
             panel5.Name = "panel5";
             panel5.Size = new Size(388, 85);
@@ -617,7 +616,7 @@
             btn_guardar_cambios.FlatStyle = FlatStyle.Flat;
             btn_guardar_cambios.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_guardar_cambios.ForeColor = Color.White;
-            btn_guardar_cambios.Location = new Point(16, 21);
+            btn_guardar_cambios.Location = new Point(14, 22);
             btn_guardar_cambios.Margin = new Padding(3, 2, 3, 2);
             btn_guardar_cambios.Name = "btn_guardar_cambios";
             btn_guardar_cambios.Size = new Size(195, 38);
@@ -631,7 +630,7 @@
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(453, 324);
+            label3.Location = new Point(454, 302);
             label3.Name = "label3";
             label3.Size = new Size(103, 15);
             label3.TabIndex = 24;
@@ -644,7 +643,7 @@
             imput_contra_actual.BorderColor = Color.FromArgb(228, 231, 236);
             imput_contra_actual.BorderFocusColor = Color.FromArgb(13, 110, 253);
             imput_contra_actual.BorderRadius = 12;
-            imput_contra_actual.Location = new Point(453, 278);
+            imput_contra_actual.Location = new Point(454, 256);
             imput_contra_actual.Margin = new Padding(3, 2, 3, 2);
             imput_contra_actual.Name = "imput_contra_actual";
             imput_contra_actual.Padding = new Padding(9, 8, 9, 8);
@@ -657,7 +656,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(453, 260);
+            label2.Location = new Point(454, 238);
             label2.Name = "label2";
             label2.Size = new Size(103, 15);
             label2.TabIndex = 22;
@@ -693,7 +692,6 @@
             panel8.PerformLayout();
             panel5.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -724,7 +722,6 @@
         private Label label11;
         private BotonRedondeado btn_cancelar;
         private BotonRedondeado btn_guardar_cambios;
-        private Panel panel5;
         private PictureBox avatar2;
         private Label label_saldo;
         private BotonRedondeado btn_elegir_plan;
@@ -739,5 +736,6 @@
         private Panel panel8;
         private Panel panel9;
         private Panel panel10;
+        private Panel panel5;
     }
 }

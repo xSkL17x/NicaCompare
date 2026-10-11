@@ -41,7 +41,7 @@ namespace NicaCompare
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
-            if (!GestorSesion.ValidarSesion()) { Pantallas.cambiar<Login>(this); }
+            if (!GestorSesion.ValidarSesion()) { Pantallas.cambiar<Form5>(this); }
             else { Pantallas.cambiar<Form6>(this); }
         }
 
