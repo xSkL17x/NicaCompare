@@ -59,44 +59,35 @@ namespace NicaCompare
 
             var usuarioDB = usuarios_db.Usuarios[correo];
             string contraguardada = usuarioDB.Password;
-
-            // 1. Lógica para cambiar contraseña
+            
             if (!string.IsNullOrWhiteSpace(imput_contra_actual.Text))
             {
-                if (imput_contra_actual.Text != contraguardada)
-                {
+                if (imput_contra_actual.Text != contraguardada){
                     MessageBox.Show("La contraseña actual es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    return; }
 
-                if (!string.IsNullOrWhiteSpace(imput_nuevacontra.Text))
-                {
-                    contraguardada = imput_nuevacontra.Text;
-                }
+                if (!string.IsNullOrWhiteSpace(imput_nuevacontra.Text)) { contraguardada = imput_nuevacontra.Text; }
             }
 
-            // 2. Lógica para validar el teléfono
-            if (!int.TryParse(imput_telefono.Text, out int nuevoTelefono))
-            {
-                MessageBox.Show("El número de teléfono no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 3. Guardar en la Sesión Actual
+            
+            if (!int.TryParse(imput_telefono.Text, out int nuevoTelefono)){MessageBox.Show("El número de teléfono no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);return;}
+            
             sesion_actual.Nombre = imput_nombre.Text;
             sesion_actual.Telefono = nuevoTelefono;
 
-            // 4. Guardar en el Diccionario (Simulación de DB)
+            
             usuarios_db.Usuarios[correo] = (
                 sesion_actual.Nombre,
                 contraguardada,
                 usuarioDB.TipoUsuario,
                 usuarioDB.Saldo,
                 nuevoTelefono,
-                usuarioDB.fecha_registro
+                usuarioDB.fecha_registro,
+                usuarioDB.Busquedas_restantes,
+                usuarioDB.Img
             );
 
-            // 5. Refrescar interfaz
+            
             imput_contra_actual.Text = "";
             imput_nuevacontra.Text = "";
             cargar_datos_usuario();

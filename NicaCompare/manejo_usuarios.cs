@@ -11,31 +11,30 @@ namespace NicaCompare
         public static string TipoUsuario = "";
         public static int Saldo = 0;
         public static int Telefono = 0;
+        public static int Busquedas_restantes = 10;
         public static DateTime fecha_registro = DateTime.Today;
-
-
+        public static string Img = "no hay usuario";
     }
 
     public static class usuarios_db
     {
-        public static Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro)> Usuarios =
-            new Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro)>
+        
+        public static Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro, int Busquedas_restantes, string Img)> Usuarios =
+            new Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro, int Busquedas_restantes, string Img)>
         {
-        { "skl@unan.ni", ("Skl ◕⩊◕", "17", "Gratis", 90, 81234567, new DateTime(2026, 9, 14)) },
-        { "oto@.unan.ni", ("Oto (๑﹏๑)", "123", "Gratis", 20, 81234567, new DateTime(2026, 9, 14)) },
-        { "jahary@.unan.ni", ("Jahary (✿ᴗ͈ˬᴗ͈)⁾", "123", "Gratis", 30, 81234567, new DateTime(2026, 9, 14)) },
-        { "moises@.unan.ni", ("Moises (•̀ ᗜ •́ )", "123", "Gratis", 50, 81234567, new DateTime(2026, 9, 14)) }
+            { "skl@unan.ni", ("Skl ◕⩊◕", "17", "Gratis", 90, 81234567, new DateTime(2026, 9, 14), 6, "skl") },
+            { "oto@.unan.ni", ("Oto (๑﹏๑)", "123", "Gratis", 20, 81234567, new DateTime(2026, 9, 14), 4, "") },
+            { "jahary@.unan.ni", ("Jahary (✿ᴗ͈ˬᴗ͈)⁾", "123", "Gratis", 30, 81234567, new DateTime(2026, 9, 14), 8, "") },
+            { "moises@.unan.ni", ("Moises (•̀ ᗜ •́ )", "123", "Gratis", 50, 81234567, new DateTime(2026, 9, 14), 9, "") }
         };
     }
-
-
 
     public static class GestorSesion
     {
         public static bool ValidarSesion()
         {
-            if (string.IsNullOrEmpty(sesion_actual.Nombre)){return false;}
-            return true; 
+            if (string.IsNullOrEmpty(sesion_actual.Nombre)) { return false; }
+            return true;
         }
     }
 }

@@ -43,7 +43,7 @@ namespace NicaCompare
 
             if (usuarios_db.Usuarios.ContainsKey(correo)) { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 300, 505, DateTime.Now));
+            usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 300, 505, DateTime.Now, 10, "no hay usuario"));
 
             MessageBox.Show($"{nombre} su Cuenta fue Creada con exito\n\nCorreo: {correo}", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -53,14 +53,8 @@ namespace NicaCompare
             this.Hide();
         }
 
-        private void panel1_Click(object sender, EventArgs e)
-        {
+        private void panel1_Click(object sender, EventArgs e) { }
 
-        }
-
-        private void campoPassword1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void campoPassword1_TextChanged(object sender, EventArgs e)  { }
     }
 }
