@@ -23,19 +23,16 @@ namespace NicaCompare
                 }
             },
             {
-                "la Curaca", new Dictionary<string, string>
+                "La Curacao", new Dictionary<string, string>
                 {
-                    //{ "img", "el_gallo_mas_gallo_nuevo" },
-                    { "Url", "https://wlt832ea3j-dsn.algolia.net/1/indexes/monge_upgrade_prod_elgallo_ni_products/query" },
-                    { "Tipo", "Algolia" },
-                    { "AlgoliaAppId", "WLT832EA3J" },
-                    { "AlgoliaApiKey", "YTYwZjI3ODFjOTI3YWQ0MjJmYzQ3ZjBiNmY1Y2FiYjRhZjNiMmM3NmMxYTMyNDUwOGUxYjhkMWFhMzFlOGExNnRhZ0ZpbHRlcnM9" },
+                    { "img", "la_curacao_nuevo" },
+                    { "Url", "https://www.lacuracaonline.com/nicaragua/search/?q=" },                    
                     { "Activo", "SI" },
-                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
+                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" },
                     { "ExcluirNombres", "Menú|Menu" },
-                    { "XPathContenedor", "//li[contains(@class, 'ais-Hits-item')]" },
-                    { "XPathTitulo", ".//*[contains(@class, 'result-title')]" },
-                    { "XPathPrecio", ".//*[contains(@class, 'price')]" }
+                    { "XPathContenedor", "//ol[contains(@class, 'product-items')]/li[contains(@class, 'product-item')]" },
+                    { "XPathTitulo", ".//strong[contains(@class, 'product-item-name')]//a" },
+                    { "XPathPrecio", ".//*[contains(@class, 'price-wrapper')]//span[contains(@class, 'price')]" }
                 }
             },
 
