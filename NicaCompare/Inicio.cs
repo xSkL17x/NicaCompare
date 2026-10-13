@@ -13,23 +13,23 @@ using System.Text.Json;
 namespace NicaCompare
 {
 
-        public partial class Inicio : Form
-        {
+    public partial class Inicio : Form
+    {
         //❍﹏﹏﹏﹏﹏﹏  𝐈𝐧𝐢𝐜𝐢𝐚𝐥𝐢𝐜𝐚𝐳𝐢𝐨𝐧 𝐝𝐞 𝐜𝐨𝐝𝐢𝐠𝐨 ──────────────╮
-        public Inicio() { InitializeComponent(); CargarUsuarioActivo(); }
-
-
+        public Inicio() { InitializeComponent(); CargarUsuarioActivo(); IniciarTimerBusquedas(); }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
 
-        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; } }
+        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; } lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n ({sesion_actual.Busquedas_restantes})\r\n"; }
 
         private void boton_usuario_Click(object sender, EventArgs e)
-        {   if (!GestorSesion.ValidarSesion()) { Pantallas.cambiar<Login>(this); }
-                else { Pantallas.cambiar<Form6>(this); } }
+        {
+            if (!GestorSesion.ValidarSesion()) { Pantallas.cambiar<Login>(this); }
+            else { Pantallas.cambiar<Form6>(this); }
+        }
 
-        private void btn_cerar_sesion_Click(object sender, EventArgs e)
+        private void btn_cerrar_sesion_Click(object sender, EventArgs e)
         {
             sesion_actual.Correo = "";
             sesion_actual.Nombre = "";
@@ -50,11 +50,48 @@ namespace NicaCompare
 
 
         //✧----------------------- 𝐁𝐀𝐑𝐑𝐀 𝐃𝐄 𝐁𝐔𝐒𝐐𝐔𝐄𝐃𝐀 -----------------------➣
+
+
+        private bool buscando = false; // para esperar a que termine una busqueda
         private async void barraBusqueda1_BuscarClicked_1(object sender, EventArgs e)
         {
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
 
+            if (sesion_actual.Busquedas_restantes <= 0)
+            {
+                MessageBox.Show(
+                    "Te has quedado sin búsquedas. Por favor espere para otro intento.",
+                    "Límite alcanzado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                ); return;
+            }
+
+            if (buscando)
+            {
+                MessageBox.Show(
+                    "Espere a terminar la búsqueda actual.",
+                    "Búsqueda en curso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
+            if (textoBuscado.Length < 5)
+            {
+                DialogResult resultado = MessageBox.Show(
+                    $"¿Estás seguro que deseas buscar \"{textoBuscado}\"?",
+                    "Confirmar búsqueda",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (resultado == DialogResult.No) { barraBusqueda1.Text = ""; return; }
+            }
+
+            DescontarBusqueda();
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} por favor espere";
@@ -63,6 +100,62 @@ namespace NicaCompare
             await EmpezarBusqueda(textoBuscado);
         }
 
+        //  ----------------------- Sistema de Intentos de busquedas -----------------------➣
+        private void DescontarBusqueda() // restar busqueda
+        {
+            sesion_actual.Busquedas_restantes -= 1;
+            if (GestorSesion.ValidarSesion())
+            {
+                string correo = sesion_actual.Correo;
+                if (!string.IsNullOrEmpty(correo) && usuarios_db.Usuarios.ContainsKey(correo))
+                {
+                    var user = usuarios_db.Usuarios[correo];
+                    user.Busquedas_restantes -= 1;
+                    usuarios_db.Usuarios[correo] = user; // Actualizamos la tupla en el diccionario
+                }
+            }
+
+            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+        }
+
+        private System.Windows.Forms.Timer? timerBusquedas;
+        private int segundosRestantes = 60;
+
+        private void IniciarTimerBusquedas()
+        {
+            timerBusquedas = new System.Windows.Forms.Timer();
+            timerBusquedas.Interval = 1000;
+
+            label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
+
+            timerBusquedas.Tick += (sender, e) =>
+            {
+                segundosRestantes -= 1;
+
+                if (segundosRestantes <= 0)
+                {
+                    sesion_actual.Busquedas_restantes += 1;
+
+                    if (GestorSesion.ValidarSesion())
+                    {
+                        string correo = sesion_actual.Correo;
+                        if (!string.IsNullOrEmpty(correo) && usuarios_db.Usuarios.ContainsKey(correo))
+                        {
+                            var user = usuarios_db.Usuarios[correo];
+                            user.Busquedas_restantes += 1;
+                            usuarios_db.Usuarios[correo] = user;
+                        }
+                    }
+
+                    lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+                    segundosRestantes = 60;
+                }
+
+                label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
+            };
+
+            timerBusquedas.Start();
+        }
         // —————————————————》✧𝐓𝐚𝐛𝐥𝐚𝐬 (𝐅𝐮𝐧𝐜𝐢𝐨𝐧 𝐩𝐚𝐫𝐚 𝐚𝐠𝐫𝐞𝐠𝐚𝐫 𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐨𝐬)✧《———————————————————————
 
         private void AgregarProductoATabla(string nombre, string precio, string tiendaKey)
@@ -83,55 +176,64 @@ namespace NicaCompare
         }
 
         private async Task EmpezarBusqueda(string textoBuscado)
-        {           
-            List<Task<(string, List<ProductoResult>)>> tareasScraping = new List<Task<(string, List<ProductoResult>)>>(); // Tarea de scraping (DOnde se guardaran los productos)
-            var handler = new HttpClientHandler
+        {
+            buscando = true;
+            try
             {
-                AllowAutoRedirect = true,
-                AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate | System.Net.DecompressionMethods.Brotli
-            };
 
-            using (HttpClient client = new HttpClient(handler))
-            {
-                
-                foreach (var tienda in ConfigScraper.Tiendas) // ver que tiendan se buscaran (usando diccionario o db)
+                List<Task<(string, List<ProductoResult>)>> tareasScraping = new List<Task<(string, List<ProductoResult>)>>(); // Tarea de scraping (DOnde se guardaran los productos)
+                var handler = new HttpClientHandler
                 {
-                    if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") continue; // si esta en "NO", Pasar a la siguiente tienda.
-                    tareasScraping.Add(ConfigScraper.ScrapearTiendaAsync(client, textoBuscado, tienda)); // si esta activa, agregar la tarea de scraping a la lista de tareas.
-                }
+                    AllowAutoRedirect = true,
+                    AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate | System.Net.DecompressionMethods.Brotli
+                };
 
-                // Esperamos a que todas las tiendas agan la busqueda.
-                var resultadosPorTienda = await Task.WhenAll(tareasScraping);
-                int totalEncontrados = 0;
-
-                List<ProductoResult> losMasBaratos = new List<ProductoResult>(); // lista de los productos para ordenar por precio
-                HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                // revisar y filtrar repetidos y los meter a la tabla de todos
-                foreach (var res in resultadosPorTienda)
+                using (HttpClient client = new HttpClient(handler))
                 {
-                    if (res.Item2.Count > 0)
+
+                    foreach (var tienda in ConfigScraper.Tiendas) // ver que tiendan se buscaran (usando diccionario o db)
                     {
-                        foreach (var prod in res.Item2)
-                        {
-                            string claveCache = $"{prod.TiendaKey}_{prod.Nombre}";                           
-                            if (productosAgregadosGlobal.Add(claveCache)) { AgregarProductoATabla(prod.Nombre, prod.PrecioTexto, prod.TiendaKey); totalEncontrados++; } // < aqui lo manda a la tabla
-                        }
-
-                        // Busca el Producto más barato de cada tienda y lo agrega a la lista de losMasBaratos
-                        var masBarato = res.Item2.Where(p => p.PrecioMonto < decimal.MaxValue).OrderBy(p => p.PrecioMonto).FirstOrDefault();
-                        if (masBarato != null) { losMasBaratos.Add(masBarato); }
+                        if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") continue; // si esta en "NO", Pasar a la siguiente tienda.
+                        tareasScraping.Add(ConfigScraper.ScrapearTiendaAsync(client, textoBuscado, tienda)); // si esta activa, agregar la tarea de scraping a la lista de tareas.
                     }
-                    else { losMasBaratos.Add(new ProductoResult { Nombre = "No disponible en esta tienda", PrecioTexto = "", PrecioMonto = decimal.MaxValue, TiendaKey = res.Item1 }); }
-                }
 
-                // Ordenamos de menor precio a mayor . . .
-                losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
-                foreach (var mejor in losMasBaratos) { AgregarMejorProductoATabla(mejor.Nombre, mejor.PrecioTexto, mejor.TiendaKey); }
-                
-                label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{totalEncontrados}";
+                    // Esperamos a que todas las tiendas agan la busqueda.
+                    var resultadosPorTienda = await Task.WhenAll(tareasScraping);
+                    int totalEncontrados = 0;
+
+                    List<ProductoResult> losMasBaratos = new List<ProductoResult>(); // lista de los productos para ordenar por precio
+                    HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                    // revisar y filtrar repetidos y los meter a la tabla de todos
+                    foreach (var res in resultadosPorTienda)
+                    {
+                        if (res.Item2.Count > 0)
+                        {
+                            foreach (var prod in res.Item2)
+                            {
+                                string claveCache = $"{prod.TiendaKey}_{prod.Nombre}";
+                                if (productosAgregadosGlobal.Add(claveCache)) { AgregarProductoATabla(prod.Nombre, prod.PrecioTexto, prod.TiendaKey); totalEncontrados++; } // < aqui lo manda a la tabla
+                            }
+
+                            // Busca el Producto más barato de cada tienda y lo agrega a la lista de losMasBaratos
+                            var masBarato = res.Item2.Where(p => p.PrecioMonto < decimal.MaxValue).OrderBy(p => p.PrecioMonto).FirstOrDefault();
+                            if (masBarato != null) { losMasBaratos.Add(masBarato); }
+                        }
+                        else { losMasBaratos.Add(new ProductoResult { Nombre = "No disponible en esta tienda", PrecioTexto = "", PrecioMonto = decimal.MaxValue, TiendaKey = res.Item1 }); }
+                    }
+
+                    // Ordenamos de menor precio a mayor . . .
+                    losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
+                    foreach (var mejor in losMasBaratos) { AgregarMejorProductoATabla(mejor.Nombre, mejor.PrecioTexto, mejor.TiendaKey); }
+
+                    label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{totalEncontrados}";
+                }
             }
+            finally { buscando = false; }
         }
+
+
+
 
 
         //❍﹏﹏﹏﹏﹏﹏  𝗠𝗲𝘁𝗼𝗱𝗼𝘀 𝗩𝗮𝗰𝗶𝗼𝘀 / 𝗘𝘃𝗲𝗻𝘁𝗼𝘀 𝗻𝗼 𝘂𝘀𝗮𝗱𝗼𝘀  ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
@@ -154,6 +256,8 @@ namespace NicaCompare
         private void label_producto_busqueda_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
         private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+
     }
 
 
