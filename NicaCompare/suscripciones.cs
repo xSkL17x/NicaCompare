@@ -16,7 +16,7 @@ namespace NicaCompare
         {InitializeComponent(); cargar_datos_usuario();}
         private void cargar_datos_usuario()
         {
-            if (GestorSesion.ValidarSesion()) {
+            if (GestorUsuario.ValidarSesion()) {
                 label_nombre.Text = sesion_actual.Nombre;
                 label_plan.Text = "Plan Actual :" + sesion_actual.TipoUsuario;
                 label_correo.Text = sesion_actual.Correo;
@@ -34,7 +34,7 @@ namespace NicaCompare
         {
 
 
-            if (!GestorSesion.ValidarSesion()){ if (MessageBox.Show("Inicia Sesion👤 , Para activar Plan 😀", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { Pantallas.cambiar<Login>(this); } return;  };
+            if (!GestorUsuario.ValidarSesion()){ if (MessageBox.Show("Inicia Sesion👤 , Para activar Plan 😀", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { Pantallas.cambiar<Login>(this); } return;  };
 
             int Saldo = sesion_actual.Saldo;
             int restante = Saldo - costo;
@@ -66,6 +66,8 @@ namespace NicaCompare
                 }
             }
         }
+
+        // funciones de los botones de los planes (llama a una funcionpasando el dato para reutilizar la funcion)
         private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Básico 🔹", 49); }
         private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Premium 💎", 99); }
         private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Elite 👑", 149); }
@@ -74,7 +76,7 @@ namespace NicaCompare
         private void btn_volver_Click(object sender, EventArgs e)
         {
 
-            if (GestorSesion.ValidarSesion()) {Pantallas.cambiar<Form6>(this);}
+            if (GestorUsuario.ValidarSesion()) {Pantallas.cambiar<Form6>(this);}
             else{Pantallas.cambiar<Inicio>(this);}
         }
     }

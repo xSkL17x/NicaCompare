@@ -256,21 +256,21 @@ namespace NicaCompare
                 case NivelPlan.Premium:
                     titulo = "Plan Premium";
                     subtitulo = "La mejor opción para más ventajas.";
-                    puntos = "500 puntos";
+                    puntos = "+300 Busquedas";
                     precio = "C$ 99 / mes";
                     break;
 
                 case NivelPlan.Elite:
                     titulo = "Plan Élite";
                     subtitulo = "Máximo ahorro y comodidad.";
-                    puntos = "1,000 puntos";
+                    puntos = "+500 Busquedas";
                     precio = "C$ 149 / mes";
                     break;
 
                 default:
                     titulo = "Plan Básico";
                     subtitulo = "Ideal para empezar a ahorrar.";
-                    puntos = "100 puntos";
+                    puntos = "+100 Busquedas";
                     precio = "C$ 49 / mes";
                     break;
             }

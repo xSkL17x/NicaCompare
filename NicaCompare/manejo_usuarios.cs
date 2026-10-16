@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 // ╰ Simulacion de db uwu ╯
 namespace NicaCompare
 {
-    public static class sesion_actual
+    public static class sesion_actual // variable global para manejar la sesion del usuario actual
     {
         public static string Correo = "";
         public static string Nombre = "";
@@ -14,14 +14,10 @@ namespace NicaCompare
         public static int Busquedas_restantes = 5;
         public static DateTime fecha_registro = DateTime.Today;
         public static string Img = "no hay usuario";
-
-
-
     }
 
-    public static class usuarios_db
+    public static class usuarios_db // guardamos todo los datos de los usuarios en un diccionario en cache
     {
-        
         public static Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro, int Busquedas_restantes, string Img)> Usuarios =
             new Dictionary<string, (string Nombre, string Password, string TipoUsuario, int Saldo, int Telefono, DateTime fecha_registro, int Busquedas_restantes, string Img)>
         {
@@ -33,15 +29,59 @@ namespace NicaCompare
         };
     }
 
-    public static class GestorSesion
+    public static class GestorUsuario // funcion para verificar inicio de secion
     {
-        public static bool ValidarSesion()
+        public static bool ValidarSesion() // veriificamos si hay una sesion iniciada (true), si no hay devuelve false XD
         {
             if (string.IsNullOrEmpty(sesion_actual.Nombre)) { return false; }
             return true;
         }
+
+        public static void Actualizar( // Actializar dts de usuarios y de sesion
+            string? correo = null,
+            string? Nombre = null,
+            string? Password = null,
+            string? TipoUsuario = null,
+            int? Saldo = null,
+            int? Telefono = null,
+            int? Busquedas = null,
+            string? Img = null)
+        {
+
+            if (!ValidarSesion() && Busquedas.HasValue) { sesion_actual.Busquedas_restantes = Busquedas.Value; return; } // si es solo actualizar la busqueda
+            
+
+            if (!string.IsNullOrEmpty(correo) && usuarios_db.Usuarios.ContainsKey(correo)) // Si hay Inicio de secion valido. actualizamos en el Diccionario (DB)
+            {
+                var actual = usuarios_db.Usuarios[correo];
+
+                string nombreFinal = Nombre ?? actual.Nombre;
+                string passFinal = Password ?? actual.Password;
+                string tipoFinal = TipoUsuario ?? actual.TipoUsuario;
+                int saldoFinal = Saldo ?? actual.Saldo;
+                int telFinal = Telefono ?? actual.Telefono;
+                int busquedasFinal = Busquedas ?? actual.Busquedas_restantes;
+                string imgFinal = Img ?? actual.Img;
+
+                // Actualizamos en el diccionario
+                usuarios_db.Usuarios[correo] = (nombreFinal, passFinal, tipoFinal, saldoFinal, telFinal, actual.fecha_registro, busquedasFinal, imgFinal);
+
+                // Actualizar Sesion actual si es el mismo usuario
+                if (sesion_actual.Correo == correo)
+                {
+                    sesion_actual.Nombre = nombreFinal;
+                    sesion_actual.TipoUsuario = tipoFinal;
+                    sesion_actual.Saldo = saldoFinal;
+                    sesion_actual.Telefono = telFinal;
+                    sesion_actual.Busquedas_restantes = busquedasFinal;
+                    sesion_actual.Img = imgFinal;
+                }
+            }            
+            
+        }
     }
-}
+
+    }
 
 
 

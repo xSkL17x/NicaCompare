@@ -24,7 +24,7 @@ namespace NicaCompare
         private void CargarUsuarioActivo()
         {
             lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
-            if (GestorSesion.ValidarSesion())
+            if (GestorUsuario.ValidarSesion())
             {
                 boton_usuario.Text = sesion_actual.Nombre;                
                 boton_usuario.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario");
@@ -35,7 +35,7 @@ namespace NicaCompare
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
-            if (!GestorSesion.ValidarSesion()) { Pantallas.cambiar<Login>(this); }
+            if (!GestorUsuario.ValidarSesion()) { Pantallas.cambiar<Login>(this); }
             else { Pantallas.cambiar<Form6>(this); }
         }
 
@@ -103,7 +103,8 @@ namespace NicaCompare
                 if (resultado == DialogResult.No) { barraBusqueda1.Text = ""; return; }
             }
 
-            DescontarBusqueda();
+            GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1); // Descontar Busquedas
+            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} por favor espere";
@@ -113,26 +114,10 @@ namespace NicaCompare
         }
 
         //  ----------------------- Sistema de Intentos de busquedas -----------------------➣
-        private void DescontarBusqueda() // restar busqueda
-        {
-            sesion_actual.Busquedas_restantes -= 1;
-            if (GestorSesion.ValidarSesion())
-            {
-                string correo = sesion_actual.Correo;
-                if (!string.IsNullOrEmpty(correo) && usuarios_db.Usuarios.ContainsKey(correo))
-                {
-                    var user = usuarios_db.Usuarios[correo];
-                    user.Busquedas_restantes -= 1;
-                    usuarios_db.Usuarios[correo] = user; // Actualizamos la tupla en el diccionario
-                }
-            }
 
-            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
-        }
 
         private System.Windows.Forms.Timer? timerBusquedas;
         private int segundosRestantes = 60;
-
         private void IniciarTimerBusquedas()
         {
 
@@ -147,19 +132,7 @@ namespace NicaCompare
 
                 if (segundosRestantes <= 0)
                 {
-                    sesion_actual.Busquedas_restantes += 1;
-
-                    if (GestorSesion.ValidarSesion())
-                    {
-                        string correo = sesion_actual.Correo;
-                        if (!string.IsNullOrEmpty(correo) && usuarios_db.Usuarios.ContainsKey(correo))
-                        {
-                            var user = usuarios_db.Usuarios[correo];
-                            user.Busquedas_restantes += 1;
-                            usuarios_db.Usuarios[correo] = user;
-                        }
-                    }
-
+                    GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes + 1);
                     lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
                     segundosRestantes = 60;
                 }

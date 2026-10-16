@@ -55,8 +55,8 @@
             avatar2 = new PictureBox();
             label12 = new Label();
             label11 = new Label();
-            botonRedondeado2 = new BotonRedondeado();
-            botonRedondeado1 = new BotonRedondeado();
+            btn_quitar_avatar = new BotonRedondeado();
+            btn_cambiar_avatar = new BotonRedondeado();
             panel6 = new Panel();
             btn_recargar = new BotonRedondeado();
             label_saldo = new Label();
@@ -406,8 +406,8 @@
             panel4.Controls.Add(avatar2);
             panel4.Controls.Add(label12);
             panel4.Controls.Add(label11);
-            panel4.Controls.Add(botonRedondeado2);
-            panel4.Controls.Add(botonRedondeado1);
+            panel4.Controls.Add(btn_quitar_avatar);
+            panel4.Controls.Add(btn_cambiar_avatar);
             panel4.Location = new Point(33, 33);
             panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
@@ -450,40 +450,40 @@
             label11.TabIndex = 4;
             label11.Text = "Foto de perfil";
             // 
-            // botonRedondeado2
+            // btn_quitar_avatar
             // 
-            botonRedondeado2.BackColor = Color.FromArgb(255, 128, 0);
-            botonRedondeado2.BorderRadius = 20;
-            botonRedondeado2.FlatAppearance.BorderSize = 0;
-            botonRedondeado2.FlatStyle = FlatStyle.Flat;
-            botonRedondeado2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            botonRedondeado2.ForeColor = Color.White;
-            botonRedondeado2.ImageAlign = ContentAlignment.TopLeft;
-            botonRedondeado2.Location = new Point(202, 237);
-            botonRedondeado2.Margin = new Padding(3, 2, 3, 2);
-            botonRedondeado2.Name = "botonRedondeado2";
-            botonRedondeado2.Size = new Size(171, 38);
-            botonRedondeado2.TabIndex = 2;
-            botonRedondeado2.Text = "Eliminar foto";
-            botonRedondeado2.UseVisualStyleBackColor = false;
-            botonRedondeado2.Click += botonRedondeado2_Click;
+            btn_quitar_avatar.BackColor = Color.FromArgb(255, 128, 0);
+            btn_quitar_avatar.BorderRadius = 20;
+            btn_quitar_avatar.FlatAppearance.BorderSize = 0;
+            btn_quitar_avatar.FlatStyle = FlatStyle.Flat;
+            btn_quitar_avatar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_quitar_avatar.ForeColor = Color.White;
+            btn_quitar_avatar.ImageAlign = ContentAlignment.TopLeft;
+            btn_quitar_avatar.Location = new Point(202, 237);
+            btn_quitar_avatar.Margin = new Padding(3, 2, 3, 2);
+            btn_quitar_avatar.Name = "btn_quitar_avatar";
+            btn_quitar_avatar.Size = new Size(171, 38);
+            btn_quitar_avatar.TabIndex = 2;
+            btn_quitar_avatar.Text = "Eliminar foto";
+            btn_quitar_avatar.UseVisualStyleBackColor = false;
+            btn_quitar_avatar.Click += btn_quitar_avatar_Click;
             // 
-            // botonRedondeado1
+            // btn_cambiar_avatar
             // 
-            botonRedondeado1.BackColor = Color.FromArgb(0, 0, 192);
-            botonRedondeado1.BorderRadius = 20;
-            botonRedondeado1.FlatAppearance.BorderSize = 0;
-            botonRedondeado1.FlatStyle = FlatStyle.Flat;
-            botonRedondeado1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            botonRedondeado1.ForeColor = Color.White;
-            botonRedondeado1.Location = new Point(16, 237);
-            botonRedondeado1.Margin = new Padding(3, 2, 3, 2);
-            botonRedondeado1.Name = "botonRedondeado1";
-            botonRedondeado1.Size = new Size(174, 38);
-            botonRedondeado1.TabIndex = 1;
-            botonRedondeado1.Text = "Subir foto";
-            botonRedondeado1.UseVisualStyleBackColor = false;
-            botonRedondeado1.Click += botonRedondeado1_Click;
+            btn_cambiar_avatar.BackColor = Color.FromArgb(0, 0, 192);
+            btn_cambiar_avatar.BorderRadius = 20;
+            btn_cambiar_avatar.FlatAppearance.BorderSize = 0;
+            btn_cambiar_avatar.FlatStyle = FlatStyle.Flat;
+            btn_cambiar_avatar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_cambiar_avatar.ForeColor = Color.White;
+            btn_cambiar_avatar.Location = new Point(16, 237);
+            btn_cambiar_avatar.Margin = new Padding(3, 2, 3, 2);
+            btn_cambiar_avatar.Name = "btn_cambiar_avatar";
+            btn_cambiar_avatar.Size = new Size(174, 38);
+            btn_cambiar_avatar.TabIndex = 1;
+            btn_cambiar_avatar.Text = "Subir foto";
+            btn_cambiar_avatar.UseVisualStyleBackColor = false;
+            btn_cambiar_avatar.Click += btn_cambiar_avatar_Click;
             // 
             // panel6
             // 
@@ -728,8 +728,8 @@
         private Label label10;
         private Panel panel3;
         private Panel panel4;
-        private BotonRedondeado botonRedondeado2;
-        private BotonRedondeado botonRedondeado1;
+        private BotonRedondeado btn_quitar_avatar;
+        private BotonRedondeado btn_cambiar_avatar;
         private Label label12;
         private Label label11;
         private BotonRedondeado btn_cancelar;
