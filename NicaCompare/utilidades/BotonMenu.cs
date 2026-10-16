@@ -168,7 +168,6 @@ namespace NicaCompare
         }
 
         #endregion
-
         #region Pintado
 
         protected override void OnPaint(PaintEventArgs e)
@@ -180,12 +179,25 @@ namespace NicaCompare
 
             bool estaActivo = isHovered || isPressed || esSeleccionado;
 
-            // Fondo azul solo cuando está activo
-            if (estaActivo)
+            // 1. Asegurar la ruta de las esquinas redondeadas
+            EnsurePath();
+
+            // 2. Aplicar la región física al botón para que las esquinas fuera del radio queden transparentes de verdad
+            if (this.Region != null)
             {
-                EnsurePath();
-                brushFondo.Color = isPressed ? colorPressed : colorHover;
-                g.FillPath(brushFondo, cachedPath);
+                this.Region.Dispose();
+            }
+            this.Region = new Region(cachedPath);
+
+            // 3. Definir el color de fondo (siempre se pinta, ya sea en reposo o activo)
+            Color colorFondoActual = estaActivo ? (isPressed ? colorPressed : colorHover) : BackColor;
+
+            if (colorFondoActual.A > 0)
+            {
+                using (SolidBrush brushFondoActual = new SolidBrush(colorFondoActual))
+                {
+                    g.FillPath(brushFondoActual, cachedPath);
+                }
             }
 
             Color colorTexto = estaActivo ? colorTextoHover : colorTextoNormal;
@@ -228,7 +240,6 @@ namespace NicaCompare
                 TextRenderer.DrawText(g, Text, Font, textRect, colorTexto, flags);
             }
         }
-
         #endregion
 
         #region Caché

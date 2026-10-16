@@ -49,6 +49,7 @@
             label2 = new Label();
             panel_Busqueda = new Panel();
             panel6 = new Panel();
+            btn_cerrar_sesion = new BotonMenu();
             botonMenu6 = new BotonMenu();
             pictureBox2 = new PictureBox();
             panel1 = new Panel();
@@ -84,7 +85,6 @@
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            btn_cerrar_sesion = new BotonMenu();
             panel_Busqueda.SuspendLayout();
             panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -103,10 +103,10 @@
             boton_usuario.AutoEllipsis = true;
             boton_usuario.AutoEscalarImagen = true;
             boton_usuario.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            boton_usuario.BackColor = Color.Transparent;
+            boton_usuario.BackColor = Color.FromArgb(100, 255, 255, 255);
             boton_usuario.BorderRadius = 18;
             boton_usuario.ColorHover = Color.FromArgb(13, 110, 253);
-            boton_usuario.ColorTextoNormal = Color.FromArgb(70, 70, 70);
+            boton_usuario.ColorTextoNormal = Color.FromArgb(0, 0, 64);
             boton_usuario.EsSeleccionado = false;
             boton_usuario.FlatAppearance.BorderSize = 0;
             boton_usuario.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -115,7 +115,7 @@
             boton_usuario.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             boton_usuario.ForeColor = Color.FromArgb(70, 70, 70);
             boton_usuario.Image = Properties.Resources.usuario;
-            boton_usuario.Location = new Point(261, 9);
+            boton_usuario.Location = new Point(262, 63);
             boton_usuario.MargenImagenIzquierda = 15;
             boton_usuario.Margin = new Padding(3, 2, 3, 2);
             boton_usuario.Name = "boton_usuario";
@@ -273,16 +273,47 @@
             panel6.Size = new Size(438, 170);
             panel6.TabIndex = 24;
             // 
+            // btn_cerrar_sesion
+            // 
+            btn_cerrar_sesion.AutoColorearIconoBlanco = true;
+            btn_cerrar_sesion.AutoEllipsis = true;
+            btn_cerrar_sesion.AutoEscalarImagen = true;
+            btn_cerrar_sesion.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_cerrar_sesion.BackColor = Color.FromArgb(100, 255, 255, 255);
+            btn_cerrar_sesion.BorderRadius = 18;
+            btn_cerrar_sesion.ColorHover = Color.FromArgb(13, 110, 253);
+            btn_cerrar_sesion.ColorTextoNormal = Color.FromArgb(0, 0, 64);
+            btn_cerrar_sesion.EsSeleccionado = false;
+            btn_cerrar_sesion.FlatAppearance.BorderSize = 0;
+            btn_cerrar_sesion.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn_cerrar_sesion.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btn_cerrar_sesion.FlatStyle = FlatStyle.Flat;
+            btn_cerrar_sesion.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btn_cerrar_sesion.ForeColor = Color.FromArgb(70, 70, 70);
+            btn_cerrar_sesion.Image = Properties.Resources.usuario;
+            btn_cerrar_sesion.Location = new Point(269, 112);
+            btn_cerrar_sesion.MargenImagenIzquierda = 15;
+            btn_cerrar_sesion.Margin = new Padding(3, 2, 3, 2);
+            btn_cerrar_sesion.Name = "btn_cerrar_sesion";
+            btn_cerrar_sesion.PorcentajeEscalaImagen = 50;
+            btn_cerrar_sesion.Size = new Size(166, 36);
+            btn_cerrar_sesion.TabIndex = 24;
+            btn_cerrar_sesion.Text = "Cerrar Sesion";
+            btn_cerrar_sesion.TextAlign = ContentAlignment.MiddleRight;
+            btn_cerrar_sesion.UseVisualStyleBackColor = false;
+            btn_cerrar_sesion.Click += btn_cerrar_sesion_Click;
+            // 
             // botonMenu6
             // 
             botonMenu6.Anchor = AnchorStyles.None;
             botonMenu6.AutoColorearIconoBlanco = true;
             botonMenu6.AutoEscalarImagen = true;
             botonMenu6.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            botonMenu6.BackColor = Color.Transparent;
-            botonMenu6.BorderRadius = 18;
+            botonMenu6.BackColor = Color.FromArgb(100, 255, 255, 255);
+            botonMenu6.BackgroundImageLayout = ImageLayout.Zoom;
+            botonMenu6.BorderRadius = 24;
             botonMenu6.ColorHover = Color.FromArgb(13, 110, 253);
-            botonMenu6.ColorTextoNormal = Color.FromArgb(70, 70, 70);
+            botonMenu6.ColorTextoNormal = Color.FromArgb(0, 0, 64);
             botonMenu6.EsSeleccionado = false;
             botonMenu6.FlatAppearance.BorderSize = 0;
             botonMenu6.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -291,12 +322,12 @@
             botonMenu6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             botonMenu6.ForeColor = Color.FromArgb(70, 70, 70);
             botonMenu6.Image = Properties.Resources.vip;
-            botonMenu6.Location = new Point(87, 9);
+            botonMenu6.Location = new Point(262, 11);
             botonMenu6.MargenImagenIzquierda = 15;
             botonMenu6.Margin = new Padding(3, 2, 3, 2);
             botonMenu6.Name = "botonMenu6";
             botonMenu6.PorcentajeEscalaImagen = 50;
-            botonMenu6.Size = new Size(169, 36);
+            botonMenu6.Size = new Size(173, 36);
             botonMenu6.TabIndex = 23;
             botonMenu6.Text = "Premium";
             botonMenu6.TextAlign = ContentAlignment.MiddleLeft;
@@ -573,6 +604,7 @@
             lbl_busquedas_restantes.TabIndex = 28;
             lbl_busquedas_restantes.Text = "Busquedas\r\nRestantes\r\n(0)";
             lbl_busquedas_restantes.TextAlign = ContentAlignment.MiddleCenter;
+
             // 
             // panel2
             // 
@@ -726,36 +758,6 @@
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // btn_cerrar_sesion
-            // 
-            btn_cerrar_sesion.AutoColorearIconoBlanco = true;
-            btn_cerrar_sesion.AutoEllipsis = true;
-            btn_cerrar_sesion.AutoEscalarImagen = true;
-            btn_cerrar_sesion.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_cerrar_sesion.BackColor = Color.Transparent;
-            btn_cerrar_sesion.BorderRadius = 18;
-            btn_cerrar_sesion.ColorHover = Color.FromArgb(13, 110, 253);
-            btn_cerrar_sesion.ColorTextoNormal = Color.FromArgb(70, 70, 70);
-            btn_cerrar_sesion.EsSeleccionado = false;
-            btn_cerrar_sesion.FlatAppearance.BorderSize = 0;
-            btn_cerrar_sesion.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btn_cerrar_sesion.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btn_cerrar_sesion.FlatStyle = FlatStyle.Flat;
-            btn_cerrar_sesion.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btn_cerrar_sesion.ForeColor = Color.FromArgb(70, 70, 70);
-            btn_cerrar_sesion.Image = Properties.Resources.usuario;
-            btn_cerrar_sesion.Location = new Point(261, 39);
-            btn_cerrar_sesion.MargenImagenIzquierda = 15;
-            btn_cerrar_sesion.Margin = new Padding(3, 2, 3, 2);
-            btn_cerrar_sesion.Name = "btn_cerrar_sesion";
-            btn_cerrar_sesion.PorcentajeEscalaImagen = 50;
-            btn_cerrar_sesion.Size = new Size(166, 36);
-            btn_cerrar_sesion.TabIndex = 24;
-            btn_cerrar_sesion.Text = "Cerrar Sesion";
-            btn_cerrar_sesion.TextAlign = ContentAlignment.MiddleRight;
-            btn_cerrar_sesion.UseVisualStyleBackColor = false;
-            btn_cerrar_sesion.Click += btn_cerrar_sesion_Click;
             // 
             // Inicio
             // 

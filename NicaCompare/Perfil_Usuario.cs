@@ -85,7 +85,7 @@ namespace NicaCompare
         private void btn_cancelar_cambios_Click(object sender, EventArgs e) { cargar_datos_usuario(); imput_contra_actual.Text = ""; imput_nuevacontra.Text = ""; }
 
         //____________๑.・︴btnes y pantallas? ︴✰  ๑_______________
-        private void btn_recargar_Click(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
+        private void btn_recargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }
         private void btn_volver_Click(object sender, EventArgs e) { Pantallas.cambiar<Inicio>(this); }
         private void btn_ir_planes_Click(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
         private void botonRecargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }

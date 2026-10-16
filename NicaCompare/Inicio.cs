@@ -21,7 +21,17 @@ namespace NicaCompare
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
 
-        private void CargarUsuarioActivo() { if (GestorSesion.ValidarSesion()) { boton_usuario.Text = sesion_actual.Nombre; } lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n ({sesion_actual.Busquedas_restantes})\r\n"; }
+        private void CargarUsuarioActivo()
+        {
+            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+            if (GestorSesion.ValidarSesion())
+            {
+                boton_usuario.Text = sesion_actual.Nombre;                
+                boton_usuario.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario");
+            }
+            else { btn_cerrar_sesion.Hide(); }
+
+        }
 
         private void boton_usuario_Click(object sender, EventArgs e)
         {
@@ -58,6 +68,8 @@ namespace NicaCompare
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
 
+            //condiciones para antes de icniciar bisqieda
+
             if (sesion_actual.Busquedas_restantes <= 0)
             {
                 MessageBox.Show(
@@ -79,7 +91,7 @@ namespace NicaCompare
                 return;
             }
 
-            if (textoBuscado.Length < 5)
+            if (textoBuscado.Length < 3)
             {
                 DialogResult resultado = MessageBox.Show(
                     $"¿Estás seguro que deseas buscar \"{textoBuscado}\"?",
@@ -123,6 +135,7 @@ namespace NicaCompare
 
         private void IniciarTimerBusquedas()
         {
+
             timerBusquedas = new System.Windows.Forms.Timer();
             timerBusquedas.Interval = 1000;
 
