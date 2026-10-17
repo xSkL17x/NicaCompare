@@ -93,16 +93,6 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap curacao_logo1 {
-            get {
-                object obj = ResourceManager.GetObject("curacao_logo1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap descarga_1 {
             get {
                 object obj = ResourceManager.GetObject("descarga-1", resourceCulture);
@@ -163,9 +153,9 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GCM1 {
+        internal static System.Drawing.Bitmap image_removebg_preview__1_ {
             get {
-                object obj = ResourceManager.GetObject("GCM1", resourceCulture);
+                object obj = ResourceManager.GetObject("image-removebg-preview (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,26 +166,6 @@ namespace NicaCompare.Properties {
         internal static System.Drawing.Bitmap LOGO_22 {
             get {
                 object obj = ResourceManager.GetObject("LOGO 22", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LOGO_221 {
-            get {
-                object obj = ResourceManager.GetObject("LOGO 221", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LOGO_222 {
-            get {
-                object obj = ResourceManager.GetObject("LOGO 222", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,59 +213,9 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap R__1_ {
-            get {
-                object obj = ResourceManager.GetObject("R (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap R__1_1 {
-            get {
-                object obj = ResourceManager.GetObject("R (1)1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2026_09_07_201238 {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot 2026-09-07 201238", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2026_09_07_201337 {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot 2026-09-07 201337", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Sicsa_logo {
             get {
                 object obj = ResourceManager.GetObject("Sicsa_logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap skl {
-            get {
-                object obj = ResourceManager.GetObject("skl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

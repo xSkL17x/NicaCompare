@@ -37,7 +37,7 @@ namespace NicaCompare
 
             if (usuarios_db.Usuarios.ContainsKey(correo)) { MessageBox.Show("El correo ya se encuentra registrado.", "Registro denegado", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 300, 505, DateTime.Now, 10, "no hay usuario"));
+            usuarios_db.Usuarios.Add(correo, (nombre, password, "Gratis", 0, 8, DateTime.Now, 10, "no hay usuario"));
 
             MessageBox.Show($"{nombre} su Cuenta fue Creada con exito\n\nCorreo: {correo}", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

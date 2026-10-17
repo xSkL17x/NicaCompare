@@ -248,7 +248,7 @@
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.None;
-            pictureBox2.Image = Properties.Resources.LOGO_222;
+            pictureBox2.Image = Properties.Resources.LOGO_22;
             pictureBox2.Location = new Point(113, 81);
             pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";

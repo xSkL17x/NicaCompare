@@ -321,12 +321,12 @@
             label_tipo_cuenta.BackColor = Color.Transparent;
             label_tipo_cuenta.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_tipo_cuenta.ForeColor = Color.Navy;
-            label_tipo_cuenta.Location = new Point(22, 44);
+            label_tipo_cuenta.Location = new Point(6, 46);
             label_tipo_cuenta.Name = "label_tipo_cuenta";
             label_tipo_cuenta.Size = new Size(188, 31);
             label_tipo_cuenta.TabIndex = 9;
             label_tipo_cuenta.Text = "Cuenta NONE";
-            label_tipo_cuenta.TextAlign = ContentAlignment.MiddleCenter;
+            label_tipo_cuenta.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
@@ -494,7 +494,7 @@
             panel6.Controls.Add(btn_elegir_plan);
             panel6.Location = new Point(8, 322);
             panel6.Name = "panel6";
-            panel6.Size = new Size(460, 214);
+            panel6.Size = new Size(467, 214);
             panel6.TabIndex = 25;
             // 
             // btn_recargar
@@ -507,7 +507,7 @@
             btn_recargar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_recargar.ForeColor = Color.White;
             btn_recargar.ImageAlign = ContentAlignment.TopLeft;
-            btn_recargar.Location = new Point(265, 122);
+            btn_recargar.Location = new Point(263, 122);
             btn_recargar.Margin = new Padding(3, 2, 3, 2);
             btn_recargar.Name = "btn_recargar";
             btn_recargar.Size = new Size(194, 38);
@@ -524,12 +524,12 @@
             label_saldo.BackColor = Color.Transparent;
             label_saldo.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_saldo.ForeColor = Color.Navy;
-            label_saldo.Location = new Point(289, 44);
+            label_saldo.Location = new Point(263, 46);
             label_saldo.Name = "label_saldo";
-            label_saldo.Size = new Size(147, 31);
+            label_saldo.Size = new Size(192, 31);
             label_saldo.TabIndex = 17;
-            label_saldo.Text = "Saldo C$ 0";
-            label_saldo.TextAlign = ContentAlignment.MiddleCenter;
+            label_saldo.Text = "Saldo C$ 0000";
+            label_saldo.TextAlign = ContentAlignment.MiddleLeft;
             label_saldo.Click += label_saldo_Click;
             // 
             // btn_elegir_plan
@@ -542,7 +542,7 @@
             btn_elegir_plan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btn_elegir_plan.ForeColor = Color.White;
             btn_elegir_plan.ImageAlign = ContentAlignment.TopLeft;
-            btn_elegir_plan.Location = new Point(10, 122);
+            btn_elegir_plan.Location = new Point(1, 122);
             btn_elegir_plan.Margin = new Padding(3, 2, 3, 2);
             btn_elegir_plan.Name = "btn_elegir_plan";
             btn_elegir_plan.Size = new Size(223, 38);

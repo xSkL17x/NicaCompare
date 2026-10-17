@@ -21,6 +21,7 @@ namespace NicaCompare
                 label_plan.Text = "Plan Actual :" + sesion_actual.TipoUsuario;
                 label_correo.Text = sesion_actual.Correo;
                 label_saldo.Text = "Saldo: C$" + sesion_actual.Saldo.ToString("0");
+                avatar_planes.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario");
             }
             else {
                 label_nombre.Visible = false;
@@ -30,18 +31,26 @@ namespace NicaCompare
                 avatar_planes.Visible = false;
             }
         }
-        private void procesar_plan(string plan, int costo)
+        private void procesar_plan(string plan, int costo, int busquedasExtra)
         {
-
-
-            if (!GestorUsuario.ValidarSesion()){ if (MessageBox.Show("Inicia Sesion👤 , Para activar Plan 😀", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { Pantallas.cambiar<Login>(this); } return;  };
+            // validar si hay sesion activa
+            if (!GestorUsuario.ValidarSesion())
+            {
+                if (MessageBox.Show("Inicia Sesion👤 , Para activar Plan 😀", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Pantallas.cambiar<Login>(this);
+                }
+                return;
+            }
 
             int Saldo = sesion_actual.Saldo;
             int restante = Saldo - costo;
 
+            // validar si el saldo alcanza para el plan
             if (Saldo < costo)
             {
-                if (MessageBox.Show("Saldo insuficiente, ¿desea recargar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes) { recargar_saldo(this, EventArgs.Empty); }
+                if (MessageBox.Show("Saldo insuficiente, ¿desea recargar?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {recargar_saldo(this, EventArgs.Empty);}
             }
             else
             {
@@ -54,24 +63,30 @@ namespace NicaCompare
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    sesion_actual.Saldo -= costo;
-                    sesion_actual.TipoUsuario = plan;
-                    MessageBox.Show($"¡El Plan {plan} ha sido adquirido con éxito!\n\nNuevo Saldo: C$ {sesion_actual.Saldo}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // actualizamos saldo tipo de usuario y sumamos las busquedas del plan
+                    GestorUsuario.Actualizar(
+                        correo: sesion_actual.Correo,
+                        TipoUsuario: plan,
+                        Saldo: restante,
+                        Busquedas: sesion_actual.Busquedas_restantes + busquedasExtra
+                    );
 
-                    // Ir a la pantalla del perfil
-                    Pantallas.cambiar<Form6>(this);
-                    //o solo actulizar y quedar en esta pantalla
-                    //cargar_datos_usuario();
-                    ;
+                    MessageBox.Show
+                        ($"¡El Plan {plan} ha sido adquirido con éxito!\n\nNuevo Saldo: C$ " +
+                        $"{sesion_actual.Saldo}\nBusquedas disponibles: {sesion_actual.Busquedas_restantes}", 
+                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    
+                    Pantallas.cambiar<Form6>(this); // ir a la pantalla del perfil
                 }
             }
         }
 
         // funciones de los botones de los planes (llama a una funcionpasando el dato para reutilizar la funcion)
-        private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Básico 🔹", 49); }
-        private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Premium 💎", 99); }
-        private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Elite 👑", 149); }
-        private void recargar_saldo(object sender, EventArgs e) { Form7 recargar = new Form7(); recargar.FormClosed += (s, args) => this.Close(); recargar.Show(); this.Hide(); }
+        private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Básico 🔹", 49, 100); }
+        private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Premium 💎", 99, 300); }
+        private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Elite 👑", 149, 500); }
+        private void recargar_saldo(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this);}
 
         private void btn_volver_Click(object sender, EventArgs e)
         {
