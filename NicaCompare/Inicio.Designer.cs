@@ -123,7 +123,6 @@
             boton_usuario.Size = new Size(166, 36);
             boton_usuario.TabIndex = 16;
             boton_usuario.Text = "Inicio de Sesión";
-            boton_usuario.TextAlign = ContentAlignment.MiddleRight;
             boton_usuario.UseVisualStyleBackColor = false;
             boton_usuario.Click += boton_usuario_Click;
             // 
@@ -299,7 +298,6 @@
             btn_cerrar_sesion.Size = new Size(166, 36);
             btn_cerrar_sesion.TabIndex = 24;
             btn_cerrar_sesion.Text = "Cerrar Sesion";
-            btn_cerrar_sesion.TextAlign = ContentAlignment.MiddleRight;
             btn_cerrar_sesion.UseVisualStyleBackColor = false;
             btn_cerrar_sesion.Click += btn_cerrar_sesion_Click;
             // 
@@ -330,7 +328,6 @@
             botonMenu6.Size = new Size(173, 36);
             botonMenu6.TabIndex = 23;
             botonMenu6.Text = "Premium";
-            botonMenu6.TextAlign = ContentAlignment.MiddleLeft;
             botonMenu6.UseVisualStyleBackColor = false;
             botonMenu6.Click += botonMenu6_Click_1;
             // 

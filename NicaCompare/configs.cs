@@ -99,6 +99,7 @@ namespace NicaCompare
                 .Replace("\u00A0", "")
                 .Replace(",", "")
                 .Replace("+IVA", "")
+                .Replace("+ IVA", "")
                 .Replace("IVA", "")
                 .Trim();
             // Convierte él texto limpio en un numero pa que no crashee y poder ordenar

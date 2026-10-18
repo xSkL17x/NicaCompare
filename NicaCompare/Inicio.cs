@@ -16,7 +16,11 @@ namespace NicaCompare
     public partial class Inicio : Form
     {
         //❍﹏﹏﹏﹏﹏﹏  𝐈𝐧𝐢𝐜𝐢𝐚𝐥𝐢𝐜𝐚𝐳𝐢𝐨𝐧 𝐝𝐞 𝐜𝐨𝐝𝐢𝐠𝐨 ──────────────╮
-        public Inicio() { InitializeComponent(); CargarUsuarioActivo(); IniciarTimerBusquedas(); }
+        public Inicio() { 
+            InitializeComponent();
+            barraBusqueda1.Text = "TV Smarth";
+            //barraBusqueda1_BuscarClicked_1(this, EventArgs.Empty);
+            CargarUsuarioActivo(); IniciarTimerBusquedas(); }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
@@ -146,18 +150,17 @@ namespace NicaCompare
 
         private void AgregarProductoATabla(string nombre, string precio, string tiendaKey)
         {
-            string nomImg = ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"].Replace("Properties.Resources.", "") : "";
-            var imgObjeto = !string.IsNullOrEmpty(nomImg) ? Properties.Resources.ResourceManager.GetObject(nomImg) : null;
-            Image logo = imgObjeto != null ? (Image)imgObjeto : Properties.Resources.LOGO_22;
+            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";//obtener img de tienda
+            Image logo = Imgagenes.Obtener(nomImg);
             tablaResultados1.Rows.Add(nombre, precio, logo, tiendaKey);
         }
 
         private void AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
         {
-            string nomImg = ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"].Replace("Properties.Resources.", "") : "";
-            var imgObjeto = !string.IsNullOrEmpty(nomImg) ? Properties.Resources.ResourceManager.GetObject(nomImg) : null;
-            Image logo = imgObjeto != null ? (Image)imgObjeto : Properties.Resources.LOGO_22;
-            string textoCombinado = string.IsNullOrWhiteSpace(precio) ? nombre : $"{precio}\n{nombre}";
+            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";//obtener img de tienda
+            Image logo = Imgagenes.Obtener(nomImg); 
+
+            string textoCombinado = string.IsNullOrWhiteSpace(precio) ? nombre : $"{precio} | \n{nombre}";
             if (Grid_Compare != null) { Grid_Compare.Rows.Add(logo, textoCombinado); }
         }
 
