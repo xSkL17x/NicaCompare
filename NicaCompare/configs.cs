@@ -31,15 +31,14 @@ namespace NicaCompare
                 "La Curacao Nicaragua", new Dictionary<string, string>
                 {
                     { "img", "curacao_logo" },
-                    { "Url", "https://www.lacuracaonline.com/nicaragua/search/" },
-                    // Al no poner "Tipo", el sistema usará automáticamente scraping_v1 (HTML)
+                    { "Url", "https://www.lacuracaonline.com/nicaragua/catalogsearch/result/?q=" },
                     { "Activo", "SI" },
-                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" },
-                    { "ExcluirNombres", "Menú|Menu|Carrito|Mi cuenta" },
-                    { "XPathContenedor", "//li[contains(@class, 'product-item')] | //div[contains(@class, 'product-item-info')]" },
-                    { "XPathTitulo", ".//a[contains(@class, 'product-item-link')] | .//strong[contains(@class, 'product-name')]" },
-                    { "XPathPrecio", ".//span[contains(@class, 'price')]" }
+                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36" },
+                    { "XPathContenedor", "//li[contains(@class, 'product-item')]" },
+                    { "XPathTitulo", ".//a[contains(@class, 'product-item-link')]" },
+                    { "XPathPrecio", ".//*[contains(@class, 'price')]" }
                 }
+
             },
             {
                 "GCM", new Dictionary<string, string>
