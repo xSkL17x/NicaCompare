@@ -50,9 +50,11 @@
             panel_Busqueda = new Panel();
             panel6 = new Panel();
             btn_cerrar_sesion = new BotonMenu();
+            lbl_busquedas_restantes = new ReaLTaiizor.Controls.BigLabel();
             botonMenu6 = new BotonMenu();
             panel1 = new Panel();
             label11 = new Label();
+            label_ag_busqueda = new ReaLTaiizor.Controls.BigLabel();
             pictureBox2 = new PictureBox();
             contenedor_categorias_tabla = new Panel();
             panel5 = new Panel();
@@ -72,9 +74,7 @@
             label_producto_busqueda = new Label();
             label_txt_compare = new Label();
             panel3 = new Panel();
-            combo_box_marcas = new ReaLTaiizor.Controls.ComboBoxEdit();
-            label_ag_busqueda = new ReaLTaiizor.Controls.BigLabel();
-            lbl_busquedas_restantes = new ReaLTaiizor.Controls.BigLabel();
+            panel_filtros = new Panel();
             panel2 = new Panel();
             tarjetaTienda4 = new TarjetaTienda();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
@@ -91,7 +91,6 @@
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            panel_filtros = new Panel();
             panel_Busqueda.SuspendLayout();
             panel6.SuspendLayout();
             panel1.SuspendLayout();
@@ -103,7 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)Grid_Compare).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
-            panel_filtros.SuspendLayout();
             SuspendLayout();
             // 
             // boton_usuario
@@ -235,7 +233,7 @@
             barraBusqueda1.Cursor = Cursors.IBeam;
             barraBusqueda1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             barraBusqueda1.ImeMode = ImeMode.Off;
-            barraBusqueda1.Location = new Point(74, 132);
+            barraBusqueda1.Location = new Point(42, 98);
             barraBusqueda1.Margin = new Padding(3, 2, 3, 2);
             barraBusqueda1.MinimumSize = new Size(175, 30);
             barraBusqueda1.Name = "barraBusqueda1";
@@ -312,6 +310,20 @@
             btn_cerrar_sesion.UseVisualStyleBackColor = false;
             btn_cerrar_sesion.Click += btn_cerrar_sesion_Click;
             // 
+            // lbl_busquedas_restantes
+            // 
+            lbl_busquedas_restantes.AutoSize = true;
+            lbl_busquedas_restantes.BackColor = Color.Transparent;
+            lbl_busquedas_restantes.BorderStyle = BorderStyle.Fixed3D;
+            lbl_busquedas_restantes.Font = new Font("Calibri", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_busquedas_restantes.ForeColor = Color.FromArgb(80, 80, 80);
+            lbl_busquedas_restantes.Location = new Point(85, 18);
+            lbl_busquedas_restantes.Name = "lbl_busquedas_restantes";
+            lbl_busquedas_restantes.Size = new Size(136, 101);
+            lbl_busquedas_restantes.TabIndex = 28;
+            lbl_busquedas_restantes.Text = "Busquedas\r\nRestantes\r\n(0)";
+            lbl_busquedas_restantes.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // botonMenu6
             // 
             botonMenu6.Anchor = AnchorStyles.None;
@@ -370,6 +382,20 @@
             label11.TabIndex = 9;
             label11.Text = "---- COMPARA. ELIGE. AHORRA ---";
             label11.Click += label11_Click;
+            // 
+            // label_ag_busqueda
+            // 
+            label_ag_busqueda.AutoSize = true;
+            label_ag_busqueda.BackColor = Color.Transparent;
+            label_ag_busqueda.BorderStyle = BorderStyle.Fixed3D;
+            label_ag_busqueda.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_ag_busqueda.ForeColor = Color.FromArgb(80, 80, 80);
+            label_ag_busqueda.Location = new Point(808, 22);
+            label_ag_busqueda.Name = "label_ag_busqueda";
+            label_ag_busqueda.Size = new Size(133, 71);
+            label_ag_busqueda.TabIndex = 29;
+            label_ag_busqueda.Text = "Agregando \r\nuna busqueda\r\nen 60 segundos";
+            label_ag_busqueda.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
@@ -658,62 +684,22 @@
             panel3.Anchor = AnchorStyles.None;
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel3.BackColor = Color.Transparent;
-            panel3.Controls.Add(panel_filtros);
             panel3.Controls.Add(panel2);
             panel3.Location = new Point(134, 16);
             panel3.Name = "panel3";
             panel3.Size = new Size(1258, 191);
             panel3.TabIndex = 21;
             // 
-            // combo_box_marcas
+            // panel_filtros
             // 
-            combo_box_marcas.BackColor = Color.FromArgb(246, 246, 246);
-            combo_box_marcas.DrawMode = DrawMode.OwnerDrawFixed;
-            combo_box_marcas.DropDownHeight = 100;
-            combo_box_marcas.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo_box_marcas.Font = new Font("Segoe UI", 10F);
-            combo_box_marcas.ForeColor = Color.FromArgb(142, 142, 142);
-            combo_box_marcas.FormattingEnabled = true;
-            combo_box_marcas.HoverSelectionColor = Color.FromArgb(241, 241, 241);
-            combo_box_marcas.IntegralHeight = false;
-            combo_box_marcas.ItemHeight = 20;
-            combo_box_marcas.Items.AddRange(new object[] { "Marcas" });
-            combo_box_marcas.Location = new Point(25, 3);
-            combo_box_marcas.Name = "combo_box_marcas";
-            combo_box_marcas.Size = new Size(135, 26);
-            combo_box_marcas.StartIndex = 0;
-            combo_box_marcas.TabIndex = 23;
-            // 
-            // label_ag_busqueda
-            // 
-            label_ag_busqueda.AutoSize = true;
-            label_ag_busqueda.BackColor = Color.Transparent;
-            label_ag_busqueda.BorderStyle = BorderStyle.Fixed3D;
-            label_ag_busqueda.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_ag_busqueda.ForeColor = Color.FromArgb(80, 80, 80);
-            label_ag_busqueda.Location = new Point(808, 22);
-            label_ag_busqueda.Name = "label_ag_busqueda";
-            label_ag_busqueda.Size = new Size(133, 71);
-            label_ag_busqueda.TabIndex = 29;
-            label_ag_busqueda.Text = "Agregando \r\nuna busqueda\r\nen 60 segundos";
-            label_ag_busqueda.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lbl_busquedas_restantes
-            // 
-            lbl_busquedas_restantes.AutoSize = true;
-            lbl_busquedas_restantes.BackColor = Color.Transparent;
-            lbl_busquedas_restantes.BorderStyle = BorderStyle.Fixed3D;
-            lbl_busquedas_restantes.Font = new Font("Calibri", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_busquedas_restantes.ForeColor = Color.FromArgb(80, 80, 80);
-            lbl_busquedas_restantes.Location = new Point(85, 18);
-            lbl_busquedas_restantes.Name = "lbl_busquedas_restantes";
-            lbl_busquedas_restantes.Size = new Size(136, 101);
-            lbl_busquedas_restantes.TabIndex = 28;
-            lbl_busquedas_restantes.Text = "Busquedas\r\nRestantes\r\n(0)";
-            lbl_busquedas_restantes.TextAlign = ContentAlignment.MiddleCenter;
+            panel_filtros.Location = new Point(42, 146);
+            panel_filtros.Name = "panel_filtros";
+            panel_filtros.Size = new Size(702, 39);
+            panel_filtros.TabIndex = 29;
             // 
             // panel2
             // 
+            panel2.Controls.Add(panel_filtros);
             panel2.Controls.Add(barraBusqueda1);
             panel2.Controls.Add(tarjetaTienda4);
             panel2.Controls.Add(tarjetaTienda1);
@@ -866,14 +852,6 @@
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
-            // panel_filtros
-            // 
-            panel_filtros.Controls.Add(combo_box_marcas);
-            panel_filtros.Location = new Point(1040, 36);
-            panel_filtros.Name = "panel_filtros";
-            panel_filtros.Size = new Size(200, 100);
-            panel_filtros.TabIndex = 29;
-            // 
             // Inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -907,7 +885,6 @@
             ((System.ComponentModel.ISupportInitialize)Grid_Compare).EndInit();
             panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
-            panel_filtros.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -962,7 +939,6 @@
         private BotonCategoriaCheck Hogar;
         private BotonCategoriaCheck Tecnología;
         private BotonCategoriaCheck botonCategoriaCheck5;
-        private ReaLTaiizor.Controls.ComboBoxEdit combo_box_marcas;
         private Panel panel5;
         private Panel panel_filtros;
     }

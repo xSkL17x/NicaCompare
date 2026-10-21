@@ -1,14 +1,16 @@
-﻿using System;
+﻿using ReaLTaiizor.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
-using System.Text.Json;
+using static NicaCompare.ConfigScraper;
 
 namespace NicaCompare
 {
@@ -82,42 +84,25 @@ namespace NicaCompare
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
 
-            //condiciones para antes de icniciar bisqieda
-
             if (sesion_actual.Busquedas_restantes <= 0)
             {
-                MessageBox.Show(
-                    "Te has quedado sin búsquedas. Por favor espere para otro intento.",
-                    "Límite alcanzado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                ); return;
+                MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             if (buscando)
             {
-                MessageBox.Show(
-                    "Espere a terminar la búsqueda actual.",
-                    "Búsqueda en curso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                MessageBox.Show("Espere a terminar la búsqueda actual.", "Búsqueda en curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (textoBuscado.Length < 3)
             {
-                DialogResult resultado = MessageBox.Show(
-                    $"¿Estás seguro que deseas buscar \"{textoBuscado}\"?",
-                    "Confirmar búsqueda",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
+                DialogResult resultado = MessageBox.Show($"¿Estás seguro que deseas buscar \"{textoBuscado}\"?", "Confirmar búsqueda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.No) { barraBusqueda1.Text = ""; return; }
             }
 
-            GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1); // Descontar Busquedas
+            GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
             lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
@@ -126,6 +111,87 @@ namespace NicaCompare
 
             await EmpezarBusqueda(textoBuscado);
         }
+
+
+        // Sistema de filtro
+
+        private void CrearFiltros(List<string> nombresProductos)
+        {
+            // Limpiamos el panel por si había filtros de una búsqueda anterior
+            panel_filtros.Controls.Clear();
+
+            // 1. FILTRADO DINÁMICO DE MARCAS: Verificamos cuáles marcas de nuestro diccionario salieron en los resultados
+            HashSet<string> marcasEncontradas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var prod in nombresProductos)
+            {
+                foreach (var marcaItem in FiltrosProductos.Marcas)
+                {
+                    foreach (var keyword in marcaItem.Value)
+                    {
+                        if (prod.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            marcasEncontradas.Add(marcaItem.Key);
+                        }
+                    }
+                }
+            }
+
+            // Si encontramos marcas en los resultados, creamos el ComboBox de Marcas estilo Amazon
+            if (marcasEncontradas.Count > 0)
+            {
+                ComboBoxEdit combo_box_marcas = new ComboBoxEdit();
+                combo_box_marcas.Name = "combo_box_marcas";
+                combo_box_marcas.Width = 160;
+                combo_box_marcas.Location = new System.Drawing.Point(15, 12);
+                combo_box_marcas.DropDownStyle = ComboBoxStyle.DropDownList;
+
+                combo_box_marcas.Items.Add("Todas las marcas");
+                foreach (var marca in marcasEncontradas)
+                {
+                    combo_box_marcas.Items.Add(marca);
+                }
+                combo_box_marcas.SelectedIndex = 0;
+
+                panel_filtros.Controls.Add(combo_box_marcas);
+            }
+
+            // 2. FILTRADO DINÁMICO DE ATRIBUTOS (Ej: Pantallas o Refrigeración según aplique)
+            HashSet<string> atributosEncontrados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var prod in nombresProductos)
+            {
+                foreach (var categoria in FiltrosProductos.Atributos)
+                {
+                    foreach (var attr in categoria.Value)
+                    {
+                        if (prod.IndexOf(attr, StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            atributosEncontrados.Add(attr);
+                        }
+                    }
+                }
+            }
+
+            // Si el usuario buscó pantallas o refris y hay atributos, creamos el segundo ComboBox al lado
+            if (atributosEncontrados.Count > 0)
+            {
+                ComboBoxEdit combo_box_atributos = new ComboBoxEdit();
+                combo_box_atributos.Name = "combo_box_atributos";
+                combo_box_atributos.Width = 160;
+                combo_box_atributos.Location = new System.Drawing.Point(190, 12); // Desplazado a la par del otro
+                combo_box_atributos.DropDownStyle = ComboBoxStyle.DropDownList;
+
+                combo_box_atributos.Items.Add("Todas las especificaciones");
+                foreach (var attr in atributosEncontrados)
+                {
+                    combo_box_atributos.Items.Add(attr);
+                }
+                combo_box_atributos.SelectedIndex = 0;
+
+                panel_filtros.Controls.Add(combo_box_atributos);
+            }
+        }
+
+
 
         //  ----------------------- Sistema de Intentos de busquedas -----------------------➣
 
@@ -222,10 +288,24 @@ namespace NicaCompare
                     }
 
                     // Ordenamos de menor precio a mayor . . .
-                    losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
-                    foreach (var mejor in losMasBaratos) { AgregarMejorProductoATabla(mejor.Nombre, mejor.PrecioTexto, mejor.TiendaKey); }
+                losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
+                foreach (var mejor in losMasBaratos) { AgregarMejorProductoATabla(mejor.Nombre, mejor.PrecioTexto, mejor.TiendaKey); }
 
-                    label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{totalEncontrados}";
+                label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{totalEncontrados}";
+
+                // (Dentro de EmpezarBusqueda, justo antes del finally / al tener todos los productos procesados)
+                List<string> nombresDeProductosObtenidos = new List<string>();
+
+                foreach (var res in resultadosPorTienda)
+                {
+                    foreach (var prod in res.Item2)
+                    {
+                        nombresDeProductosObtenidos.Add(prod.Nombre);
+                    }
+                }
+
+                // Genera los filtros dinámicamente en base a lo que arrojó la búsqueda estilo Amazon
+                CrearFiltros(nombresDeProductosObtenidos);
                 }
             }
             finally { buscando = false; }

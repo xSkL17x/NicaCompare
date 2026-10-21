@@ -77,18 +77,28 @@ namespace NicaCompare
 
         public static class FiltrosProductos
         {
-            public static readonly List<string> MarcasConocidas = new List<string>
-            {"G-PLUS", "Samsung", "Hisense", "Frigidaire", "Telstar", "RCA", "Konka", "Challenger", "Premier", "LG"};
+            // Diccionario principal de marcas y palabras clave asociadas
+            public static readonly Dictionary<string, string[]> Marcas = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+            { "Samsung", new[] { "Samsung" } },
+            { "LG", new[] { "LG" } },
+            { "Hisense", new[] { "Hisense" } },
+            { "Frigidaire", new[] { "Frigidaire" } },
+            { "Telstar", new[] { "Telstar" } },
+            { "RCA", new[] { "RCA" } },
+            { "Konka", new[] { "Konka" } },
+            { "Challenger", new[] { "Challenger" } },
+            { "Premier", new[] { "Premier" } },
+            { "G-PLUS", new[] { "G-PLUS", "GPLUS" } }
+            };
 
-            public static readonly List<string> TiposRefrigeracion = new List<string>
-            {"Semiautomática", "Automática", "Congelador Horizontal"};
-            public static readonly List<string> TiposPantallas = new List<string>
-            {"OLED", "QLED", "LED", "Smart TV"};
-
-            public static readonly List<string> ResolucionesPantallas = new List<string>
-            {"4K UHD", "Full HD", "HD"};
-
-        }
+            // Diccionario de especificaciones por categoría o tipo de producto
+            public static readonly Dictionary<string, string[]> Atributos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+            { "TipoOperacion", new[] { "Semiautomática", "Automática", "Congelador Horizontal" } },
+            { "Resoluciones", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } }
+            };
+            }
 
         // —————————————————— Revisa qué forma de búsqueda usar según la tienda  ————————————————————————————————๑•̀ᴗ•̀) ̫ ─꒱
         public static async Task<(string, List<ProductoResult>)> ScrapearTiendaAsync(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
