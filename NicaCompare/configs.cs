@@ -73,6 +73,22 @@ namespace NicaCompare
         };
 
 
+        // ****   Adision Para Mejorar las busquedas      ****
+
+        public static class FiltrosProductos
+        {
+            public static readonly List<string> MarcasConocidas = new List<string>
+            {"G-PLUS", "Samsung", "Hisense", "Frigidaire", "Telstar", "RCA", "Konka", "Challenger", "Premier", "LG"};
+
+            public static readonly List<string> TiposRefrigeracion = new List<string>
+            {"Semiautomática", "Automática", "Congelador Horizontal"};
+            public static readonly List<string> TiposPantallas = new List<string>
+            {"OLED", "QLED", "LED", "Smart TV"};
+
+            public static readonly List<string> ResolucionesPantallas = new List<string>
+            {"4K UHD", "Full HD", "HD"};
+
+        }
 
         // —————————————————— Revisa qué forma de búsqueda usar según la tienda  ————————————————————————————————๑•̀ᴗ•̀) ̫ ─꒱
         public static async Task<(string, List<ProductoResult>)> ScrapearTiendaAsync(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)

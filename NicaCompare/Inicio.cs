@@ -19,9 +19,10 @@ namespace NicaCompare
         public Inicio()
         {
             InitializeComponent();
-            barraBusqueda1.Text = "TV Smarth";
+            barraBusqueda1.Text = "Refrigerador Samsung";
             //barraBusqueda1_BuscarClicked_1(this, EventArgs.Empty);
             CargarUsuarioActivo(); IniciarTimerBusquedas();
+            CargarEstadoBotones();
         }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
@@ -62,8 +63,15 @@ namespace NicaCompare
         private void tarjetaTienda1_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] = tarjetaTienda1.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda2_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["SICSA"]["Activo"] = tarjetaTienda2.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda3_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["GCM"]["Activo"] = tarjetaTienda3.Seleccionado ? "SI" : "NO"; }
-        private void tarjetaTienda4_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["GCM"]["Activo"] = tarjetaTienda3.Seleccionado ? "SI" : "NO"; }
+        private void tarjetaTienda4_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["La Curacao Nicaragua"]["Activo"] = tarjetaTienda4.Seleccionado ? "SI" : "NO"; }
 
+        private void CargarEstadoBotones()
+        {
+            tarjetaTienda1.Seleccionado = ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] == "SI";
+            tarjetaTienda2.Seleccionado = ConfigScraper.Tiendas["SICSA"]["Activo"] == "SI";
+            tarjetaTienda3.Seleccionado = ConfigScraper.Tiendas["GCM"]["Activo"] == "SI";
+            tarjetaTienda4.Seleccionado = ConfigScraper.Tiendas["La Curacao Nicaragua"]["Activo"] == "SI";
+        }
 
         //✧----------------------- 𝐁𝐀𝐑𝐑𝐀 𝐃𝐄 𝐁𝐔𝐒𝐐𝐔𝐄𝐃𝐀 -----------------------➣
 
@@ -123,7 +131,7 @@ namespace NicaCompare
 
 
         private System.Windows.Forms.Timer? timerBusquedas;
-        private int segundosRestantes = 60;
+        private int segundosRestantes = 300;
         private void IniciarTimerBusquedas()
         {
 
@@ -140,7 +148,7 @@ namespace NicaCompare
                 {
                     GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes + 1);
                     lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
-                    segundosRestantes = 60;
+                    segundosRestantes = 300;
                 }
 
                 label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
