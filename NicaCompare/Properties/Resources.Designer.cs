@@ -123,6 +123,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap electrodomesticos1 {
+            get {
+                object obj = ResourceManager.GetObject("electrodomesticos1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fondo_perfil {
             get {
                 object obj = ResourceManager.GetObject("fondo perfil", resourceCulture);
@@ -193,6 +203,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap muebles1 {
+            get {
+                object obj = ResourceManager.GetObject("muebles1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap no_hay_usuario {
             get {
                 object obj = ResourceManager.GetObject("no hay usuario", resourceCulture);
@@ -233,6 +253,26 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tecnologia1 {
+            get {
+                object obj = ResourceManager.GetObject("tecnologia1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thaehaetheaeh {
+            get {
+                object obj = ResourceManager.GetObject("thaehaetheaeh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap usuario {
             get {
                 object obj = ResourceManager.GetObject("usuario", resourceCulture);
@@ -246,6 +286,16 @@ namespace NicaCompare.Properties {
         internal static System.Drawing.Bitmap varios {
             get {
                 object obj = ResourceManager.GetObject("varios", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap varios1 {
+            get {
+                object obj = ResourceManager.GetObject("varios1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

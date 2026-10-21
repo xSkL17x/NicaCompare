@@ -16,11 +16,13 @@ namespace NicaCompare
     public partial class Inicio : Form
     {
         //❍﹏﹏﹏﹏﹏﹏  𝐈𝐧𝐢𝐜𝐢𝐚𝐥𝐢𝐜𝐚𝐳𝐢𝐨𝐧 𝐝𝐞 𝐜𝐨𝐝𝐢𝐠𝐨 ──────────────╮
-        public Inicio() { 
+        public Inicio()
+        {
             InitializeComponent();
             barraBusqueda1.Text = "TV Smarth";
             //barraBusqueda1_BuscarClicked_1(this, EventArgs.Empty);
-            CargarUsuarioActivo(); IniciarTimerBusquedas(); }
+            CargarUsuarioActivo(); IniciarTimerBusquedas();
+        }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
         private void botonMenu6_Click_1(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
@@ -30,7 +32,7 @@ namespace NicaCompare
             lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
             if (GestorUsuario.ValidarSesion())
             {
-                boton_usuario.Text = sesion_actual.Nombre;                
+                boton_usuario.Text = sesion_actual.Nombre;
                 boton_usuario.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario");
             }
             else { btn_cerrar_sesion.Hide(); }
@@ -158,7 +160,7 @@ namespace NicaCompare
         private void AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
         {
             string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";//obtener img de tienda
-            Image logo = Imgagenes.Obtener(nomImg); 
+            Image logo = Imgagenes.Obtener(nomImg);
 
             string textoCombinado = string.IsNullOrWhiteSpace(precio) ? nombre : $"{precio} | \n{nombre}";
             if (Grid_Compare != null) { Grid_Compare.Rows.Add(logo, textoCombinado); }
@@ -246,7 +248,20 @@ namespace NicaCompare
         private void pictureBox3_Click(object sender, EventArgs e) { }
         private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
+        private void botonCategoriaCheck5_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Hogar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonCategoriaCheck3_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
