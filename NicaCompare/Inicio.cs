@@ -14,16 +14,15 @@ using static NicaCompare.ConfigScraper;
 
 namespace NicaCompare
 {
-
     public partial class Inicio : Form
     {
         //❍﹏﹏﹏﹏﹏﹏  𝐈𝐧𝐢𝐜𝐢𝐚𝐥𝐢𝐜𝐚𝐳𝐢𝐨𝐧 𝐝𝐞 𝐜𝐨𝐝𝐢𝐠𝐨 ──────────────╮
         public Inicio()
         {
             InitializeComponent();
-            barraBusqueda1.Text = "Refrigerador Samsung";
-            //barraBusqueda1_BuscarClicked_1(this, EventArgs.Empty);
-            CargarUsuarioActivo(); IniciarTimerBusquedas();
+            barraBusqueda1.Text = "Refri";
+            CargarUsuarioActivo();
+            IniciarTimerBusquedas();
             CargarEstadoBotones();
         }
 
@@ -39,7 +38,6 @@ namespace NicaCompare
                 boton_usuario.Image = Imgagenes.Obtener(sesion_actual.Img, "usuario");
             }
             else { btn_cerrar_sesion.Hide(); }
-
         }
 
         private void boton_usuario_Click(object sender, EventArgs e)
@@ -59,8 +57,6 @@ namespace NicaCompare
             Pantallas.cambiar<Login>(this);
         }
 
-
-
         //❍﹏﹏﹏﹏﹏﹏  𝑩𝑶𝑻𝑶𝑵𝑬𝑺 𝑨𝑪𝑻𝑰𝑽𝑨𝑹/𝑫𝑬𝑺𝑨𝑪𝑻𝑰𝑽𝑨𝑹 𝑻𝑰𝑬𝑵𝑫𝑨𝑺  ———————————————๑•̀ᴗ•̀) ̫ ─꒱
         private void tarjetaTienda1_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] = tarjetaTienda1.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda2_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["SICSA"]["Activo"] = tarjetaTienda2.Seleccionado ? "SI" : "NO"; }
@@ -75,10 +71,9 @@ namespace NicaCompare
             tarjetaTienda4.Seleccionado = ConfigScraper.Tiendas["La Curacao Nicaragua"]["Activo"] == "SI";
         }
 
-        //✧----------------------- 𝐁𝐀𝐑𝐑𝐀 𝐃𝐄 𝐁𝐔𝐒𝐐𝐔𝐄𝐃𝐀 -----------------------➣
+        //✧----------------------- 𝐁𝐀𝐑𝐑𝐀 𝐃𝐄 𝐁𝐔𝐒𝐐𝐔𝐄𝐃🇦 -----------------------➣
+        private bool buscando = false;
 
-
-        private bool buscando = false; // para esperar a que termine una busqueda
         private async void barraBusqueda1_BuscarClicked_1(object sender, EventArgs e)
         {
             string textoBuscado = barraBusqueda1.Text;
@@ -112,15 +107,12 @@ namespace NicaCompare
             await EmpezarBusqueda(textoBuscado);
         }
 
-
-        // Sistema de filtro
-
+        // Armar filtros dinámicos estilo Amazon
         private void CrearFiltros(List<string> nombresProductos)
         {
-            // Limpiamos el panel por si había filtros de una búsqueda anterior
             panel_filtros.Controls.Clear();
 
-            // 1. FILTRADO DINÁMICO DE MARCAS: Verificamos cuáles marcas de nuestro diccionario salieron en los resultados
+            // Marcas
             HashSet<string> marcasEncontradas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
             {
@@ -136,7 +128,6 @@ namespace NicaCompare
                 }
             }
 
-            // Si encontramos marcas en los resultados, creamos el ComboBox de Marcas estilo Amazon
             if (marcasEncontradas.Count > 0)
             {
                 ComboBoxEdit combo_box_marcas = new ComboBoxEdit();
@@ -151,11 +142,12 @@ namespace NicaCompare
                     combo_box_marcas.Items.Add(marca);
                 }
                 combo_box_marcas.SelectedIndex = 0;
+                combo_box_marcas.SelectedIndexChanged += (s, e) => ActualizarTablaConFiltros();
 
                 panel_filtros.Controls.Add(combo_box_marcas);
             }
 
-            // 2. FILTRADO DINÁMICO DE ATRIBUTOS (Ej: Pantallas o Refrigeración según aplique)
+            // Atributos
             HashSet<string> atributosEncontrados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
             {
@@ -171,151 +163,201 @@ namespace NicaCompare
                 }
             }
 
-            // Si el usuario buscó pantallas o refris y hay atributos, creamos el segundo ComboBox al lado
             if (atributosEncontrados.Count > 0)
             {
                 ComboBoxEdit combo_box_atributos = new ComboBoxEdit();
                 combo_box_atributos.Name = "combo_box_atributos";
                 combo_box_atributos.Width = 160;
-                combo_box_atributos.Location = new System.Drawing.Point(190, 12); // Desplazado a la par del otro
+                combo_box_atributos.Location = new System.Drawing.Point(190, 12);
                 combo_box_atributos.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                combo_box_atributos.Items.Add("Todas las especificaciones");
+                combo_box_atributos.Items.Add("Mas especificaciones");
                 foreach (var attr in atributosEncontrados)
                 {
                     combo_box_atributos.Items.Add(attr);
                 }
                 combo_box_atributos.SelectedIndex = 0;
+                combo_box_atributos.SelectedIndexChanged += (s, e) => ActualizarTablaConFiltros();
 
                 panel_filtros.Controls.Add(combo_box_atributos);
             }
         }
 
-
-
-        //  ----------------------- Sistema de Intentos de busquedas -----------------------➣
-
-
+        // ----------------------- Timer de intentos -----------------------➣
         private System.Windows.Forms.Timer? timerBusquedas;
         private int segundosRestantes = 300;
+
         private void IniciarTimerBusquedas()
         {
-
             timerBusquedas = new System.Windows.Forms.Timer();
             timerBusquedas.Interval = 1000;
-
             label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
 
             timerBusquedas.Tick += (sender, e) =>
             {
                 segundosRestantes -= 1;
-
                 if (segundosRestantes <= 0)
                 {
                     GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes + 1);
                     lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
                     segundosRestantes = 300;
                 }
-
                 label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
             };
 
             timerBusquedas.Start();
         }
-        // —————————————————》✧𝐓𝐚𝐛𝐥𝐚𝐬 (𝐅𝐮𝐧𝐜𝐢𝐨𝐧 𝐩𝐚𝐫𝐚 𝐚𝐠𝐫𝐞𝐠𝐚𝐫 𝐏𝐫𝐨𝐝𝐮𝐜𝐭𝐨𝐬)✧《———————————————————————
 
+        // —————————————————》✧𝐓𝐚𝐛𝐥as✧《———————————————————————
         private void AgregarProductoATabla(string nombre, string precio, string tiendaKey)
         {
-            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";//obtener img de tienda
+            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";
             Image logo = Imgagenes.Obtener(nomImg);
             tablaResultados1.Rows.Add(nombre, precio, logo, tiendaKey);
         }
 
         private void AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
         {
-            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";//obtener img de tienda
+            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";
             Image logo = Imgagenes.Obtener(nomImg);
-
             string textoCombinado = string.IsNullOrWhiteSpace(precio) ? nombre : $"{precio} | \n{nombre}";
             if (Grid_Compare != null) { Grid_Compare.Rows.Add(logo, textoCombinado); }
         }
+        // Lista  para guardar productos y filtrar localmente sin volver a scrapear
+        private List<ProductoResult> listaProductos = new List<ProductoResult>();
 
         private async Task EmpezarBusqueda(string textoBuscado)
         {
             buscando = true;
             try
             {
+                tablaResultados1.Rows.Clear();
+                if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
+                listaProductos.Clear();
+                label_producto_busqueda.Text = $"Buscando: {textoBuscado}";
 
-                List<Task<(string, List<ProductoResult>)>> tareasScraping = new List<Task<(string, List<ProductoResult>)>>(); // Tarea de scraping (DOnde se guardaran los productos)
-                var handler = new HttpClientHandler
+                List<Task> tareasTiendas = new List<Task>();
+
+                // Recorremos las tiendas activas para lanzar el scraping en paralelo
+                foreach (var tienda in ConfigScraper.Tiendas)
                 {
-                    AllowAutoRedirect = true,
-                    AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate | System.Net.DecompressionMethods.Brotli
-                };
+                    if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") { continue; }
 
-                using (HttpClient client = new HttpClient(handler))
-                {
-
-                    foreach (var tienda in ConfigScraper.Tiendas) // ver que tiendan se buscaran (usando diccionario o db)
+                    var tiendaActual = tienda;
+                    var tareaTienda = Task.Run(async () =>
                     {
-                        if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") continue; // si esta en "NO", Pasar a la siguiente tienda.
-                        tareasScraping.Add(ConfigScraper.ScrapearTiendaAsync(client, textoBuscado, tienda)); // si esta activa, agregar la tarea de scraping a la lista de tareas.
-                    }
+                        var resultadoScraping = await ConfigScraper.ScrapearTiendaAsync(textoBuscado, tiendaActual);
 
-                    // Esperamos a que todas las tiendas agan la busqueda.
-                    var resultadosPorTienda = await Task.WhenAll(tareasScraping);
-                    int totalEncontrados = 0;
-
-                    List<ProductoResult> losMasBaratos = new List<ProductoResult>(); // lista de los productos para ordenar por precio
-                    HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                    // revisar y filtrar repetidos y los meter a la tabla de todos
-                    foreach (var res in resultadosPorTienda)
-                    {
-                        if (res.Item2.Count > 0)
+                        // Actualizamos la interfaz conforme cada tienda va respondiendo
+                        this.Invoke((MethodInvoker)delegate
                         {
-                            foreach (var prod in res.Item2)
+                            if (resultadoScraping.Item2 != null && resultadoScraping.Item2.Count > 0)
                             {
-                                string claveCache = $"{prod.TiendaKey}_{prod.Nombre}";
-                                if (productosAgregadosGlobal.Add(claveCache)) { AgregarProductoATabla(prod.Nombre, prod.PrecioTexto, prod.TiendaKey); totalEncontrados++; } // < aqui lo manda a la tabla
+                                listaProductos.AddRange(resultadoScraping.Item2);
+                                ActualizarTablaConFiltros();
+
+                                List<string> nombresProductos = listaProductos.Select(p => p.Nombre).ToList();
+                                CrearFiltros(nombresProductos);
                             }
 
-                            // Busca el Producto más barato de cada tienda y lo agrega a la lista de losMasBaratos
-                            var masBarato = res.Item2.Where(p => p.PrecioMonto < decimal.MaxValue).OrderBy(p => p.PrecioMonto).FirstOrDefault();
-                            if (masBarato != null) { losMasBaratos.Add(masBarato); }
-                        }
-                        else { losMasBaratos.Add(new ProductoResult { Nombre = "No disponible en esta tienda", PrecioTexto = "", PrecioMonto = decimal.MaxValue, TiendaKey = res.Item1 }); }
-                    }
+                            // Actualizamos el estado temporal en el label con la tienda actual
+                            label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{listaProductos.Count} | Buscando en {tiendaActual.Key}";
+                        });
+                    });
 
-                    // Ordenamos de menor precio a mayor . . .
-                losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
-                foreach (var mejor in losMasBaratos) { AgregarMejorProductoATabla(mejor.Nombre, mejor.PrecioTexto, mejor.TiendaKey); }
-
-                label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{totalEncontrados}";
-
-                // (Dentro de EmpezarBusqueda, justo antes del finally / al tener todos los productos procesados)
-                List<string> nombresDeProductosObtenidos = new List<string>();
-
-                foreach (var res in resultadosPorTienda)
-                {
-                    foreach (var prod in res.Item2)
-                    {
-                        nombresDeProductosObtenidos.Add(prod.Nombre);
-                    }
+                    tareasTiendas.Add(tareaTienda);
                 }
 
-                // Genera los filtros dinámicamente en base a lo que arrojó la búsqueda estilo Amazon
-                CrearFiltros(nombresDeProductosObtenidos);
-                }
+                await Task.WhenAll(tareasTiendas);
+                label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{listaProductos.Count} ✔";
             }
-            finally { buscando = false; }
+            finally {  buscando = false; }
         }
 
+        // Aplica los filtros locales y refresca ambas tablas en memoria
+        private void ActualizarTablaConFiltros()
+        {
+            tablaResultados1.Rows.Clear();
+            if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
 
+            string marcaSeleccionada = "Todas las marcas";
+            string atributoSeleccionado = "Mas especificaciones";
 
+            var comboMarca = panel_filtros.Controls["combo_box_marcas"] as ComboBoxEdit;
+            if (comboMarca != null && comboMarca.SelectedItem != null)
+            { marcaSeleccionada = comboMarca.SelectedItem?.ToString() ?? "Todas las marcas"; }
 
+            var comboAtributo = panel_filtros.Controls["combo_box_atributos"] as ComboBoxEdit;
+            if (comboAtributo != null && comboAtributo.SelectedItem != null)
+            { atributoSeleccionado = comboAtributo.SelectedItem?.ToString() ?? "Mas especificaciones"; }
 
-        //❍﹏﹏﹏﹏﹏﹏  𝗠𝗲𝘁𝗼𝗱𝗼𝘀 𝗩𝗮𝗰𝗶𝗼𝘀 / 𝗘𝘃𝗲𝗻𝘁𝗼𝘀 𝗻𝗼 𝘂𝘀𝗮𝗱𝗼𝘀  ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
+            // Filtramos la lista maestra usando LINQ según lo seleccionado en los combos
+            var productosFiltrados = listaProductos.Where(prod =>
+            {
+                bool pasaMarca = true;
+                if (marcaSeleccionada != "Todas las marcas" && !string.IsNullOrEmpty(marcaSeleccionada))
+                {
+                    if (FiltrosProductos.Marcas.ContainsKey(marcaSeleccionada))
+                    {
+                        var keywords = FiltrosProductos.Marcas[marcaSeleccionada];
+                        pasaMarca = keywords.Any(kw => prod.Nombre.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0);
+                    }
+                }
+
+                bool pasaAtributo = true;
+                if (atributoSeleccionado != "Mas especificaciones" && !string.IsNullOrEmpty(atributoSeleccionado))
+                { pasaAtributo = prod.Nombre.IndexOf(atributoSeleccionado, StringComparison.OrdinalIgnoreCase) >= 0; }
+
+                return pasaMarca && pasaAtributo;
+            }).ToList();
+
+            // Llenamos la tabla principal evitando duplicados globales
+            HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var prod in productosFiltrados)
+            {
+                string claveCache = $"{prod.TiendaKey}_{prod.Nombre}";
+                if (productosAgregadosGlobal.Add(claveCache))
+                {
+                    string precioLimpiado = ObtenerPrimerPrecio(prod.PrecioTexto);
+                    AgregarProductoATabla(prod.Nombre, precioLimpiado, prod.TiendaKey);
+                }
+            }
+
+            List<ProductoResult> losMasBaratos = new List<ProductoResult>();
+
+            // Calculamos el producto más barato por tienda o ponemos el aviso de no disponible
+            foreach (var tienda in ConfigScraper.Tiendas)
+            {
+                string tiendaKey = tienda.Key;
+                if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") continue;
+
+                var prodsDeEstaTienda = productosFiltrados.Where(p => p.TiendaKey.Equals(tiendaKey, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                if (prodsDeEstaTienda.Count > 0)
+                {
+                    var masBarato = prodsDeEstaTienda.Where(p => p.PrecioMonto < decimal.MaxValue).OrderBy(p => p.PrecioMonto).FirstOrDefault();
+                    if (masBarato != null) { losMasBaratos.Add(masBarato); }
+                }
+                else
+                {
+                    losMasBaratos.Add(new ProductoResult
+                    {
+                        Nombre = "No disponible en esta tienda",
+                        PrecioTexto = "",
+                        PrecioMonto = decimal.MaxValue,
+                        TiendaKey = tiendaKey
+                    });
+                }
+            }
+
+            losMasBaratos = losMasBaratos.OrderBy(p => p.PrecioMonto).ToList();
+            foreach (var mejor in losMasBaratos)
+            {
+                string precioMejorLimpiado = ObtenerPrimerPrecio(mejor.PrecioTexto);
+                AgregarMejorProductoATabla(mejor.Nombre, precioMejorLimpiado, mejor.TiendaKey);
+            }
+        }
+        //❍﹏﹏﹏﹏﹏﹏  𝗠𝗲𝘁𝗼𝗱𝗼𝘀 𝗩𝗮𝗰𝗶𝗼𝘀  ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
         private void pictureBox2_Click(object sender, EventArgs e) { }
         private void botonMenu1_Click(object sender, EventArgs e) { }
         private void botonMenu6_Click(object sender, EventArgs e) { }
@@ -335,26 +377,12 @@ namespace NicaCompare
         private void label_producto_busqueda_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
         private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-
-        private void botonCategoriaCheck5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Hogar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonCategoriaCheck3_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        private void botonCategoriaCheck5_Click(object sender, EventArgs e) { }
+        private void Hogar_Click(object sender, EventArgs e) { }
+        private void botonCategoriaCheck3_Click_1(object sender, EventArgs e) { }
     }
 
-
-
-    //❍﹏﹏﹏﹏﹏﹏  plantilla para ordenar productos encontrados ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
+    // Modelo de resultado
     public class ProductoResult
     {
         public string Nombre { get; set; } = "";

@@ -81,6 +81,15 @@ namespace NicaCompare
             public static readonly Dictionary<string, string[]> Marcas = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
             { "Samsung", new[] { "Samsung" } },
+            { "Xiaomi", new[] { "Xiaomi", "Redmi", "Poco" } },
+            { "HONOR", new[] { "HONOR", "Honor" } },
+            { "Motorola", new[] { "Motorola", "Moto" } },
+            { "Huawei", new[] { "Huawei" } },
+            { "Apple", new[] { "Apple", "iPhone" } },
+            { "ZTE", new[] { "ZTE" } },
+            { "TCL", new[] { "TCL" } },
+
+            // Marcas de Línea Blanca / Electrodomésticos / TV
             { "LG", new[] { "LG" } },
             { "Hisense", new[] { "Hisense" } },
             { "Frigidaire", new[] { "Frigidaire" } },
@@ -96,19 +105,35 @@ namespace NicaCompare
             public static readonly Dictionary<string, string[]> Atributos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
             { "TipoOperacion", new[] { "Semiautomática", "Automática", "Congelador Horizontal" } },
-            { "Resoluciones", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } }
+            { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },
+            { "Conectividad", new[] { "5G", "4G" } },
+            { "MemoriaRAM", new[] { "4GB RAM", "6GB RAM", "8GB RAM", "12GB RAM" } }
             };
             }
 
+
+        public static readonly Dictionary<string, string[]> parecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+            { "celular", new[] { "smartphone", "telefono", "movil" } },
+            { "smartphone", new[] { "celular", "telefono" } },
+            { "refri", new[] { "refrigeradora", "refrigerador", "nevera" } },
+            { "tv", new[] { "televisor", "smart tv", "pantalla" } },
+            { "pantalla", new[] { "televisor", "tv", "monitor" } },
+            { "lavadora", new[] { "lavadora secadora", "seco-lavadora" } }
+            };
+
+
+        // aqui ya terminan todos los diccionarios XD
+
         // —————————————————— Revisa qué forma de búsqueda usar según la tienda  ————————————————————————————————๑•̀ᴗ•̀) ̫ ─꒱
-        public static async Task<(string, List<ProductoResult>)> ScrapearTiendaAsync(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
+        public static async Task<(string, List<ProductoResult>)> ScrapearTiendaAsync(string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
         {
             if (tienda.Value.ContainsKey("Tipo"))
             {
-                if (tienda.Value["Tipo"] == "Algolia") { return await scraping_Algolia(client, textoBuscado, tienda); }
-                //else if (tienda.Value["Tipo"] == "Constructor") { return await scraping_Constructor(client, textoBuscado, tienda); }
+                if (tienda.Value["Tipo"] == "Algolia") { return await scraping_Algolia(httpClient, textoBuscado, tienda); }
+                //else if (tienda.Value["Tipo"] == "Constructor") { return await scraping_Constructor(httpClient, textoBuscado, tienda); }
             }
-            return await scraping_v1(client, textoBuscado, tienda);
+            return await scraping_v1(httpClient, textoBuscado, tienda);
         }
 
         // LIMPIAR PRECIO - Quita letras, símbolos de moneda y espacios para dejar sólo el número puro.
@@ -116,21 +141,54 @@ namespace NicaCompare
         {
             if (string.IsNullOrWhiteSpace(precioTexto) || precioTexto == "Sin precio") return decimal.MaxValue;
 
-            string limpio = precioTexto.ToUpper()
-                .Replace("C$", "")
-                .Replace("U$", "")
-                .Replace("$", "")
-                .Replace(" ", "")
+            // Normalizamos el texto general
+            string textoProcesado = precioTexto.ToUpper()
+                .Replace("U$", "$")
+                .Replace("C$", "$")
                 .Replace("\u00A0", "")
-                .Replace(",", "")
                 .Replace("+IVA", "")
                 .Replace("+ IVA", "")
                 .Replace("IVA", "")
                 .Trim();
-            // Convierte él texto limpio en un numero pa que no crashee y poder ordenar
-            if (decimal.TryParse(limpio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal resultado)) { return resultado; }
+            // evitar mas de 1 precio
+            var fragmentos = textoProcesado.Split(new[] { '$' }, StringSplitOptions.RemoveEmptyEntries);
+            List<decimal> montosEncontrados = new List<decimal>();
+
+            foreach (var frag in fragmentos)
+            {
+                string limpio = frag.Replace(" ", "").Replace(",", "").Trim();
+
+                // Convierte el texto limpio en un numero pa que no crashee y poder ordenar
+                if (decimal.TryParse(limpio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal resultado))
+                { if (resultado > 0) { montosEncontrados.Add(resultado);  } }
+            }
+            // Si encontro precios, devolvemos el menor (el precio de oferta real)
+            if (montosEncontrados.Count > 0) { return montosEncontrados.Min(); }
 
             return decimal.MaxValue;
+        }
+
+
+        //Mejora pa rendimiento        
+        public static readonly HttpClient httpClient = new HttpClient(new HttpClientHandler
+        {
+            AllowAutoRedirect = true,
+            AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate | System.Net.DecompressionMethods.Brotli
+        });
+
+        public static string ObtenerPrimerPrecio(string precioTexto)
+        {
+            if (string.IsNullOrWhiteSpace(precioTexto)) return precioTexto;
+
+            // Busca el primer patrón válido de precio (ej: C$89,740.00 o $20,999) y descarta todo lo demás
+            var match = System.Text.RegularExpressions.Regex.Match(precioTexto, @"(C\$|\$)\s*[\d,.]+", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+            if (match.Success)
+            {
+                return match.Value.Trim();
+            }
+
+            return precioTexto;
         }
 
         //╰────────────────➤[La Magia 🥷]
@@ -260,6 +318,4 @@ namespace NicaCompare
             return (tienda.Key, productosEncontrados);
         }
 
-
-    }
 }
