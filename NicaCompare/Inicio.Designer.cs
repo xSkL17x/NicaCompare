@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             boton_usuario = new BotonMenu();
             tarjetaTienda1 = new TarjetaTienda();
             tarjetaTienda2 = new TarjetaTienda();
@@ -59,9 +59,9 @@
             contenedor_categorias_tabla = new Panel();
             panel5 = new Panel();
             Tecnología = new BotonCategoriaCheck();
-            botonCategoriaCheck5 = new BotonCategoriaCheck();
+            Celulares = new BotonCategoriaCheck();
             Hogar = new BotonCategoriaCheck();
-            botonCategoriaCheck3 = new BotonCategoriaCheck();
+            Categoria_electrodomesticos = new BotonCategoriaCheck();
             panel4 = new Panel();
             tablaResultados1 = new ReaLTaiizor.Controls.PoisonDataGridView();
             Nombre = new DataGridViewTextBoxColumn();
@@ -74,8 +74,8 @@
             label_producto_busqueda = new Label();
             label_txt_compare = new Label();
             panel3 = new Panel();
-            panel_filtros = new Panel();
             panel2 = new Panel();
+            panel_filtros = new Panel();
             tarjetaTienda4 = new TarjetaTienda();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewImageColumn2 = new DataGridViewImageColumn();
@@ -426,9 +426,9 @@
             // panel5
             // 
             panel5.Controls.Add(Tecnología);
-            panel5.Controls.Add(botonCategoriaCheck5);
+            panel5.Controls.Add(Celulares);
             panel5.Controls.Add(Hogar);
-            panel5.Controls.Add(botonCategoriaCheck3);
+            panel5.Controls.Add(Categoria_electrodomesticos);
             panel5.Location = new Point(3, 6);
             panel5.Name = "panel5";
             panel5.Size = new Size(127, 554);
@@ -447,21 +447,22 @@
             Tecnología.Size = new Size(102, 82);
             Tecnología.TabIndex = 22;
             Tecnología.Text = "Tecnología";
+            Tecnología.Click += Tecnología_Click;
             // 
-            // botonCategoriaCheck5
+            // Celulares
             // 
-            botonCategoriaCheck5.BackColor = Color.Transparent;
-            botonCategoriaCheck5.BorderRadius = 12;
-            botonCategoriaCheck5.Checked = false;
-            botonCategoriaCheck5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            botonCategoriaCheck5.Imagen = Properties.Resources.varios1;
-            botonCategoriaCheck5.Location = new Point(10, 297);
-            botonCategoriaCheck5.Margin = new Padding(3, 2, 3, 2);
-            botonCategoriaCheck5.Name = "botonCategoriaCheck5";
-            botonCategoriaCheck5.Size = new Size(102, 82);
-            botonCategoriaCheck5.TabIndex = 26;
-            botonCategoriaCheck5.Text = "Varios";
-            botonCategoriaCheck5.Click += botonCategoriaCheck5_Click;
+            Celulares.BackColor = Color.Transparent;
+            Celulares.BorderRadius = 12;
+            Celulares.Checked = false;
+            Celulares.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            Celulares.Imagen = Properties.Resources.varios1;
+            Celulares.Location = new Point(10, 297);
+            Celulares.Margin = new Padding(3, 2, 3, 2);
+            Celulares.Name = "Celulares";
+            Celulares.Size = new Size(102, 82);
+            Celulares.TabIndex = 26;
+            Celulares.Text = "Smarphones";
+            Celulares.Click += botonCategoriaCelulares_Click;
             // 
             // Hogar
             // 
@@ -478,20 +479,20 @@
             Hogar.Text = "Hogar";
             Hogar.Click += Hogar_Click;
             // 
-            // botonCategoriaCheck3
+            // Categoria_electrodomesticos
             // 
-            botonCategoriaCheck3.BackColor = Color.Transparent;
-            botonCategoriaCheck3.BorderRadius = 12;
-            botonCategoriaCheck3.Checked = false;
-            botonCategoriaCheck3.Font = new Font("Segoe UI Black", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            botonCategoriaCheck3.Imagen = Properties.Resources.electrodomesticos1;
-            botonCategoriaCheck3.Location = new Point(10, 199);
-            botonCategoriaCheck3.Margin = new Padding(3, 2, 3, 2);
-            botonCategoriaCheck3.Name = "botonCategoriaCheck3";
-            botonCategoriaCheck3.Size = new Size(102, 82);
-            botonCategoriaCheck3.TabIndex = 24;
-            botonCategoriaCheck3.Text = "Electrodomesticos";
-            botonCategoriaCheck3.Click += botonCategoriaCheck3_Click_1;
+            Categoria_electrodomesticos.BackColor = Color.Transparent;
+            Categoria_electrodomesticos.BorderRadius = 12;
+            Categoria_electrodomesticos.Checked = false;
+            Categoria_electrodomesticos.Font = new Font("Segoe UI Black", 6F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Categoria_electrodomesticos.Imagen = Properties.Resources.electrodomesticos1;
+            Categoria_electrodomesticos.Location = new Point(10, 199);
+            Categoria_electrodomesticos.Margin = new Padding(3, 2, 3, 2);
+            Categoria_electrodomesticos.Name = "Categoria_electrodomesticos";
+            Categoria_electrodomesticos.Size = new Size(102, 82);
+            Categoria_electrodomesticos.TabIndex = 24;
+            Categoria_electrodomesticos.Text = "Electrodomesticos";
+            Categoria_electrodomesticos.Click += botonCategoriaElectrodomesticos_Click;
             // 
             // panel4
             // 
@@ -514,41 +515,43 @@
             tablaResultados1.BorderStyle = BorderStyle.None;
             tablaResultados1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             tablaResultados1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 102, 204);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 102, 204);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            tablaResultados1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(0, 102, 204);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(0, 102, 204);
+            dataGridViewCellStyle11.SelectionForeColor = Color.White;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            tablaResultados1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             tablaResultados1.ColumnHeadersHeight = 42;
             tablaResultados1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tablaResultados1.Columns.AddRange(new DataGridViewColumn[] { Nombre, Precio, icono, dataGridViewTextBoxColumn2 });
             tablaResultados1.Cursor = Cursors.Hand;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle12;
+            tablaResultados1.EditMode = DataGridViewEditMode.EditOnF2;
             tablaResultados1.EnableHeadersVisualStyles = false;
             tablaResultados1.Font = new Font("Segoe UI", 9.5F);
             tablaResultados1.GridColor = Color.FromArgb(235, 238, 242);
             tablaResultados1.Location = new Point(496, 56);
+            tablaResultados1.MultiSelect = false;
             tablaResultados1.Name = "tablaResultados1";
             tablaResultados1.RightToLeft = RightToLeft.No;
             tablaResultados1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            tablaResultados1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.White;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle13.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle13.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle13.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            tablaResultados1.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             tablaResultados1.RowHeadersVisible = false;
             tablaResultados1.RowHeadersWidth = 51;
             tablaResultados1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -585,6 +588,7 @@
             dataGridViewTextBoxColumn2.HeaderText = "Tienda";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Resizable = DataGridViewTriState.True;
             // 
             // Grid_Compare
             // 
@@ -594,25 +598,25 @@
             Grid_Compare.BorderStyle = BorderStyle.None;
             Grid_Compare.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             Grid_Compare.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(0, 102, 204);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(0, 102, 204);
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            Grid_Compare.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(0, 102, 204);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(0, 102, 204);
+            dataGridViewCellStyle14.SelectionForeColor = Color.White;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            Grid_Compare.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             Grid_Compare.ColumnHeadersHeight = 42;
             Grid_Compare.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             Grid_Compare.Columns.AddRange(new DataGridViewColumn[] { Tienda, Producto });
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.White;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            Grid_Compare.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.White;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle15.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            Grid_Compare.DefaultCellStyle = dataGridViewCellStyle15;
             Grid_Compare.EnableHeadersVisualStyles = false;
             Grid_Compare.Font = new Font("Segoe UI", 9.5F);
             Grid_Compare.GridColor = Color.FromArgb(235, 238, 242);
@@ -620,14 +624,14 @@
             Grid_Compare.Name = "Grid_Compare";
             Grid_Compare.RightToLeft = RightToLeft.No;
             Grid_Compare.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            Grid_Compare.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle16.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle16.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            Grid_Compare.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             Grid_Compare.RowHeadersVisible = false;
             Grid_Compare.RowHeadersWidth = 51;
             Grid_Compare.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -635,6 +639,7 @@
             Grid_Compare.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             Grid_Compare.Size = new Size(471, 296);
             Grid_Compare.TabIndex = 26;
+            Grid_Compare.CellContentClick += Grid_Compare_CellContentClick;
             // 
             // Tienda
             // 
@@ -690,13 +695,6 @@
             panel3.Size = new Size(1258, 191);
             panel3.TabIndex = 21;
             // 
-            // panel_filtros
-            // 
-            panel_filtros.Location = new Point(42, 146);
-            panel_filtros.Name = "panel_filtros";
-            panel_filtros.Size = new Size(702, 39);
-            panel_filtros.TabIndex = 29;
-            // 
             // panel2
             // 
             panel2.Controls.Add(panel_filtros);
@@ -709,6 +707,13 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(829, 188);
             panel2.TabIndex = 26;
+            // 
+            // panel_filtros
+            // 
+            panel_filtros.Location = new Point(42, 146);
+            panel_filtros.Name = "panel_filtros";
+            panel_filtros.Size = new Size(702, 39);
+            panel_filtros.TabIndex = 29;
             // 
             // tarjetaTienda4
             // 
@@ -734,9 +739,9 @@
             // 
             // dataGridViewImageColumn1
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.NullValue = null;
-            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.NullValue = null;
+            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridViewImageColumn1.HeaderText = "Foto";
             dataGridViewImageColumn1.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridViewImageColumn1.MinimumWidth = 6;
@@ -746,9 +751,9 @@
             // 
             // dataGridViewImageColumn2
             // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle18;
             dataGridViewImageColumn2.HeaderText = "Foto";
             dataGridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridViewImageColumn2.MinimumWidth = 6;
@@ -805,8 +810,8 @@
             // 
             // dataGridViewTextBoxColumn11
             // 
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle19;
             dataGridViewTextBoxColumn11.MinimumWidth = 6;
             dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -837,8 +842,8 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle20;
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -926,20 +931,20 @@
         private Panel panel4;
         private ReaLTaiizor.Controls.PoisonDataGridView tablaResultados1;
         private ReaLTaiizor.Controls.PoisonDataGridView Grid_Compare;
+        private ReaLTaiizor.Controls.BigLabel lbl_busquedas_restantes;
+        private ReaLTaiizor.Controls.BigLabel label_ag_busqueda;
+        private BotonMenu btn_cerrar_sesion;
+        private BotonCategoriaCheck Categoria_electrodomesticos;
+        private BotonCategoriaCheck Hogar;
+        private BotonCategoriaCheck Tecnología;
+        private BotonCategoriaCheck Celulares;
+        private Panel panel5;
+        private Panel panel_filtros;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Precio;
         private DataGridViewImageColumn icono;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewImageColumn Tienda;
         private DataGridViewTextBoxColumn Producto;
-        private ReaLTaiizor.Controls.BigLabel lbl_busquedas_restantes;
-        private ReaLTaiizor.Controls.BigLabel label_ag_busqueda;
-        private BotonMenu btn_cerrar_sesion;
-        private BotonCategoriaCheck botonCategoriaCheck3;
-        private BotonCategoriaCheck Hogar;
-        private BotonCategoriaCheck Tecnología;
-        private BotonCategoriaCheck botonCategoriaCheck5;
-        private Panel panel5;
-        private Panel panel_filtros;
     }
 }

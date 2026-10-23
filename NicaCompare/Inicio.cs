@@ -209,20 +209,23 @@ namespace NicaCompare
         }
 
         // —————————————————》✧𝐓𝐚𝐛𝐥as✧《———————————————————————
-        private void AgregarProductoATabla(string nombre, string precio, string tiendaKey)
-        {
-            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";
-            Image logo = Imgagenes.Obtener(nomImg);
-            tablaResultados1.Rows.Add(nombre, precio, logo, tiendaKey);
-        }
-
-        private void AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
+        private int AgregarMejorProductoATabla(string nombre, string precio, string tiendaKey)
         {
             string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";
             Image logo = Imgagenes.Obtener(nomImg);
             string textoCombinado = string.IsNullOrWhiteSpace(precio) ? nombre : $"{precio} | \n{nombre}";
-            if (Grid_Compare != null) { Grid_Compare.Rows.Add(logo, textoCombinado); }
+
+            return Grid_Compare.Rows.Add(logo, textoCombinado);
         }
+
+        private int AgregarProductoATabla(string nombre, string precio, string tiendaKey)
+        {
+            string nomImg = ConfigScraper.Tiendas.ContainsKey(tiendaKey) && ConfigScraper.Tiendas[tiendaKey].ContainsKey("img") ? ConfigScraper.Tiendas[tiendaKey]["img"] : "";
+            Image logo = Imgagenes.Obtener(nomImg);
+
+            return tablaResultados1.Rows.Add(nombre, precio, logo, tiendaKey);
+        }
+
         // Lista  para guardar productos y filtrar localmente sin volver a scrapear
         private List<ProductoResult> listaProductos = new List<ProductoResult>();
 
@@ -271,10 +274,10 @@ namespace NicaCompare
                 await Task.WhenAll(tareasTiendas);
                 label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{listaProductos.Count} ✔";
             }
-            finally {  buscando = false; }
+            finally { buscando = false; }
         }
 
-        // Aplica los filtros locales y refresca ambas tablas en memoria
+        // Aplica los filtros locales y refresca ambas tablas en memoria// Aplica los filtros locales y refresca ambas tablas en memoria
         private void ActualizarTablaConFiltros()
         {
             tablaResultados1.Rows.Clear();
@@ -319,7 +322,15 @@ namespace NicaCompare
                 if (productosAgregadosGlobal.Add(claveCache))
                 {
                     string precioLimpiado = ObtenerPrimerPrecio(prod.PrecioTexto);
-                    AgregarProductoATabla(prod.Nombre, precioLimpiado, prod.TiendaKey);
+
+                    // Capturamos el índice exacto que devuelve el método
+                    int rowIndex = AgregarProductoATabla(prod.Nombre, precioLimpiado, prod.TiendaKey);
+
+                    // Guardamos el objeto completo (con su URL) en el Tag de esa fila exacta
+                    if (rowIndex >= 0 && rowIndex < tablaResultados1.Rows.Count)
+                    {
+                        tablaResultados1.Rows[rowIndex].Tag = prod;
+                    }
                 }
             }
 
@@ -345,7 +356,9 @@ namespace NicaCompare
                         Nombre = "No disponible en esta tienda",
                         PrecioTexto = "",
                         PrecioMonto = decimal.MaxValue,
-                        TiendaKey = tiendaKey
+                        TiendaKey = tiendaKey,
+                        Url = "",
+                        Imagen = ""
                     });
                 }
             }
@@ -354,7 +367,15 @@ namespace NicaCompare
             foreach (var mejor in losMasBaratos)
             {
                 string precioMejorLimpiado = ObtenerPrimerPrecio(mejor.PrecioTexto);
-                AgregarMejorProductoATabla(mejor.Nombre, precioMejorLimpiado, mejor.TiendaKey);
+
+                // Capturamos el índice exacto para la tabla de comparación
+                int rowIndexCompare = AgregarMejorProductoATabla(mejor.Nombre, precioMejorLimpiado, mejor.TiendaKey);
+
+                // Guardamos el objeto en el Tag de la fila de Grid_Compare
+                if (Grid_Compare != null && rowIndexCompare >= 0 && rowIndexCompare < Grid_Compare.Rows.Count)
+                {
+                    Grid_Compare.Rows[rowIndexCompare].Tag = mejor;
+                }
             }
         }
         //❍﹏﹏﹏﹏﹏﹏  𝗠𝗲𝘁𝗼𝗱𝗼𝘀 𝗩𝗮𝗰𝗶𝗼𝘀  ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
@@ -376,10 +397,87 @@ namespace NicaCompare
         private void label11_Click(object sender, EventArgs e) { }
         private void label_producto_busqueda_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
-        private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void botonCategoriaCheck5_Click(object sender, EventArgs e) { }
-        private void Hogar_Click(object sender, EventArgs e) { }
-        private void botonCategoriaCheck3_Click_1(object sender, EventArgs e) { }
+
+
+
+
+
+        // tablas funciones de click que pasa su info private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { ProcesarClickEnTabla(sender, e, "Abrir Enlace"); }
+
+        private void Grid_Compare_CellContentClick(object sender, DataGridViewCellEventArgs e) { ProcesarClickEnTabla(sender, e, "Abrir Enlace (Comparación)"); }
+
+        //funcon para ir al url
+        private void ProcesarClickEnTabla(object sender, DataGridViewCellEventArgs e, string tituloVentana)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var grid = sender as DataGridView;
+                if (grid != null)
+                {
+                    var producto = grid.Rows[e.RowIndex].Tag as ProductoResult;
+                    if (producto != null && !string.IsNullOrEmpty(producto.Url))
+                    {
+                        // AQUÍ RECORTAMOS EL TEXTO: Nos quedamos solo con las primeras 5 palabras (o ajusta el número a tu gusto)
+                        string nombreCorto = Utilidad.AcortarTexto(producto.Nombre, 5);
+
+                        DialogResult resultado = MessageBox.Show(
+                            $"Producto: {nombreCorto}\n\n¿Deseas abrir la página de este producto?",
+                            tituloVentana,
+                            MessageBoxButtons.OKCancel,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (resultado == DialogResult.OK)
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                            {
+                                FileName = producto.Url,
+                                UseShellExecute = true
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        ////////// Categorias Adicionales
+        private void Tecnología_Click(object sender, EventArgs e) { SeleccionarCategoria(Tecnología, "Tecnología"); }
+
+        private void Hogar_Click(object sender, EventArgs e) { SeleccionarCategoria(Hogar, "Hogar"); }
+
+        private void botonCategoriaCelulares_Click(object sender, EventArgs e) { SeleccionarCategoria(Celulares, "Celulares"); }
+
+        private void botonCategoriaElectrodomesticos_Click(object sender, EventArgs e) { SeleccionarCategoria(Categoria_electrodomesticos, "Electrodomésticos");}
+
+        private async void SeleccionarCategoria(BotonCategoriaCheck botonActual, string nombreCategoria)
+        {
+            BotonCategoriaCheck[] grupoBotones = new[] { Tecnología, Hogar, Celulares, Categoria_electrodomesticos };
+            if (sesion_actual.Busquedas_restantes <= 0)
+            {
+                foreach (var btn in grupoBotones) {btn.Checked = false;}
+                MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+3
+            foreach (var btn in grupoBotones){if (btn != null && btn != botonActual){btn.Checked = false;}}
+            if (!botonActual.Checked){botonActual.Checked = true;}
+
+
+            // restar puntos etcc (funcion similar a lo de busqueda)
+            GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
+            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+            tablaResultados1.Rows.Clear(); Grid_Compare.Rows.Clear();
+
+            barraBusqueda1.Text = "";
+
+            await EmpezarBusqueda(nombreCategoria);
+            barraBusqueda1.Text = "";
+
+
+        }
+
+
     }
 
     // Modelo de resultado
@@ -389,5 +487,8 @@ namespace NicaCompare
         public string PrecioTexto { get; set; } = "";
         public decimal PrecioMonto { get; set; }
         public string TiendaKey { get; set; } = "";
+
+        public string Imagen { get; set; } = "";
+        public string Url { get; set; } = "";
     }
 }

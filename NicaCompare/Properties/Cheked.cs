@@ -5,6 +5,11 @@ using System.Windows.Forms;
 
 namespace NicaCompare
 {
+    using System;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Windows.Forms;
+
     public class BotonCategoriaCheck : Control
     {
         private bool _checked = false;
@@ -61,8 +66,8 @@ namespace NicaCompare
 
         protected override void OnClick(EventArgs e)
         {
-            base.OnClick(e);
-            Checked = !Checked;
+            Checked = !Checked; // 1. Cambia el estado primero
+            base.OnClick(e);    // 2. Luego dispara el evento Click
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -75,14 +80,14 @@ namespace NicaCompare
             Rectangle rect = new Rectangle(0, 0, Width - 1, Height - 1);
             GraphicsPath path = GetRoundedPath(rect, _borderRadius);
 
-            // 1. Fondo
+            // 1. Fondo (cambia de color si está seleccionado)
             Color currentBack = _checked ? _backSelectedColor : _backNormalColor;
             using (SolidBrush brushBack = new SolidBrush(currentBack))
             {
                 g.FillPath(brushBack, path);
             }
 
-            // 2. Borde exterior
+            // 2. Borde exterior (cambia de grosor y color si está seleccionado)
             Color currentBorder = _checked ? _borderSelectedColor : _borderNormalColor;
             int borderWidth = _checked ? 2 : 1;
             using (Pen penBorder = new Pen(currentBorder, borderWidth))
@@ -94,14 +99,14 @@ namespace NicaCompare
             int imageAreaHeight = (int)(Height * 0.55);
             if (_imagen != null)
             {
-                int imgSize = Math.Min(Width - 40, imageAreaHeight - 10);
+                int imgSize = Math.Min(Width - 40, imageAreaHeight);
                 int imgX = (Width - imgSize) / 2;
                 int imgY = 12;
                 g.DrawImage(_imagen, new Rectangle(imgX, imgY, imgSize, imgSize));
             }
 
             // 4. Renderizado del Texto
-            Rectangle textRect = new Rectangle(5, imageAreaHeight, Width - 10, Height - imageAreaHeight - 6);
+            Rectangle textRect = new Rectangle(5, imageAreaHeight, Width - 10, Height - imageAreaHeight);
             using (StringFormat sf = new StringFormat())
             {
                 sf.Alignment = StringAlignment.Center;
@@ -115,34 +120,13 @@ namespace NicaCompare
                 }
             }
 
-            // 5. Check Icon
-            if (_checked)
-            {
-                int badgeSize = 18;
-                Rectangle badgeRect = new Rectangle(Width - badgeSize - 8, 8, badgeSize, badgeSize);
 
-                using (SolidBrush badgeBrush = new SolidBrush(_borderSelectedColor))
-                {
-                    g.FillEllipse(badgeBrush, badgeRect);
-                }
-
-                using (Pen checkPen = new Pen(Color.White, 2))
-                {
-                    Point[] checkPoints = new Point[]
-                    {
-                        new Point(badgeRect.X + 4, badgeRect.Y + 9),
-                        new Point(badgeRect.X + 8, badgeRect.Y + 12),
-                        new Point(badgeRect.X + 13, badgeRect.Y + 6)
-                    };
-                    g.DrawLines(checkPen, checkPoints);
-                }
-            }
         }
 
         private GraphicsPath GetRoundedPath(Rectangle rect, int radius)
         {
             GraphicsPath path = new GraphicsPath();
-            float diameter = radius * 2F;
+            float diameter = radius * 2f;
 
             path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
             path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90);

@@ -31,6 +31,7 @@ namespace NicaCompare
             return imgDefectoObjeto != null ? (Image)imgDefectoObjeto : Properties.Resources.LOGO_22;
         }
 
+
         public static void Guardar(string rutaOrigen, string nombreimg)
         {
             // armamos la ruta hacia la carpeta Resources del proyecto
@@ -88,4 +89,61 @@ namespace NicaCompare
             formularioActual.Hide();
         }
     }
+
+
+
+    public static class Utilidad
+    {
+
+        public static string AcortarTexto(string textoCompleto, int maxPalabras) // recortar texto evita muchas cosas
+        {
+            if (string.IsNullOrWhiteSpace(textoCompleto)) return "";
+
+            var palabras = textoCompleto.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (palabras.Length <= maxPalabras)
+            {
+                return textoCompleto;
+            }
+            // Une solo las primeras N palabras y le agrega puntos suspensivos
+            return string.Join(" ", palabras.Take(maxPalabras)) + "...";
+        }
+
+
+        /// Limpiar Precio, y convertir a numero
+        public static decimal LimpiarPrecio(string precioTexto)
+        {
+            if (string.IsNullOrWhiteSpace(precioTexto) || precioTexto == "Sin precio") return decimal.MaxValue;
+
+            // Normalizamos el texto general
+            string textoProcesado = precioTexto.ToUpper()
+                .Replace("U$", "$")
+                .Replace("C$", "$")
+                .Replace("\u00A0", "")
+                .Replace("+IVA", "")
+                .Replace("+ IVA", "")
+                .Replace("IVA", "")
+                .Trim();
+
+            // Evitar más de 1 precio
+            var fragmentos = textoProcesado.Split(new[] { '$' }, StringSplitOptions.RemoveEmptyEntries);
+            List<decimal> montosEncontrados = new List<decimal>();
+
+            foreach (var frag in fragmentos)
+            {
+                string limpio = frag.Replace(" ", "").Replace(",", "").Trim();
+
+                // Convierte el texto limpio en un número para que no crashee y poder ordenar
+                if (decimal.TryParse(limpio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal resultado))
+                {
+                    if (resultado > 0) { montosEncontrados.Add(resultado); }
+                }
+            }
+
+            // Si encontró precios, devolvemos el menor (el precio de oferta real)
+            if (montosEncontrados.Count > 0) { return montosEncontrados.Min(); }
+
+            return decimal.MaxValue;
+        }
+    }
+
 }

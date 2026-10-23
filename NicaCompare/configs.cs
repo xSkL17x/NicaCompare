@@ -105,11 +105,10 @@ namespace NicaCompare
             public static readonly Dictionary<string, string[]> Atributos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
             { "TipoOperacion", new[] { "Semiautomática", "Automática", "Congelador Horizontal" } },
-            { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },
-            { "Conectividad", new[] { "5G", "4G" } },
+            { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },            
             { "MemoriaRAM", new[] { "4GB RAM", "6GB RAM", "8GB RAM", "12GB RAM" } }
             };
-            }
+        }
 
 
         public static readonly Dictionary<string, string[]> parecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
@@ -136,39 +135,6 @@ namespace NicaCompare
             return await scraping_v1(httpClient, textoBuscado, tienda);
         }
 
-        // LIMPIAR PRECIO - Quita letras, símbolos de moneda y espacios para dejar sólo el número puro.
-        public static decimal ParsearPrecio(string precioTexto)
-        {
-            if (string.IsNullOrWhiteSpace(precioTexto) || precioTexto == "Sin precio") return decimal.MaxValue;
-
-            // Normalizamos el texto general
-            string textoProcesado = precioTexto.ToUpper()
-                .Replace("U$", "$")
-                .Replace("C$", "$")
-                .Replace("\u00A0", "")
-                .Replace("+IVA", "")
-                .Replace("+ IVA", "")
-                .Replace("IVA", "")
-                .Trim();
-            // evitar mas de 1 precio
-            var fragmentos = textoProcesado.Split(new[] { '$' }, StringSplitOptions.RemoveEmptyEntries);
-            List<decimal> montosEncontrados = new List<decimal>();
-
-            foreach (var frag in fragmentos)
-            {
-                string limpio = frag.Replace(" ", "").Replace(",", "").Trim();
-
-                // Convierte el texto limpio en un numero pa que no crashee y poder ordenar
-                if (decimal.TryParse(limpio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal resultado))
-                { if (resultado > 0) { montosEncontrados.Add(resultado);  } }
-            }
-            // Si encontro precios, devolvemos el menor (el precio de oferta real)
-            if (montosEncontrados.Count > 0) { return montosEncontrados.Min(); }
-
-            return decimal.MaxValue;
-        }
-
-
         //Mejora pa rendimiento        
         public static readonly HttpClient httpClient = new HttpClient(new HttpClientHandler
         {
@@ -183,10 +149,7 @@ namespace NicaCompare
             // Busca el primer patrón válido de precio (ej: C$89,740.00 o $20,999) y descarta todo lo demás
             var match = System.Text.RegularExpressions.Regex.Match(precioTexto, @"(C\$|\$)\s*[\d,.]+", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
-            if (match.Success)
-            {
-                return match.Value.Trim();
-            }
+            if (match.Success) { return match.Value.Trim(); }
 
             return precioTexto;
         }
@@ -226,6 +189,7 @@ namespace NicaCompare
                             string[] terminosOmitir = { "Añadir al carrito", "Agregar a Lista de deseos", "Leer más" };
                             string xpathTitulo = tienda.Value.ContainsKey("XPathTitulo") ? tienda.Value["XPathTitulo"] : ".//*[contains(@class, 'title') or contains(@class, 'name') or name()='h2' or name()='h3']";
                             string xpathPrecio = tienda.Value.ContainsKey("XPathPrecio") ? tienda.Value["XPathPrecio"] : ".//ins//bdi | .//bdi | .//*[contains(@class, 'electro-price')] | .//*[contains(@class, 'price')]";
+                            string xpathImagen = tienda.Value.ContainsKey("XPathImagen") ? tienda.Value["XPathImagen"] : ".//img";
 
                             // Revisa cada cajita de producto encontrada.
                             foreach (var nodo in nodosProductos)
@@ -233,6 +197,7 @@ namespace NicaCompare
                                 if (count >= 1000) break;
                                 var nodoTitulo = nodo.SelectSingleNode(xpathTitulo);
                                 var nodoPrecio = nodo.SelectSingleNode(xpathPrecio);
+                                var nodoImagen = nodo.SelectSingleNode(xpathImagen);
 
                                 // Limpia el nombre y el precio
                                 string nombre = nodoTitulo != null ? System.Net.WebUtility.HtmlDecode(nodoTitulo.InnerText.Trim()).Replace("\n", " ").Replace("\r", "") : "";
@@ -241,6 +206,17 @@ namespace NicaCompare
                                 foreach (var term in terminosOmitir) { precio = precio.Replace(term, ""); }
                                 precio = precio.Trim();
 
+                                // Extracción de enlace (Hipervínculo)
+                                var nodoAncla = nodo.SelectSingleNode(".//a") ?? (nodoTitulo != null ? nodoTitulo.SelectSingleNode("ancestor-or-self::a") : null);
+                                string href = nodoAncla != null ? nodoAncla.GetAttributeValue("href", "") : "";
+                                string urlFinal = "";
+                                if (!string.IsNullOrEmpty(href)){
+                                    urlFinal = href.StartsWith("http") ? href : new Uri(new Uri(tienda.Value["Url"]), href).ToString();
+                                }
+
+                                // Extracción de Imagen
+                                string imagenUrl = nodoImagen != null ? nodoImagen.GetAttributeValue("src", "") : "";
+
                                 // Comprueba que el producto tenga nombre y no sea una palabra random o basura.
                                 bool esValido = !string.IsNullOrEmpty(nombre);
                                 foreach (var palabra in palabrasExcluidas) { if (nombre.Contains(palabra, StringComparison.OrdinalIgnoreCase)) { esValido = false; break; } }
@@ -248,7 +224,15 @@ namespace NicaCompare
                                 if (esValido)
                                 {
                                     // Guarda el producto limpio en nuestra lista.
-                                    productosEncontrados.Add(new ProductoResult { Nombre = nombre, PrecioTexto = precio, PrecioMonto = ParsearPrecio(precio), TiendaKey = tienda.Key });
+                                    productosEncontrados.Add(new ProductoResult
+                                    {
+                                        Nombre = nombre,
+                                        PrecioTexto = precio,
+                                        PrecioMonto = Utilidad.LimpiarPrecio(precio),
+                                        TiendaKey = tienda.Key,
+                                        Url = urlFinal,
+                                        Imagen = imagenUrl
+                                    });
                                     count++;
                                 }
                             }
@@ -303,10 +287,27 @@ namespace NicaCompare
                                         }
                                     }
 
+                                    // Extracción de URL e Imagen desde Algolia
+                                    string urlProducto = hit.TryGetProperty("url", out var uProp) ? uProp.GetString() ?? "" : "";
+                                    if (!string.IsNullOrEmpty(urlProducto) && !urlProducto.StartsWith("http"))
+                                    {
+                                        urlProducto = $"https://www.elgallomasgallo.com.ni{urlProducto}";
+                                    }
+
+                                    string imagenUrl = hit.TryGetProperty("image", out var iProp) ? iProp.GetString() ?? "" : "";
+
                                     if (!string.IsNullOrEmpty(nombre))
                                     {
-                                        if (precioMonto == decimal.MaxValue) precioMonto = ParsearPrecio(precioTexto);
-                                        productosEncontrados.Add(new ProductoResult { Nombre = nombre, PrecioTexto = precioTexto, PrecioMonto = precioMonto, TiendaKey = tienda.Key });
+                                        if (precioMonto == decimal.MaxValue) precioMonto = Utilidad.LimpiarPrecio(precioTexto);
+                                        productosEncontrados.Add(new ProductoResult
+                                        {
+                                            Nombre = nombre,
+                                            PrecioTexto = precioTexto,
+                                            PrecioMonto = precioMonto,
+                                            TiendaKey = tienda.Key,
+                                            Url = urlProducto,
+                                            Imagen = imagenUrl
+                                        });
                                     }
                                 }
                             }
@@ -317,5 +318,6 @@ namespace NicaCompare
             catch { }
             return (tienda.Key, productosEncontrados);
         }
+    }
 
 }
