@@ -459,7 +459,7 @@ namespace NicaCompare
                 MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-3
+
             foreach (var btn in grupoBotones){if (btn != null && btn != botonActual){btn.Checked = false;}}
             if (!botonActual.Checked){botonActual.Checked = true;}
 
