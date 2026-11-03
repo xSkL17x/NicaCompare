@@ -79,6 +79,7 @@
             pictureBox4 = new PictureBox();
             label5 = new Label();
             panel7 = new Panel();
+            tarjetaTienda6 = new TarjetaTienda();
             tarjetaTienda5 = new TarjetaTienda();
             tarjetaTienda4 = new TarjetaTienda();
             panel_filtros = new Panel();
@@ -108,7 +109,6 @@
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            tarjetaTienda6 = new TarjetaTienda();
             panel_Busqueda.SuspendLayout();
             panel6.SuspendLayout();
             panel1.SuspendLayout();
@@ -195,7 +195,7 @@
             tarjetaTienda2.MostrarBorde = false;
             tarjetaTienda2.MostrarSeparador = true;
             tarjetaTienda2.Name = "tarjetaTienda2";
-            tarjetaTienda2.Seleccionado = true;
+            tarjetaTienda2.Seleccionado = false;
             tarjetaTienda2.Size = new Size(133, 83);
             tarjetaTienda2.TabIndex = 19;
             tarjetaTienda2.TamañoImagen = new Size(0, 0);
@@ -684,12 +684,12 @@
             label_producto_busqueda.BackColor = Color.Transparent;
             label_producto_busqueda.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label_producto_busqueda.ForeColor = Color.Indigo;
-            label_producto_busqueda.Location = new Point(742, 3);
+            label_producto_busqueda.Location = new Point(725, 3);
             label_producto_busqueda.Name = "label_producto_busqueda";
             label_producto_busqueda.Size = new Size(141, 30);
             label_producto_busqueda.TabIndex = 24;
             label_producto_busqueda.Text = "Mas Buscado";
-            label_producto_busqueda.TextAlign = ContentAlignment.MiddleCenter;
+            label_producto_busqueda.TextAlign = ContentAlignment.MiddleRight;
             label_producto_busqueda.Click += label_producto_busqueda_Click;
             // 
             // label_txt_compare
@@ -780,6 +780,28 @@
             panel7.Size = new Size(821, 90);
             panel7.TabIndex = 22;
             // 
+            // tarjetaTienda6
+            // 
+            tarjetaTienda6.BackColor = Color.Transparent;
+            tarjetaTienda6.BackgroundImage = Properties.Resources.RadioShack_Logo;
+            tarjetaTienda6.BackgroundImageLayout = ImageLayout.Center;
+            tarjetaTienda6.ColorBorde = Color.FromArgb(220, 224, 230);
+            tarjetaTienda6.ColorCheck = Color.FromArgb(13, 110, 253);
+            tarjetaTienda6.Imagen = null;
+            tarjetaTienda6.Location = new Point(279, 3);
+            tarjetaTienda6.MargenImagen = 8;
+            tarjetaTienda6.Margin = new Padding(3, 2, 3, 2);
+            tarjetaTienda6.MinimumSize = new Size(35, 22);
+            tarjetaTienda6.MostrarBorde = false;
+            tarjetaTienda6.MostrarSeparador = true;
+            tarjetaTienda6.Name = "tarjetaTienda6";
+            tarjetaTienda6.Seleccionado = true;
+            tarjetaTienda6.Size = new Size(133, 83);
+            tarjetaTienda6.TabIndex = 23;
+            tarjetaTienda6.TamañoImagen = new Size(0, 0);
+            tarjetaTienda6.Text = "tarjetaTienda6";
+            tarjetaTienda6.CheckedChanged += tarjetaTienda6_CheckedChanged;
+            // 
             // tarjetaTienda5
             // 
             tarjetaTienda5.BackColor = Color.Transparent;
@@ -795,11 +817,12 @@
             tarjetaTienda5.MostrarBorde = false;
             tarjetaTienda5.MostrarSeparador = true;
             tarjetaTienda5.Name = "tarjetaTienda5";
-            tarjetaTienda5.Seleccionado = true;
+            tarjetaTienda5.Seleccionado = false;
             tarjetaTienda5.Size = new Size(133, 83);
             tarjetaTienda5.TabIndex = 22;
             tarjetaTienda5.TamañoImagen = new Size(0, 0);
-            tarjetaTienda5.Text = "v";
+            tarjetaTienda5.Text = "tarjetaTienda5";
+            tarjetaTienda5.CheckedChanged += tarjetaTienda5_CheckedChanged;
             // 
             // tarjetaTienda4
             // 
@@ -816,7 +839,7 @@
             tarjetaTienda4.MostrarBorde = false;
             tarjetaTienda4.MostrarSeparador = true;
             tarjetaTienda4.Name = "tarjetaTienda4";
-            tarjetaTienda4.Seleccionado = true;
+            tarjetaTienda4.Seleccionado = false;
             tarjetaTienda4.Size = new Size(133, 83);
             tarjetaTienda4.TabIndex = 21;
             tarjetaTienda4.TamañoImagen = new Size(0, 0);
@@ -1113,27 +1136,6 @@
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // tarjetaTienda6
-            // 
-            tarjetaTienda6.BackColor = Color.Transparent;
-            tarjetaTienda6.BackgroundImage = Properties.Resources.RadioShack_Logo;
-            tarjetaTienda6.BackgroundImageLayout = ImageLayout.Center;
-            tarjetaTienda6.ColorBorde = Color.FromArgb(220, 224, 230);
-            tarjetaTienda6.ColorCheck = Color.FromArgb(13, 110, 253);
-            tarjetaTienda6.Imagen = null;
-            tarjetaTienda6.Location = new Point(279, 3);
-            tarjetaTienda6.MargenImagen = 8;
-            tarjetaTienda6.Margin = new Padding(3, 2, 3, 2);
-            tarjetaTienda6.MinimumSize = new Size(35, 22);
-            tarjetaTienda6.MostrarBorde = false;
-            tarjetaTienda6.MostrarSeparador = true;
-            tarjetaTienda6.Name = "tarjetaTienda6";
-            tarjetaTienda6.Seleccionado = true;
-            tarjetaTienda6.Size = new Size(133, 83);
-            tarjetaTienda6.TabIndex = 23;
-            tarjetaTienda6.TamañoImagen = new Size(0, 0);
-            tarjetaTienda6.Text = "v";
             // 
             // Inicio
             // 

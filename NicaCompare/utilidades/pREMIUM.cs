@@ -39,29 +39,31 @@ namespace NicaCompare
 
         private static readonly string[] BeneficiosBasico =
         {
-            "Descuentos exclusivos en tiendas",
-            "Comparación de precios en tiempo real",
+            "Compara hasta 4 tiendas a la vez",
+            "Filtros avanzados por rango de precios",
             "Historial de precios (últimos 7 días)",
-            "Soporte por chat"
+            "Soporte por chat",
+            "Próximamente: Exportación de resultados a CSV"
         };
 
-        private static readonly string[] BeneficiosPremium =
-        {
+                private static readonly string[] BeneficiosPremium =
+                {
+            "Compara hasta 5 tiendas a la vez",
             "Todos los beneficios del plan Básico",
-            "Descuentos VIP en todas las tiendas",
-            "Alertas de bajada de precios",
-            "Comparación avanzada",
-            "Soporte prioritario 24/7"
+            "Detección de ofertas y productos en stock",
+            "Gráficos de variación de precios",
+            "Soporte técnico directo",
+            "Próximamente: Alertas automáticas de cambios de precio"
         };
 
-        private static readonly string[] BeneficiosElite =
-        {
+                private static readonly string[] BeneficiosElite =
+                {
+            "Compara las 6 tiendas disponibles",
             "Todos los beneficios del plan Premium",
-            "Descuentos VIP extendidos",
-            "Compras con cashback (hasta 10%)",
-            "Reportes personalizados de ahorro",
-            "Acceso anticipado a funciones",
-            "Soporte 24/7 + asesor personal"
+            "Búsqueda prioritaria sin colas de espera",
+            "Reportes de ahorro y estadísticas de compra",
+            "Acceso anticipado a nuevos scrapers de tiendas",
+            "Próximamente: API propia y webhooks personalizados"
         };
 
         [Category("NicaCompare Custom")]

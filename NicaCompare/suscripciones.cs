@@ -86,7 +86,12 @@ namespace NicaCompare
         private void tarjetaPlan1_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Básico 🔹", 49, 100); }
         private void tarjetaPlan2_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Premium 💎", 99, 300); }
         private void tarjetaPlan3_ClickSeleccionar(object sender, EventArgs e) { procesar_plan("Plan Elite 👑", 149, 500); }
-        private void recargar_saldo(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this);}
+        private void recargar_saldo(object sender, EventArgs e)
+        {
+            Form7 formRecarga = new Form7();
+            formRecarga.ShowDialog(this);
+            cargar_datos_usuario();
+        }
 
         private void btn_volver_Click(object sender, EventArgs e)
         {

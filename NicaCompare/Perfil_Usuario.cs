@@ -137,7 +137,7 @@ namespace NicaCompare
         private void btn_recargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }
         private void btn_volver_Click(object sender, EventArgs e) { Pantallas.cambiar<Inicio>(this); }
         private void btn_ir_planes_Click(object sender, EventArgs e) { Pantallas.cambiar<Form8>(this); }
-        private void botonRecargar_Click(object sender, EventArgs e) { Pantallas.cambiar<Form7>(this); }
+        private void botonRecargar_Click(object sender, EventArgs e) { Form7 formRecarga = new Form7(); formRecarga.ShowDialog(this); cargar_datos_usuario(); }
 
 
     }

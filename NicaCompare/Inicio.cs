@@ -24,8 +24,6 @@ namespace NicaCompare
             CargarUsuarioActivo();
             IniciarTimerBusquedas();
             CargarEstadoBotones();
-
-
         }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
@@ -59,13 +57,15 @@ namespace NicaCompare
             Pantallas.cambiar<Login>(this);
         }
 
-        //❍﹏﹏﹏﹏﹏﹏  𝑩𝑶𝑻𝑶𝑵𝑬𝑺 𝑨𝑪𝑻𝑰𝑽𝑨𝑹/𝑫𝑬𝑺𝑨𝑪𝑻𝑰𝑽𝑨𝑹 𝑻𝑰𝑬𝑵𝑫𝑨𝑺  ———————————————๑•̀ᴗ•̀) ̫ ─꒱
+        //❍﹏﹏﹏﹏﹏﹏  𝑩𝑶𝑻𝑶𝑵𝑬𝑺 𝑨𝑪𝑻𝑰𝑽𝑨𝑹/𝑫𝑬𝑺𝑨𝑪𝑻𝑰𝑽𝑨𝑹 𝑻𝑰𝑬𝑵𝑫𝑨𝚂  ———————————————๑•̀ᴗ•̀) ̫ ─꒱
+
         private void tarjetaTienda1_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] = tarjetaTienda1.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda2_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["SICSA"]["Activo"] = tarjetaTienda2.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda3_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["GCM"]["Activo"] = tarjetaTienda3.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda4_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["WALMART"]["Activo"] = tarjetaTienda4.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda5_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["La Curacao"]["Activo"] = tarjetaTienda5.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda6_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["RadioShack"]["Activo"] = tarjetaTienda6.Seleccionado ? "SI" : "NO"; }
+
 
         private void CargarEstadoBotones()
         {
@@ -84,36 +84,54 @@ namespace NicaCompare
         {
             string textoBuscado = barraBusqueda1.Text;
             if (string.IsNullOrWhiteSpace(textoBuscado)) { return; }
-
             if (sesion_actual.Busquedas_restantes <= 0)
             {
                 MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (buscando)
             {
                 MessageBox.Show("Espere a terminar la búsqueda actual.", "Búsqueda en curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
+            int tiendasSeleccionadas = 0;
+            if (tarjetaTienda1.Seleccionado) tiendasSeleccionadas++;
+            if (tarjetaTienda2.Seleccionado) tiendasSeleccionadas++;
+            if (tarjetaTienda3.Seleccionado) tiendasSeleccionadas++;
+            if (tarjetaTienda4.Seleccionado) tiendasSeleccionadas++;
+            if (tarjetaTienda5.Seleccionado) tiendasSeleccionadas++;
+            if (tarjetaTienda6.Seleccionado) tiendasSeleccionadas++;
+            if (tiendasSeleccionadas == 0)
+            {
+                MessageBox.Show("Por favor seleccione al menos 1 tienda para hacer la búsqueda.", "Tiendas requeridas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string planUsuario = sesion_actual.TipoUsuario ?? "Gratis";
+            int limiteTiendas = 3;
+            string planLower = planUsuario.ToLower();
+            if (planLower.Contains("básico") || planLower.Contains("basico")) limiteTiendas = 4;
+            else if (planLower.Contains("premium")) limiteTiendas = 5;
+            else if (planLower.Contains("elite") || planLower.Contains("élite")) limiteTiendas = 6;
+            if (tiendasSeleccionadas > limiteTiendas)
+            {
+                MessageBox.Show($"Tu plan actual solo deja buscar {limiteTiendas} tiendas.", "Límite de tiendas excedido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (textoBuscado.Length < 3)
             {
                 DialogResult resultado = MessageBox.Show($"¿Estás seguro que deseas buscar \"{textoBuscado}\"?", "Confirmar búsqueda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.No) { barraBusqueda1.Text = ""; return; }
             }
-
             GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
             lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} por favor espere";
             barraBusqueda1.Text = "";
-
             await EmpezarBusqueda(textoBuscado);
         }
 
-
+        //❍﹏﹏﹏﹏﹏﹏  𝐆𝐄𝐒𝐓𝐈𝐎𝐍 𝐃𝐄 𝐅𝐈𝐋𝐓𝐑𝐎𝐒 𝐘 𝐑𝐀𝐍𝐆𝐎𝐒  ──────────────╮
         private void CrearFiltros(List<string> nombresProductos)
         {
             // 1. Marcas
@@ -155,10 +173,7 @@ namespace NicaCompare
                 precioMaximoReal = validos.Max(p => p.PrecioMonto);
             }
 
-
-
             label_precio.Visible = true;
-
             TrackBarMinimo.Visible = true;
             TrackBarMaximo.Visible = true;
 
@@ -214,6 +229,7 @@ namespace NicaCompare
         // Lista  para guardar productos y filtrar localmente sin volver a scrapear
         private List<ProductoResult> listaProductos = new List<ProductoResult>();
 
+        //❍﹏﹏﹏﹏﹏﹏  𝐌𝐎𝐓𝐎𝐑 𝐃𝐄 𝐒𝐂𝐑𝐀𝐏𝐈𝐍𝐆 𝐘 𝐅𝐈𝐋𝐓𝐑𝐀𝐃𝐎  ══════╮
         private async Task EmpezarBusqueda(string textoBuscado)
         {
             buscando = true;
@@ -262,7 +278,7 @@ namespace NicaCompare
             finally { buscando = false; }
         }
 
-private void ActualizarTablaConFiltros()
+        private void ActualizarTablaConFiltros()
         {
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
@@ -365,11 +381,7 @@ private void ActualizarTablaConFiltros()
         private void label_producto_busqueda_Click(object sender, EventArgs e) { }
         private void pictureBox3_Click(object sender, EventArgs e) { }
 
-
-
-
-
-        // tablas funciones de click que pasa su info private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //✧----------------------- 𝐄𝐕𝐄𝐍𝐓𝐎𝐒 𝐃𝐄 𝐓𝐀𝐁𝐋𝐀𝐒 𝐘 𝐄𝐍𝐋𝐀𝐂𝐄𝐒 -----------------------➣
         private void poisonDataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { ProcesarClickEnTabla(sender, e, "Abrir Enlace"); }
 
         private void Grid_Compare_CellContentClick(object sender, DataGridViewCellEventArgs e) { ProcesarClickEnTabla(sender, e, "Abrir Enlace (Comparación)"); }
@@ -408,13 +420,10 @@ private void ActualizarTablaConFiltros()
             }
         }
 
-        ////////// Categorias Adicionales
+        //❍﹏﹏﹏﹏﹏﹏  𝐂𝐀𝐓𝐄𝐆𝐎𝐑𝐈𝐀𝐒 𝐘 𝐂𝐎𝐍𝐓𝐑𝐎𝐋𝐄𝐒  ──────────────╮
         private void Tecnología_Click(object sender, EventArgs e) { SeleccionarCategoria(Tecnología, "Tecnología"); }
-
         private void Hogar_Click(object sender, EventArgs e) { SeleccionarCategoria(Hogar, "Hogar"); }
-
         private void botonCategoriaCelulares_Click(object sender, EventArgs e) { SeleccionarCategoria(Celulares, "Celulares"); }
-
         private void botonCategoriaElectrodomesticos_Click(object sender, EventArgs e) { SeleccionarCategoria(Categoria_electrodomesticos, "Electrodomésticos"); }
 
         private async void SeleccionarCategoria(BotonCategoriaCheck botonActual, string nombreCategoria)
@@ -430,7 +439,6 @@ private void ActualizarTablaConFiltros()
             foreach (var btn in grupoBotones) { if (btn != null && btn != botonActual) { btn.Checked = false; } }
             if (!botonActual.Checked) { botonActual.Checked = true; }
 
-
             // restar puntos etcc (funcion similar a lo de busqueda)
             GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
             lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
@@ -440,20 +448,17 @@ private void ActualizarTablaConFiltros()
 
             await EmpezarBusqueda(nombreCategoria);
             barraBusqueda1.Text = "";
-
-
         }
 
         private void comboMarca_SelectedIndexChanged(object sender, EventArgs e) { ActualizarTablaConFiltros(); }
-
         private void comboAtributo_SelectedIndexChanged(object sender, EventArgs e) { ActualizarTablaConFiltros(); }
-
         private void TrackBarMinimo_Scroll(object sender, ScrollEventArgs e) { ActualizarTablaConFiltros(); }
+        private void TrackBarMaximo_Scroll(object sender, ScrollEventArgs e) { ActualizarTablaConFiltros(); }
 
-        private void TrackBarMaximo_Scroll(object sender, ScrollEventArgs e){ ActualizarTablaConFiltros(); }
+
     }
 
-    // Modelo de resultado
+    //❍﹏﹏﹏﹏﹏﹏  𝐌𝐎𝐃𝐄𝐋𝐎 𝐃𝐄 𝐃𝐀𝐓𝐎𝐒  ──────────────╮
     public class ProductoResult
     {
         public string Nombre { get; set; } = "";

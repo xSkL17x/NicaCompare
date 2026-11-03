@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace NicaCompare
@@ -100,10 +101,7 @@ namespace NicaCompare
             if (string.IsNullOrWhiteSpace(textoCompleto)) return "";
 
             var palabras = textoCompleto.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (palabras.Length <= maxPalabras)
-            {
-                return textoCompleto;
-            }
+            if (palabras.Length <= maxPalabras) { return textoCompleto; }
             // Une solo las primeras N palabras y le agrega puntos suspensivos
             return string.Join(" ", palabras.Take(maxPalabras)) + "...";
         }
@@ -134,16 +132,42 @@ namespace NicaCompare
 
                 // Convierte el texto limpio en un número para que no crashee y poder ordenar
                 if (decimal.TryParse(limpio, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal resultado))
-                {
-                    if (resultado > 0) { montosEncontrados.Add(resultado); }
-                }
-            }
+                {  if (resultado > 0) { montosEncontrados.Add(resultado); } }  }
 
             // Si encontró precios, devolvemos el menor (el precio de oferta real)
             if (montosEncontrados.Count > 0) { return montosEncontrados.Min(); }
 
             return decimal.MaxValue;
         }
-    }
 
+        // --- FUNCIONES DE APOYO PARA SCRAPING ---
+
+        public static JsonElement Prop(JsonElement elemento, string propiedad) =>
+            elemento.ValueKind == JsonValueKind.Object && elemento.TryGetProperty(propiedad, out var valor) ? valor : default;
+
+        public static string Texto(JsonElement elemento, string propiedad)
+        {
+            var valor = Prop(elemento, propiedad);
+            return valor.ValueKind == JsonValueKind.String ? valor.GetString() ?? "" : "";
+        }
+
+        public static decimal? Numero(JsonElement elemento, params string[] ruta)
+        {
+            foreach (string propiedad in ruta)
+            {
+                elemento = Prop(elemento, propiedad);
+                if (elemento.ValueKind == JsonValueKind.Undefined || elemento.ValueKind == JsonValueKind.Null) return null;
+            }
+            return elemento.ValueKind == JsonValueKind.Number && elemento.TryGetDecimal(out decimal numero) ? numero : null;
+        }
+
+        public static string ResolverUrl(string url, string dominio)
+        {
+            // resolvemos url absoluta o relativa para productos e imagenes
+            if (string.IsNullOrWhiteSpace(url)) return "";
+            if (url.StartsWith("//")) return "https:" + url;
+            if (Uri.TryCreate(url, UriKind.Absolute, out var absoluta)) return absoluta.ToString();
+            return Uri.TryCreate(new Uri(dominio + "/"), url, out var relativa) ? relativa.ToString() : "";
+        }
+    }
 }

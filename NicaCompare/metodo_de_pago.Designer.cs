@@ -458,7 +458,6 @@
             Name = "Form7";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Recargar 💳";
-            WindowState = FormWindowState.Maximized;
             Load += Form7_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

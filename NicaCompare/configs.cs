@@ -30,7 +30,7 @@ namespace NicaCompare
                     { "img", "Walmart-Logo" },
                     { "Url", "https://www.walmart.com.ni/" },
                     { "Tipo", "VTEX" },
-                    { "Activo", "SI" },
+                    { "Activo", "NO" },
                     { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36" },
                     { "XPathContenedor", "//*[contains(@class, 'vtex-product-summary')]" },
                     { "XPathTitulo", ".//*[@id='product-summary-sku-name']" },
@@ -38,18 +38,21 @@ namespace NicaCompare
                     { "XPathImagen", ".//img" }
                 }
             },
+
             {
                 "La Curacao", new Dictionary<string, string>
                 {
                     { "img", "curacao_logo" },
-                    { "Url", "https://www.lacuracaonline.com/nicaragua/" },
+                    { "Activo", "NO" },
                     { "Tipo", "MagentoLS" },
-                    { "Activo", "SI" },
-                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36" },
-                    { "XPathContenedor", "//*[contains(@class,'ds-sdk-product-item')]" },
-                    { "XPathTitulo", ".//*[contains(@class,'ds-sdk-product-item__product-name')]" },
-                    { "XPathPrecio", ".//*[contains(@class,'price')]" },
-                    { "XPathImagen", ".//img" }
+                    { "Url", "https://www.lacuracaonline.com/" },
+                    { "GraphQLUrl", "https://catalog-service.adobe.io/graphql" },
+                    { "Magento-Customer-Group", "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c" },
+                    { "Magento-Environment-Id", "b0453fee-9cca-41d9-930c-0a94fd84b9bd" },
+                    { "Magento-Website-Code", "lco_nicaragua_w" },
+                    { "Magento-Store-Code", "lco_nicaragua_s" },
+                    { "Magento-Store-View-Code", "lco_nicaragua_sv" },
+                    { "X-Api-Key", "2999e5a23078490096b15ef87ccc499c" }
                 }
             },
             {
@@ -59,7 +62,6 @@ namespace NicaCompare
                     { "Activo", "SI" },
                     { "Tipo", "MagentoLS" },
                     { "Url", "https://www.radioshackla.com/" },
-
                     { "GraphQLUrl", "https://catalog-service.adobe.io/graphql" },
                     { "Magento-Customer-Group", "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c" },
                     { "Magento-Environment-Id", "b0453fee-9cca-41d9-930c-0a94fd84b9bd" },
@@ -69,6 +71,7 @@ namespace NicaCompare
                     { "X-Api-Key", "2999e5a23078490096b15ef87ccc499c" }
                 }
             },
+
             {
                 "GCM", new Dictionary<string, string>
                 {
@@ -90,7 +93,7 @@ namespace NicaCompare
                     { "img", "Sicsa_logo" },
                     { "Url", "https://sicsa.com.ni/?s=" },
                     { "UrlParametros", "&post_type=product" },
-                    { "Activo", "SI" },
+                    { "Activo", "NO" },
                     { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
                     { "ExcluirNombres", "SICSA|Resultados|Categorías|Recommended Products|últimos productos|Filtro|Producto Prueba|Productos relacionados" },
                     { "XPathContenedor", "//li[contains(@class, 'type-product')] | //*[contains(@class, 'product') and not(contains(@class, 'category'))]" },
@@ -469,16 +472,16 @@ namespace NicaCompare
         }
 
         // AUXILIARES VTEX
-        private static string ObtenerTextoVTEX(JsonElement obj, string prop) => obj.TryGetProperty(prop, out JsonElement val) && (val.ValueKind == JsonValueKind.String || val.ValueKind == JsonValueKind.Number) ? val.ToString() : "";
+        public static string ObtenerTextoVTEX(JsonElement obj, string prop) => obj.TryGetProperty(prop, out JsonElement val) && (val.ValueKind == JsonValueKind.String || val.ValueKind == JsonValueKind.Number) ? val.ToString() : "";
 
-        private static decimal? ObtenerDecimalVTEX(JsonElement obj, string prop)
+        public static decimal? ObtenerDecimalVTEX(JsonElement obj, string prop)
         {
             if (!obj.TryGetProperty(prop, out JsonElement val)) return null;
             if (val.ValueKind == JsonValueKind.Number && val.TryGetDecimal(out decimal num)) return num;
             return val.ValueKind == JsonValueKind.String && decimal.TryParse(val.GetString(), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal parsed) ? parsed : null;
         }
 
-        private static string ResolverUrlVTEX(string baseUrl, string url)
+        public static string ResolverUrlVTEX(string baseUrl, string url)
         {
             if (string.IsNullOrWhiteSpace(url)) return "";
             if (url.StartsWith("//")) return "https:" + url;
@@ -490,250 +493,160 @@ namespace NicaCompare
 
 
 
-        // BÚSQUEDA POR MAGENTO LIVE SEARCH
-        public static async Task<(string, List<ProductoResult>)> scraping_MagentoLS(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
 
+        public static async Task<(string, List<ProductoResult>)> scraping_MagentoLS(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
         {
             var productos = new List<ProductoResult>();
-            var debug = new System.Text.StringBuilder();
-            string rutaDebug = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"MagentoLS_{tienda.Key.Replace(" ", "_")}_debug.txt");
 
             try
             {
                 string termino = textoBuscado.Trim();
                 string endpoint = tienda.Value.GetValueOrDefault("GraphQLUrl", "https://catalog-service.adobe.io/graphql");
+                string dominio = new Uri(tienda.Value["Url"]).GetLeftPart(UriPartial.Authority);
                 const int pageSize = 24;
 
                 const string query = """
-        query productSearch($phrase: String!, $pageSize: Int, $currentPage: Int = 1, $filter: [SearchClauseInput!], $sort: [ProductSearchSortInput!], $context: QueryContextInput) {
-            productSearch(phrase: $phrase, page_size: $pageSize, current_page: $currentPage, filter: $filter, sort: $sort, context: $context) {
-                total_count
-                items {
-                    product {
-                        name
-                        canonical_url
-                        small_image { url }
-                        image { url }
-                        price_range {
-                            minimum_price {
-                                final_price { value currency }
-                            }
-                        }
-                    }
-                    productView {
-                        name
-                        url
-                        images { url roles }
-                        ... on SimpleProductView {
-                            price {
-                                final {
-                                    amount { value currency }
-                                }
-                            }
-                        }
-                        ... on ComplexProductView {
-                            priceRange {
-                                minimum {
-                                    final {
-                                        amount { value currency }
+                query productSearch($phrase: String!, $pageSize: Int, $currentPage: Int = 1, $filter: [SearchClauseInput!], $sort: [ProductSearchSortInput!], $context: QueryContextInput) {
+                    productSearch(phrase: $phrase, page_size: $pageSize, current_page: $currentPage, filter: $filter, sort: $sort, context: $context) {
+                        total_count
+                        items {
+                            product {
+                                name
+                                canonical_url
+                                small_image { url }
+                                image { url }
+                                thumbnail { url }
+                                price_range {
+                                    minimum_price {
+                                        final_price { value currency }
                                     }
                                 }
                             }
-                        }
-                    }
-                }
-                page_info { current_page page_size total_pages }
-            }
-        }
-        """;
-
-                JsonElement Prop(JsonElement elemento, string propiedad)
-                {
-                    return elemento.ValueKind == JsonValueKind.Object && elemento.TryGetProperty(propiedad, out var valor) ? valor : default;
-                }
-
-                string Texto(JsonElement elemento, string propiedad)
-                {
-                    var valor = Prop(elemento, propiedad);
-                    return valor.ValueKind == JsonValueKind.String ? valor.GetString() ?? "" : "";
-                }
-
-                decimal? Numero(JsonElement elemento, params string[] ruta)
-                {
-                    foreach (string propiedad in ruta)
-                    {
-                        elemento = Prop(elemento, propiedad);
-                        if (elemento.ValueKind == JsonValueKind.Undefined || elemento.ValueKind == JsonValueKind.Null) return null;
-                    }
-                    if (elemento.ValueKind == JsonValueKind.Number && elemento.TryGetDecimal(out decimal numero)) return numero;
-                    return null;
-                }
-
-                string ResolverUrl(string url)
-                {
-                    if (string.IsNullOrWhiteSpace(url)) return "";
-                    if (url.StartsWith("//")) return "https:" + url;
-                    if (Uri.TryCreate(url, UriKind.Absolute, out var absoluta)) return absoluta.ToString();
-                    return Uri.TryCreate(new Uri(endpoint), url, out var relativa) ? relativa.ToString() : "";
-                }
-
-                string ObtenerImagen(JsonElement producto, JsonElement vista)
-                {
-                    var imagenes = Prop(vista, "images");
-                    if (imagenes.ValueKind == JsonValueKind.Array)
-                    {
-                        JsonElement primera = default;
-                        JsonElement preferida = default;
-                        foreach (var img in imagenes.EnumerateArray())
-                        {
-                            if (primera.ValueKind == JsonValueKind.Undefined) primera = img;
-                            var roles = Prop(img, "roles");
-                            if (roles.ValueKind == JsonValueKind.Array)
-                            {
-                                foreach (var rol in roles.EnumerateArray())
-                                {
-                                    string valor = rol.GetString() ?? "";
-                                    if (valor == "image") { preferida = img; break; }
-                                    if (valor == "small_image" && preferida.ValueKind == JsonValueKind.Undefined) preferida = img;
+                            productView {
+                                name
+                                url
+                                images { url roles }
+                                ... on SimpleProductView {
+                                    price { final { amount { value currency } } }
+                                }
+                                ... on ComplexProductView {
+                                    priceRange { minimum { final { amount { value currency } } } }
                                 }
                             }
-                            if (preferida.ValueKind != JsonValueKind.Undefined)
-                            {
-                                var rolesActuales = Prop(preferida, "roles");
-                                if (rolesActuales.ValueKind == JsonValueKind.Array && System.Linq.Enumerable.Contains(System.Linq.Enumerable.Select(rolesActuales.EnumerateArray(), r => r.GetString()), "image")) break;
-                            }
                         }
+                        page_info { current_page page_size total_pages }
+                    }
+                }
+                """;
 
-                        var seleccionada = preferida.ValueKind != JsonValueKind.Undefined ? preferida : primera;
-                        string url = Texto(seleccionada, "url");
-                        if (!string.IsNullOrWhiteSpace(url)) return ResolverUrl(url);
+                string ObtenerImagen(System.Text.Json.JsonElement producto, System.Text.Json.JsonElement vista)
+                {
+                    var imagenes = Utilidad.Prop(vista, "images");
+                    if (imagenes.ValueKind == System.Text.Json.JsonValueKind.Array)
+                    {
+                        System.Text.Json.JsonElement primera = default, pequena = default, principal = default;
+                        foreach (var img in imagenes.EnumerateArray())
+                        {
+                            if (primera.ValueKind == System.Text.Json.JsonValueKind.Undefined) primera = img;
+                            var roles = Utilidad.Prop(img, "roles");
+                            if (roles.ValueKind != System.Text.Json.JsonValueKind.Array) continue;
+                            foreach (var rol in roles.EnumerateArray())
+                            {
+                                string valor = rol.GetString() ?? "";
+                                if (valor == "image") principal = img;
+                                else if (valor == "small_image") pequena = img;
+                            }
+                            if (principal.ValueKind != System.Text.Json.JsonValueKind.Undefined) break;
+                        }
+                        var seleccionada = principal.ValueKind != System.Text.Json.JsonValueKind.Undefined ? principal : pequena.ValueKind != System.Text.Json.JsonValueKind.Undefined ? pequena : primera;
+                        string urlImg = Utilidad.Texto(seleccionada, "url");
+                        if (!string.IsNullOrWhiteSpace(urlImg)) return Utilidad.ResolverUrl(urlImg, dominio);
                     }
 
-                    string alternativa = Texto(Prop(producto, "small_image"), "url");
-                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Texto(Prop(producto, "image"), "url");
-                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Texto(Prop(producto, "thumbnail"), "url");
-                    return ResolverUrl(alternativa);
+                    string alternativa = Utilidad.Texto(Utilidad.Prop(producto, "small_image"), "url");
+                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Utilidad.Texto(Utilidad.Prop(producto, "image"), "url");
+                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Utilidad.Texto(Utilidad.Prop(producto, "thumbnail"), "url");
+                    return Utilidad.ResolverUrl(alternativa, dominio);
                 }
 
-                var duplicados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                int pagina = 1;
-                int totalPaginas = 1;
+                var requeridos = new[] { "Magento-Customer-Group", "Magento-Environment-Id", "Magento-Website-Code", "Magento-Store-Code", "Magento-Store-View-Code", "X-Api-Key" };
+                foreach (string clave in requeridos)
+                    if (!tienda.Value.TryGetValue(clave, out string valor) || string.IsNullOrWhiteSpace(valor))
+                        throw new Exception($"Falta configurar '{clave}' para {tienda.Key}.");
 
-                debug.AppendLine("TIENDA: " + tienda.Key);
-                debug.AppendLine("BÚSQUEDA: " + termino);
-                debug.AppendLine("ENDPOINT: " + endpoint);
+                var duplicados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                int pagina = 1, totalPaginas = 1;
 
                 do
                 {
                     var payload = new
                     {
-                        query = query,
+                        query,
                         variables = new
                         {
                             phrase = termino,
-                            pageSize = pageSize,
+                            pageSize,
                             currentPage = pagina,
                             filter = new object[]
                             {
-                        new { attribute = "visibility", @in = new[] { "Search", "Catalog, Search" } },
-                        new { attribute = "inStock", eq = "true" },
-                        new { attribute = "price", range = new { from = 0, to = 999998 } }
+                                new { attribute = "visibility", @in = new[] { "Search", "Catalog, Search" } },
+                                new { attribute = "inStock", eq = "true" },
+                                new { attribute = "price", range = new { from = 0, to = 999998 } }
                             },
-                            sort = new[]
-                            {
-                        new { attribute = "relevance", direction = "DESC" }
-                    },
-                            context = new
-                            {
-                                customerGroup = tienda.Value.GetValueOrDefault("CustomerGroup", "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c"),
-                                userViewHistory = Array.Empty<object>()
-                            }
+                            sort = new[] { new { attribute = "relevance", direction = "DESC" } },
+                            context = new { customerGroup = tienda.Value["Magento-Customer-Group"], userViewHistory = Array.Empty<object>() }
                         }
                     };
 
                     string jsonBody = System.Text.Json.JsonSerializer.Serialize(payload);
-
                     using var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
                     request.Content = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
                     request.Headers.Accept.ParseAdd("application/json");
+                    request.Headers.TryAddWithoutValidation("Origin", dominio);
+                    request.Headers.Referrer = new Uri(dominio + "/");
+                    request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0");
 
-                    string[] encabezados =
-                    {
-                "Magento-Environment-Id",
-                "Magento-Website-Code",
-                "Magento-Store-Code",
-                "Magento-Store-View-Code",
-                "X-Api-Key"
-            };
-
-                    debug.AppendLine();
-                    debug.AppendLine($"========== PÁGINA {pagina} ==========");
-                    debug.AppendLine("REQUEST URL: " + endpoint);
-                    debug.AppendLine("METHOD: POST");
-                    debug.AppendLine("PAYLOAD:");
-                    debug.AppendLine(jsonBody);
-
-                    foreach (string encabezado in encabezados)
-                    {
-                        string valor = tienda.Value.GetValueOrDefault(encabezado, "");
-                        if (!string.IsNullOrWhiteSpace(valor))
-                            request.Headers.TryAddWithoutValidation(encabezado, valor);
-                        else
-                            debug.AppendLine("FALTA ENCABEZADO: " + encabezado);
-                    }
+                    foreach (string encabezado in requeridos)
+                        request.Headers.TryAddWithoutValidation(encabezado, tienda.Value[encabezado]);
 
                     using var response = await client.SendAsync(request);
                     string respuesta = await response.Content.ReadAsStringAsync();
 
-                    debug.AppendLine("STATUS: " + (int)response.StatusCode);
-                    debug.AppendLine("RESPONSE:");
-                    debug.AppendLine(respuesta);
+                    if (!response.IsSuccessStatusCode) break;
 
-                    if (!response.IsSuccessStatusCode)
-                        break;
-
-                    using var documento = JsonDocument.Parse(respuesta);
+                    using var documento = System.Text.Json.JsonDocument.Parse(respuesta);
                     var raiz = documento.RootElement;
+                    var errores = Utilidad.Prop(raiz, "errors");
 
-                    var errores = Prop(raiz, "errors");
-                    if (errores.ValueKind == JsonValueKind.Array && errores.GetArrayLength() > 0)
-                    {
-                        debug.AppendLine("GRAPHQL ERRORS: " + errores.GetRawText());
-                        break;
-                    }
+                    if (errores.ValueKind == System.Text.Json.JsonValueKind.Array && errores.GetArrayLength() > 0) break;
 
-                    var data = Prop(raiz, "data");
-                    var busqueda = Prop(data, "productSearch");
-                    var items = Prop(busqueda, "items");
+                    var busqueda = Utilidad.Prop(Utilidad.Prop(raiz, "data"), "productSearch");
+                    var items = Utilidad.Prop(busqueda, "items");
+                    if (items.ValueKind != System.Text.Json.JsonValueKind.Array || items.GetArrayLength() == 0) break;
 
-                    if (items.ValueKind != JsonValueKind.Array || items.GetArrayLength() == 0)
-                        break;
-
-                    var informacionPagina = Prop(busqueda, "page_info");
-                    totalPaginas = (int)(Numero(informacionPagina, "total_pages") ?? 1);
+                    totalPaginas = (int)(Utilidad.Numero(Utilidad.Prop(busqueda, "page_info"), "total_pages") ?? 1);
 
                     foreach (var item in items.EnumerateArray())
                     {
                         if (productos.Count >= 1000) break;
 
-                        var producto = Prop(item, "product");
-                        var vista = Prop(item, "productView");
+                        var producto = Utilidad.Prop(item, "product");
+                        var vista = Utilidad.Prop(item, "productView");
 
-                        string nombre = Texto(producto, "name");
-                        if (string.IsNullOrWhiteSpace(nombre)) nombre = Texto(vista, "name");
+                        string nombre = Utilidad.Texto(producto, "name");
+                        if (string.IsNullOrWhiteSpace(nombre)) nombre = Utilidad.Texto(vista, "name");
                         nombre = System.Net.WebUtility.HtmlDecode(nombre).Trim();
                         if (string.IsNullOrWhiteSpace(nombre)) continue;
 
-                        string url = ResolverUrl(Texto(vista, "url"));
-                        if (string.IsNullOrWhiteSpace(url))
-                            url = ResolverUrl(Texto(producto, "canonical_url"));
+                        string url = Utilidad.ResolverUrl(Utilidad.Texto(vista, "url"), dominio);
+                        if (string.IsNullOrWhiteSpace(url)) url = Utilidad.ResolverUrl(Utilidad.Texto(producto, "canonical_url"), dominio);
 
                         string imagen = ObtenerImagen(producto, vista);
 
                         decimal? monto =
-                            Numero(vista, "price", "final", "amount", "value") ??
-                            Numero(vista, "priceRange", "minimum", "final", "amount", "value") ??
-                            Numero(producto, "price_range", "minimum_price", "final_price", "value");
+                            Utilidad.Numero(vista, "price", "final", "amount", "value") ??
+                            Utilidad.Numero(vista, "priceRange", "minimum", "final", "amount", "value") ??
+                            Utilidad.Numero(producto, "price_range", "minimum_price", "final_price", "value");
 
                         string precioTexto = monto.HasValue
                             ? "C$ " + monto.Value.ToString("#,##0.00", System.Globalization.CultureInfo.InvariantCulture)
@@ -756,34 +669,11 @@ namespace NicaCompare
                     pagina++;
 
                 } while (pagina <= totalPaginas && productos.Count < 1000);
-
-                debug.AppendLine();
-                debug.AppendLine("========== RESULTADO FINAL ==========");
-                debug.AppendLine("PRODUCTOS ENCONTRADOS: " + productos.Count);
-                debug.AppendLine("PÁGINAS CONSULTADAS: " + (pagina - 1));
-
             }
-            catch (Exception ex)
-            {
-                debug.AppendLine("ERROR GENERAL:");
-                debug.AppendLine(ex.ToString());
-                System.Diagnostics.Debug.WriteLine($"Error MagentoLS ({tienda.Key}): {ex}");
-            }
-            finally
-            {
-                try
-                {
-                    await System.IO.File.WriteAllTextAsync(rutaDebug, debug.ToString(), System.Text.Encoding.UTF8);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error guardando debug MagentoLS: " + ex.Message);
-                }
-            }
-
+            catch (Exception ex) { }
+            finally { }
             return (tienda.Key, productos);
         }
-
 
 
 
