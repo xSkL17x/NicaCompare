@@ -132,9 +132,10 @@ namespace NicaCompare
         }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐆𝐄𝐒𝐓𝐈𝐎𝐍 𝐃𝐄 𝐅𝐈𝐋𝐓𝐑𝐎𝐒 𝐘 𝐑𝐀𝐍𝐆𝐎𝐒  ──────────────╮
-        private void CrearFiltros(List<string> nombresProductos)
+
+        private void CrearFiltros(List<string> nombresProductos, string textoBuscado)
         {
-            // 1. Marcas
+            //  Marcas
             HashSet<string> marcasEncontradas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
                 foreach (var marcaItem in FiltrosProductos.Marcas)
@@ -148,7 +149,7 @@ namespace NicaCompare
             comboMarca.SelectedIndex = 0;
             comboMarca.Visible = true;
 
-            // 2. Atributos
+            //  Atributos
             HashSet<string> atributosEncontrados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
                 foreach (var categoria in FiltrosProductos.Atributos)
@@ -162,16 +163,49 @@ namespace NicaCompare
             comboAtributo.SelectedIndex = 0;
             comboAtributo.Visible = true;
 
-            // 3. Precios y Rangos (Trackbars y Labels)
-            decimal precioMinimoReal = 0;
-            decimal precioMaximoReal = 50000;
+            // nueva parte para elchecklist
+            //HashSet<string> palabrasAIgnorar = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            if (listaProductos != null && listaProductos.Any(p => p.PrecioMonto < decimal.MaxValue))
-            {
-                var validos = listaProductos.Where(p => p.PrecioMonto < decimal.MaxValue);
-                precioMinimoReal = validos.Min(p => p.PrecioMonto);
-                precioMaximoReal = validos.Max(p => p.PrecioMonto);
-            }
+            //if (FiltrosProductos.ExclusionesPorParecidos.ContainsKey(textoBuscado))
+            //{
+            //    foreach (var p in FiltrosProductos.ExclusionesPorParecidos[textoBuscado])
+            //        palabrasAIgnorar.Add(p);
+            //}
+
+            //if (FiltrosProductos.ExclusionesPorParecidos.ContainsKey("ExclusionesGlobales"))
+            //{
+            //    foreach (var p in FiltrosProductos.ExclusionesPorParecidos["ExclusionesGlobales"])
+            //        palabrasAIgnorar.Add(p);
+            //}
+
+            //foreach (var prod in nombresProductos)
+            //{
+            //    foreach (var ex in palabrasAIgnorar)
+            //    {
+            //        if (prod.IndexOf(ex, StringComparison.OrdinalIgnoreCase) >= 0)
+            //        {
+            //            if (!lista_ignorar.Items.Contains(prod))
+            //            {
+            //                // Se agrega con el check en true por defecto
+            //                lista_ignorar.Items.Add(prod, true);
+            //            }
+            //            break;
+            //        }
+            //    }
+            //}
+
+            // 
+            //decimal precioMinimoReal = 0;
+            //decimal precioMaximoReal = 50000;
+
+            //if (listaProductos != null && listaProductos.Any(p => p.PrecioMonto < decimal.MaxValue))
+            //{
+            //    var validos = listaProductos.Where(p => p.PrecioMonto < decimal.MaxValue);
+            //    precioMinimoReal = validos.Min(p => p.PrecioMonto);
+            //    precioMaximoReal = validos.Max(p => p.PrecioMonto);
+            //}
+
+            //lista_ignorar.Visible = true;
 
             //label_precio.Visible = true;
             //TrackBarMinimo.Visible = true;
@@ -235,22 +269,38 @@ namespace NicaCompare
             buscando = true;
             try
             {
+                // Reconocer sinónimos y obtener el nombre base del producto
+                string textoOriginal = textoBuscado.Trim();
+                string textoBase = textoOriginal;
+
+                foreach (var categoria in FiltrosProductos.parecidos)
+                {
+                    if (textoOriginal.IndexOf(categoria.Key, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        categoria.Value.Any(p => textoOriginal.IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0))
+                    {
+                        textoBase = categoria.Key;
+                        break;
+                    }
+                }
+
                 tablaResultados1.Rows.Clear();
-                if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
+                if (Grid_Compare != null) Grid_Compare.Rows.Clear();
                 listaProductos.Clear();
-                label_producto_busqueda.Text = $"Buscando: {textoBuscado}";
+
+                label_producto_busqueda.Text = $"Buscando: {textoOriginal}";
 
                 List<Task> tareasTiendas = new List<Task>();
 
                 // Recorremos las tiendas activas para lanzar el scraping en paralelo
                 foreach (var tienda in ConfigScraper.Tiendas)
                 {
-                    if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") { continue; }
+                    if (tienda.Value.ContainsKey("Activo") && tienda.Value["Activo"] == "NO") continue;
 
                     var tiendaActual = tienda;
                     var tareaTienda = Task.Run(async () =>
                     {
-                        var resultadoScraping = await ConfigScraper.ScrapearTiendaAsync(textoBuscado, tiendaActual);
+                        // Enviamos el nombre base al scraper
+                        var resultadoScraping = await ConfigScraper.ScrapearTiendaAsync(textoBase, tiendaActual);
 
                         // Actualizamos la interfaz conforme cada tienda va respondiendo
                         this.Invoke((MethodInvoker)delegate
@@ -258,14 +308,14 @@ namespace NicaCompare
                             if (resultadoScraping.Item2 != null && resultadoScraping.Item2.Count > 0)
                             {
                                 listaProductos.AddRange(resultadoScraping.Item2);
-                                ActualizarTablaConFiltros();
 
                                 List<string> nombresProductos = listaProductos.Select(p => p.Nombre).ToList();
-                                CrearFiltros(nombresProductos);
+                                CrearFiltros(nombresProductos, textoBase);
+                                ActualizarTablaConFiltros();
                             }
 
-                            // Actualizamos el estado temporal en el label con la tienda actual
-                            label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{listaProductos.Count} | Buscando en {tiendaActual.Key}";
+                            // Actualizamos el estado temporal en el label con el texto original
+                            label_producto_busqueda.Text = $"Resultados para: {textoOriginal} #{listaProductos.Count} | Buscando en {tiendaActual.Key}";
                         });
                     });
 
@@ -273,7 +323,7 @@ namespace NicaCompare
                 }
 
                 await Task.WhenAll(tareasTiendas);
-                label_producto_busqueda.Text = $"Resultados para: {textoBuscado} #{listaProductos.Count} ✔";
+                label_producto_busqueda.Text = $"Resultados para: {textoOriginal} #{listaProductos.Count} ✔";
             }
             finally { buscando = false; }
         }
@@ -286,12 +336,18 @@ namespace NicaCompare
             string marcaSeleccionada = comboMarca.SelectedItem?.ToString() ?? "Todas las marcas";
             string atributoSeleccionado = comboAtributo.SelectedItem?.ToString() ?? "Mas especificaciones";
 
+            // Obtener los productos que tienen el check en true en la lista de ignorar
+            var itemsIgnoradosCheck = lista_ignorar.CheckedItems.Cast<object>().Select(item => item.ToString()).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
             int precioMaxSeleccionado = int.MaxValue;
 
             var productosFiltrados = listaProductos.Where(prod =>
             {
                 // Filtro para descartar productos agotados (precio 0 o menor)
                 if (prod.PrecioMonto <= 0) return false;
+
+                // Omitir si el producto está chequeado en la lista de ignorados
+                if (itemsIgnoradosCheck.Contains(prod.Nombre)) return false;
 
                 bool pasaMarca = true;
                 if (marcaSeleccionada != "Todas las marcas" && !string.IsNullOrEmpty(marcaSeleccionada))
@@ -462,7 +518,12 @@ namespace NicaCompare
         private void TrackBarMinimo_Scroll(object sender, ScrollEventArgs e) { ActualizarTablaConFiltros(); }
         private void TrackBarMaximo_Scroll(object sender, ScrollEventArgs e) { ActualizarTablaConFiltros(); }
 
-
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate {
+                ActualizarTablaConFiltros();
+            });
+        }
     }
 
     //❍﹏﹏﹏﹏﹏﹏  𝐌𝐎𝐃𝐄𝐋𝐎 𝐃𝐄 𝐃𝐀𝐓𝐎𝐒  ──────────────╮

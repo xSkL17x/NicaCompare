@@ -114,7 +114,7 @@ namespace NicaCompare
                 { "Samsung", new[] { "Samsung" } },
                 { "Xiaomi", new[] { "Xiaomi", "Redmi", "Poco" } },
                 { "HONOR", new[] { "HONOR", "Honor" } },
-                { "Motorola", new[] { "Motorola", "Moto" } },
+                { "Motorola", new[] { "Motorola" } },
                 { "Huawei", new[] { "Huawei" } },
                 { "Apple", new[] { "Apple", "iPhone" } },
                 { "ZTE", new[] { "ZTE" } },
@@ -130,7 +130,23 @@ namespace NicaCompare
                 { "Konka", new[] { "Konka" } },
                 { "Challenger", new[] { "Challenger" } },
                 { "Premier", new[] { "Premier" } },
-                { "G-PLUS", new[] { "G-PLUS", "GPLUS" } }
+                { "G-PLUS", new[] { "G-PLUS", "GPLUS" } },
+
+
+               { "Serpento", new[] { "Serpento" } },
+               { "Bajaj", new[] { "Bajaj", "Pulsar", "Discover", "Platina", "Boxer" } },
+               { "Genesis", new[] { "Genesis" } },
+               { "Raybar", new[] { "Raybar" } },
+               { "Dayun", new[] { "Dayun" } },
+               { "Yamasaki", new[] { "Yamasaki" } },
+               { "Yamaha", new[] { "Yamaha" } },
+               { "Honda", new[] { "Honda" } },
+               { "Suzuki", new[] { "Suzuki" } },
+               { "TVS", new[] { "TVS", "Apache" } },
+               { "KATANA", new[] { "KATANA", "Katana" } },
+               { "KTM", new[] { "KTM", "Duke" } },
+               { "AKT", new[] { "AKT" } },
+               { "HAOJUE", new[] { "HAOJUE", "Haojue" } }
             };
 
             // Diccionario de especificaciones por categoría o tipo de producto
@@ -140,17 +156,68 @@ namespace NicaCompare
                 { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },
                 { "MemoriaRAM", new[] { "4GB RAM", "6GB RAM", "8GB RAM", "12GB RAM" } }
             };
+            // Lista de términos a ignorar según la intención de búsqueda o categoría
+
+            public static readonly Dictionary<string, string[]> ExclusionesPorParecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "televisor", new[] { "cable", "hdmi", "soporte", "control remoto", "mueble", "limpiador", "protector",
+                    "convertidor", "adaptador", "estante", "rack", "reproductor de streaming", "amplificador", "mesa", "barra de sonido", "ups", "parlante",
+                    "celular", "reproductor","Termómetro","galaxy", "redmi", "smartband", "cafetera", "freidora", "luz led", "batería", "hub", "teléfono", "cargador",
+                    "transmisor", "radio", "almohada", "lápiz digital", "reloj", "audífonos", "kit de limpieza" ,"Smartwatch", "Mouse", "Proyector","Monitor", "LAPTOP"} },
+
+                { "celular", new[] { "Limpiador","Soporte","Adaptador","Convertidor","Película","Reloj", "Cable","estuche", "cobertor", "vidrio templado", "cargador", "cable", "soporte", "aro de luz",
+                    "estuche", "cobertor", "vidrio templado", "cargador", "cable", "soporte magnético", "soporte telefónico", "aro de luz", "repuesto", "flex", "pantalla táctil" } },
+
+                { "tablet", new[] { "estuche", "funda", "lápiz digital", "stylus", "vidrio templado", "teclado para tablet", "soporte" } },
+
+                { "laptop", new[] { "mochila", "bolso", "fundas", "base refrigerante", "mouse", "cargador", "repuesto", "teclado", "batería" } },
+
+                { "refrigeradora", new[] { "organizador", "filtro de agua", "repuesto", "magneto", "fundas" } },
+
+                { "pantalla", new[] { "monitor", "display", "pantalla de computadora", "monitor de computadora", "protector de pantalla" } },
+
+                { "lavadora", new[] { "washer", "lavadora automática", "lavadora semiautomática", "lavasecadora", "lavadora-secadora", "centro de lavado", "funda", "manguera", "repuesto" } },
+
+                { "secadora", new[] { "dryer", "secadora de ropa", "secadora eléctrica", "secadora electrica", "filtro", "repuesto" } },
+           
+                { "motocicleta", new[] { "repuesto", "casco", "guantes", "impermeable", "aceite", "lubricante", "alarma", "gps", "sticker", "calcomanía", "soporte para celular", "funda" , "guardacadena", "kit reten motor", "manguera de freno", "guardafango", "volante", "caja filtro de aire", "tijera" } },
+
+                { "bateria", new[] { "cargador de batería", "probador", "cable jumper" } },
+
+                { "ExclusionesGlobales", new[] { "calculadora", "lentes de contacto", "limpiador", "soporte magnético", "soporte giratorio" } }
+            };
+
+            public static readonly Dictionary<string, string[]> parecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "celular", new[] { "smartphone", "teléfono", "telefono", "móvil", "movil", "teléfono móvil", "telefono movil", "teléfono inteligente", "telefono inteligente", "cel" } },
+                { "tablet", new[] { "tableta", "ipad", "tab", "computadora tablet", "computadora de tableta" } },
+                { "laptop", new[] { "portátil", "portatil", "computadora portátil", "computadora portatil", "notebook", "netbook", "ultrabook", "computadora personal" } },
+                { "computadora", new[] { "pc", "desktop", "computador", "ordenador", "cpu", "equipo de escritorio" } },
+                { "smartwatch", new[] { "reloj inteligente", "pulsera inteligente", "smart band", "smartband", "banda inteligente" } },
+                { "audifonos", new[] { "audífonos", "auriculares", "handsfree", "manos libres", "headset", "cascos", "earbuds", "airpods" } },
+                { "consola", new[] { "videojuego", "playstation", "ps5", "ps4", "xbox", "nintendo switch", "consola de videojuegos" } },
+    
+                { "refrigeradora", new[] { "refri", "refrigerador", "nevera", "frigorífico", "frigorifico", "cava" } },
+                { "televisor", new[] { "tv", "televisión", "television", "smart tv", "pantalla de tv", "pantalla de televisión", "pantalla led" } },
+                { "pantalla", new[] { "monitor", "display", "pantalla de computadora", "monitor de computadora" } },
+                { "lavadora", new[] { "washer", "lavadora automática", "lavadora semiautomática", "lavasecadora", "lavadora-secadora", "centro de lavado" } },
+                { "secadora", new[] { "dryer", "secadora de ropa", "secadora eléctrica", "secadora electrica" } },
+                { "estufa", new[] { "cocina", "cocina de gas", "cocina eléctrica", "anafe", "horno" } },
+                { "microondas", new[] { "horno microondas", "micro onda", "microondas digital" } },
+                { "abanico", new[] { "ventilador", "ventilador de pie", "ventilador de pared", "circulador de aire" } },
+                { "aire acondicionado", new[] { "ac", "minisplit", "mini split", "clima", "aire" } },
+    
+                { "motocicleta", new[] { "moto", "motona", "scooter", "pasola", "motocleta" } },
+                { "casco", new[] { "casco para moto", "casco abatible", "casco cerrado", "casco abierto" } },
+                { "bateria", new[] { "batería", "acumulador", "pila", "batería de moto", "batería de carro" } },
+                { "llanta", new[] { "neumático", "neumatico", "cubierta", "caucho" } }
+            };
+
         }
 
-        public static readonly Dictionary<string, string[]> parecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "celular", new[] { "smartphone", "telefono", "movil" } },
-            { "smartphone", new[] { "celular", "telefono" } },
-            { "refri", new[] { "refrigeradora", "refrigerador", "nevera" } },
-            { "tv", new[] { "televisor", "smart tv", "pantalla" } },
-            { "pantalla", new[] { "televisor", "tv", "monitor" } },
-            { "lavadora", new[] { "lavadora secadora", "seco-lavadora" } }
-        };
+
+
+  
 
         // aqui ya terminan todos los diccionarios XD
 

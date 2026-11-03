@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             boton_usuario = new BotonMenu();
             tarjetaTienda1 = new TarjetaTienda();
             tarjetaTienda2 = new TarjetaTienda();
@@ -57,8 +57,8 @@
             lbl_busquedas_restantes = new ReaLTaiizor.Controls.BigLabel();
             label_ag_busqueda = new ReaLTaiizor.Controls.BigLabel();
             contenedor_categorias_tabla = new Panel();
-            pictureBox5 = new PictureBox();
             panel5 = new Panel();
+            pictureBox5 = new PictureBox();
             Tecnología = new BotonCategoriaCheck();
             Celulares = new BotonCategoriaCheck();
             Hogar = new BotonCategoriaCheck();
@@ -83,19 +83,20 @@
             tarjetaTienda6 = new TarjetaTienda();
             tarjetaTienda5 = new TarjetaTienda();
             tarjetaTienda4 = new TarjetaTienda();
-            panel_filtros = new Panel();
             LabelRangoMaximo = new ReaLTaiizor.Controls.BigLabel();
-            LabelRangoMinimo = new ReaLTaiizor.Controls.BigLabel();
-            TrackBarMaximo = new ReaLTaiizor.Controls.PoisonTrackBar();
-            label_precio = new Label();
-            TrackBarMinimo = new ReaLTaiizor.Controls.PoisonTrackBar();
+            panel_filtros = new Panel();
+            lista_ignorar = new CheckedListBox();
             comboAtributo = new ReaLTaiizor.Controls.AloneComboBox();
             comboMarca = new ReaLTaiizor.Controls.AloneComboBox();
+            label_precio = new Label();
+            LabelRangoMinimo = new ReaLTaiizor.Controls.BigLabel();
             panel8 = new Panel();
             label4 = new Label();
             pictureBox3 = new PictureBox();
             label3 = new Label();
             pictureBox1 = new PictureBox();
+            TrackBarMaximo = new ReaLTaiizor.Controls.PoisonTrackBar();
+            TrackBarMinimo = new ReaLTaiizor.Controls.PoisonTrackBar();
             dataGridViewImageColumn1 = new DataGridViewImageColumn();
             dataGridViewImageColumn2 = new DataGridViewImageColumn();
             dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
@@ -115,8 +116,8 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             contenedor_categorias_tabla.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tablaResultados1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Grid_Compare).BeginInit();
@@ -445,18 +446,6 @@
             contenedor_categorias_tabla.Size = new Size(1411, 593);
             contenedor_categorias_tabla.TabIndex = 27;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = Properties.Resources._2___copia;
-            pictureBox5.Location = new Point(19, 506);
-            pictureBox5.Margin = new Padding(3, 2, 3, 2);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(73, 25);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 10;
-            pictureBox5.TabStop = false;
-            // 
             // panel5
             // 
             panel5.Anchor = AnchorStyles.None;
@@ -469,6 +458,18 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(127, 531);
             panel5.TabIndex = 23;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = Properties.Resources._2___copia;
+            pictureBox5.Location = new Point(19, 506);
+            pictureBox5.Margin = new Padding(3, 2, 3, 2);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(73, 25);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 10;
+            pictureBox5.TabStop = false;
             // 
             // Tecnología
             // 
@@ -551,26 +552,26 @@
             tablaResultados1.BorderStyle = BorderStyle.None;
             tablaResultados1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             tablaResultados1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(51, 153, 255);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(51, 153, 255);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            tablaResultados1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(51, 153, 255);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(51, 153, 255);
+            dataGridViewCellStyle11.SelectionForeColor = Color.White;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            tablaResultados1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             tablaResultados1.ColumnHeadersHeight = 42;
             tablaResultados1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tablaResultados1.Columns.AddRange(new DataGridViewColumn[] { Nombre, Precio, icono, dataGridViewTextBoxColumn2 });
             tablaResultados1.Cursor = Cursors.Hand;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            tablaResultados1.DefaultCellStyle = dataGridViewCellStyle12;
             tablaResultados1.EditMode = DataGridViewEditMode.EditOnF2;
             tablaResultados1.EnableHeadersVisualStyles = false;
             tablaResultados1.Font = new Font("Segoe UI", 9.5F);
@@ -580,14 +581,14 @@
             tablaResultados1.Name = "tablaResultados1";
             tablaResultados1.RightToLeft = RightToLeft.No;
             tablaResultados1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            tablaResultados1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.White;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle13.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle13.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle13.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            tablaResultados1.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             tablaResultados1.RowHeadersVisible = false;
             tablaResultados1.RowHeadersWidth = 51;
             tablaResultados1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -634,25 +635,25 @@
             Grid_Compare.BorderStyle = BorderStyle.None;
             Grid_Compare.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             Grid_Compare.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(51, 153, 255);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(0, 102, 204);
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            Grid_Compare.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(51, 153, 255);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(0, 102, 204);
+            dataGridViewCellStyle14.SelectionForeColor = Color.White;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            Grid_Compare.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             Grid_Compare.ColumnHeadersHeight = 42;
             Grid_Compare.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             Grid_Compare.Columns.AddRange(new DataGridViewColumn[] { Tienda, Producto });
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.White;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            Grid_Compare.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.White;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle15.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle15.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            Grid_Compare.DefaultCellStyle = dataGridViewCellStyle15;
             Grid_Compare.EnableHeadersVisualStyles = false;
             Grid_Compare.Font = new Font("Segoe UI", 9.5F);
             Grid_Compare.GridColor = Color.FromArgb(235, 238, 242);
@@ -660,14 +661,14 @@
             Grid_Compare.Name = "Grid_Compare";
             Grid_Compare.RightToLeft = RightToLeft.No;
             Grid_Compare.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(51, 65, 85);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(225, 238, 254);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(0, 51, 102);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            Grid_Compare.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle16.ForeColor = Color.FromArgb(51, 65, 85);
+            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(225, 238, 254);
+            dataGridViewCellStyle16.SelectionForeColor = Color.FromArgb(0, 51, 102);
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            Grid_Compare.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             Grid_Compare.RowHeadersVisible = false;
             Grid_Compare.RowHeadersWidth = 51;
             Grid_Compare.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -726,8 +727,12 @@
             panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel3.BackColor = Color.Transparent;
             panel3.Controls.Add(panel2);
+            panel3.Controls.Add(LabelRangoMaximo);
             panel3.Controls.Add(panel_filtros);
+            panel3.Controls.Add(LabelRangoMinimo);
             panel3.Controls.Add(panel8);
+            panel3.Controls.Add(TrackBarMaximo);
+            panel3.Controls.Add(TrackBarMinimo);
             panel3.Location = new Point(134, 16);
             panel3.Name = "panel3";
             panel3.Size = new Size(1258, 259);
@@ -861,27 +866,13 @@
             tarjetaTienda4.Text = "tarjetaTienda4";
             tarjetaTienda4.CheckedChanged += tarjetaTienda4_CheckedChanged;
             // 
-            // panel_filtros
-            // 
-            panel_filtros.Controls.Add(LabelRangoMaximo);
-            panel_filtros.Controls.Add(LabelRangoMinimo);
-            panel_filtros.Controls.Add(TrackBarMaximo);
-            panel_filtros.Controls.Add(label_precio);
-            panel_filtros.Controls.Add(TrackBarMinimo);
-            panel_filtros.Controls.Add(comboAtributo);
-            panel_filtros.Controls.Add(comboMarca);
-            panel_filtros.Location = new Point(65, 202);
-            panel_filtros.Name = "panel_filtros";
-            panel_filtros.Size = new Size(829, 54);
-            panel_filtros.TabIndex = 30;
-            // 
             // LabelRangoMaximo
             // 
             LabelRangoMaximo.AutoSize = true;
             LabelRangoMaximo.BackColor = Color.Transparent;
             LabelRangoMaximo.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelRangoMaximo.ForeColor = Color.FromArgb(80, 80, 80);
-            LabelRangoMaximo.Location = new Point(624, 17);
+            LabelRangoMaximo.Location = new Point(1146, 219);
             LabelRangoMaximo.Name = "LabelRangoMaximo";
             LabelRangoMaximo.Size = new Size(123, 25);
             LabelRangoMaximo.TabIndex = 34;
@@ -889,58 +880,28 @@
             LabelRangoMaximo.TextAlign = ContentAlignment.MiddleLeft;
             LabelRangoMaximo.Visible = false;
             // 
-            // LabelRangoMinimo
+            // panel_filtros
             // 
-            LabelRangoMinimo.AutoSize = true;
-            LabelRangoMinimo.BackColor = Color.Transparent;
-            LabelRangoMinimo.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            LabelRangoMinimo.ForeColor = Color.FromArgb(80, 80, 80);
-            LabelRangoMinimo.Location = new Point(378, 17);
-            LabelRangoMinimo.Name = "LabelRangoMinimo";
-            LabelRangoMinimo.Size = new Size(84, 25);
-            LabelRangoMinimo.TabIndex = 31;
-            LabelRangoMinimo.Text = "C$ 5000";
-            LabelRangoMinimo.TextAlign = ContentAlignment.MiddleCenter;
-            LabelRangoMinimo.Visible = false;
+            panel_filtros.Controls.Add(lista_ignorar);
+            panel_filtros.Controls.Add(comboAtributo);
+            panel_filtros.Controls.Add(comboMarca);
+            panel_filtros.Controls.Add(label_precio);
+            panel_filtros.Location = new Point(65, 202);
+            panel_filtros.Name = "panel_filtros";
+            panel_filtros.Size = new Size(829, 54);
+            panel_filtros.TabIndex = 30;
             // 
-            // TrackBarMaximo
+            // lista_ignorar
             // 
-            TrackBarMaximo.BackColor = Color.Transparent;
-            TrackBarMaximo.Location = new Point(543, 19);
-            TrackBarMaximo.MouseWheelBarPartitions = 20;
-            TrackBarMaximo.Name = "TrackBarMaximo";
-            TrackBarMaximo.Size = new Size(75, 23);
-            TrackBarMaximo.TabIndex = 33;
-            TrackBarMaximo.Text = "poisonTrackBar1";
-            TrackBarMaximo.Value = 100;
-            TrackBarMaximo.Visible = false;
-            TrackBarMaximo.Scroll += TrackBarMaximo_Scroll;
-            // 
-            // label_precio
-            // 
-            label_precio.AutoSize = true;
-            label_precio.BackColor = Color.Transparent;
-            label_precio.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_precio.ForeColor = Color.FromArgb(0, 0, 64);
-            label_precio.Location = new Point(424, 3);
-            label_precio.Name = "label_precio";
-            label_precio.Size = new Size(39, 13);
-            label_precio.TabIndex = 32;
-            label_precio.Text = "Precio";
-            label_precio.TextAlign = ContentAlignment.TopCenter;
-            label_precio.Visible = false;
-            // 
-            // TrackBarMinimo
-            // 
-            TrackBarMinimo.BackColor = Color.Transparent;
-            TrackBarMinimo.Location = new Point(468, 19);
-            TrackBarMinimo.Name = "TrackBarMinimo";
-            TrackBarMinimo.Size = new Size(75, 23);
-            TrackBarMinimo.TabIndex = 3;
-            TrackBarMinimo.Text = "poisonTrackBar1";
-            TrackBarMinimo.Value = 0;
-            TrackBarMinimo.Visible = false;
-            TrackBarMinimo.Scroll += TrackBarMinimo_Scroll;
+            lista_ignorar.BackColor = SystemColors.Menu;
+            lista_ignorar.BorderStyle = BorderStyle.FixedSingle;
+            lista_ignorar.FormattingEnabled = true;
+            lista_ignorar.Location = new Point(440, 11);
+            lista_ignorar.Name = "lista_ignorar";
+            lista_ignorar.Size = new Size(157, 38);
+            lista_ignorar.TabIndex = 0;
+            lista_ignorar.Visible = false;
+            lista_ignorar.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged;
             // 
             // comboAtributo
             // 
@@ -970,6 +931,34 @@
             comboMarca.TabIndex = 1;
             comboMarca.Visible = false;
             comboMarca.SelectedIndexChanged += comboMarca_SelectedIndexChanged;
+            // 
+            // label_precio
+            // 
+            label_precio.AutoSize = true;
+            label_precio.BackColor = Color.Transparent;
+            label_precio.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_precio.ForeColor = Color.FromArgb(0, 0, 64);
+            label_precio.Location = new Point(386, 20);
+            label_precio.Name = "label_precio";
+            label_precio.Size = new Size(48, 13);
+            label_precio.TabIndex = 32;
+            label_precio.Text = "Ignorar ";
+            label_precio.TextAlign = ContentAlignment.TopCenter;
+            label_precio.Visible = false;
+            // 
+            // LabelRangoMinimo
+            // 
+            LabelRangoMinimo.AutoSize = true;
+            LabelRangoMinimo.BackColor = Color.Transparent;
+            LabelRangoMinimo.Font = new Font("Segoe UI Black", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LabelRangoMinimo.ForeColor = Color.FromArgb(80, 80, 80);
+            LabelRangoMinimo.Location = new Point(900, 219);
+            LabelRangoMinimo.Name = "LabelRangoMinimo";
+            LabelRangoMinimo.Size = new Size(84, 25);
+            LabelRangoMinimo.TabIndex = 31;
+            LabelRangoMinimo.Text = "C$ 5000";
+            LabelRangoMinimo.TextAlign = ContentAlignment.MiddleCenter;
+            LabelRangoMinimo.Visible = false;
             // 
             // panel8
             // 
@@ -1032,11 +1021,36 @@
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
+            // TrackBarMaximo
+            // 
+            TrackBarMaximo.BackColor = Color.Transparent;
+            TrackBarMaximo.Location = new Point(1065, 221);
+            TrackBarMaximo.MouseWheelBarPartitions = 20;
+            TrackBarMaximo.Name = "TrackBarMaximo";
+            TrackBarMaximo.Size = new Size(75, 23);
+            TrackBarMaximo.TabIndex = 33;
+            TrackBarMaximo.Text = "poisonTrackBar1";
+            TrackBarMaximo.Value = 100;
+            TrackBarMaximo.Visible = false;
+            TrackBarMaximo.Scroll += TrackBarMaximo_Scroll;
+            // 
+            // TrackBarMinimo
+            // 
+            TrackBarMinimo.BackColor = Color.Transparent;
+            TrackBarMinimo.Location = new Point(990, 221);
+            TrackBarMinimo.Name = "TrackBarMinimo";
+            TrackBarMinimo.Size = new Size(75, 23);
+            TrackBarMinimo.TabIndex = 3;
+            TrackBarMinimo.Text = "poisonTrackBar1";
+            TrackBarMinimo.Value = 0;
+            TrackBarMinimo.Visible = false;
+            TrackBarMinimo.Scroll += TrackBarMinimo_Scroll;
+            // 
             // dataGridViewImageColumn1
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.NullValue = null;
-            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.NullValue = null;
+            dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridViewImageColumn1.HeaderText = "Foto";
             dataGridViewImageColumn1.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridViewImageColumn1.MinimumWidth = 6;
@@ -1046,9 +1060,9 @@
             // 
             // dataGridViewImageColumn2
             // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle18;
             dataGridViewImageColumn2.HeaderText = "Foto";
             dataGridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridViewImageColumn2.MinimumWidth = 6;
@@ -1105,8 +1119,8 @@
             // 
             // dataGridViewTextBoxColumn11
             // 
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle19;
             dataGridViewTextBoxColumn11.MinimumWidth = 6;
             dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -1137,8 +1151,8 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle20;
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -1177,13 +1191,14 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             contenedor_categorias_tabla.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)tablaResultados1).EndInit();
             ((System.ComponentModel.ISupportInitialize)Grid_Compare).EndInit();
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -1270,5 +1285,8 @@
         private TarjetaTienda tarjetaTienda5;
         private TarjetaTienda tarjetaTienda6;
         private PictureBox pictureBox5;
+        private CheckedListBox lista_ignorar;
+        private Panel panel9;
+        private CheckedListBox checkedListBox1;
     }
 }
