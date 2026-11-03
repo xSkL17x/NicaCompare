@@ -13,7 +13,7 @@ namespace NicaCompare
     public class TablaResultados : DataGridView
     {
         private readonly Color _borde = Color.FromArgb(203, 213, 225);
-        private readonly Color _colorMejor = Color.FromArgb(240, 247, 255);
+        private readonly Color _colorMejor = Color.FromArgb(51, 153, 255);
         private decimal? _min;
         private bool _sucio = true;
 

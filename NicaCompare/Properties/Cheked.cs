@@ -16,8 +16,8 @@ namespace NicaCompare
         private Image _imagen;
         private int _borderRadius = 12;
 
-        private Color _borderSelectedColor = Color.FromArgb(0, 102, 204);
-        private Color _borderNormalColor = Color.FromArgb(230, 232, 235);
+        private Color _borderSelectedColor = Color.FromArgb(51, 153, 255);
+        private Color _borderNormalColor = Color.FromArgb(51, 153, 255);
         private Color _backSelectedColor = Color.FromArgb(240, 247, 255);
         private Color _backNormalColor = Color.White;
 

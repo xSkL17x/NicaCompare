@@ -24,6 +24,8 @@ namespace NicaCompare
             CargarUsuarioActivo();
             IniciarTimerBusquedas();
             CargarEstadoBotones();
+
+
         }
 
         //❍﹏﹏﹏﹏﹏﹏  𝐍𝐚𝐯𝐞𝐠𝐚𝐜𝐢𝐨𝐧 𝐲 𝐀𝐜𝐜𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐔𝐬𝐮𝐚𝐫𝐢𝐨══════╮
@@ -31,7 +33,7 @@ namespace NicaCompare
 
         private void CargarUsuarioActivo()
         {
-            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+            lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
             if (GestorUsuario.ValidarSesion())
             {
                 boton_usuario.Text = sesion_actual.Nombre;
@@ -61,14 +63,18 @@ namespace NicaCompare
         private void tarjetaTienda1_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] = tarjetaTienda1.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda2_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["SICSA"]["Activo"] = tarjetaTienda2.Seleccionado ? "SI" : "NO"; }
         private void tarjetaTienda3_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["GCM"]["Activo"] = tarjetaTienda3.Seleccionado ? "SI" : "NO"; }
-        private void tarjetaTienda4_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["La Curacao Nicaragua"]["Activo"] = tarjetaTienda4.Seleccionado ? "SI" : "NO"; }
+        private void tarjetaTienda4_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["WALMART"]["Activo"] = tarjetaTienda4.Seleccionado ? "SI" : "NO"; }
+        private void tarjetaTienda5_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["La Curacao"]["Activo"] = tarjetaTienda5.Seleccionado ? "SI" : "NO"; }
+        private void tarjetaTienda6_CheckedChanged(object sender, EventArgs e) { ConfigScraper.Tiendas["RadioShack"]["Activo"] = tarjetaTienda6.Seleccionado ? "SI" : "NO"; }
 
         private void CargarEstadoBotones()
         {
             tarjetaTienda1.Seleccionado = ConfigScraper.Tiendas["el GallomasGallo"]["Activo"] == "SI";
             tarjetaTienda2.Seleccionado = ConfigScraper.Tiendas["SICSA"]["Activo"] == "SI";
             tarjetaTienda3.Seleccionado = ConfigScraper.Tiendas["GCM"]["Activo"] == "SI";
-            tarjetaTienda4.Seleccionado = ConfigScraper.Tiendas["La Curacao Nicaragua"]["Activo"] == "SI";
+            tarjetaTienda4.Seleccionado = ConfigScraper.Tiendas["WALMART"]["Activo"] == "SI";
+            tarjetaTienda5.Seleccionado = ConfigScraper.Tiendas["La Curacao"]["Activo"] == "SI";
+            tarjetaTienda6.Seleccionado = ConfigScraper.Tiendas["RadioShack"]["Activo"] == "SI";
         }
 
         //✧----------------------- 𝐁𝐀𝐑𝐑𝐀 𝐃𝐄 𝐁𝐔𝐒𝐐𝐔𝐄𝐃🇦 -----------------------➣
@@ -98,7 +104,7 @@ namespace NicaCompare
             }
 
             GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
-            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+            lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
             label_producto_busqueda.Text = $"Buscando: {textoBuscado} por favor espere";
@@ -107,91 +113,70 @@ namespace NicaCompare
             await EmpezarBusqueda(textoBuscado);
         }
 
-        // Armar filtros dinámicos estilo Amazon
+
         private void CrearFiltros(List<string> nombresProductos)
         {
-            panel_filtros.Controls.Clear();
-
-            // Marcas
+            // 1. Marcas
             HashSet<string> marcasEncontradas = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
-            {
                 foreach (var marcaItem in FiltrosProductos.Marcas)
-                {
                     foreach (var keyword in marcaItem.Value)
-                    {
                         if (prod.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
                             marcasEncontradas.Add(marcaItem.Key);
-                        }
-                    }
-                }
-            }
 
-            if (marcasEncontradas.Count > 0)
-            {
-                ComboBoxEdit combo_box_marcas = new ComboBoxEdit();
-                combo_box_marcas.Name = "combo_box_marcas";
-                combo_box_marcas.Width = 160;
-                combo_box_marcas.Location = new System.Drawing.Point(15, 12);
-                combo_box_marcas.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboMarca.Items.Clear();
+            comboMarca.Items.Add("Todas las marcas");
+            foreach (var marca in marcasEncontradas) comboMarca.Items.Add(marca);
+            comboMarca.SelectedIndex = 0;
+            comboMarca.Visible = true;
 
-                combo_box_marcas.Items.Add("Todas las marcas");
-                foreach (var marca in marcasEncontradas)
-                {
-                    combo_box_marcas.Items.Add(marca);
-                }
-                combo_box_marcas.SelectedIndex = 0;
-                combo_box_marcas.SelectedIndexChanged += (s, e) => ActualizarTablaConFiltros();
-
-                panel_filtros.Controls.Add(combo_box_marcas);
-            }
-
-            // Atributos
+            // 2. Atributos
             HashSet<string> atributosEncontrados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in nombresProductos)
-            {
                 foreach (var categoria in FiltrosProductos.Atributos)
-                {
                     foreach (var attr in categoria.Value)
-                    {
                         if (prod.IndexOf(attr, StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
                             atributosEncontrados.Add(attr);
-                        }
-                    }
-                }
-            }
 
-            if (atributosEncontrados.Count > 0)
+            comboAtributo.Items.Clear();
+            comboAtributo.Items.Add("Mas especificaciones");
+            foreach (var attr in atributosEncontrados) comboAtributo.Items.Add(attr);
+            comboAtributo.SelectedIndex = 0;
+            comboAtributo.Visible = true;
+
+            // 3. Precios y Rangos (Trackbars y Labels)
+            decimal precioMinimoReal = 0;
+            decimal precioMaximoReal = 50000;
+
+            if (listaProductos != null && listaProductos.Any(p => p.PrecioMonto < decimal.MaxValue))
             {
-                ComboBoxEdit combo_box_atributos = new ComboBoxEdit();
-                combo_box_atributos.Name = "combo_box_atributos";
-                combo_box_atributos.Width = 160;
-                combo_box_atributos.Location = new System.Drawing.Point(190, 12);
-                combo_box_atributos.DropDownStyle = ComboBoxStyle.DropDownList;
-
-                combo_box_atributos.Items.Add("Mas especificaciones");
-                foreach (var attr in atributosEncontrados)
-                {
-                    combo_box_atributos.Items.Add(attr);
-                }
-                combo_box_atributos.SelectedIndex = 0;
-                combo_box_atributos.SelectedIndexChanged += (s, e) => ActualizarTablaConFiltros();
-
-                panel_filtros.Controls.Add(combo_box_atributos);
+                var validos = listaProductos.Where(p => p.PrecioMonto < decimal.MaxValue);
+                precioMinimoReal = validos.Min(p => p.PrecioMonto);
+                precioMaximoReal = validos.Max(p => p.PrecioMonto);
             }
+
+
+
+            label_precio.Visible = true;
+
+            TrackBarMinimo.Visible = true;
+            TrackBarMaximo.Visible = true;
+
+            LabelRangoMinimo.Text = $"C$ {(int)precioMinimoReal:N0}";
+            LabelRangoMinimo.Visible = true;
+
+            LabelRangoMaximo.Text = $"C$ {(int)precioMaximoReal:N0}";
+            LabelRangoMaximo.Visible = true;
         }
 
         // ----------------------- Timer de intentos -----------------------➣
         private System.Windows.Forms.Timer? timerBusquedas;
         private int segundosRestantes = 300;
-
         private void IniciarTimerBusquedas()
         {
             timerBusquedas = new System.Windows.Forms.Timer();
             timerBusquedas.Interval = 1000;
-            label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
+            label_ag_busqueda.Text = $"{TimeSpan.FromSeconds(segundosRestantes):mm\\:ss}";
 
             timerBusquedas.Tick += (sender, e) =>
             {
@@ -199,10 +184,10 @@ namespace NicaCompare
                 if (segundosRestantes <= 0)
                 {
                     GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes + 1);
-                    lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
-                    segundosRestantes = 300;
+                    lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
+                    segundosRestantes = 300; // Puedes modificar este valor directamente aquí o cambiar la variable global cuando quieras
                 }
-                label_ag_busqueda.Text = $"Agregando \r\nuna busqueda\r\nen {segundosRestantes} segundos";
+                label_ag_busqueda.Text = $"{TimeSpan.FromSeconds(segundosRestantes):mm\\:ss}";
             };
 
             timerBusquedas.Start();
@@ -277,26 +262,21 @@ namespace NicaCompare
             finally { buscando = false; }
         }
 
-        // Aplica los filtros locales y refresca ambas tablas en memoria// Aplica los filtros locales y refresca ambas tablas en memoria
-        private void ActualizarTablaConFiltros()
+private void ActualizarTablaConFiltros()
         {
             tablaResultados1.Rows.Clear();
             if (Grid_Compare != null) { Grid_Compare.Rows.Clear(); }
 
-            string marcaSeleccionada = "Todas las marcas";
-            string atributoSeleccionado = "Mas especificaciones";
+            string marcaSeleccionada = comboMarca.SelectedItem?.ToString() ?? "Todas las marcas";
+            string atributoSeleccionado = comboAtributo.SelectedItem?.ToString() ?? "Mas especificaciones";
 
-            var comboMarca = panel_filtros.Controls["combo_box_marcas"] as ComboBoxEdit;
-            if (comboMarca != null && comboMarca.SelectedItem != null)
-            { marcaSeleccionada = comboMarca.SelectedItem?.ToString() ?? "Todas las marcas"; }
+            int precioMaxSeleccionado = int.MaxValue;
 
-            var comboAtributo = panel_filtros.Controls["combo_box_atributos"] as ComboBoxEdit;
-            if (comboAtributo != null && comboAtributo.SelectedItem != null)
-            { atributoSeleccionado = comboAtributo.SelectedItem?.ToString() ?? "Mas especificaciones"; }
-
-            // Filtramos la lista maestra usando LINQ según lo seleccionado en los combos
             var productosFiltrados = listaProductos.Where(prod =>
             {
+                // Filtro para descartar productos agotados (precio 0 o menor)
+                if (prod.PrecioMonto <= 0) return false;
+
                 bool pasaMarca = true;
                 if (marcaSeleccionada != "Todas las marcas" && !string.IsNullOrEmpty(marcaSeleccionada))
                 {
@@ -309,12 +289,15 @@ namespace NicaCompare
 
                 bool pasaAtributo = true;
                 if (atributoSeleccionado != "Mas especificaciones" && !string.IsNullOrEmpty(atributoSeleccionado))
-                { pasaAtributo = prod.Nombre.IndexOf(atributoSeleccionado, StringComparison.OrdinalIgnoreCase) >= 0; }
+                {
+                    pasaAtributo = prod.Nombre.IndexOf(atributoSeleccionado, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
 
-                return pasaMarca && pasaAtributo;
-            }).ToList();
+                bool pasaPrecio = prod.PrecioMonto <= precioMaxSeleccionado;
 
-            // Llenamos la tabla principal evitando duplicados globales
+                return pasaMarca && pasaAtributo && pasaPrecio;
+            }).OrderBy(p => p.PrecioMonto).ToList();
+
             HashSet<string> productosAgregadosGlobal = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var prod in productosFiltrados)
             {
@@ -322,21 +305,15 @@ namespace NicaCompare
                 if (productosAgregadosGlobal.Add(claveCache))
                 {
                     string precioLimpiado = ObtenerPrimerPrecio(prod.PrecioTexto);
-
-                    // Capturamos el índice exacto que devuelve el método
                     int rowIndex = AgregarProductoATabla(prod.Nombre, precioLimpiado, prod.TiendaKey);
-
-                    // Guardamos el objeto completo (con su URL) en el Tag de esa fila exacta
-                    if (rowIndex >= 0 && rowIndex < tablaResultados1.Rows.Count)
-                    {
-                        tablaResultados1.Rows[rowIndex].Tag = prod;
-                    }
+                    if (rowIndex >= 0 && rowIndex < tablaResultados1.Rows.Count) { tablaResultados1.Rows[rowIndex].Tag = prod; }
                 }
             }
 
+            foreach (DataGridViewColumn col in tablaResultados1.Columns) { col.SortMode = DataGridViewColumnSortMode.NotSortable; }
+
             List<ProductoResult> losMasBaratos = new List<ProductoResult>();
 
-            // Calculamos el producto más barato por tienda o ponemos el aviso de no disponible
             foreach (var tienda in ConfigScraper.Tiendas)
             {
                 string tiendaKey = tienda.Key;
@@ -351,15 +328,7 @@ namespace NicaCompare
                 }
                 else
                 {
-                    losMasBaratos.Add(new ProductoResult
-                    {
-                        Nombre = "No disponible en esta tienda",
-                        PrecioTexto = "",
-                        PrecioMonto = decimal.MaxValue,
-                        TiendaKey = tiendaKey,
-                        Url = "",
-                        Imagen = ""
-                    });
+                    losMasBaratos.Add(new ProductoResult { Nombre = "No disponible en esta tienda", PrecioTexto = "", PrecioMonto = decimal.MaxValue, TiendaKey = tiendaKey, Url = "", Imagen = "" });
                 }
             }
 
@@ -367,17 +336,15 @@ namespace NicaCompare
             foreach (var mejor in losMasBaratos)
             {
                 string precioMejorLimpiado = ObtenerPrimerPrecio(mejor.PrecioTexto);
-
-                // Capturamos el índice exacto para la tabla de comparación
                 int rowIndexCompare = AgregarMejorProductoATabla(mejor.Nombre, precioMejorLimpiado, mejor.TiendaKey);
-
-                // Guardamos el objeto en el Tag de la fila de Grid_Compare
                 if (Grid_Compare != null && rowIndexCompare >= 0 && rowIndexCompare < Grid_Compare.Rows.Count)
                 {
                     Grid_Compare.Rows[rowIndexCompare].Tag = mejor;
                 }
             }
+            if (Grid_Compare != null) { foreach (DataGridViewColumn col in Grid_Compare.Columns) { col.SortMode = DataGridViewColumnSortMode.NotSortable; } }
         }
+
         //❍﹏﹏﹏﹏﹏﹏  𝗠𝗲𝘁𝗼𝗱𝗼𝘀 𝗩𝗮𝗰𝗶𝗼𝘀  ﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏❍
         private void pictureBox2_Click(object sender, EventArgs e) { }
         private void botonMenu1_Click(object sender, EventArgs e) { }
@@ -448,25 +415,25 @@ namespace NicaCompare
 
         private void botonCategoriaCelulares_Click(object sender, EventArgs e) { SeleccionarCategoria(Celulares, "Celulares"); }
 
-        private void botonCategoriaElectrodomesticos_Click(object sender, EventArgs e) { SeleccionarCategoria(Categoria_electrodomesticos, "Electrodomésticos");}
+        private void botonCategoriaElectrodomesticos_Click(object sender, EventArgs e) { SeleccionarCategoria(Categoria_electrodomesticos, "Electrodomésticos"); }
 
         private async void SeleccionarCategoria(BotonCategoriaCheck botonActual, string nombreCategoria)
         {
             BotonCategoriaCheck[] grupoBotones = new[] { Tecnología, Hogar, Celulares, Categoria_electrodomesticos };
             if (sesion_actual.Busquedas_restantes <= 0)
             {
-                foreach (var btn in grupoBotones) {btn.Checked = false;}
+                foreach (var btn in grupoBotones) { btn.Checked = false; }
                 MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            foreach (var btn in grupoBotones){if (btn != null && btn != botonActual){btn.Checked = false;}}
-            if (!botonActual.Checked){botonActual.Checked = true;}
+            foreach (var btn in grupoBotones) { if (btn != null && btn != botonActual) { btn.Checked = false; } }
+            if (!botonActual.Checked) { botonActual.Checked = true; }
 
 
             // restar puntos etcc (funcion similar a lo de busqueda)
             GestorUsuario.Actualizar(sesion_actual.Correo, Busquedas: sesion_actual.Busquedas_restantes - 1);
-            lbl_busquedas_restantes.Text = $"Busquedas\r\nRestantes\r\n({sesion_actual.Busquedas_restantes})\r\n";
+            lbl_busquedas_restantes.Text = $"{sesion_actual.Busquedas_restantes}";
             tablaResultados1.Rows.Clear(); Grid_Compare.Rows.Clear();
 
             barraBusqueda1.Text = "";
@@ -477,7 +444,13 @@ namespace NicaCompare
 
         }
 
+        private void comboMarca_SelectedIndexChanged(object sender, EventArgs e) { ActualizarTablaConFiltros(); }
 
+        private void comboAtributo_SelectedIndexChanged(object sender, EventArgs e) { ActualizarTablaConFiltros(); }
+
+        private void TrackBarMinimo_Scroll(object sender, ScrollEventArgs e) { ActualizarTablaConFiltros(); }
+
+        private void TrackBarMaximo_Scroll(object sender, ScrollEventArgs e){ ActualizarTablaConFiltros(); }
     }
 
     // Modelo de resultado

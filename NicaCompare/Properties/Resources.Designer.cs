@@ -83,6 +83,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap busqueda_avanzada {
+            get {
+                object obj = ResourceManager.GetObject("busqueda-avanzada", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap curacao_logo {
             get {
                 object obj = ResourceManager.GetObject("curacao_logo", resourceCulture);
@@ -233,9 +243,29 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RadioShack_Logo {
+            get {
+                object obj = ResourceManager.GetObject("RadioShack-Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sicsa_logo {
             get {
                 object obj = ResourceManager.GetObject("Sicsa_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap store_front {
+            get {
+                object obj = ResourceManager.GetObject("store-front", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +293,29 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap telefono_de_mano {
+            get {
+                object obj = ResourceManager.GetObject("telefono-de-mano", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap thaehaetheaeh {
             get {
                 object obj = ResourceManager.GetObject("thaehaetheaeh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap time_and_date {
+            get {
+                object obj = ResourceManager.GetObject("time-and-date", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -316,6 +366,16 @@ namespace NicaCompare.Properties {
         internal static System.Drawing.Bitmap vip {
             get {
                 object obj = ResourceManager.GetObject("vip", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Walmart_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Walmart-Logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

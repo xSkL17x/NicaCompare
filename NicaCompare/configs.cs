@@ -4,13 +4,11 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static System.Resources.ResXFileRef;
 
 namespace NicaCompare
 {
     public static class ConfigScraper
     {
-
         // ┌─────────────────◦(●￣ ⚙️ Configuracion de scraping por tienda ⚙️ ￣●)◦────────────────────┐
         public static readonly Dictionary<string, Dictionary<string, string>> Tiendas = new Dictionary<string, Dictionary<string, string>>
         {
@@ -23,22 +21,53 @@ namespace NicaCompare
                     { "AlgoliaAppId", "WLT832EA3J" },
                     { "AlgoliaApiKey", "YTYwZjI3ODFjOTI3YWQ0MjJmYzQ3ZjBiNmY1Y2FiYjRhZjNiMmM3NmMxYTMyNDUwOGUxYjhkMWFhMzFlOGExNnRhZ0ZpbHRlcnM9" },
                     { "Activo", "SI" },
-                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" },
-
+                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" }
                 }
             },
             {
-                "La Curacao Nicaragua", new Dictionary<string, string>
+                "WALMART", new Dictionary<string, string>
                 {
-                    { "img", "curacao_logo" },
-                    { "Url", "https://www.lacuracaonline.com/nicaragua/catalogsearch/result/?q=" },
+                    { "img", "Walmart-Logo" },
+                    { "Url", "https://www.walmart.com.ni/" },
+                    { "Tipo", "VTEX" },
                     { "Activo", "SI" },
                     { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36" },
-                    { "XPathContenedor", "//li[contains(@class, 'product-item')]" },
-                    { "XPathTitulo", ".//a[contains(@class, 'product-item-link')]" },
-                    { "XPathPrecio", ".//*[contains(@class, 'price')]" }
+                    { "XPathContenedor", "//*[contains(@class, 'vtex-product-summary')]" },
+                    { "XPathTitulo", ".//*[@id='product-summary-sku-name']" },
+                    { "XPathPrecio", ".//*[contains(@class, 'price_sellingPrice--summary')]" },
+                    { "XPathImagen", ".//img" }
                 }
+            },
+            {
+                "La Curacao", new Dictionary<string, string>
+                {
+                    { "img", "curacao_logo" },
+                    { "Url", "https://www.lacuracaonline.com/nicaragua/" },
+                    { "Tipo", "MagentoLS" },
+                    { "Activo", "SI" },
+                    { "UserAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36" },
+                    { "XPathContenedor", "//*[contains(@class,'ds-sdk-product-item')]" },
+                    { "XPathTitulo", ".//*[contains(@class,'ds-sdk-product-item__product-name')]" },
+                    { "XPathPrecio", ".//*[contains(@class,'price')]" },
+                    { "XPathImagen", ".//img" }
+                }
+            },
+            {
+                "RadioShack", new Dictionary<string, string>
+                {
+                    { "img", "RadioShack-Logo" },
+                    { "Activo", "SI" },
+                    { "Tipo", "MagentoLS" },
+                    { "Url", "https://www.radioshackla.com/" },
 
+                    { "GraphQLUrl", "https://catalog-service.adobe.io/graphql" },
+                    { "Magento-Customer-Group", "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c" },
+                    { "Magento-Environment-Id", "b0453fee-9cca-41d9-930c-0a94fd84b9bd" },
+                    { "Magento-Website-Code", "rso_nicaragua_w" },
+                    { "Magento-Store-Code", "rso_nicaragua_s" },
+                    { "Magento-Store-View-Code", "rso_nicaragua_sv" },
+                    { "X-Api-Key", "2999e5a23078490096b15ef87ccc499c" }
+                }
             },
             {
                 "GCM", new Dictionary<string, string>
@@ -72,66 +101,64 @@ namespace NicaCompare
             }
         };
 
-
-        // ****   Adision Para Mejorar las busquedas      ****
+        // ****   Adision Para Mejorar las busquedas     ****
 
         public static class FiltrosProductos
         {
             // Diccionario principal de marcas y palabras clave asociadas
             public static readonly Dictionary<string, string[]> Marcas = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
-            { "Samsung", new[] { "Samsung" } },
-            { "Xiaomi", new[] { "Xiaomi", "Redmi", "Poco" } },
-            { "HONOR", new[] { "HONOR", "Honor" } },
-            { "Motorola", new[] { "Motorola", "Moto" } },
-            { "Huawei", new[] { "Huawei" } },
-            { "Apple", new[] { "Apple", "iPhone" } },
-            { "ZTE", new[] { "ZTE" } },
-            { "TCL", new[] { "TCL" } },
+                { "Samsung", new[] { "Samsung" } },
+                { "Xiaomi", new[] { "Xiaomi", "Redmi", "Poco" } },
+                { "HONOR", new[] { "HONOR", "Honor" } },
+                { "Motorola", new[] { "Motorola", "Moto" } },
+                { "Huawei", new[] { "Huawei" } },
+                { "Apple", new[] { "Apple", "iPhone" } },
+                { "ZTE", new[] { "ZTE" } },
+                { "TCL", new[] { "TCL" } },
+                { "Sony", new[] { "TCL" } },
 
-            // Marcas de Línea Blanca / Electrodomésticos / TV
-            { "LG", new[] { "LG" } },
-            { "Hisense", new[] { "Hisense" } },
-            { "Frigidaire", new[] { "Frigidaire" } },
-            { "Telstar", new[] { "Telstar" } },
-            { "RCA", new[] { "RCA" } },
-            { "Konka", new[] { "Konka" } },
-            { "Challenger", new[] { "Challenger" } },
-            { "Premier", new[] { "Premier" } },
-            { "G-PLUS", new[] { "G-PLUS", "GPLUS" } }
+                // Marcas de Línea Blanca / Electrodomésticos / TV
+                { "LG", new[] { "LG" } },
+                { "Hisense", new[] { "Hisense" } },
+                { "Frigidaire", new[] { "Frigidaire" } },
+                { "Telstar", new[] { "Telstar" } },
+                { "RCA", new[] { "RCA" } },
+                { "Konka", new[] { "Konka" } },
+                { "Challenger", new[] { "Challenger" } },
+                { "Premier", new[] { "Premier" } },
+                { "G-PLUS", new[] { "G-PLUS", "GPLUS" } }
             };
 
             // Diccionario de especificaciones por categoría o tipo de producto
             public static readonly Dictionary<string, string[]> Atributos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
             {
-            { "TipoOperacion", new[] { "Semiautomática", "Automática", "Congelador Horizontal" } },
-            { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },            
-            { "MemoriaRAM", new[] { "4GB RAM", "6GB RAM", "8GB RAM", "12GB RAM" } }
+                { "TipoOperacion", new[] { "Semiautomática", "Automática", "Congelador Horizontal" } },
+                { "ResolucionesTV", new[] { "OLED", "QLED", "LED", "Smart TV", "4K UHD", "Full HD", "HD" } },
+                { "MemoriaRAM", new[] { "4GB RAM", "6GB RAM", "8GB RAM", "12GB RAM" } }
             };
         }
 
-
         public static readonly Dictionary<string, string[]> parecidos = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
-            {
+        {
             { "celular", new[] { "smartphone", "telefono", "movil" } },
             { "smartphone", new[] { "celular", "telefono" } },
             { "refri", new[] { "refrigeradora", "refrigerador", "nevera" } },
             { "tv", new[] { "televisor", "smart tv", "pantalla" } },
             { "pantalla", new[] { "televisor", "tv", "monitor" } },
             { "lavadora", new[] { "lavadora secadora", "seco-lavadora" } }
-            };
-
+        };
 
         // aqui ya terminan todos los diccionarios XD
 
         // —————————————————— Revisa qué forma de búsqueda usar según la tienda  ————————————————————————————————๑•̀ᴗ•̀) ̫ ─꒱
         public static async Task<(string, List<ProductoResult>)> ScrapearTiendaAsync(string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
         {
-            if (tienda.Value.ContainsKey("Tipo"))
+            if (tienda.Value.TryGetValue("Tipo", out var tipo))
             {
-                if (tienda.Value["Tipo"] == "Algolia") { return await scraping_Algolia(httpClient, textoBuscado, tienda); }
-                //else if (tienda.Value["Tipo"] == "Constructor") { return await scraping_Constructor(httpClient, textoBuscado, tienda); }
-            }
+                if (tipo == "Algolia") return await scraping_Algolia(httpClient, textoBuscado, tienda);
+                if (tipo == "VTEX") return await scraping_VTEX(httpClient, textoBuscado, tienda);
+                if (tienda.Value["Tipo"] == "MagentoLS") return await scraping_MagentoLS(httpClient, textoBuscado, tienda); }
             return await scraping_v1(httpClient, textoBuscado, tienda);
         }
 
@@ -149,9 +176,31 @@ namespace NicaCompare
             // Busca el primer patrón válido de precio (ej: C$89,740.00 o $20,999) y descarta todo lo demás
             var match = System.Text.RegularExpressions.Regex.Match(precioTexto, @"(C\$|\$)\s*[\d,.]+", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
-            if (match.Success) { return match.Value.Trim(); }
+            return match.Success ? match.Value.Trim() : precioTexto;
+        }
 
-            return precioTexto;
+        // Método auxiliar para realizar peticiones GET y opcionalmente guardar el HTML de diagnóstico sin repetir código
+        private static async Task<(int StatusCode, string Content)> RealizarGetAsync(HttpClient client, string url, string userAgent, string rutaDebug = null)
+        {
+            try
+            {
+                using var request = new HttpRequestMessage(HttpMethod.Get, url);
+                if (!string.IsNullOrEmpty(userAgent)) request.Headers.TryAddWithoutValidation("User-Agent", userAgent);
+
+                using var response = await client.SendAsync(request);
+                string content = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(rutaDebug))
+                    System.IO.File.WriteAllText(rutaDebug, $"URL: {url}\nSTATUS: {(int)response.StatusCode}\n\n{content}");
+
+                return ((int)response.StatusCode, content);
+            }
+            catch (Exception ex)
+            {
+                if (!string.IsNullOrEmpty(rutaDebug))
+                    System.IO.File.WriteAllText(rutaDebug, $"ERROR:\n{url}\n{ex}");
+                return (0, string.Empty);
+            }
         }
 
         //╰────────────────➤[La Magia 🥷]
@@ -160,90 +209,83 @@ namespace NicaCompare
         public static async Task<(string, List<ProductoResult>)> scraping_v1(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
         {
             List<ProductoResult> productosEncontrados = new List<ProductoResult>();
-            try
+            string escritorio = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string rutaTxtPrueba = System.IO.Path.Combine(escritorio, "radioshack_debug.txt");
+
+            // Prepara el texto que escribiste para que la página web lo entienda en el enlace.
+            string textoCodificado = Uri.EscapeDataString(textoBuscado);
+            string urlBusqueda = tienda.Value["Url"] + textoCodificado + tienda.Value.GetValueOrDefault("UrlParametros", "");
+            string userAgent = tienda.Value.GetValueOrDefault("UserAgent", "");
+
+            var (status, html) = await RealizarGetAsync(client, urlBusqueda, userAgent, rutaTxtPrueba);
+            if (status != 200 || string.IsNullOrEmpty(html)) return (tienda.Key, productosEncontrados);
+
+            // Lee todo el código de la página web.
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+
+            // Busca las cajitas donde están guardados los productos en la página.
+            string xpathContenedor = tienda.Value.GetValueOrDefault("XPathContenedor", "//*[contains(@class, 'product') and not(contains(@class, 'category'))]");
+            var nodosProductos = doc.DocumentNode.SelectNodes(xpathContenedor);
+
+            if (nodosProductos != null)
             {
-                // Prepara el texto que escribiste para que la página web lo entienda en el enlace.
-                string textoCodificado = Uri.EscapeDataString(textoBuscado);
-                string urlBusqueda = tienda.Value["Url"] + textoCodificado + (tienda.Value.ContainsKey("UrlParametros") ? tienda.Value["UrlParametros"] : "");
+                int count = 0;
+                string[] palabrasExcluidas = tienda.Value.GetValueOrDefault("ExcluirNombres", "").Split('|', StringSplitOptions.RemoveEmptyEntries);
+                string[] terminosOmitir = { "Añadir al carrito", "Agregar a Lista de deseos", "Leer más" };
+                string xpathTitulo = tienda.Value.GetValueOrDefault("XPathTitulo", ".//*[contains(@class, 'title') or contains(@class, 'name') or name()='h2' or name()='h3']");
+                string xpathPrecio = tienda.Value.GetValueOrDefault("XPathPrecio", ".//ins//bdi | .//bdi | .//*[contains(@class, 'electro-price')] | .//*[contains(@class, 'price')]");
+                string xpathImagen = tienda.Value.GetValueOrDefault("XPathImagen", ".//img");
 
-                using (var request = new HttpRequestMessage(HttpMethod.Get, urlBusqueda))
+                // Revisa cada cajita de producto encontrada.
+                foreach (var nodo in nodosProductos)
                 {
-                    if (tienda.Value.ContainsKey("UserAgent")) { request.Headers.Add("User-Agent", tienda.Value["UserAgent"]); }
+                    if (count >= 1000) break;
+                    var nodoTitulo = nodo.SelectSingleNode(xpathTitulo);
+                    var nodoPrecio = nodo.SelectSingleNode(xpathPrecio);
+                    var nodoImagen = nodo.SelectSingleNode(xpathImagen);
 
-                    var response = await client.SendAsync(request);
-                    if (response.IsSuccessStatusCode)
+                    // Limpia el nombre y el precio
+                    string nombre = nodoTitulo != null ? System.Net.WebUtility.HtmlDecode(nodoTitulo.InnerText.Trim()).Replace("\n", " ").Replace("\r", "") : "";
+                    string precio = nodoPrecio != null ? System.Net.WebUtility.HtmlDecode(nodoPrecio.InnerText.Trim()).Replace("\n", " ").Replace("\r", "") : "Sin precio";
+
+                    foreach (var term in terminosOmitir) { precio = precio.Replace(term, ""); }
+                    precio = precio.Trim();
+
+                    // Extracción de enlace (Hipervínculo)
+                    var nodoAncla = nodo.SelectSingleNode(".//a") ?? (nodoTitulo != null ? nodoTitulo.SelectSingleNode("ancestor-or-self::a") : null);
+                    string href = nodoAncla != null ? nodoAncla.GetAttributeValue("href", "") : "";
+                    string urlFinal = "";
+                    if (!string.IsNullOrEmpty(href))
                     {
-                        // Lee todo el código de la página web.
-                        string html = await response.Content.ReadAsStringAsync();
-                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                        doc.LoadHtml(html);
+                        urlFinal = href.StartsWith("http") ? href : new Uri(new Uri(tienda.Value["Url"]), href).ToString();
+                    }
 
-                        // Busca las cajitas donde están guardados los productos en la página.
-                        string xpathContenedor = tienda.Value.ContainsKey("XPathContenedor") ? tienda.Value["XPathContenedor"] : "//*[contains(@class, 'product') and not(contains(@class, 'category'))]";
-                        var nodosProductos = doc.DocumentNode.SelectNodes(xpathContenedor);
+                    // Extracción de Imagen
+                    string imagenUrl = nodoImagen != null ? nodoImagen.GetAttributeValue("src", "") : "";
 
-                        if (nodosProductos != null)
+                    // Comprueba que el producto tenga nombre y no sea una palabra random o basura.
+                    bool esValido = !string.IsNullOrEmpty(nombre);
+                    foreach (var palabra in palabrasExcluidas) { if (nombre.Contains(palabra, StringComparison.OrdinalIgnoreCase)) { esValido = false; break; } }
+
+                    if (esValido)
+                    {
+                        // Guarda el producto limpio en nuestra lista.
+                        productosEncontrados.Add(new ProductoResult
                         {
-                            int count = 0;
-                            string[] palabrasExcluidas = tienda.Value.ContainsKey("ExcluirNombres") ? tienda.Value["ExcluirNombres"].Split('|') : new string[0];
-                            string[] terminosOmitir = { "Añadir al carrito", "Agregar a Lista de deseos", "Leer más" };
-                            string xpathTitulo = tienda.Value.ContainsKey("XPathTitulo") ? tienda.Value["XPathTitulo"] : ".//*[contains(@class, 'title') or contains(@class, 'name') or name()='h2' or name()='h3']";
-                            string xpathPrecio = tienda.Value.ContainsKey("XPathPrecio") ? tienda.Value["XPathPrecio"] : ".//ins//bdi | .//bdi | .//*[contains(@class, 'electro-price')] | .//*[contains(@class, 'price')]";
-                            string xpathImagen = tienda.Value.ContainsKey("XPathImagen") ? tienda.Value["XPathImagen"] : ".//img";
-
-                            // Revisa cada cajita de producto encontrada.
-                            foreach (var nodo in nodosProductos)
-                            {
-                                if (count >= 1000) break;
-                                var nodoTitulo = nodo.SelectSingleNode(xpathTitulo);
-                                var nodoPrecio = nodo.SelectSingleNode(xpathPrecio);
-                                var nodoImagen = nodo.SelectSingleNode(xpathImagen);
-
-                                // Limpia el nombre y el precio
-                                string nombre = nodoTitulo != null ? System.Net.WebUtility.HtmlDecode(nodoTitulo.InnerText.Trim()).Replace("\n", " ").Replace("\r", "") : "";
-                                string precio = nodoPrecio != null ? System.Net.WebUtility.HtmlDecode(nodoPrecio.InnerText.Trim()).Replace("\n", " ").Replace("\r", "") : "Sin precio";
-
-                                foreach (var term in terminosOmitir) { precio = precio.Replace(term, ""); }
-                                precio = precio.Trim();
-
-                                // Extracción de enlace (Hipervínculo)
-                                var nodoAncla = nodo.SelectSingleNode(".//a") ?? (nodoTitulo != null ? nodoTitulo.SelectSingleNode("ancestor-or-self::a") : null);
-                                string href = nodoAncla != null ? nodoAncla.GetAttributeValue("href", "") : "";
-                                string urlFinal = "";
-                                if (!string.IsNullOrEmpty(href)){
-                                    urlFinal = href.StartsWith("http") ? href : new Uri(new Uri(tienda.Value["Url"]), href).ToString();
-                                }
-
-                                // Extracción de Imagen
-                                string imagenUrl = nodoImagen != null ? nodoImagen.GetAttributeValue("src", "") : "";
-
-                                // Comprueba que el producto tenga nombre y no sea una palabra random o basura.
-                                bool esValido = !string.IsNullOrEmpty(nombre);
-                                foreach (var palabra in palabrasExcluidas) { if (nombre.Contains(palabra, StringComparison.OrdinalIgnoreCase)) { esValido = false; break; } }
-
-                                if (esValido)
-                                {
-                                    // Guarda el producto limpio en nuestra lista.
-                                    productosEncontrados.Add(new ProductoResult
-                                    {
-                                        Nombre = nombre,
-                                        PrecioTexto = precio,
-                                        PrecioMonto = Utilidad.LimpiarPrecio(precio),
-                                        TiendaKey = tienda.Key,
-                                        Url = urlFinal,
-                                        Imagen = imagenUrl
-                                    });
-                                    count++;
-                                }
-                            }
-                        }
+                            Nombre = nombre,
+                            PrecioTexto = precio,
+                            PrecioMonto = Utilidad.LimpiarPrecio(precio),
+                            TiendaKey = tienda.Key,
+                            Url = urlFinal,
+                            Imagen = imagenUrl
+                        });
+                        count++;
                     }
                 }
             }
-            catch { }
             return (tienda.Key, productosEncontrados);
         }
-
 
         // BÚSQUEDA POR ALGOLIA - Consulta directamente al buscador inteligente de la tienda usando datos ocultos.
         public static async Task<(string, List<ProductoResult>)> scraping_Algolia(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
@@ -318,6 +360,433 @@ namespace NicaCompare
             catch { }
             return (tienda.Key, productosEncontrados);
         }
-    }
 
+        // BÚSQUEDA POR VTEX
+        public static async Task<(string, List<ProductoResult>)> scraping_VTEX(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
+        {
+            var productos = new List<ProductoResult>();
+            string baseUrl = tienda.Value["Url"].TrimEnd('/'), termino = Uri.EscapeDataString(textoBuscado.Trim());
+            string rutaDebug = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "walmart_vtex_debug.txt");
+
+            // 1. API VTEX
+            foreach (string urlAPI in new[] { $"{baseUrl}/api/catalog_system/pub/products/search/{termino}?_from=0&_to=49", $"{baseUrl}/api/catalog_system/pub/products/search?ft={termino}&_from=0&_to=49" })
+            {
+                try
+                {
+                    using var request = new HttpRequestMessage(HttpMethod.Get, urlAPI);
+                    request.Headers.TryAddWithoutValidation("User-Agent", tienda.Value.GetValueOrDefault("UserAgent", "Mozilla/5.0"));
+                    request.Headers.Accept.ParseAdd("application/json");
+                    request.Headers.Referrer = new Uri(baseUrl + "/");
+
+                    using var response = await client.SendAsync(request);
+                    string json = await response.Content.ReadAsStringAsync();
+                    System.IO.File.WriteAllText(rutaDebug, $"URL: {urlAPI}\nSTATUS: {(int)response.StatusCode}\n\n{json}");
+                    if (!response.IsSuccessStatusCode) continue;
+
+                    using var doc = JsonDocument.Parse(json);
+                    if (doc.RootElement.ValueKind != JsonValueKind.Array) continue;
+
+                    foreach (JsonElement prod in doc.RootElement.EnumerateArray())
+                    {
+                        string nombre = ObtenerTextoVTEX(prod, "productName");
+                        if (string.IsNullOrWhiteSpace(nombre)) nombre = ObtenerTextoVTEX(prod, "productTitle");
+                        if (string.IsNullOrWhiteSpace(nombre)) continue;
+
+                        string enlace = ObtenerTextoVTEX(prod, "link");
+                        if (string.IsNullOrWhiteSpace(enlace))
+                        {
+                            string slug = ObtenerTextoVTEX(prod, "linkText");
+                            if (!string.IsNullOrWhiteSpace(slug)) enlace = $"/{slug}/p";
+                        }
+
+                        string imagen = "";
+                        decimal? precio = null;
+
+                        if (prod.TryGetProperty("items", out JsonElement items) && items.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (JsonElement item in items.EnumerateArray())
+                            {
+                                if (string.IsNullOrWhiteSpace(imagen) && item.TryGetProperty("images", out JsonElement imgs) && imgs.ValueKind == JsonValueKind.Array && imgs.GetArrayLength() > 0)
+                                    imagen = ObtenerTextoVTEX(imgs[0], "imageUrl");
+
+                                if (item.TryGetProperty("sellers", out JsonElement sellers) && sellers.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (JsonElement seller in sellers.EnumerateArray())
+                                    {
+                                        if (!seller.TryGetProperty("commertialOffer", out JsonElement oferta)) continue;
+                                        precio = ObtenerDecimalVTEX(oferta, "Price") ?? ObtenerDecimalVTEX(oferta, "PriceWithoutDiscount");
+                                        if (precio.HasValue) break;
+                                    }
+                                }
+                                if (precio.HasValue && !string.IsNullOrWhiteSpace(imagen)) break;
+                            }
+                        }
+
+                        string precioTexto = precio.HasValue ? $"C$ {precio.Value.ToString("#,##0.00", System.Globalization.CultureInfo.InvariantCulture)}" : "Sin precio";
+                        productos.Add(new ProductoResult { Nombre = nombre, PrecioTexto = precioTexto, PrecioMonto = precio ?? Utilidad.LimpiarPrecio(precioTexto), TiendaKey = tienda.Key, Url = ResolverUrlVTEX(baseUrl, enlace), Imagen = ResolverUrlVTEX(baseUrl, imagen) });
+                    }
+                    if (productos.Count > 0) return (tienda.Key, productos);
+                }
+                catch (Exception ex) { System.IO.File.WriteAllText(rutaDebug, $"ERROR API:\n{urlAPI}\n{ex}"); }
+            }
+
+            // 2. Respaldo mediante HTML
+            try
+            {
+                string slug = Uri.EscapeDataString(textoBuscado.Trim().Replace(" ", "-").ToLowerInvariant());
+                string urlBusqueda = $"{baseUrl}/{slug}?_q={termino}&map=ft";
+                var (status, html) = await RealizarGetAsync(client, urlBusqueda, tienda.Value.GetValueOrDefault("UserAgent", ""), rutaDebug);
+                if (status != 200) return (tienda.Key, productos);
+
+                var docHtml = new HtmlAgilityPack.HtmlDocument();
+                docHtml.LoadHtml(html);
+
+                string xpathCont = tienda.Value.GetValueOrDefault("XPathContenedor", "//*[contains(@class,'vtex-product-summary')]");
+                string xpathTit = tienda.Value.GetValueOrDefault("XPathTitulo", ".//*[@id='product-summary-sku-name']");
+                string xpathPrec = tienda.Value.GetValueOrDefault("XPathPrecio", ".//*[contains(@class,'price_sellingPrice--summary')]");
+                string xpathImg = tienda.Value.GetValueOrDefault("XPathImagen", ".//img");
+
+                var nodos = docHtml.DocumentNode.SelectNodes(xpathCont);
+                if (nodos != null)
+                {
+                    foreach (var nodo in nodos)
+                    {
+                        string nombre = System.Net.WebUtility.HtmlDecode(nodo.SelectSingleNode(xpathTit)?.InnerText.Trim() ?? "");
+                        if (string.IsNullOrWhiteSpace(nombre)) continue;
+
+                        string precioTexto = System.Net.WebUtility.HtmlDecode(nodo.SelectSingleNode(xpathPrec)?.InnerText.Trim() ?? "Sin precio");
+                        var imgNode = nodo.SelectSingleNode(xpathImg);
+                        string imgUrl = imgNode?.GetAttributeValue("src", "") ?? "";
+                        if (string.IsNullOrWhiteSpace(imgUrl)) imgUrl = imgNode?.GetAttributeValue("data-src", "") ?? "";
+
+                        productos.Add(new ProductoResult { Nombre = nombre, PrecioTexto = precioTexto, PrecioMonto = Utilidad.LimpiarPrecio(precioTexto), TiendaKey = tienda.Key, Url = ResolverUrlVTEX(baseUrl, nodo.SelectSingleNode(".//a")?.GetAttributeValue("href", "") ?? ""), Imagen = ResolverUrlVTEX(baseUrl, imgUrl) });
+                    }
+                }
+            }
+            catch (Exception ex) { System.IO.File.WriteAllText(rutaDebug, "ERROR HTML:\n" + ex); }
+
+            return (tienda.Key, productos);
+        }
+
+        // AUXILIARES VTEX
+        private static string ObtenerTextoVTEX(JsonElement obj, string prop) => obj.TryGetProperty(prop, out JsonElement val) && (val.ValueKind == JsonValueKind.String || val.ValueKind == JsonValueKind.Number) ? val.ToString() : "";
+
+        private static decimal? ObtenerDecimalVTEX(JsonElement obj, string prop)
+        {
+            if (!obj.TryGetProperty(prop, out JsonElement val)) return null;
+            if (val.ValueKind == JsonValueKind.Number && val.TryGetDecimal(out decimal num)) return num;
+            return val.ValueKind == JsonValueKind.String && decimal.TryParse(val.GetString(), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal parsed) ? parsed : null;
+        }
+
+        private static string ResolverUrlVTEX(string baseUrl, string url)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return "";
+            if (url.StartsWith("//")) return "https:" + url;
+            if (Uri.TryCreate(url, UriKind.Absolute, out var abs) && abs != null) return abs.ToString();
+            return Uri.TryCreate(new Uri(baseUrl + "/"), url.TrimStart('/'), out var rel) && rel != null ? rel.ToString() : "";
+        }
+
+
+
+
+
+        // BÚSQUEDA POR MAGENTO LIVE SEARCH
+        public static async Task<(string, List<ProductoResult>)> scraping_MagentoLS(HttpClient client, string textoBuscado, KeyValuePair<string, Dictionary<string, string>> tienda)
+
+        {
+            var productos = new List<ProductoResult>();
+            var debug = new System.Text.StringBuilder();
+            string rutaDebug = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"MagentoLS_{tienda.Key.Replace(" ", "_")}_debug.txt");
+
+            try
+            {
+                string termino = textoBuscado.Trim();
+                string endpoint = tienda.Value.GetValueOrDefault("GraphQLUrl", "https://catalog-service.adobe.io/graphql");
+                const int pageSize = 24;
+
+                const string query = """
+        query productSearch($phrase: String!, $pageSize: Int, $currentPage: Int = 1, $filter: [SearchClauseInput!], $sort: [ProductSearchSortInput!], $context: QueryContextInput) {
+            productSearch(phrase: $phrase, page_size: $pageSize, current_page: $currentPage, filter: $filter, sort: $sort, context: $context) {
+                total_count
+                items {
+                    product {
+                        name
+                        canonical_url
+                        small_image { url }
+                        image { url }
+                        price_range {
+                            minimum_price {
+                                final_price { value currency }
+                            }
+                        }
+                    }
+                    productView {
+                        name
+                        url
+                        images { url roles }
+                        ... on SimpleProductView {
+                            price {
+                                final {
+                                    amount { value currency }
+                                }
+                            }
+                        }
+                        ... on ComplexProductView {
+                            priceRange {
+                                minimum {
+                                    final {
+                                        amount { value currency }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                page_info { current_page page_size total_pages }
+            }
+        }
+        """;
+
+                JsonElement Prop(JsonElement elemento, string propiedad)
+                {
+                    return elemento.ValueKind == JsonValueKind.Object && elemento.TryGetProperty(propiedad, out var valor) ? valor : default;
+                }
+
+                string Texto(JsonElement elemento, string propiedad)
+                {
+                    var valor = Prop(elemento, propiedad);
+                    return valor.ValueKind == JsonValueKind.String ? valor.GetString() ?? "" : "";
+                }
+
+                decimal? Numero(JsonElement elemento, params string[] ruta)
+                {
+                    foreach (string propiedad in ruta)
+                    {
+                        elemento = Prop(elemento, propiedad);
+                        if (elemento.ValueKind == JsonValueKind.Undefined || elemento.ValueKind == JsonValueKind.Null) return null;
+                    }
+                    if (elemento.ValueKind == JsonValueKind.Number && elemento.TryGetDecimal(out decimal numero)) return numero;
+                    return null;
+                }
+
+                string ResolverUrl(string url)
+                {
+                    if (string.IsNullOrWhiteSpace(url)) return "";
+                    if (url.StartsWith("//")) return "https:" + url;
+                    if (Uri.TryCreate(url, UriKind.Absolute, out var absoluta)) return absoluta.ToString();
+                    return Uri.TryCreate(new Uri(endpoint), url, out var relativa) ? relativa.ToString() : "";
+                }
+
+                string ObtenerImagen(JsonElement producto, JsonElement vista)
+                {
+                    var imagenes = Prop(vista, "images");
+                    if (imagenes.ValueKind == JsonValueKind.Array)
+                    {
+                        JsonElement primera = default;
+                        JsonElement preferida = default;
+                        foreach (var img in imagenes.EnumerateArray())
+                        {
+                            if (primera.ValueKind == JsonValueKind.Undefined) primera = img;
+                            var roles = Prop(img, "roles");
+                            if (roles.ValueKind == JsonValueKind.Array)
+                            {
+                                foreach (var rol in roles.EnumerateArray())
+                                {
+                                    string valor = rol.GetString() ?? "";
+                                    if (valor == "image") { preferida = img; break; }
+                                    if (valor == "small_image" && preferida.ValueKind == JsonValueKind.Undefined) preferida = img;
+                                }
+                            }
+                            if (preferida.ValueKind != JsonValueKind.Undefined)
+                            {
+                                var rolesActuales = Prop(preferida, "roles");
+                                if (rolesActuales.ValueKind == JsonValueKind.Array && System.Linq.Enumerable.Contains(System.Linq.Enumerable.Select(rolesActuales.EnumerateArray(), r => r.GetString()), "image")) break;
+                            }
+                        }
+
+                        var seleccionada = preferida.ValueKind != JsonValueKind.Undefined ? preferida : primera;
+                        string url = Texto(seleccionada, "url");
+                        if (!string.IsNullOrWhiteSpace(url)) return ResolverUrl(url);
+                    }
+
+                    string alternativa = Texto(Prop(producto, "small_image"), "url");
+                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Texto(Prop(producto, "image"), "url");
+                    if (string.IsNullOrWhiteSpace(alternativa)) alternativa = Texto(Prop(producto, "thumbnail"), "url");
+                    return ResolverUrl(alternativa);
+                }
+
+                var duplicados = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                int pagina = 1;
+                int totalPaginas = 1;
+
+                debug.AppendLine("TIENDA: " + tienda.Key);
+                debug.AppendLine("BÚSQUEDA: " + termino);
+                debug.AppendLine("ENDPOINT: " + endpoint);
+
+                do
+                {
+                    var payload = new
+                    {
+                        query = query,
+                        variables = new
+                        {
+                            phrase = termino,
+                            pageSize = pageSize,
+                            currentPage = pagina,
+                            filter = new object[]
+                            {
+                        new { attribute = "visibility", @in = new[] { "Search", "Catalog, Search" } },
+                        new { attribute = "inStock", eq = "true" },
+                        new { attribute = "price", range = new { from = 0, to = 999998 } }
+                            },
+                            sort = new[]
+                            {
+                        new { attribute = "relevance", direction = "DESC" }
+                    },
+                            context = new
+                            {
+                                customerGroup = tienda.Value.GetValueOrDefault("CustomerGroup", "b6589fc6ab0dc82cf12099d1c2d40ab994e8410c"),
+                                userViewHistory = Array.Empty<object>()
+                            }
+                        }
+                    };
+
+                    string jsonBody = System.Text.Json.JsonSerializer.Serialize(payload);
+
+                    using var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+                    request.Content = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
+                    request.Headers.Accept.ParseAdd("application/json");
+
+                    string[] encabezados =
+                    {
+                "Magento-Environment-Id",
+                "Magento-Website-Code",
+                "Magento-Store-Code",
+                "Magento-Store-View-Code",
+                "X-Api-Key"
+            };
+
+                    debug.AppendLine();
+                    debug.AppendLine($"========== PÁGINA {pagina} ==========");
+                    debug.AppendLine("REQUEST URL: " + endpoint);
+                    debug.AppendLine("METHOD: POST");
+                    debug.AppendLine("PAYLOAD:");
+                    debug.AppendLine(jsonBody);
+
+                    foreach (string encabezado in encabezados)
+                    {
+                        string valor = tienda.Value.GetValueOrDefault(encabezado, "");
+                        if (!string.IsNullOrWhiteSpace(valor))
+                            request.Headers.TryAddWithoutValidation(encabezado, valor);
+                        else
+                            debug.AppendLine("FALTA ENCABEZADO: " + encabezado);
+                    }
+
+                    using var response = await client.SendAsync(request);
+                    string respuesta = await response.Content.ReadAsStringAsync();
+
+                    debug.AppendLine("STATUS: " + (int)response.StatusCode);
+                    debug.AppendLine("RESPONSE:");
+                    debug.AppendLine(respuesta);
+
+                    if (!response.IsSuccessStatusCode)
+                        break;
+
+                    using var documento = JsonDocument.Parse(respuesta);
+                    var raiz = documento.RootElement;
+
+                    var errores = Prop(raiz, "errors");
+                    if (errores.ValueKind == JsonValueKind.Array && errores.GetArrayLength() > 0)
+                    {
+                        debug.AppendLine("GRAPHQL ERRORS: " + errores.GetRawText());
+                        break;
+                    }
+
+                    var data = Prop(raiz, "data");
+                    var busqueda = Prop(data, "productSearch");
+                    var items = Prop(busqueda, "items");
+
+                    if (items.ValueKind != JsonValueKind.Array || items.GetArrayLength() == 0)
+                        break;
+
+                    var informacionPagina = Prop(busqueda, "page_info");
+                    totalPaginas = (int)(Numero(informacionPagina, "total_pages") ?? 1);
+
+                    foreach (var item in items.EnumerateArray())
+                    {
+                        if (productos.Count >= 1000) break;
+
+                        var producto = Prop(item, "product");
+                        var vista = Prop(item, "productView");
+
+                        string nombre = Texto(producto, "name");
+                        if (string.IsNullOrWhiteSpace(nombre)) nombre = Texto(vista, "name");
+                        nombre = System.Net.WebUtility.HtmlDecode(nombre).Trim();
+                        if (string.IsNullOrWhiteSpace(nombre)) continue;
+
+                        string url = ResolverUrl(Texto(vista, "url"));
+                        if (string.IsNullOrWhiteSpace(url))
+                            url = ResolverUrl(Texto(producto, "canonical_url"));
+
+                        string imagen = ObtenerImagen(producto, vista);
+
+                        decimal? monto =
+                            Numero(vista, "price", "final", "amount", "value") ??
+                            Numero(vista, "priceRange", "minimum", "final", "amount", "value") ??
+                            Numero(producto, "price_range", "minimum_price", "final_price", "value");
+
+                        string precioTexto = monto.HasValue
+                            ? "C$ " + monto.Value.ToString("#,##0.00", System.Globalization.CultureInfo.InvariantCulture)
+                            : "Sin precio";
+
+                        string clave = !string.IsNullOrWhiteSpace(url) ? url : nombre;
+                        if (!duplicados.Add(clave)) continue;
+
+                        productos.Add(new ProductoResult
+                        {
+                            Nombre = nombre,
+                            PrecioTexto = precioTexto,
+                            PrecioMonto = monto ?? Utilidad.LimpiarPrecio(precioTexto),
+                            TiendaKey = tienda.Key,
+                            Url = url,
+                            Imagen = imagen
+                        });
+                    }
+
+                    pagina++;
+
+                } while (pagina <= totalPaginas && productos.Count < 1000);
+
+                debug.AppendLine();
+                debug.AppendLine("========== RESULTADO FINAL ==========");
+                debug.AppendLine("PRODUCTOS ENCONTRADOS: " + productos.Count);
+                debug.AppendLine("PÁGINAS CONSULTADAS: " + (pagina - 1));
+
+            }
+            catch (Exception ex)
+            {
+                debug.AppendLine("ERROR GENERAL:");
+                debug.AppendLine(ex.ToString());
+                System.Diagnostics.Debug.WriteLine($"Error MagentoLS ({tienda.Key}): {ex}");
+            }
+            finally
+            {
+                try
+                {
+                    await System.IO.File.WriteAllTextAsync(rutaDebug, debug.ToString(), System.Text.Encoding.UTF8);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error guardando debug MagentoLS: " + ex.Message);
+                }
+            }
+
+            return (tienda.Key, productos);
+        }
+
+
+
+
+
+    }
 }

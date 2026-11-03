@@ -124,8 +124,14 @@
   <data name="VERDUGO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VERDUGO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="no hay usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\no hay usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="muebles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\muebles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhatsApp Image 2026-09-07 at 12.37.13 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WhatsApp Image 2026-09-07 at 12.37.13 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thaehaetheaeh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thaehaetheaeh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tecnologia1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tecnologia1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -135,6 +141,9 @@
   </data>
   <data name="WhatsApp Image 2026-09-07 at 12.37.09 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-07 at 12.37.09 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LOGO 22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LOGO 22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,23 +184,32 @@
   <data name="WhatsApp Image 2026-09-07 at 3.21.22 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-07 at 3.21.22 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WhatsApp Image 2026-09-07 at 12.37.13 PM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WhatsApp Image 2026-09-07 at 12.37.13 PM.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="telefono-de-mano" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\telefono-de-mano.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="no hay usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\no hay usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="busqueda-avanzada" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\busqueda-avanzada.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="curacao_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\curacao_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="muebles" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\muebles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="thaehaetheaeh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\thaehaetheaeh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="store-front" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\store-front.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FOTO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FOTO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="time-and-date" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\time-and-date.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Walmart-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Walmart-Logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="varios1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\varios1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="electrodomesticos1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\electrodomesticos1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,7 +223,7 @@
   <data name="WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WhatsApp Image 2026-09-04 at 1.50.14 PM_upscayl_5x_digital-art-4x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="varios1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\varios1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RadioShack-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RadioShack-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
