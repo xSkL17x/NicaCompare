@@ -57,6 +57,7 @@
             lbl_busquedas_restantes = new ReaLTaiizor.Controls.BigLabel();
             label_ag_busqueda = new ReaLTaiizor.Controls.BigLabel();
             contenedor_categorias_tabla = new Panel();
+            pictureBox5 = new PictureBox();
             panel5 = new Panel();
             Tecnología = new BotonCategoriaCheck();
             Celulares = new BotonCategoriaCheck();
@@ -114,6 +115,7 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             contenedor_categorias_tabla.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tablaResultados1).BeginInit();
@@ -443,16 +445,29 @@
             contenedor_categorias_tabla.Size = new Size(1411, 593);
             contenedor_categorias_tabla.TabIndex = 27;
             // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = Properties.Resources._2___copia;
+            pictureBox5.Location = new Point(19, 506);
+            pictureBox5.Margin = new Padding(3, 2, 3, 2);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(73, 25);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 10;
+            pictureBox5.TabStop = false;
+            // 
             // panel5
             // 
             panel5.Anchor = AnchorStyles.None;
+            panel5.Controls.Add(pictureBox5);
             panel5.Controls.Add(Tecnología);
             panel5.Controls.Add(Celulares);
             panel5.Controls.Add(Hogar);
             panel5.Controls.Add(Categoria_electrodomesticos);
             panel5.Location = new Point(3, 6);
             panel5.Name = "panel5";
-            panel5.Size = new Size(127, 554);
+            panel5.Size = new Size(127, 531);
             panel5.TabIndex = 23;
             // 
             // Tecnología
@@ -1162,6 +1177,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             contenedor_categorias_tabla.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
@@ -1253,5 +1269,6 @@
         private ReaLTaiizor.Controls.BigLabel LabelRangoMaximo;
         private TarjetaTienda tarjetaTienda5;
         private TarjetaTienda tarjetaTienda6;
+        private PictureBox pictureBox5;
     }
 }

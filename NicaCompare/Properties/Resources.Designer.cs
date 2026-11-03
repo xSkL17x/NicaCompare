@@ -73,6 +73,16 @@ namespace NicaCompare.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _2___copia {
+            get {
+                object obj = ResourceManager.GetObject("2 - copia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _2dd8d181507843_Y3JvcCw4MTAsNjMzLDAsMA {
             get {
                 object obj = ResourceManager.GetObject("2dd8d181507843.Y3JvcCw4MTAsNjMzLDAsMA", resourceCulture);
@@ -186,6 +196,16 @@ namespace NicaCompare.Properties {
         internal static System.Drawing.Bitmap LOGO_22 {
             get {
                 object obj = ResourceManager.GetObject("LOGO 22", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logos {
+            get {
+                object obj = ResourceManager.GetObject("Logos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

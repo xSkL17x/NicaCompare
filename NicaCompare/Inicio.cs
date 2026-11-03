@@ -173,15 +173,15 @@ namespace NicaCompare
                 precioMaximoReal = validos.Max(p => p.PrecioMonto);
             }
 
-            label_precio.Visible = true;
-            TrackBarMinimo.Visible = true;
-            TrackBarMaximo.Visible = true;
+            //label_precio.Visible = true;
+            //TrackBarMinimo.Visible = true;
+            //TrackBarMaximo.Visible = true;
 
-            LabelRangoMinimo.Text = $"C$ {(int)precioMinimoReal:N0}";
-            LabelRangoMinimo.Visible = true;
+            //LabelRangoMinimo.Text = $"C$ {(int)precioMinimoReal:N0}";
+            //LabelRangoMinimo.Visible = true;
 
-            LabelRangoMaximo.Text = $"C$ {(int)precioMaximoReal:N0}";
-            LabelRangoMaximo.Visible = true;
+            //LabelRangoMaximo.Text = $"C$ {(int)precioMaximoReal:N0}";
+            //LabelRangoMaximo.Visible = true;
         }
 
         // ----------------------- Timer de intentos -----------------------➣
@@ -435,6 +435,13 @@ namespace NicaCompare
                 MessageBox.Show("Te has quedado sin búsquedas. Por favor espere para otro intento.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (buscando)
+            {
+                MessageBox.Show("Espere a terminar la búsqueda actual.", "Búsqueda en curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
 
             foreach (var btn in grupoBotones) { if (btn != null && btn != botonActual) { btn.Checked = false; } }
             if (!botonActual.Checked) { botonActual.Checked = true; }
